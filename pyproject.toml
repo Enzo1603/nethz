@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "nethz-django"
+version = "0.1.0"
+description = "\"Personal ETHZ website\""
+authors = ["Enzo1603 <96661578+Enzo1603@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10.5"
+Django = "^4.2.7"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
