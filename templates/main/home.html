@@ -1,9 +1,10 @@
 {% extends "components/_base.html" %}
 
 {% load static %}
+{% load macros %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/animation.css' %}">
+<link rel="stylesheet" href="{% static 'css/animation.css' %}" />
 {% endblock %}
 
 
@@ -18,5 +19,18 @@
 </div>
 
 <br>
+<!-- <h1 class="mt-5 mb-4">Übungsstunden</h1> -->
+
+<div class="row">
+    {% card tm_card %}
+
+    {% card ph_card %}
+
+    {% card inf_card %}
+
+    {% card worldle_card %}
+</div>
+
+
 
 {% endblock content %}

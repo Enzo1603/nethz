@@ -1,0 +1,27 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+{% load macros %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/animation.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="mb-4">Spielmodi</h1>
+
+
+<div class="row">
+    {% card capitals_card %}
+
+    {% card languages_card %}
+
+    {% card areas_card %}
+
+    {% coming_soon_card %}
+</div>
+
+
+{% endblock content %}
