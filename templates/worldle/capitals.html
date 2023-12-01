@@ -1,0 +1,135 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+{% load macros %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/animation.css' }}">
+{% endblock %}
+
+
+{% block content %}
+
+{% region_select region %}
+
+<br>
+<br>
+
+<h1 class="mb-4">Capitals</h1>
+
+<div class="col-8 mx-auto">
+    <div class="text-center">
+
+        <h3>{{ country_name | title }}</h3>
+
+        <br>
+
+        <img src="{% static country_image_name %}" class="img-fluid zoom" style="max-width: 45%;">
+
+        <br>
+        <br>
+        <br>
+
+        <input class="form-control" type="text" id="userAnswer" placeholder="Enter the capital(s)">
+        <br>
+        <button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>
+
+        <br>
+        <br>
+        <br>
+
+        <!-- Solution Accordion -->
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Show me the solution
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {% if country_capital %}
+                        {{ country_capital }}
+                        {% else %}
+                        {{ "There is no capital. Submit an empty text field." }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    // TODO: Refactor code to extract similar functionality between capitals and languages
+    let userAnswer = document.getElementById("userAnswer")
+    userAnswer.focus()
+
+    function checkAnswer() {
+        const correctAnswer = "{{ country_capital | safe }}".trim().toLowerCase()
+
+        const userText = userAnswer.value.trim().toLowerCase()
+
+        /* Teile die vom Benutzer eingegebenen Hauptstädte auf, entferne Leerzeichen und
+        filtere leere Strings heraus */
+        const userCapitals = userText.split(",")
+            .map(capital => capital.trim())
+            .filter(capital => capital !== "")
+            .sort()
+
+        // Teile die korrekten Hauptstädte auf und entferne Leerzeichen
+        const correctCapitals = correctAnswer.split(",")
+            .map(capital => capital.trim())
+            .filter(capital => capital !== "")
+            .sort()
+
+        // Überprüfe, ob die eingegebenen Hauptstädte korrekt sind
+        const isCorrect = arraysEqual(userCapitals, correctCapitals);
+
+        // Überprüfe, ob einige der korrekten Hauptstädte eingegeben wurden
+        const isPartialCorrect = correctCapitals.some(capital => userCapitals.includes(capital))
+        const hasWrongAnswer = userCapitals.some(capital => !correctCapitals.includes(capital))
+
+
+        if (isCorrect) {
+            // Correct answer
+            userAnswer.classList.remove('is-invalid')
+            userAnswer.classList.remove("is-partial-correct")
+
+            userAnswer.classList.add('is-valid')
+
+            setTimeout(function () {
+                location.reload()
+                document.getElementById("userAnswer").value = ""
+            }, 1000)
+
+        } else if (isPartialCorrect && !hasWrongAnswer) {
+            // Einige der korrekten Hauptstädte wurden eingeben
+            userAnswer.classList.remove("is-invalid")
+            userAnswer.classList.add("is-partial-correct")
+        } else {
+            // Wrong answer
+            userAnswer.classList.remove('is-valid')
+            userAnswer.classList.remove('is-partial-correct')
+
+            userAnswer.classList.add('is-invalid')
+        }
+    }
+
+    // Überprüfe, ob zwei Arrays gleich sind
+    function arraysEqual(arr1, arr2) {
+        return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+    }
+
+    // Füge einen Eventlistener hinzu, um die Enter-Taste abzufangen
+    document.getElementById('userAnswer').addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+            checkAnswer();
+        }
+    });
+
+</script>
+
+{% endblock content %}

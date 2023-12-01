@@ -1,0 +1,25 @@
+<!-- Region Select -->
+{# <!-- <label for="regionSelect">Choose a region:</label> --> #}
+<select class="form-select" id="regionSelect" name="regionSelect" onchange="changeRegion()">
+    <option value="worldwide">Worldwide</option>
+    <option value="africa">Africa</option>
+    <option value="americas">Americas</option>
+    <option value="antarctic">Antarctic</option>
+    <option value="asia">Asia</option>
+    <option value="europe">Europe</option>
+    <option value="oceania">Oceania</option>
+</select>
+
+<script>
+    let regionSelect = document.getElementById("regionSelect")
+    regionSelect.value = "{{ region }}"  // Set select tag to current region
+
+    function changeRegion() {
+        const selectedRegion = regionSelect.value
+
+        let currentURL = window.location.href
+        let newURL = currentURL.replace("{{ region }}", selectedRegion)
+        // let newURL = currentURL.replace(/\/capital\/[^/]+$/, "/capital/" + selectedRegion)
+        window.location.href = newURL
+    }
+</script>
