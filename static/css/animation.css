@@ -1,0 +1,14 @@
+/* Create a simple white box, and add the shadow for the initial state */
+.zoom {
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.zoom::after {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.zoom:hover {
+    box-shadow: 2px 2px 10px 1px #3d3d3d;
+    transform: scale(1.05, 1.05);
+}

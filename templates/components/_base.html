@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="de" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% include "dependencies/_bootstrap.html" %}
+
+    {% include "dependencies/_google_fonts.html" %}
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- Custom JS -->
+    <script defer src="{% static 'js/themeSwitch.js' %}"></script>
+
+    {% block style %}
+    {% endblock %}
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/eth-logo.ico' %}">
+
+    <title>Enzo Baraldi</title>
+</head>
+
+<body>
+
+    {% include "components/_navbar.html" %}
+
+    <div class="container" style="margin-top: 80px;">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch" checked>
+            <label class="form-check-label" for="themeSwitch">Dark Theme</label>
+        </div>
+
+        <br>
+        <br>
+
+        {% block content %}{% endblock %}
+
+    </div>
+
+    {% include "components/_footer.html" %}
+
+</body>
+
+</html>

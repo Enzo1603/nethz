@@ -1,0 +1,81 @@
+{% macro card(title, description, button_text, image_path, link="#",disabled=False) %}
+
+<!-- {{ title | capitalize }} Card -->
+<div class="col-md-6 col-sm-12 mt-2 mb-4">
+    <div class="card rounded-3 zoom">
+        <a href="{{ link }}">
+            <img src="{{ image_path }}" class="card-img rounded-3" style="filter: brightness(70%);" alt="...">
+            <div class="card-img-overlay text-white text-center">
+                <div
+                    style="margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 90%;">
+                    <h2 class="card-title fs-2">{{ title }}</h2>
+                    <p class="card-text fs-6 mb-3">{{ description }}</p>
+                    <a class="btn btn-light btn-lg {% if disabled %} disabled {% endif %}" href="{{ link }}">
+                        {{ button_text }}</a>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+{% endmacro %}
+
+
+{% macro coming_soon_card() %}
+
+{{ card("Coming soon (or never)", "nothing to be seen here", "Go away",
+url_for('static', filename='images/informatik1_3px.jpg'), "#", True) }}
+
+{% endmacro %}
+
+
+{#
+
+{% set card_data = [
+
+{
+"title": "Technische Mechanik 2023",
+"description": "Übungsbetrieb und wichtige Unterlagen",
+"button_text": "Zu den Unterlagen",
+"image_path":url_for('static', filename='images/technische_mechanik_6px.jpg'),
+"link": url_for('technische_mechanik', semester='HS23'),
+"disabled": False,
+},
+
+"Coming soon",
+
+{
+"title": "Worldle",
+"description": "Verschiedene Länderquizzes",
+"button_text": "Zu den Spielmodi",
+"image_path":url_for('static', filename='images/Earth_2px.jpg'),
+"link": url_for('worldle_bp.home'),
+"disabled": False,
+},
+
+] %}
+
+#}
+
+{% macro row_cards(cards_data) %}
+
+<!-- Cards Row -->
+<div class="row">
+
+    {% for card_data in cards_data %}
+
+    {% if card_data != 'Coming soon' %}
+
+    {{ card(card_data.title, card_data.description, card_data.button_text, card_data.image_path, card_data.link,
+    card_data.disabled)}}
+
+    {% else %}
+
+    {{ coming_soon_card() }}
+
+    {% endif %}
+
+    {% endfor %}
+</div>
+
+{% endmacro %}
