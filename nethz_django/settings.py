@@ -28,7 +28,6 @@ SECRET_KEY = config(
     default="django-insecure-^s(r!#oicsvaye9#%e*pp(^ph33q7m8_agw%f4o62_lwx0&@f8",
     cast=str,
 )
-print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
