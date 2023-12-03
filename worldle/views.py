@@ -1,14 +1,13 @@
 import random
 from copy import deepcopy
-from django.http import Http404
 
-from django.urls import reverse
-
-from .utils import get_csv_entries
-
-
+from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
+from django.urls import reverse
+from django.views.decorators.http import require_GET
+
+from .utils import get_csv_entries
 
 
 DEFAULT_REGION = "worldwide"
@@ -47,8 +46,8 @@ def home(request):
         "description": "Higher Lower mit Landesflächen",
         "button_text": "Zum Spiel",
         "image_path": static("images/World-Map.jpg"),
-        "link": "#",
-        "disable": True,
+        "link": reverse("worldle:areas"),
+        "disable": False,
     }
 
     return render(
@@ -140,3 +139,23 @@ def languages(request, region):
             "country_languages": country_languages,
         },
     )
+
+
+def areas(request):
+    return render(request, "worldle/areas.html")
+
+
+@require_GET
+def get_country(request):
+    entries = deepcopy(get_csv_entries())
+
+    # Filter entries with no area or negative area
+    entries = [
+        entry
+        for entry in entries
+        if entry["area"].strip() or float(entry["area"].strip()) < 0
+    ]
+
+    country = random.choice(entries)
+
+    return JsonResponse({"country": country})
