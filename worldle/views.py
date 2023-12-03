@@ -38,8 +38,8 @@ def home(request):
         "description": "Errate die Landessprachen",
         "button_text": "Zum Spiel",
         "image_path": static("images/Languages_3px.jpg"),
-        "link": "#",
-        "disable": True,
+        "link": reverse("worldle:default_languages"),
+        "disable": False,
     }
 
     areas_card = {
@@ -98,5 +98,45 @@ def capitals(request, region):
             "country_image_name": country_image_name,
             "country_name": country_name,
             "country_capital": country_capital,
+        },
+    )
+
+
+def default_languages(request):
+    return redirect(reverse("worldle:languages", args=[DEFAULT_REGION]))
+
+
+def languages(request, region):
+    if region not in VALID_REGIONS:
+        raise Http404()
+
+    entries = deepcopy(get_csv_entries())
+
+    if region != DEFAULT_REGION:
+        entries = [
+            entry for entry in entries if entry["region"].lower().strip() == region
+        ]
+
+    # Filter entries with no languages
+    entries = [entry for entry in entries if entry["languages"].strip()]
+
+    random_row = random.choice(entries)
+
+    country_name = random_row["name.common"].strip()
+    country_cca3 = random_row["cca3"].strip().lower()
+    country_image_name = f"worldle/data/{country_cca3}.svg"
+
+    languages_list = random_row["languages"].strip().split(",")
+    languages_list = list(map(str.strip, languages_list))
+    country_languages = ", ".join(languages_list)
+
+    return render(
+        request,
+        "worldle/languages.html",
+        {
+            "region": region,
+            "country_image_name": country_image_name,
+            "country_name": country_name,
+            "country_languages": country_languages,
         },
     )

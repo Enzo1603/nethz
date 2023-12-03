@@ -15,7 +15,7 @@
 <br>
 <br>
 
-<h1 class="mb-4">Capitals</h1>
+<h1 class="mb-4">Languages</h1>
 
 <div class="col-8 mx-auto">
     <div class="text-center">
@@ -30,7 +30,7 @@
         <br>
         <br>
 
-        <input class="form-control" type="text" id="userAnswer" placeholder="Enter the capital(s)">
+        <input class="form-control" type="text" id="userAnswer" placeholder="Enter the language(s)">
         <br>
         <button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>
 
@@ -48,10 +48,10 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        {% if country_capital %}
-                        {{ country_capital }}
+                        {% if country_languages %}
+                        {{ country_languages }}
                         {% else %}
-                        {{ "There is no capital. Submit an empty text field." }}
+                        {{ "There is no language. Submit an empty text field." }}
                         {% endif %}
                     </div>
                 </div>
@@ -68,35 +68,35 @@
     userAnswer.focus()
 
     function checkAnswer() {
-        const correctAnswer = "{{ country_capital | safe }}".trim().toLowerCase()
+        const correctAnswer = "{{ country_languages | safe }}".trim().toLowerCase()
 
         const userText = userAnswer.value.trim().toLowerCase()
 
-        /* Teile die vom Benutzer eingegebenen Hauptstädte auf, entferne Leerzeichen und
+        /* Teile die vom Benutzer eingegebenen Sprachen auf, entferne Leerzeichen und
         filtere leere Strings heraus */
-        const userCapitals = userText.split(",")
-            .map(capital => capital.trim())
-            .filter(capital => capital !== "")
+        const userLanguages = userText.split(',')
+            .map(lang => lang.trim())
+            .filter(lang => lang !== "")
             .sort()
 
-        // Teile die korrekten Hauptstädte auf und entferne Leerzeichen
-        const correctCapitals = correctAnswer.split(",")
-            .map(capital => capital.trim())
-            .filter(capital => capital !== "")
+        // Teile die korrekten Sprachen auf und entferne Leerzeichen
+        const correctLanguages = correctAnswer.split(',')
+            .map(lang => lang.trim())
+            .filter(lang => lang !== "")
             .sort()
 
-        // Überprüfe, ob die eingegebenen Hauptstädte korrekt sind
-        const isCorrect = arraysEqual(userCapitals, correctCapitals);
+        // Überprüfe, ob die eingegebenen Sprachen korrekt sind
+        const isCorrect = arraysEqual(userLanguages, correctLanguages)
 
-        // Überprüfe, ob einige der korrekten Hauptstädte eingegeben wurden
-        const isPartialCorrect = correctCapitals.some(capital => userCapitals.includes(capital))
-        const hasWrongAnswer = userCapitals.some(capital => !correctCapitals.includes(capital))
+        // Überprüfe, ob einige der korrekten Sprachen eingegeben wurden
+        const isPartialCorrect = correctLanguages.some(lang => userLanguages.includes(lang))
+        const hasWrongAnswer = userLanguages.some(lang => !correctLanguages.includes(lang))
 
 
         if (isCorrect) {
             // Correct answer
             userAnswer.classList.remove('is-invalid')
-            userAnswer.classList.remove("is-partial-correct")
+            userAnswer.classList.remove('is-partial-correct')
 
             userAnswer.classList.add('is-valid')
 
@@ -106,12 +106,12 @@
             }, 1000)
 
         } else if (isPartialCorrect && !hasWrongAnswer) {
-            // Einige der korrekten Hauptstädte wurden eingeben
-            userAnswer.classList.remove("is-invalid")
-            userAnswer.classList.add("is-partial-correct")
+            // Einige der korrekten Sprachen wurden eingegeben
+            userAnswer.classList.remove('is-invalid')
+            userAnswer.classList.add('is-partial-correct')
         } else {
             // Wrong answer
-            userAnswer.classList.remove('is-valid')
+            userAnswer.classList.remove('is-invalid')
             userAnswer.classList.remove('is-partial-correct')
 
             userAnswer.classList.add('is-invalid')

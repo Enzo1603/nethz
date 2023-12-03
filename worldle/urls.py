@@ -10,4 +10,6 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("capitals", views.default_capitals, name="default_capitals"),
     path("capitals/<str:region>", views.capitals, name="capitals"),
+    path("languages", views.default_languages, name="default_languages"),
+    path("languages/<str:region>", views.languages, name="languages"),
 ]
