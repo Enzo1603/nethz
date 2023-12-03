@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+
+ENVIRONMENT = config("ENVIRONMENT", default="production", cast=str)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^s(r!#oicsvaye9#%e*pp(^ph33q7m8_agw%f4o62_lwx0&@f8"
+SECRET_KEY = config(
+    "SECRET_KEY",
+    default="django-insecure-^s(r!#oicsvaye9#%e*pp(^ph33q7m8_agw%f4o62_lwx0&@f8",
+    cast=str,
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["ebaraldi.pythonanywhere.com"]
+ALLOWED_HOSTS = []
+
+if ENVIRONMENT == "development":
+    DEBUG = True
+    ALLOWED_HOSTS.append("127.0.0.1")
+    ALLOWED_HOSTS.append("localhost")
+
+if ENVIRONMENT == "production":
+    ALLOWED_HOSTS.append("ebaraldi.pythonanywhere.com")
 
 
 # Application definition

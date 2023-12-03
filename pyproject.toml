@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10.5"
 Django = "^4.2.7"
+python-decouple = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.6"
