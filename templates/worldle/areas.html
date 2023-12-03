@@ -46,10 +46,17 @@
 <br>
 <br>
 
-<h1 class="mb-4">Areas</h1>
 
-<!-- TODO: Display it right aligned next to Areas header -->
-<p>Highscore: <span id="high_score"></span></p>
+<div class="row align-items-end mb-4">
+    <div class="col-6">
+        <h1 class="text-start">Areas</h1>
+    </div>
+    <div class="col-6">
+        <h4 class="text-end">Highscore: <span id="high_score"></span></h4>
+    </div>
+</div>
+
+<br>
 
 <div class="col-10 mx-auto">
     <div class="row">
@@ -83,16 +90,12 @@
 
     <br>
 
-    <div class="text-center">
-        <p>Is the area of the right country higher or lower?</p>
-
-        <button id="lower-button" type="button" class="btn btn-outline-danger mx-5">Lower <i class="bi bi-chevron-double-down ms-1"></i></button>
-
-        <span>score: <span id="score"></span></span>
-
-        <button id="higher-button" type="button" class="btn btn-outline-success mx-5">Higher <i class="bi bi-chevron-double-up ms-1"></i></button>
-
+    <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center text-center">
+        <button id="lower-button" type="button" class="btn btn-outline-danger my-1 mx-5 order-3 order-md-1">Lower <i class="bi bi-chevron-double-down ms-1"></i></button>
+        <span class="order-1 order-md-2 my-1">score: <span id="score"></span></span>
+        <button id="higher-button" type="button" class="btn btn-outline-success my-1 mx-5 order-2 order-md-3">Higher <i class="bi bi-chevron-double-up ms-1"></i></button>
     </div>
+
 
 
 </div>
