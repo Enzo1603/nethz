@@ -42,6 +42,11 @@ if ENVIRONMENT == "development":
 if ENVIRONMENT == "production":
     ALLOWED_HOSTS.append("ebaraldi.pythonanywhere.com")
 
+if ENVIRONMENT == "testing":
+    DEBUG = False
+    ALLOWED_HOSTS.append("127.0.0.1")
+    ALLOWED_HOSTS.append("localhost")
+
 
 # Application definition
 
