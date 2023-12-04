@@ -1,0 +1,23 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/animation.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Sign Up</h1>
+
+<div class="container mt-5">
+    <h2>Login</h2>
+    <form method="POST" class="form-control mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+{% endblock content %}

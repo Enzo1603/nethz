@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10.5"
 Django = "^5.0.0"
 python-decouple = "^3.8"
+django-crispy-forms = "^2.1"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.6"
