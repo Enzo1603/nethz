@@ -29,7 +29,7 @@ SECRET_KEY = config(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False  # Set to True only in development environment
 
 ALLOWED_HOSTS = []
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "accounts.apps.AccountsConfig",
     "lib",
     "main.apps.MainConfig",
     "worldle.apps.WorldleConfig",
@@ -122,6 +123,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+
+LOGIN_URL = "accounts:login"
+LOGOUT_URL = "accounts:logout"
+
+LOGIN_REDIRECT_URL = "main:home"
+LOGOUT_REDIRECT_URL = "main:home"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
