@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<h1>Sign Up</h1>
+<h1>Login</h1>
 
 <br>
 <br>
@@ -20,10 +20,10 @@
 
     <hr class="mx-4">
     <div class="text-center mt-2">
-        <h6 style="font-weight: 500;">Already have an account?</h6>
+        <h6 style="font-weight: 500;">Don't have an account yet?</h6>
     </div>
     <div class="d-grid col-12">
-        <a href="{% url 'accounts:login' %}" class="btn btn-primary m-4 mt-2">Login</a>
+        <a href="{% url 'accounts:sign_up' %}" class="btn btn-primary m-4 mt-2">Sign up</a>
     </div>
 </div>
 

@@ -1,8 +1,13 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    AuthenticationForm,
+)
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div, Field
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from django import forms
+from django.forms import ModelForm
 
 
 from django.core import validators
@@ -12,51 +17,53 @@ from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
-    username = forms.CharField(
-        label="Username",
-        help_text="Choose your unique username.",
-        validators=[
-            validators.RegexValidator(
-                regex="^[A-Za-z][A-Za-z0-9_.]*$",
-                message="Usernames must have only letters, numbers, dots, or underscores.",
-            ),
-            validators.MinLengthValidator(
-                limit_value=4, message="Username must be at least 4 characters long."
-            ),
-        ],
-    )
+    # username = forms.CharField(
+    #     label="Username",
+    #     help_text="Choose your unique username.",
+    #     validators=[
+    #         validators.RegexValidator(
+    #             regex="^[A-Za-z][A-Za-z0-9_.]*$",
+    #             message="Usernames must have only letters, numbers, dots, or underscores.",
+    #         ),
+    #         validators.MinLengthValidator(
+    #             limit_value=4, message="Username must be at least 4 characters long."
+    #         ),
+    #     ],
+    # )
 
-    email = forms.EmailField(
-        label="Email Address",
-        help_text="We'll never share your email address with anyone else.",
-    )
+    # email = forms.EmailField(
+    #     label="Email Address",
+    #     help_text="We'll never share your email address with anyone else.",
+    # )
 
-    password1 = forms.CharField(
-        label="Password",
-        help_text="Minimum length of 8 characters.",
-        widget=forms.PasswordInput,
-        validators=[
-            validators.MinLengthValidator(limit_value=8),
-        ],
-    )
+    # password1 = forms.CharField(
+    #     label="Password",
+    #     help_text="Minimum length of 8 characters.",
+    #     widget=forms.PasswordInput,
+    #     validators=[
+    #         validators.MinLengthValidator(limit_value=8),
+    #     ],
+    # )
 
-    password2 = forms.CharField(
-        label="Confirm Password",
-        widget=forms.PasswordInput,
-    )
+    # password2 = forms.CharField(
+    #     label="Confirm Password",
+    #     widget=forms.PasswordInput,
+    # )
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = UserCreationForm.Meta.fields
+        fields = ("username", "email", "password1", "password2")
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                "csrf_token",
                 FloatingField(
-                    "username", placeholder="Username", maxlength=16, minlength=4
+                    "username",
+                    placeholder="Username",
+                    maxlength=16,
+                    minlength=4,
                 ),
                 FloatingField("email", placeholder="Email Address"),
                 FloatingField("password1", placeholder="Password", minlength=8),
@@ -66,9 +73,26 @@ class CustomUserCreationForm(UserCreationForm):
             Div(
                 Submit(
                     "submit",
-                    "Register",
+                    "Sign up",
                     css_class="btn btn-primary m-4 mt-3",
                 ),
+                css_class="d-grid col-12",
+            ),
+        )
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                FloatingField("username", placeholder="Username"),
+                FloatingField("password", placeholder="Password"),
+                css_class="m-4",
+            ),
+            Div(
+                Submit("submit", "Login", css_class="btn btn-primary m-4 mt-3"),
                 css_class="d-grid col-12",
             ),
         )
