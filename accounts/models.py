@@ -3,7 +3,6 @@ from django.db import models
 from django.core import validators
 
 
-# Create your models here.
 class CustomUser(AbstractUser):
     username = models.CharField(
         "username",
