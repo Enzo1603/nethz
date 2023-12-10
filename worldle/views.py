@@ -5,9 +5,10 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
 from django.urls import reverse
-from django.views.decorators.http import require_GET
+from django.contrib.auth.decorators import login_required
 
-from .utils import get_csv_entries
+
+from .utils import get_csv_entries, get_random_countries
 
 
 DEFAULT_REGION = "worldwide"
@@ -141,21 +142,91 @@ def languages(request, region):
     )
 
 
+@login_required
 def areas(request):
-    return render(request, "worldle/areas.html")
+    if request.method == "GET":
+        country1, country2 = get_random_countries(2, filter_empty=["area"])
+        request.session["country1"] = country1
+        request.session["country2"] = country2
 
+        score = int(request.session.get("score", 0))
 
-@require_GET
-def get_country(request):
-    entries = deepcopy(get_csv_entries())
+        request.session["score"] = score
 
-    # Filter entries with no area or negative area
-    entries = [
-        entry
-        for entry in entries
-        if entry["area"].strip() or float(entry["area"].strip()) < 0
-    ]
+        areas_highscore = request.user.areas_highscore
 
-    country = random.choice(entries)
+        country1_cleaned = {
+            "name": country1["name.common"],
+            "image_url": static(f"worldle/data/{country1["cca3"].lower()}.svg"),
+            "area": float(country1["area"]),
+        }
 
-    return JsonResponse({"country": country})
+        country2_cleaned = {
+            "name": country2["name.common"],
+            "image_url": static(f"worldle/data/{country2["cca3"].lower()}.svg"),
+        }
+
+        return render(
+            request,
+            "worldle/areas.html",
+            {
+                "country1": country1_cleaned,
+                "country2": country2_cleaned,
+                "score": score,
+                "highscore": areas_highscore,
+            },
+        )
+
+    elif request.method == "POST":
+        country1 = request.session.get("country1")
+        country2 = request.session.get("country2")
+        user_choice = request.POST.get("choice")
+
+        correct_answer = (
+            "higher"
+            if float(country2["area"]) > float(country1["area"])
+            else "lower"
+            if float(country2["area"]) < float(country1["area"])
+            else "equal"
+        )
+
+        is_correct = correct_answer == "equal" or correct_answer == user_choice
+
+        if is_correct:
+            request.session["score"] += 1
+        else:
+            request.session["score"] = 0
+
+        score = request.session["score"]
+        areas_highscore = request.user.areas_highscore
+        if score > areas_highscore:
+            request.user.areas_highscore = score
+            request.user.save()
+            areas_highscore = score
+
+        # generate new countries
+        country1 = country2  # old country2 becomes new country1
+        country2 = get_random_countries(1, filter_empty=["area"])[0]
+        request.session["country1"] = country1
+        request.session["country2"] = country2
+
+        country1_cleaned = {
+            "name": country1["name.common"],
+            "image_url": static(f"worldle/data/{country1["cca3"].lower()}.svg"),
+            "area": float(country1["area"]),
+        }
+
+        country2_cleaned = {
+            "name": country2["name.common"],
+            "image_url": static(f"worldle/data/{country2["cca3"].lower()}.svg"),
+        }
+
+        return JsonResponse(
+            {
+                "country1": country1_cleaned,
+                "country2": country2_cleaned,
+                "score": score,
+                "highscore": areas_highscore,
+                "is_correct": is_correct,
+            }
+        )

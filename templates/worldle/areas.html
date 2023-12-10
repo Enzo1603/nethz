@@ -3,6 +3,8 @@
 {% load static %}
 
 {% block style %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
 <link rel="stylesheet" href="{% static 'css/animation.css' %}">
 
 <style>
@@ -60,11 +62,11 @@
 
 <div class="col-10 mx-auto">
     <div class="row">
-        <div class="col-6 text-center">
-            <h3 id="country1-name"></h3>
+        <div class="col-6 text-center mb-3">
+            <h2 id="country1-name"></h2>
         </div>
 
-        <div class="col-6 text-center">
+        <div class="col-6 text-center mb-3">
             <h2 id="country2-name"></h2>
         </div>
 
@@ -74,13 +76,11 @@
     <div class="row">
 
         <div class="col-6 text-center">
-            <h3 id="country1-name"></h3>
             <img id="image1" src="" alt="flag of country" class="img-fluid zoom" style="max-width: 55%; max-height: 55%">
             <p class="mt-4">Area: <span id="country1-area"></span> km&sup2;</p>
         </div>
 
         <div class="col-6 text-center">
-            <h2 id="country2-name"></h2>
             <img id="image2" src="" alt="flag of country" class="img-fluid zoom" style="max-width: 55%; max-height: 55%">
         </div>
 
@@ -103,24 +103,20 @@
 <script>
     // TODO: Display score and update it
     // TODO: Keep track of highscore via Cookie, display it and update it
-    let score = 0
-    let high_score = localStorage.getItem("areas_highscore")
-    if (high_score === null) {
-        high_score = 0
-    }
+    let score = {{ score }}
+    let highscore = {{ highscore }}
 
-    let country1 = {}
-    let country2 = {}
+    let country1 = {{ country1 | safe }}
+    let country2 = {{ country2 | safe }}
 
     // DOM-Elemente initialisieren
-    const country1_name = document.getElementById("country1-name");
-    const country2_name = document.getElementById("country2-name");
-    const image1 = document.getElementById("image1");
-    const image2 = document.getElementById("image2");
-    const country1_area = document.getElementById("country1-area");
+    const country1_name = document.getElementById("country1-name")
+    const country2_name = document.getElementById("country2-name")
+    const image1 = document.getElementById("image1")
+    const image2 = document.getElementById("image2")
+    const country1_area = document.getElementById("country1-area")
     const score_span = document.getElementById("score")
-    const high_score_span = document.getElementById("high_score")
-
+    const highscore_span = document.getElementById("high_score")
 
     const lowerButton = document.getElementById("lower-button")
     const higherButton = document.getElementById("higher-button")
@@ -129,78 +125,50 @@
     higherButton.addEventListener("click", higherButtonClickHandler)
 
     function lowerButtonClickHandler() {
-        checkAnswer("lower");
+        sendChoice("lower");
     }
 
     function higherButtonClickHandler() {
-        checkAnswer("higher");
+        sendChoice("higher");
     }
 
+    // First load initialization
+    updateDisplay()
 
-    function checkAnswer(userChoice) {
-        let isCorrect = false
+    function sendChoice(userChoice) {
+        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
-        if (userChoice === "lower") {
-            isCorrect = parseFloat(country2["area"]) <= parseFloat(country1["area"])
-        } else if (userChoice === "higher") {
-            isCorrect = parseFloat(country2["area"]) >= parseFloat(country1["area"])
-        }
-
-        // Aktualisiere die Anzeige mit den neuen Länderdaten
-        updateDisplay()
-
-        // Zeige eine Benachrichtigung basierend auf der Korrektheit der Antwort an
-        if (isCorrect) {
-            ++score
-            showOverlay("correct-overlay")
-
-
-        } else {
-            showOverlay("incorrect-overlay")
-            // Hier könntest du weitere Aktionen implementieren, wie das Zurücksetzen des Spiels.
-            score = 0
-        }
-        // Update Score
-        score_span.innerText = score
-        // Update Highscore
-        if (high_score < score) {
-            high_score = score
-            localStorage.setItem("areas_highscore", high_score)
-            high_score_span.innerText = high_score
-        }
-    }
-
-    function updateDisplay() {
-        // TODO: Fetch first the new country and then insert the insert the new countries
-        // Alte Länder durch neue ersetzen
-        country1 = country2
-
-        getNewCountry().then(data => {
-            country2 = data.country
-
-            // Aktualisiere die Anzeige mit den Daten des neuen Landes
-            country1_name.innerText = country1["name.common"]
-            country2_name.innerText = country2["name.common"]
-
-            let image1_url = "/static/worldle/data/" + country1["cca3"].toLowerCase() + ".svg"
-            let image2_url = "/static/worldle/data/" + country2["cca3"].toLowerCase() + ".svg"
-
-            image1.src = image1_url
-            image2.src = image2_url
-
-            country1_area.innerText = country1["area"]
-
-            // Entferne vorhandene Event-Listener
-            lowerButton.removeEventListener("click", lowerButtonClickHandler);
-            higherButton.removeEventListener("click", higherButtonClickHandler);
-
-            // Füge neue Event-Listener hinzu
-            lowerButton.addEventListener("click", lowerButtonClickHandler);
-            higherButton.addEventListener("click", higherButtonClickHandler);
+        fetch('/worldle/areas/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken
+            },
+            body: 'choice=' + userChoice
         })
+            .then(response => response.json())
+            .then(data => {
+                country1 = data["country1"]
+                country2 = data["country2"]
+                score = data["score"]
+                highscore = data["highscore"]
+                updateDisplay()
+
+                let is_correct = data["is_correct"]
+                showOverlay(is_correct)
+
+            })
+            .catch(error => console.error('Error:', error))
     }
 
-    function showOverlay(id) {
+    function showOverlay(isCorrect) {
+        let id = ""
+        if (isCorrect) {
+            id = "correct-overlay"
+        } else {
+            id = "incorrect-overlay"
+        }
+
         const overlay = document.getElementById(id)
         overlay.style.visibility = "visible"
 
@@ -211,39 +179,23 @@
         }, 800)
     }
 
-    function getNewCountry() {
-        return fetch("/worldle/areas/get-country")
-            .then(response => response.json())
-            .then(data => data)
+    function updateDisplay() {
+        country1_name.innerText = country1["name"]
+        country2_name.innerText = country2["name"]
+        image1.src = country1["image_url"]
+        image2.src = country2["image_url"]
+        country1_area.innerText = country1["area"]
+        score_span.innerText = score
+        highscore_span.innerText = highscore
     }
 
-    // TODO: Fetch first both countries and then insert them (for more synchronous appearance)
-    // Lade zu Beginn die ersten Länder
-    getNewCountry().then(data => {
-        score_span.innerText = score
-        console.log(high_score)
-        high_score_span.innerText = high_score
 
-        country1 = data.country
 
-        // Aktualisiere die Anzeige
-        country1_name.innerText = country1["name.common"]
-        country1_area.innerText = country1["area"]
 
-        image1_url = "/static/worldle/data/" + country1["cca3"].toLowerCase() + ".svg"
-        image1.src = image1_url
 
-        // Lade das zweite Land 
-        getNewCountry().then(data => {
-            country2 = data.country
 
-            // Aktualisiere die Anzeige
-            country2_name.innerText = country2["name.common"]
 
-            image2_url = "/static/worldle/data/" + country2["cca3"].toLowerCase() + ".svg"
-            image2.src = image2_url
-        })
-    })
+
 
 </script>
 
