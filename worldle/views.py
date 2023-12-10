@@ -157,13 +157,13 @@ def areas(request):
 
         country1_cleaned = {
             "name": country1["name.common"],
-            "image_url": static(f"worldle/data/{country1["cca3"].lower()}.svg"),
+            "image_url": static(f"worldle/data/{country1['cca3'].lower()}.svg"),
             "area": float(country1["area"]),
         }
 
         country2_cleaned = {
             "name": country2["name.common"],
-            "image_url": static(f"worldle/data/{country2["cca3"].lower()}.svg"),
+            "image_url": static(f"worldle/data/{country2['cca3'].lower()}.svg"),
         }
 
         return render(
@@ -212,13 +212,13 @@ def areas(request):
 
         country1_cleaned = {
             "name": country1["name.common"],
-            "image_url": static(f"worldle/data/{country1["cca3"].lower()}.svg"),
+            "image_url": static(f"worldle/data/{country1['cca3'].lower()}.svg"),
             "area": float(country1["area"]),
         }
 
         country2_cleaned = {
             "name": country2["name.common"],
-            "image_url": static(f"worldle/data/{country2["cca3"].lower()}.svg"),
+            "image_url": static(f"worldle/data/{country2['cca3'].lower()}.svg"),
         }
 
         return JsonResponse(
