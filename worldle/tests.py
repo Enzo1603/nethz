@@ -1,4 +1,4 @@
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.test import TestCase
 from django.urls import reverse
 

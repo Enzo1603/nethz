@@ -2,7 +2,6 @@ import csv
 import random
 from copy import deepcopy
 from pathlib import Path
-from django.utils.crypto import get_random_string
 
 
 FILE_PATH = Path(__file__).resolve().parent
