@@ -18,6 +18,24 @@ typing-extensions = {version = ">=4", markers = "python_version < \"3.11\""}
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
+name = "crispy-bootstrap5"
+version = "2023.10"
+description = "Bootstrap5 template pack for django-crispy-forms"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "crispy-bootstrap5-2023.10.tar.gz", hash = "sha256:f16c44f1997310e5a89c0cf230402e7111cc1f942f64fb7e44603958b89b06a1"},
+    {file = "crispy_bootstrap5-2023.10-py3-none-any.whl", hash = "sha256:9b5a6c9880f37cd32aa678c0d7576ae60b3e502c444c8712e582f8bd91659afb"},
+]
+
+[package.dependencies]
+django = ">=4.2"
+django-crispy-forms = ">=2"
+
+[package.extras]
+test = ["pytest", "pytest-django"]
+
+[[package]]
 name = "django"
 version = "5.0"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
@@ -36,6 +54,20 @@ tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+
+[[package]]
+name = "django-crispy-forms"
+version = "2.1"
+description = "Best way to have Django DRY forms"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-crispy-forms-2.1.tar.gz", hash = "sha256:4d7ec431933ad4d4b5c5a6de4a584d24613c347db9ac168723c9aaf63af4bb96"},
+    {file = "django_crispy_forms-2.1-py3-none-any.whl", hash = "sha256:d592044771412ae1bd539cc377203aa61d4eebe77fcbc07fbc8f12d3746d4f6b"},
+]
+
+[package.dependencies]
+django = ">=4.2"
 
 [[package]]
 name = "python-decouple"
@@ -92,13 +124,13 @@ test = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "typing-extensions"
-version = "4.8.0"
+version = "4.9.0"
 description = "Backported and Experimental Type Hints for Python 3.8+"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "typing_extensions-4.8.0-py3-none-any.whl", hash = "sha256:8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0"},
-    {file = "typing_extensions-4.8.0.tar.gz", hash = "sha256:df8e4339e9cb77357558cbdbceca33c303714cf861d1eef15e1070055ae8b7ef"},
+    {file = "typing_extensions-4.9.0-py3-none-any.whl", hash = "sha256:af72aea155e91adfc61c3ae9e0e342dbc0cba726d6cba4b6c72c1f34e47291cd"},
+    {file = "typing_extensions-4.9.0.tar.gz", hash = "sha256:23478f88c37f27d76ac8aee6c905017a143b0b1b886c3c9f66bc2fd94f9f5783"},
 ]
 
 [[package]]
@@ -115,4 +147,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10.5"
-content-hash = "3def01870d242477c2a1432a8f7ecc5f193b9444e71e9f74f94f876e931f24c6"
+content-hash = "cb855585a2e44d06e9d0f56cde281d23f69e8a2f4b5216ce7b1c37aa7e322297"
