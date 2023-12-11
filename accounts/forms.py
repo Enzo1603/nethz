@@ -18,7 +18,7 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
         label="Email",
         help_text="We'll never share your email address with anyone else.",
-        required=False,
+        required=True,
     )
 
     password1 = forms.CharField(

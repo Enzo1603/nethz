@@ -25,6 +25,11 @@ class CustomUser(AbstractUser):
         },
     )
 
+    email = models.EmailField("email address", unique=True, blank=False, null=False)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
+
     areas_highscore = models.PositiveSmallIntegerField(
         null=False, default=0, blank=True
     )
