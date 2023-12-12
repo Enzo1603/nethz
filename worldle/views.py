@@ -84,7 +84,7 @@ def capitals(request, region):
 
     country_name = random_row["name.common"].strip()
     country_cca3 = random_row["cca3"].strip().lower()
-    country_image_name = f"worldle/data/{country_cca3}.svg"
+    country_image_name = f"worldle/{country_cca3}.svg"
 
     capitals_list = random_row["capital"].strip().split(",")
     capitals_list = list(map(str.strip, capitals_list))
@@ -124,7 +124,7 @@ def languages(request, region):
 
     country_name = random_row["name.common"].strip()
     country_cca3 = random_row["cca3"].strip().lower()
-    country_image_name = f"worldle/data/{country_cca3}.svg"
+    country_image_name = f"worldle/{country_cca3}.svg"
 
     languages_list = random_row["languages"].strip().split(",")
     languages_list = list(map(str.strip, languages_list))
@@ -157,13 +157,13 @@ def areas(request):
 
         country1_cleaned = {
             "name": country1["name.common"],
-            "image_url": static(f"worldle/data/{country1['cca3'].lower()}.svg"),
+            "image_url": static(f"worldle/{country1['cca3'].lower()}.svg"),
             "area": float(country1["area"]),
         }
 
         country2_cleaned = {
             "name": country2["name.common"],
-            "image_url": static(f"worldle/data/{country2['cca3'].lower()}.svg"),
+            "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
         }
 
         return render(
@@ -212,13 +212,13 @@ def areas(request):
 
         country1_cleaned = {
             "name": country1["name.common"],
-            "image_url": static(f"worldle/data/{country1['cca3'].lower()}.svg"),
+            "image_url": static(f"worldle/{country1['cca3'].lower()}.svg"),
             "area": float(country1["area"]),
         }
 
         country2_cleaned = {
             "name": country2["name.common"],
-            "image_url": static(f"worldle/data/{country2['cca3'].lower()}.svg"),
+            "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
         }
 
         return JsonResponse(
