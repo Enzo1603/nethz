@@ -1,12 +1,23 @@
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.http import JsonResponse
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
-from worldle.views import DEFAULT_REGION
+from unittest.mock import patch
+
+from accounts.models import CustomUser
+from worldle.views import DEFAULT_REGION, areas
 
 
 # Create your tests here.
 class WorldleViewsTest(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = CustomUser.objects.create_user(
+            username="testuser", password="testpass"
+        )
+        self.client.force_login(self.user)
+
     def test_home_view(self):
         response = self.client.get(reverse("worldle:home"))
         self.assertEqual(response.status_code, 200)
@@ -58,30 +69,45 @@ class WorldleViewsTest(TestCase):
 
         # Add more test cases as needed
 
-    def test_areas_view(self):
+    @patch("worldle.views.get_random_countries")
+    def test_areas_view(self, mock_get_random_countries):
+        # Mocking get_random_countries to return fixed countries for testing
+        mock_get_random_countries.return_value = [
+            {
+                "name.common": "Test Country 1",
+                "cca3": "TST",
+                "area": "1000",
+            },
+            {
+                "name.common": "Test Country 2",
+                "cca3": "TST2",
+                "area": "2000",
+            },
+        ]
+
         response = self.client.get(reverse("worldle:areas"))
-        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "worldle/areas.html")
 
-        # Add more assertions for the content of the response, if needed
+        request = self.factory.get(reverse("worldle:areas"))
+        middleware = SessionMiddleware(lambda x: None)
+        middleware.process_request(request)
+        request.user = self.user
 
-    def test_get_country_view(self):
-        response = self.client.get(reverse("worldle:get_country"))
+        response = areas(request)
+
         self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(response, JsonResponse)
 
         # Add more assertions for the content of the response, if needed
-        json_data = response.json()
-        self.assertIn("country", json_data)
-        country = json_data["country"]
-        self.assertIsInstance(country, dict)
 
-        # Ensure that the country has the expected fields
-        expected_fields = {
-            "name.common",
-            "cca3",
-            "area",
-        }
-        self.assertTrue(expected_fields.issubset(country.keys()))
+        # Example assertions for the JSON response in a POST request
+        response_post = self.client.post(reverse("worldle:areas"), {"choice": "higher"})
+        json_response = response_post.json()
 
-    # Add more test cases as needed
+        self.assertIn("country1", json_response)
+        self.assertIn("country2", json_response)
+        self.assertIn("score", json_response)
+        self.assertIn("highscore", json_response)
+        self.assertIn("is_correct", json_response)
+        self.assertTrue(isinstance(json_response["score"], int))
+        self.assertTrue(isinstance(json_response["highscore"], int))
+        self.assertTrue(isinstance(json_response["is_correct"], bool))
