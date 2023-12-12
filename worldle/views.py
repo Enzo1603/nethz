@@ -149,8 +149,7 @@ def areas(request):
         request.session["country1"] = country1
         request.session["country2"] = country2
 
-        score = int(request.session.get("score", 0))
-
+        score = 0
         request.session["score"] = score
 
         areas_highscore = request.user.areas_highscore
