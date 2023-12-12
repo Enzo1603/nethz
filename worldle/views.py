@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
+from .leaders import areas_leaders
 from .utils import get_csv_entries, get_random_countries
 
 
@@ -165,6 +166,9 @@ def areas(request):
             "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
         }
 
+        # Leaderboard
+        users = areas_leaders()[:20]
+
         return render(
             request,
             "worldle/areas.html",
@@ -173,6 +177,7 @@ def areas(request):
                 "country2": country2_cleaned,
                 "score": score,
                 "highscore": areas_highscore,
+                "users": users,
             },
         )
 
