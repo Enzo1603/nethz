@@ -12,6 +12,7 @@ from crispy_bootstrap5.bootstrap5 import FloatingField
 
 
 from .models import CustomUser
+from .utils import PROFANITIES
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -31,6 +32,13 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ("username", "email", "password1", "password2")
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        username_lower = username.lower()
+        if any(word in username_lower for word in PROFANITIES):
+            raise forms.ValidationError("The username contains not allowed characters.")
+        return username
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
@@ -101,6 +109,13 @@ class CustomUserChangeForm(UserChangeForm):
             "password1",
             "password2",
         )
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        username_lower = username.lower()
+        if any(word in username_lower for word in PROFANITIES):
+            raise forms.ValidationError("The username contains not allowed characters.")
+        return username
 
     def clean(self):
         cleaned_data = super().clean()
