@@ -29,3 +29,14 @@ def get_random_countries(number_of_countries: int, filter_empty: list[str]) -> l
             ]
 
     return random.sample(entries, number_of_countries)
+
+
+def get_random_capitals(number_of_capitals: int) -> list:
+    entries = deepcopy(CSV_ENTRIES)
+
+    capitals = []
+    for entry in entries:
+        # TODO: handle multiple capitals -> south africa
+        # TODO: finish implementation
+        capital = entry["capital"].strip().lower()
+        capitals.append(capital)

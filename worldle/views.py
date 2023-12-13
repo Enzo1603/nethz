@@ -52,6 +52,15 @@ def home(request):
         "disable": False,
     }
 
+    competitive_capitals_card = {
+        "title": "Competitive Capitals",
+        "description": "Errate die Hauptstädte",
+        "button_text": "Zum Spiel",
+        "image_path": static("images/Bern_3px.jpg"),
+        "link": reverse("worldle:competitive_capitals"),
+        "disable": False,
+    }
+
     return render(
         request,
         "worldle/home.html",
@@ -59,6 +68,7 @@ def home(request):
             "capitals_card": capitals_card,
             "languages_card": languages_card,
             "areas_card": areas_card,
+            "competitive_capitals_card": competitive_capitals_card,
         },
     )
 
@@ -101,6 +111,29 @@ def capitals(request, region):
             "country_capital": country_capital,
         },
     )
+
+
+@login_required
+def competitive_capitals(request):
+    # TODO: finish GET implementation
+    # TODO: Implement POST implementation
+    if request.method == "GET":
+        country = get_random_countries(1, filter_empty=["capital"])
+        request.session["country"] = country
+
+        score = 0
+        request.session["score"] = score
+
+        capitals_highscore = request.user.capitals_highscore
+
+        country_cleaned = {
+            "name": country["name.common"].capitalize(),
+            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
+        }
+
+        choices = {"A": "IMPLEMENT ME"}
+
+        return render(request, "worldle/competitive_capitals.html")
 
 
 def default_languages(request):

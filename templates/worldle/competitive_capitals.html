@@ -1,0 +1,170 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+{% load macros %}
+
+{% block style %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<link rel="stylesheet" href="{% static 'css/animation.css' %}">
+
+<style>
+    /* For Correct/Incorrect overlay */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        /* Start mit unsichtbarem Overlay */
+        transition: visibility 0.4s ease;
+        /* Füge einen sanften Übergang für die Sichtbarkeit hinzu */
+    }
+
+    .overlay i {
+        font-size: 5rem;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- HTML-Code für die Symbole -->
+<div id="correct-overlay" class="overlay">
+    <i class="bi bi-check-circle-fill" style="color: green;"></i>
+</div>
+
+<div id="incorrect-overlay" class="overlay">
+    <i class="bi bi-x-circle-fill" style="color: red"></i>
+</div>
+
+
+<h1 class="mb-4">Competitive Capitals</h1>
+
+<div class="col-8 mx-auto">
+    <div class="text-center">
+
+        <h3 id="country-name">{{ country_name | title }}</h3>
+
+        <br>
+
+        <img id="image" src="" alt="flag of country" class="img-fluid zoom" style="max-width: 45%;">
+
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <button id="button-a" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                    <span>A.</span>
+                    <span id="choice-a">Choice A</span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button id="button-b" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                    <span>B.</span>
+                    <span id="choice-b">Choice B</span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <button id="button-c" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                    <span>C.</span>
+                    <span id="choice-c">Choice C</span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button id="button-d" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                    <span>D.</span>
+                    <span id="choice-d">Choice D</span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+</div>
+</div>
+
+
+<script>
+    let score = {{ score }}
+    let highscore = {{ highscore }}
+
+    let country = {{ country | safe }}
+    let choices = {{ choices | safe }}
+
+    // DOM-Elemente initialisieren
+    const country_name = document.getElementById("country-name")
+    const image = document.getElementById("image")
+
+    const choice_a_text = document.getElementById("choice-a-text")
+    const choice_b_text = document.getElementById("choice-b-text")
+    const choice_c_text = document.getElementById("choice-c-text")
+    const choice_d_text = document.getElementById("choice-d-text")
+
+    const button_a = document.getElementById("button-a")
+    const button_b = document.getElementById("button-b")
+    const button_c = document.getElementById("button-c")
+    const button_d = document.getElementById("button-d")
+
+    // Register Eventhandlers
+    button_a.addEventListener("click", sendChoice("A"))
+    button_b.addEventListener("click", sendChoice("B"))
+    button_c.addEventListener("click", sendChoice("C"))
+    button_d.addEventListener("click", sendChoice("D"))
+
+    // First load initialization
+    updateDisplay()
+
+    function sendChoice(userChoice) {
+        // Implement me
+        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+
+    function showOverlay(isCorrect) {
+        let id = ""
+        if (isCorrect) {
+            id = "correct-overlay"
+        } else {
+            id = "incorrect-overlay"
+        }
+
+        const overlay = document.getElementById(id)
+        overlay.style.visibility = "visible"
+
+        // verzögertes Ausblenden des Overlays
+        setTimeout(() => {
+            overlay.style.visibility = "hidden"
+
+        }, 600)
+    }
+
+    function updateDisplay() {
+        country_name.innerText = country["name"]
+        image.src = country["image_url"]
+
+        choice_a_text = choices["A"]
+        choice_b_text = choices["B"]
+        choice_c_text = choices["C"]
+        choice_d_text = choices["D"]
+    }
+
+</script>
+
+{% endblock content %}

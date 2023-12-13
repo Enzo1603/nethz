@@ -33,3 +33,7 @@ class CustomUser(AbstractUser):
     areas_highscore = models.PositiveSmallIntegerField(
         null=False, default=0, blank=True
     )
+
+    capitals_highscore = models.PositiveSmallIntegerField(
+        null=False, default=0, blank=True
+    )
