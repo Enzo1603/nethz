@@ -45,7 +45,14 @@
 </div>
 
 
-<h1 class="mb-4">Competitive Capitals</h1>
+<div class="row align-items-end mb-4">
+    <div class="col-6">
+        <h1 class="text-start">Competitive Capitals</h1>
+    </div>
+    <div class="col-6">
+        <h4 class="text-end">Highscore: <span id="high_score"></span></h4>
+    </div>
+</div>
 
 <div class="col-8 mx-auto">
     <div class="text-center">
@@ -58,36 +65,40 @@
 
         <br>
         <br>
+
+        <span class="order-1 order-md-2 my-1">score: <span id="score"></span></span>
+
+        <br>
         <br>
 
         <div class="row">
             <div class="col-12 col-md-6">
-                <button id="button-a" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                <button id="button-a" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
                     <span>A.</span>
-                    <span id="choice-a">Choice A</span>
+                    <span id="choice-a-text">Choice A</span>
                     <span></span>
                 </button>
             </div>
             <div class="col-12 col-md-6">
-                <button id="button-b" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                <button id="button-b" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
                     <span>B.</span>
-                    <span id="choice-b">Choice B</span>
+                    <span id="choice-b-text">Choice B</span>
                     <span></span>
                 </button>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-6">
-                <button id="button-c" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                <button id="button-c" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
                     <span>C.</span>
-                    <span id="choice-c">Choice C</span>
+                    <span id="choice-c-text">Choice C</span>
                     <span></span>
                 </button>
             </div>
             <div class="col-12 col-md-6">
-                <button id="button-d" type="button" class="btn btn-outline-primary my-2 w-100 d-flex justify-content-between">
+                <button id="button-d" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
                     <span>D.</span>
-                    <span id="choice-d">Choice D</span>
+                    <span id="choice-d-text">Choice D</span>
                     <span></span>
                 </button>
             </div>
@@ -96,7 +107,42 @@
 
     <br>
     <br>
-    <br>
+
+    <!-- Leaderboard Accordion -->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Leaderboard
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Highscore</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <th scpoe="row">{{ forloop.counter }}</th>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.capitals_highscore }}</td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 </div>
@@ -112,11 +158,13 @@
     // DOM-Elemente initialisieren
     const country_name = document.getElementById("country-name")
     const image = document.getElementById("image")
+    const score_span = document.getElementById("score")
+    const highscore_span = document.getElementById("high_score")
 
-    const choice_a_text = document.getElementById("choice-a-text")
-    const choice_b_text = document.getElementById("choice-b-text")
-    const choice_c_text = document.getElementById("choice-c-text")
-    const choice_d_text = document.getElementById("choice-d-text")
+    let choice_a_text = document.getElementById("choice-a-text")
+    let choice_b_text = document.getElementById("choice-b-text")
+    let choice_c_text = document.getElementById("choice-c-text")
+    let choice_d_text = document.getElementById("choice-d-text")
 
     const button_a = document.getElementById("button-a")
     const button_b = document.getElementById("button-b")
@@ -124,17 +172,45 @@
     const button_d = document.getElementById("button-d")
 
     // Register Eventhandlers
-    button_a.addEventListener("click", sendChoice("A"))
-    button_b.addEventListener("click", sendChoice("B"))
-    button_c.addEventListener("click", sendChoice("C"))
-    button_d.addEventListener("click", sendChoice("D"))
+    button_a.addEventListener("click", () => sendChoice("A"))
+    button_b.addEventListener("click", () => sendChoice("B"))
+    button_c.addEventListener("click", () => sendChoice("C"))
+    button_d.addEventListener("click", () => sendChoice("D"))
 
     // First load initialization
     updateDisplay()
 
     function sendChoice(userChoice) {
-        // Implement me
+        // TODO: Implement me
         let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+        if (userChoice === "A") { userChoice = choices["A"] }
+        else if (userChoice === "B") { userChoice = choices["B"] }
+        else if (userChoice === "C") { userChoice = choices["C"] }
+        else if (userChoice === "D") { userChoice = choices["D"] }
+        else { console.error("Invalid userChoice: " + userChoice) }
+
+        fetch("/worldle/capitals/competitive/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken
+            },
+            body: 'choice=' + userChoice
+        })
+            .then(response => response.json())
+            .then(data => {
+                country = data["country"]
+                choices = data["choices"]
+                score = data["score"]
+                highscore = data["highscore"]
+                updateDisplay()
+
+                let is_correct = data["is_correct"]
+                showOverlay(is_correct)
+
+            })
+            .catch(error => console.error('Error:', error))
     }
 
     function showOverlay(isCorrect) {
@@ -152,17 +228,19 @@
         setTimeout(() => {
             overlay.style.visibility = "hidden"
 
-        }, 600)
+        }, 500)
     }
 
     function updateDisplay() {
         country_name.innerText = country["name"]
         image.src = country["image_url"]
+        score_span.innerText = score
+        highscore_span.innerText = highscore
 
-        choice_a_text = choices["A"]
-        choice_b_text = choices["B"]
-        choice_c_text = choices["C"]
-        choice_d_text = choices["D"]
+        choice_a_text.innerText = choices["A"].toUpperCase()
+        choice_b_text.innerText = choices["B"].toUpperCase()
+        choice_c_text.innerText = choices["C"].toUpperCase()
+        choice_d_text.innerText = choices["D"].toUpperCase()
     }
 
 </script>

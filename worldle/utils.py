@@ -39,4 +39,10 @@ def get_random_capitals(number_of_capitals: int) -> list:
         # TODO: handle multiple capitals -> south africa
         # TODO: finish implementation
         capital = entry["capital"].strip().lower()
-        capitals.append(capital)
+        capital = list(map(lambda capital: capital.strip(), capital.split(",")))
+        capital = list(filter(lambda capital: capital != "", capital))
+
+        for c in capital:
+            capitals.append(c)
+
+    return random.sample(capitals, number_of_capitals)

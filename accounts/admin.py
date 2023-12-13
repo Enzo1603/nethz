@@ -17,7 +17,15 @@ class CustomUserAdmin(UserAdmin):
             "Personal Info",
             {"fields": ("first_name", "last_name", "email")},
         ),
-        ("Worldle Stats", {"fields": ("areas_highscore",)}),
+        (
+            "Worldle Stats",
+            {
+                "fields": (
+                    "areas_highscore",
+                    "capitals_highscore",
+                )
+            },
+        ),
         (
             "Permissions",
             {

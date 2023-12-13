@@ -8,8 +8,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-from .leaders import areas_leaders
-from .utils import get_csv_entries, get_random_countries
+from .leaders import areas_leaders, capitals_leaders
+from .utils import get_csv_entries, get_random_countries, get_random_capitals
 
 
 DEFAULT_REGION = "worldwide"
@@ -115,10 +115,8 @@ def capitals(request, region):
 
 @login_required
 def competitive_capitals(request):
-    # TODO: finish GET implementation
-    # TODO: Implement POST implementation
     if request.method == "GET":
-        country = get_random_countries(1, filter_empty=["capital"])
+        country = get_random_countries(1, filter_empty=["capital"])[0]
         request.session["country"] = country
 
         score = 0
@@ -127,13 +125,88 @@ def competitive_capitals(request):
         capitals_highscore = request.user.capitals_highscore
 
         country_cleaned = {
-            "name": country["name.common"].capitalize(),
+            "name": country["name.common"].strip().capitalize(),
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
-        choices = {"A": "IMPLEMENT ME"}
+        answers = get_random_capitals(3)
+        answers.append(country["capital"].strip().lower())
+        random.shuffle(answers)
 
-        return render(request, "worldle/competitive_capitals.html")
+        choices = {
+            "A": answers[0],
+            "B": answers[1],
+            "C": answers[2],
+            "D": answers[3],
+        }
+
+        # Leaderboard
+        users = capitals_leaders()[:20]
+
+        return render(
+            request,
+            "worldle/competitive_capitals.html",
+            {
+                "country": country_cleaned,
+                "choices": choices,
+                "score": score,
+                "highscore": capitals_highscore,
+                "users": users,
+            },
+        )
+
+    elif request.method == "POST":
+        country = request.session.get("country")
+        user_choice = request.POST.get("choice")
+
+        correct_answers = country["capital"].strip().lower()
+        correct_answers = list(
+            map(lambda capital: capital.strip(), correct_answers.split(","))
+        )
+
+        is_correct = user_choice in correct_answers
+
+        if is_correct:
+            request.session["score"] += 1
+        else:
+            request.session["score"] = 0
+
+        score = request.session["score"]
+        capitals_highscore = request.user.capitals_highscore
+        if score > capitals_highscore:
+            request.user.capitals_highscore = score
+            request.user.save()
+            capitals_highscore = score
+
+        # generate new country
+        country = get_random_countries(1, filter_empty=["capital"])[0]
+        request.session["country"] = country
+
+        country_cleaned = {
+            "name": country["name.common"].strip().capitalize(),
+            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
+        }
+
+        answers = get_random_capitals(3)
+        answers.append(country["capital"].strip().lower())
+        random.shuffle(answers)
+
+        choices = {
+            "A": answers[0],
+            "B": answers[1],
+            "C": answers[2],
+            "D": answers[3],
+        }
+
+        return JsonResponse(
+            {
+                "country": country_cleaned,
+                "choices": choices,
+                "score": score,
+                "highscore": capitals_highscore,
+                "is_correct": is_correct,
+            }
+        )
 
 
 def default_languages(request):

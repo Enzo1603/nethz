@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config
 
+APPEND_SLASH = False
+
 ENVIRONMENT = config("ENVIRONMENT", default="production", cast=str)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
