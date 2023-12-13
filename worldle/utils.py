@@ -31,7 +31,7 @@ def get_random_countries(number_of_countries: int, filter_empty: list[str]) -> l
     return random.sample(entries, number_of_countries)
 
 
-def get_random_capitals(number_of_capitals: int) -> list:
+def get_random_capitals(number_of_capitals: int, exclude: str = None) -> list:
     entries = deepcopy(CSV_ENTRIES)
 
     capitals = []
@@ -45,4 +45,9 @@ def get_random_capitals(number_of_capitals: int) -> list:
         for c in capital:
             capitals.append(c)
 
-    return random.sample(capitals, number_of_capitals)
+    result = random.sample(capitals, number_of_capitals)
+
+    while exclude in result:
+        result = random.sample(capitals, number_of_capitals)
+
+    return result

@@ -129,8 +129,15 @@ def competitive_capitals(request):
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
-        answers = get_random_capitals(3)
-        answers.append(country["capital"].strip().lower())
+        correct_capitals = country["capital"].strip().lower()
+        correct_capitals = list(
+            map(lambda capital: capital.strip(), correct_capitals.split(","))
+        )
+        correct_capitals = list(filter(lambda capital: capital != "", correct_capitals))
+        correct_capital = random.choice(correct_capitals)
+
+        answers = get_random_capitals(3, exclude=correct_capital)
+        answers.append(correct_capital)
         random.shuffle(answers)
 
         choices = {
@@ -163,6 +170,7 @@ def competitive_capitals(request):
         correct_answers = list(
             map(lambda capital: capital.strip(), correct_answers.split(","))
         )
+        correct_answers = list(filter(lambda capital: capital != "", correct_answers))
 
         is_correct = user_choice in correct_answers
 
@@ -187,8 +195,15 @@ def competitive_capitals(request):
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
-        answers = get_random_capitals(3)
-        answers.append(country["capital"].strip().lower())
+        correct_capitals = country["capital"].strip().lower()
+        correct_capitals = list(
+            map(lambda capital: capital.strip(), correct_capitals.split(","))
+        )
+        correct_capitals = list(filter(lambda capital: capital != "", correct_capitals))
+        correct_capital = random.choice(correct_capitals)
+
+        answers = get_random_capitals(3, exclude=correct_capital)
+        answers.append(correct_capital)
         random.shuffle(answers)
 
         choices = {
