@@ -125,7 +125,7 @@ def competitive_capitals(request):
         capitals_highscore = request.user.capitals_highscore
 
         country_cleaned = {
-            "name": country["name.common"].strip().capitalize(),
+            "name": country["name.common"].strip().title(),
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
@@ -191,7 +191,7 @@ def competitive_capitals(request):
         request.session["country"] = country
 
         country_cleaned = {
-            "name": country["name.common"].strip().capitalize(),
+            "name": country["name.common"].strip().title(),
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
