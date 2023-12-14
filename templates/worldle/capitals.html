@@ -5,6 +5,8 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/animation.css' %}">
+
+<script src="{% static 'js/quiz.js' %}"></script>
 {% endblock %}
 
 
@@ -32,7 +34,7 @@
 
         <input class="form-control" type="text" id="userAnswer" placeholder="Enter the capital(s)">
         <br>
-        <button class="btn btn-primary" onclick="checkAnswer()">Check Answer</button>
+        <button class="btn btn-primary" onclick="checkAnswer(userAnswerElement, correctAnswer)">Check Answer</button>
 
         <br>
         <br>
@@ -61,75 +63,14 @@
     </div>
 </div>
 
-
 <script>
-    // TODO: Refactor code to extract similar functionality between capitals and languages
-    let userAnswer = document.getElementById("userAnswer")
-    userAnswer.focus()
+    const userAnswerId = "userAnswer"
+    let userAnswerElement = document.getElementById(userAnswerId)
+    userAnswerElement.focus()
 
-    function checkAnswer() {
-        const correctAnswer = "{{ country_capital | safe }}".trim().toLowerCase()
+    const correctAnswer = "{{ country_capital | safe }}".trim().toLowerCase()
 
-        const userText = userAnswer.value.trim().toLowerCase()
-
-        /* Teile die vom Benutzer eingegebenen Hauptstädte auf, entferne Leerzeichen und
-        filtere leere Strings heraus */
-        const userCapitals = userText.split(",")
-            .map(capital => capital.trim())
-            .filter(capital => capital !== "")
-            .sort()
-
-        // Teile die korrekten Hauptstädte auf und entferne Leerzeichen
-        const correctCapitals = correctAnswer.split(",")
-            .map(capital => capital.trim())
-            .filter(capital => capital !== "")
-            .sort()
-
-        // Überprüfe, ob die eingegebenen Hauptstädte korrekt sind
-        const isCorrect = arraysEqual(userCapitals, correctCapitals);
-
-        // Überprüfe, ob einige der korrekten Hauptstädte eingegeben wurden
-        const isPartialCorrect = correctCapitals.some(capital => userCapitals.includes(capital))
-        const hasWrongAnswer = userCapitals.some(capital => !correctCapitals.includes(capital))
-
-
-        if (isCorrect) {
-            // Correct answer
-            userAnswer.classList.remove('is-invalid')
-            userAnswer.classList.remove("is-partial-correct")
-
-            userAnswer.classList.add('is-valid')
-
-            setTimeout(function () {
-                location.reload()
-                document.getElementById("userAnswer").value = ""
-            }, 1000)
-
-        } else if (isPartialCorrect && !hasWrongAnswer) {
-            // Einige der korrekten Hauptstädte wurden eingeben
-            userAnswer.classList.remove("is-invalid")
-            userAnswer.classList.add("is-partial-correct")
-        } else {
-            // Wrong answer
-            userAnswer.classList.remove('is-valid')
-            userAnswer.classList.remove('is-partial-correct')
-
-            userAnswer.classList.add('is-invalid')
-        }
-    }
-
-    // Überprüfe, ob zwei Arrays gleich sind
-    function arraysEqual(arr1, arr2) {
-        return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
-    }
-
-    // Füge einen Eventlistener hinzu, um die Enter-Taste abzufangen
-    document.getElementById('userAnswer').addEventListener('keyup', function (event) {
-        if (event.key === 'Enter') {
-            checkAnswer();
-        }
-    });
-
+    addEnterKeyListener(userAnswerElement, correctAnswer)
 </script>
 
 {% endblock content %}
