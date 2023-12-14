@@ -1,5 +1,4 @@
 from django.contrib.sessions.middleware import SessionMiddleware
-from django.http import JsonResponse
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 

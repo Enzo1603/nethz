@@ -35,7 +35,7 @@ def get_random_capitals(number_of_capitals: int, exclude: str = None) -> list:
     entries = deepcopy(CSV_ENTRIES)
 
     capitals = []
-    for entry in entries:
+    for entry in entries:  # TODO: handle multiple capitals -> south africa
         capital = entry["capital"].strip().lower()
         capital = list(map(lambda capital: capital.strip(), capital.split(",")))
         capital = list(filter(lambda capital: capital != "", capital))
