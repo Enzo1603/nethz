@@ -125,7 +125,7 @@ def competitive_capitals(request):
         capitals_highscore = request.user.capitals_highscore
 
         country_cleaned = {
-            "name": country["name.common"].strip().title(),
+            "name": country["name.common"].strip(),
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
@@ -191,7 +191,7 @@ def competitive_capitals(request):
         request.session["country"] = country
 
         country_cleaned = {
-            "name": country["name.common"].strip().title(),
+            "name": country["name.common"].strip(),
             "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
         }
 
@@ -277,13 +277,13 @@ def areas(request):
         areas_highscore = request.user.areas_highscore
 
         country1_cleaned = {
-            "name": country1["name.common"],
+            "name": country1["name.common"].strip(),
             "image_url": static(f"worldle/{country1['cca3'].lower()}.svg"),
             "area": float(country1["area"]),
         }
 
         country2_cleaned = {
-            "name": country2["name.common"],
+            "name": country2["name.common"].strip(),
             "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
         }
 
@@ -336,13 +336,13 @@ def areas(request):
         request.session["country2"] = country2
 
         country1_cleaned = {
-            "name": country1["name.common"],
+            "name": country1["name.common"].strip(),
             "image_url": static(f"worldle/{country1['cca3'].lower()}.svg"),
             "area": float(country1["area"]),
         }
 
         country2_cleaned = {
-            "name": country2["name.common"],
+            "name": country2["name.common"].strip(),
             "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
         }
 
