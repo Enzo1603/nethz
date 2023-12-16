@@ -1,7 +1,6 @@
 import csv
 import random
 from pathlib import Path
-from typing import Self
 
 
 FILE_PATH = Path(__file__).resolve().parent
@@ -12,7 +11,7 @@ class CountryData:
     __CSV_ENTRIES = None
     __COUNTRIES_CSV_FILE_PATH = FILE_PATH / "data" / "countries.csv"
 
-    def __new__(cls) -> Self:
+    def __new__(cls):
         if cls.__instance is None:
             cls.__instance = super(CountryData, cls).__new__(cls)
             with open(cls.__COUNTRIES_CSV_FILE_PATH, "r", encoding="utf-8") as f:
