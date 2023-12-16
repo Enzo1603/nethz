@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from .leaders import areas_leaders, capitals_leaders
-from .utils import get_csv_entries, get_random_countries, get_random_capitals
+from .country_data import CountryData
 
 
 DEFAULT_REGION = "worldwide"
@@ -81,7 +81,7 @@ def capitals(request, region):
     if region not in VALID_REGIONS:
         raise Http404()
 
-    entries = deepcopy(get_csv_entries())
+    entries = deepcopy(CountryData().get_csv_entries())
 
     if region != DEFAULT_REGION:
         entries = [
@@ -116,7 +116,7 @@ def capitals(request, region):
 @login_required
 def competitive_capitals(request):
     if request.method == "GET":
-        country = get_random_countries(1, filter_empty=["capital"])[0]
+        country = CountryData().get_random_countries(1, filter_empty=["capital"])[0]
         request.session["country"] = country
 
         score = 0
@@ -136,7 +136,7 @@ def competitive_capitals(request):
         correct_capitals = list(filter(lambda capital: capital != "", correct_capitals))
         correct_capital = random.choice(correct_capitals)
 
-        answers = get_random_capitals(3, exclude=correct_capital)
+        answers = CountryData().get_random_capitals(3, exclude=correct_capital)
         answers.append(correct_capital)
         random.shuffle(answers)
 
@@ -187,7 +187,7 @@ def competitive_capitals(request):
             capitals_highscore = score
 
         # generate new country
-        country = get_random_countries(1, filter_empty=["capital"])[0]
+        country = CountryData().get_random_countries(1, filter_empty=["capital"])[0]
         request.session["country"] = country
 
         country_cleaned = {
@@ -202,7 +202,7 @@ def competitive_capitals(request):
         correct_capitals = list(filter(lambda capital: capital != "", correct_capitals))
         correct_capital = random.choice(correct_capitals)
 
-        answers = get_random_capitals(3, exclude=correct_capital)
+        answers = CountryData().get_random_capitals(3, exclude=correct_capital)
         answers.append(correct_capital)
         random.shuffle(answers)
 
@@ -232,7 +232,7 @@ def languages(request, region):
     if region not in VALID_REGIONS:
         raise Http404()
 
-    entries = deepcopy(get_csv_entries())
+    entries = deepcopy(CountryData().get_csv_entries())
 
     if region != DEFAULT_REGION:
         entries = [
@@ -267,7 +267,9 @@ def languages(request, region):
 @login_required
 def areas(request):
     if request.method == "GET":
-        country1, country2 = get_random_countries(2, filter_empty=["area"])
+        country1, country2 = CountryData().get_random_countries(
+            2, filter_empty=["area"]
+        )
         request.session["country1"] = country1
         request.session["country2"] = country2
 
@@ -331,7 +333,7 @@ def areas(request):
 
         # generate new countries
         country1 = country2  # old country2 becomes new country1
-        country2 = get_random_countries(1, filter_empty=["area"])[0]
+        country2 = CountryData().get_random_countries(1, filter_empty=["area"])[0]
         request.session["country1"] = country1
         request.session["country2"] = country2
 
