@@ -220,6 +220,7 @@ def competitive_capitals(request):
                 "score": score,
                 "highscore": capitals_highscore,
                 "is_correct": is_correct,
+                "correct_answers": ", ".join(correct_answers).upper(),
             }
         )
 

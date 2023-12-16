@@ -18,6 +18,8 @@
         height: 100%;
         background: rgba(0, 0, 0, 0.4);
         display: flex;
+        flex-direction: column;
+        /* Richtung auf Spalte ändern */
         align-items: center;
         justify-content: center;
         visibility: hidden;
@@ -29,6 +31,15 @@
     .overlay i {
         font-size: 5rem;
     }
+
+    .overlay p {
+        margin-top: 20px;
+        /* Fügt einen oberen Rand hinzu, um Platz zwischen dem Symbol und dem Text zu schaffen */
+        color: white;
+        /* Setzt die Textfarbe auf Weiß */
+        font-size: 2rem;
+        /* Setzt die Schriftgröße */
+    }
 </style>
 {% endblock %}
 
@@ -38,11 +49,14 @@
 <!-- HTML-Code für die Symbole -->
 <div id="correct-overlay" class="overlay">
     <i class="bi bi-check-circle-fill" style="color: green;"></i>
+    <p class="correct-text"></p>
 </div>
 
 <div id="incorrect-overlay" class="overlay">
     <i class="bi bi-x-circle-fill" style="color: red"></i>
+    <p class="correct-text"></p>
 </div>
+
 
 
 <div class="row align-items-end mb-4">
@@ -206,14 +220,15 @@
                 highscore = data["highscore"]
                 updateDisplay()
 
-                let is_correct = data["is_correct"]
-                showOverlay(is_correct)
+                const is_correct = data["is_correct"]
+                const correct_answers = data["correct_answers"]
+                showOverlay(is_correct, correct_answers)
 
             })
             .catch(error => console.error('Error:', error))
     }
 
-    function showOverlay(isCorrect) {
+    function showOverlay(isCorrect, correct_answers) {
         let id = ""
         if (isCorrect) {
             id = "correct-overlay"
@@ -222,12 +237,16 @@
         }
 
         const overlay = document.getElementById(id)
+        const overlayTexts = document.getElementsByClassName("correct-text")
+
+        overlayTexts[0].textContent = correct_answers
+        overlayTexts[1].textContent = correct_answers
+
         overlay.style.visibility = "visible"
 
         // verzögertes Ausblenden des Overlays
         setTimeout(() => {
             overlay.style.visibility = "hidden"
-
         }, 500)
     }
 
