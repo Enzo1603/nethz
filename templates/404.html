@@ -1,0 +1,27 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/errors.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container bg-container bg-img">
+    <div class="container col-lg-8 col-md-10 py-3 mb-4 text-center">
+        <h1 class="text-light">Oops! You ran out of oxygen.</h1>
+        <br>
+        <h3 class="text-light">The page you're looking for is now beyond your reach...</h3>
+        <br>
+        <h1 class="float text-light">404</h1>
+        <br>
+        <br>
+        <br>
+        <a href="{% url 'main:home' %}" class="btn btn-light btn-lg me-4 mb-4">Return to Home Page</a>
+
+        <img id="astronaut-img" src="{% static 'images/errors/astronaut.png' %}" alt="astronaut picture">
+    </div>
+</div>
+
+{% endblock %}
