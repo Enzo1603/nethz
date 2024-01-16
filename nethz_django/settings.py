@@ -19,7 +19,7 @@ ENVIRONMENT = config("ENVIRONMENT", default="production", cast=str)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -74,6 +74,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -159,8 +160,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-if ENVIRONMENT == "production":
+if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
     STATIC_URL = "assets/"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
