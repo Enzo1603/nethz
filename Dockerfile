@@ -38,7 +38,7 @@ ENV SECRET_KEY=${SECRET_KEY}
 RUN python manage.py collectstatic --noinput
 
 # Ausführen von Django-spezifischen Befehlen wie z.B. das Migrieren der Datenbank
-RUN python manage.py migrate
+# RUN python manage.py migrate
 
 # Entfernen der Build-Abhängigkeiten, um die Größe des Images zu reduzieren
 RUN apk del build-base
@@ -47,5 +47,10 @@ RUN apk del build-base
 EXPOSE 80
 
 # Starten des Gunicorn-Servers
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "nethz_django.wsgi:application"]
+# CMD ["gunicorn", "--bind", "0.0.0.0:80", "nethz_django.wsgi:application"]
 
+# Machen Sie entrypoint.sh ausführbar
+RUN chmod +x ./entrypoint.sh
+
+# Setzen Sie entrypoint.sh als Eintrittspunkt
+ENTRYPOINT ["./entrypoint.sh"]
