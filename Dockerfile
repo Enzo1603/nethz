@@ -32,7 +32,8 @@ RUN poetry config virtualenvs.create false && \
 
 
 ARG SECRET_KEY
-ENV SECRET_KEY=${SECRET_KEY}
+# Otherwise the secret key would be saved to the image (not desired)
+# ENV SECRET_KEY=${SECRET_KEY}
 
 # Sammeln von statischen Dateien
 RUN python manage.py collectstatic --noinput
