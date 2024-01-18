@@ -10,9 +10,9 @@ sudo docker build --build-arg SECRET_KEY=dummy_secret_key -t image_name /path/to
 
 ## Run Docker Container
 
-Currently only the testing environment (or the development) environment are supported (otherwise you would need to update the allowed hosts in django's settings.py file).
+Currently only the testing environment (or the development) environment are supported (otherwise you would need to update the allowed hosts in django's settings.py file before building your image).
 
-Here you need to provide the 'real' secret key. Otherwise your container will crash immediately due to the missing secret key (see the logs).
+Here you need to provide the 'real' secret key. Otherwise your container will crash immediately due to the missing secret key (see the logs of your docker container).
 
 To make the database persistent you need to specify a volume.
 
