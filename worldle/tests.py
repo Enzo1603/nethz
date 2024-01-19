@@ -68,7 +68,7 @@ class WorldleViewsTest(TestCase):
 
         # Add more test cases as needed
 
-    @patch("worldle.utils.CountryData.get_random_countries")
+    @patch("worldle.country_data.CountryData.get_random_countries")
     def test_areas_view(self, mock_get_random_countries):
         # Mocking get_random_countries to return fixed countries for testing
         mock_get_random_countries.return_value = [

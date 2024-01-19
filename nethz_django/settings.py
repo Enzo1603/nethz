@@ -170,12 +170,14 @@ STATIC_URL = "static/"
 
 if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
     STATIC_URL = "assets/"
+    STATIC_ROOT = (
+        BASE_DIR / "assets"
+    )  # python manage.py collectstatic saves files there
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-STATIC_ROOT = BASE_DIR / "assets"  # python manage.py collectstatic saves files there
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
