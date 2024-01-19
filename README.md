@@ -32,7 +32,7 @@ sudo docker build --build-arg SECRET_KEY=dummy_secret_key -t image_name /path/to
 
 ## Run Docker Container
 
-Currently only the testing environment (or the development) environment are supported (otherwise you would need to update the allowed hosts in django's settings.py file before building your image).
+Currently only the `testing` environment (or the `development` environment) are supported. Otherwise you would need to provide the `PRODUCTION_DOMAIN` environment variable or you would need to update the allowed hosts in django's settings.py file before building your image.
 
 Here you need to provide the 'real' secret key. Otherwise your container will crash immediately due to the missing secret key (see the logs of your docker container).
 
