@@ -50,6 +50,7 @@ class CustomUserCreationForm(UserCreationForm):
                     placeholder="Username",
                     maxlength=16,
                     minlength=4,
+                    autofocus=True,
                 ),
                 FloatingField("email", placeholder="Email Address"),
                 FloatingField("password1", placeholder="Password", minlength=8),
