@@ -24,7 +24,7 @@ This section outlines the environment variables used in this project. You can cr
 
 ## Build Docker Image
 
-To be able to only run once the `python manage.py collectstatic` during the image build you must provide a secret key. This secret key can be a 'dummy' secret key.
+To be able to only run once the `python manage.py collectstatic` during the image build you must provide a secret key. This secret key can be a 'dummy' secret key. This 'dummy' secret key is not saved to the docker image!
 
 ```bash
 sudo docker build --build-arg SECRET_KEY=dummy_secret_key -t image_name /path/to/nethz_django
