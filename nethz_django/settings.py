@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config
 
+from django.core.exceptions import ImproperlyConfigured
+
 APPEND_SLASH = False
 
 ENVIRONMENT = config("ENVIRONMENT", default="production", cast=str)
+PRODUCTION_DOMAIN = config("PRODUCTION_DOMAIN", default=None)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +46,11 @@ if ENVIRONMENT == "development":
 
 if ENVIRONMENT == "production":
     DEBUG = False
-    ALLOWED_HOSTS.append("ebaraldi.pythonanywhere.com")
+    if PRODUCTION_DOMAIN is None:
+        raise ImproperlyConfigured(
+            "PRODUCTION_DOMAIN must be set in production environment"
+        )
+    ALLOWED_HOSTS.append(PRODUCTION_DOMAIN)
 
 if ENVIRONMENT == "testing":
     DEBUG = False

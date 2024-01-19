@@ -1,8 +1,10 @@
 # Environment Variables
 
-This section outlines the environment variables used in this project.
+This section outlines the environment variables used in this project. You can create a `.env` file in the root directory of the project to define all the environment variables. These variables can then be loaded into your application using the `python-decouple` library.
 
 - `SECRET_KEY`: **(required)** A unique, secret key used for security purposes. It is essential for running the application and should be kept confidential.
+
+- `PRODUCTION_DOMAIN`: (optional in development/testing, required in production) Specifies the domain name for the production environment. This should be set to the domain where the application is hosted in production.
 
 - `ENVIRONMENT`: (optional) Specifies the mode in which the application runs. It can be set to `development`, `testing`, or `production`. The default value is `production`.
   - In `development` mode:
