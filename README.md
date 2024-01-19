@@ -1,3 +1,23 @@
+# Environment Variables
+
+This section outlines the environment variables used in this project.
+
+- `SECRET_KEY`: **(required)** A unique, secret key used for security purposes. It is essential for running the application and should be kept confidential.
+
+- `ENVIRONMENT`: (optional) Specifies the mode in which the application runs. It can be set to `development`, `testing`, or `production`. The default value is `production`.
+  - In `development` mode:
+    - `DEBUG` is activated, allowing error details to be displayed.
+    - `ALLOWED_HOSTS` includes `127.0.0.1` and `localhost`.
+    - `STATIC_URL` is set to `"static/"`.
+  - In `testing` mode:
+    - `DEBUG` is set to `false` to facilitate the testing of error pages and other non-development scenarios. Therefore you can simulate your production mode inside your development environment.
+    - `ALLOWED_HOSTS` includes `localhost` and `127.0.0.1`.
+    - `STATIC_URL` is set to `"assets/"`.
+  - In `production` mode:
+    - `DEBUG` is set to `false` for security and performance.
+    - `ALLOWED_HOSTS` should be set to your specific domain.
+    - `STATIC_URL` is `"assets/"`.
+
 # Build Docker Container
 
 ## Build Docker Image
