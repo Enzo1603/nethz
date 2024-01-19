@@ -16,7 +16,7 @@ ENV PYTHONUNBUFFERED 1
 # RUN apk update && \
 #     apk add --virtual build-deps gcc python3-dev musl-dev && \
 #     apk add postgresql-dev
-RUN apk add --no-cache build-base
+# RUN apk add --no-cache build-base
 # RUN apk add --no-cache bash
 
 
@@ -31,6 +31,8 @@ RUN poetry config virtualenvs.create false && \
     poetry install --no-dev
 
 
+# Otherwise Django will throw an ImproperlyConfigured Exception
+ARG PRODUCTION_DOMAIN="dummy.domain.com"
 ARG SECRET_KEY
 # Otherwise the secret key would be saved to the image (not desired)
 # ENV SECRET_KEY=${SECRET_KEY}
@@ -42,7 +44,7 @@ RUN python manage.py collectstatic --noinput
 # RUN python manage.py migrate
 
 # Entfernen der Build-Abhängigkeiten, um die Größe des Images zu reduzieren
-RUN apk del build-base
+# RUN apk del build-base
 
 # Port 80 veröffentlichen
 EXPOSE 80
