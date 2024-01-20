@@ -18,12 +18,11 @@ from django.core.exceptions import ImproperlyConfigured
 APPEND_SLASH = False
 
 ENVIRONMENT = config("ENVIRONMENT", default="production", cast=str)
-PRODUCTION_DOMAIN = config("PRODUCTION_DOMAIN", default=None)
+PRODUCTION_DOMAINS = config("PRODUCTION_DOMAINS", default=None)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -44,18 +43,25 @@ if ENVIRONMENT == "development":
     ALLOWED_HOSTS.append("127.0.0.1")
     ALLOWED_HOSTS.append("localhost")
 
-if ENVIRONMENT == "production":
-    DEBUG = False
-    if PRODUCTION_DOMAIN is None:
-        raise ImproperlyConfigured(
-            "PRODUCTION_DOMAIN must be set in production environment"
-        )
-    ALLOWED_HOSTS.append(PRODUCTION_DOMAIN)
-
 if ENVIRONMENT == "testing":
     DEBUG = False
     ALLOWED_HOSTS.append("127.0.0.1")
     ALLOWED_HOSTS.append("localhost")
+
+if ENVIRONMENT == "production":
+    DEBUG = False
+    print(f"{PRODUCTION_DOMAINS=}")
+    if PRODUCTION_DOMAINS:
+        # To avoid adding empty strings to allowed hosts
+        ALLOWED_HOSTS.extend(
+            domain.strip() for domain in PRODUCTION_DOMAINS.split(",") if domain.strip()
+        )
+    print(f"{ALLOWED_HOSTS=}")
+    if not ALLOWED_HOSTS:
+        raise ImproperlyConfigured(
+            "PRODUCTION_DOMAINS must be set in production environment OR"
+            "update ALLOWED_HOST in the projects settings.py"
+        )
 
 
 # Application definition
@@ -167,6 +173,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
 
 if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
     STATIC_URL = "assets/"
@@ -174,9 +182,6 @@ if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
         BASE_DIR / "assets"
     )  # python manage.py collectstatic saves files there
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 
 # Default primary key field type
