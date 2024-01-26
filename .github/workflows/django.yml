@@ -32,6 +32,8 @@ jobs:
         pip install poetry
         poetry config virtualenvs.create false
         poetry install --only main
+    - name: Django collectstatic
+      run: python manage.py collectstatic --noinput
     - name: Run Tests
       run: |
         python manage.py test
