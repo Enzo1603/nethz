@@ -18,6 +18,7 @@ jobs:
 
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      PRODUCTION_DOMAINS: ${{ secrets.PRODUCTION_DOMAINS }}
 
     steps:
     - uses: actions/checkout@v3
