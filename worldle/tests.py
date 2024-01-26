@@ -73,14 +73,14 @@ class WorldleViewsTest(TestCase):
         # Mocking get_random_countries to return fixed countries for testing
         mock_get_random_countries.return_value = [
             {
-                "name.common": "Test Country 1",
-                "cca3": "TST",
-                "area": "1000",
+                "name.common": "Switzerland",
+                "cca3": "CHE",
+                "area": "41284",
             },
             {
-                "name.common": "Test Country 2",
-                "cca3": "TST2",
-                "area": "2000",
+                "name.common": "United States Minor Outlying Islands",
+                "cca3": "UMI",
+                "area": "34.2",
             },
         ]
 
