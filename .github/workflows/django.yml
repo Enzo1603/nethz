@@ -17,8 +17,8 @@ jobs:
         python-version: ["3.10", "3.11", "3.12"]
 
     env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      PRODUCTION_DOMAINS: ${{ secrets.PRODUCTION_DOMAINS }}
+      SECRET_KEY: dummy-secret-key-to-run-github-actions
+      PRODUCTION_DOMAINS: dummy.domain.com
 
     steps:
     - uses: actions/checkout@v3
