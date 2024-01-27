@@ -24,3 +24,22 @@ urlpatterns = [
     path("", include("main.urls")),
     path("worldle/", include("worldle.urls")),
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
