@@ -7,3 +7,7 @@ def areas_leaders():
 
 def capitals_leaders():
     return CustomUser.objects.order_by("-capitals_highscore")
+
+
+def languages_leaders():
+    return CustomUser.objects.order_by("-languages_highscore")

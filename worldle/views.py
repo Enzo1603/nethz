@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-from .leaders import areas_leaders, capitals_leaders
+from .leaders import areas_leaders, capitals_leaders, languages_leaders
 from .country_data import CountryData
 
 
@@ -61,6 +61,15 @@ def home(request):
         "disable": False,
     }
 
+    competitive_languages_card = {
+        "title": "Competitive Languages",
+        "description": "Errate die Landessprachen",
+        "button_text": "Zum Spiel",
+        "image_path": static("images/Languages_3px.jpg"),
+        "link": reverse("worldle:competitive_languages"),
+        "disable": False,
+    }
+
     return render(
         request,
         "worldle/home.html",
@@ -69,6 +78,7 @@ def home(request):
             "languages_card": languages_card,
             "areas_card": areas_card,
             "competitive_capitals_card": competitive_capitals_card,
+            "competitive_languages_card": competitive_languages_card,
         },
     )
 
@@ -263,6 +273,122 @@ def languages(request, region):
             "country_languages": country_languages,
         },
     )
+
+
+@login_required
+def competitive_languages(request):
+    if request.method == "GET":
+        country = CountryData().get_random_countries(1, filter_empty=["languages"])[0]
+        request.session["country"] = country
+
+        score = 0
+        request.session["score"] = score
+
+        languages_highscore = request.user.languages_highscore
+
+        country_cleaned = {
+            "name": country["name.common"].strip(),
+            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
+        }
+
+        correct_languages = country["languages"].strip().lower()
+        correct_languages = list(
+            map(lambda language: language.strip(), correct_languages.split(","))
+        )
+        correct_languages = list(
+            filter(lambda language: language != "", correct_languages)
+        )
+        correct_language = random.choice(correct_languages)
+
+        answers = CountryData().get_random_languages(3, exclude=correct_language)
+        answers.append(correct_language)
+        random.shuffle(answers)
+
+        choices = {
+            "A": answers[0],
+            "B": answers[1],
+            "C": answers[2],
+            "D": answers[3],
+        }
+
+        # Leaderboard
+        users = languages_leaders()[:20]
+
+        return render(
+            request,
+            "worldle/competitive_languages.html",
+            {
+                "country": country_cleaned,
+                "choices": choices,
+                "score": score,
+                "highscore": languages_highscore,
+                "users": users,
+            },
+        )
+
+    elif request.method == "POST":
+        country = request.session.get("country")
+        user_choice = request.POST.get("choice")
+
+        correct_answers = country["languages"].strip().lower()
+        correct_answers = list(
+            map(lambda language: language.strip(), correct_answers.split(","))
+        )
+        correct_answers = list(filter(lambda language: language != "", correct_answers))
+
+        is_correct = user_choice in correct_answers
+
+        if is_correct:
+            request.session["score"] += 1
+        else:
+            request.session["score"] = 0
+
+        score = request.session["score"]
+        languages_highscore = request.user.languages_highscore
+        if score > languages_highscore:
+            request.user.languages_highscore = score
+            request.user.save()
+            languages_highscore = score
+
+        # generate new country
+        country = CountryData().get_random_countries(1, filter_empty=["languages"])[0]
+        request.session["country"] = country
+
+        country_cleaned = {
+            "name": country["name.common"].strip(),
+            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
+        }
+
+        correct_languages = country["languages"].strip().lower()
+        correct_languages = list(
+            map(lambda language: language.strip(), correct_languages.split(","))
+        )
+        correct_languages = list(
+            filter(lambda language: language != "", correct_languages)
+        )
+        correct_language = random.choice(correct_languages)
+
+        answers = CountryData().get_random_languages(3, exclude=correct_language)
+        answers.append(correct_language)
+        random.shuffle(answers)
+
+        choices = {
+            "A": answers[0],
+            "B": answers[1],
+            "C": answers[2],
+            "D": answers[3],
+        }
+
+        return JsonResponse(
+            {
+                "country": country_cleaned,
+                "choices": choices,
+                "score": score,
+                "highscore": languages_highscore,
+                "is_correct": is_correct,
+                "correct_answers": ", ".join(correct_answers).upper(),
+            }
+        )
 
 
 @login_required

@@ -37,3 +37,7 @@ class CustomUser(AbstractUser):
     capitals_highscore = models.PositiveSmallIntegerField(
         null=False, default=0, blank=True
     )
+
+    languages_highscore = models.PositiveSmallIntegerField(
+        null=False, default=0, blank=True
+    )

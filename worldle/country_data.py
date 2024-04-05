@@ -59,3 +59,23 @@ class CountryData:
             result = random.sample(capitals, number_of_capitals)
 
         return result
+
+    @classmethod
+    def get_random_languages(
+        cls, number_of_languages: int, exclude: str = None
+    ) -> list:
+        languages = []
+        for entry in cls.get_csv_entries():
+            language = entry["languages"].strip().lower()
+            language = list(map(lambda language: language.strip(), language.split(",")))
+            language = list(filter(lambda language: language != "", language))
+
+            for l in language:
+                languages.append(l)
+
+        result = random.sample(languages, number_of_languages)
+
+        while exclude in result:
+            result = random.sample(languages, number_of_languages)
+
+        return result
