@@ -61,6 +61,26 @@ class CountryData:
         return result
 
     @classmethod
+    def get_random_currencies(
+        cls, number_of_currencies: int, exclude: str = None
+    ) -> list:
+        currencies = []
+        for entry in cls.get_csv_entries():
+            currency = entry["currencies"].strip().lower()
+            currency = list(map(lambda currency: currency.strip(), currency.split(",")))
+            currency = list(filter(lambda currency: currency != "", currency))
+
+            for c in currency:
+                currencies.append(c)
+
+        result = random.sample(currencies, number_of_currencies)
+
+        while exclude in result:
+            result = random.sample(currencies, number_of_currencies)
+
+        return result
+
+    @classmethod
     def get_random_languages(
         cls, number_of_languages: int, exclude: str = None
     ) -> list:

@@ -8,8 +8,14 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-from .leaders import areas_leaders, capitals_leaders, languages_leaders
+from .leaders import (
+    areas_leaders,
+    capitals_leaders,
+    currencies_leaders,
+    languages_leaders,
+)
 from .country_data import CountryData
+from .currency_data import CurrencyData
 
 
 DEFAULT_REGION = "worldwide"
@@ -61,6 +67,15 @@ def home(request):
         "disable": False,
     }
 
+    competitive_currencies_card = {
+        "title": "Competitive Currencies",
+        "description": "Errate die Währung",
+        "button_text": "Zum Spiel",
+        "image_path": static("images/SwissFrancs_3px.jpg"),
+        "link": reverse("worldle:competitive_currencies"),
+        "disable": False,
+    }
+
     competitive_languages_card = {
         "title": "Competitive Languages",
         "description": "Errate die Landessprachen",
@@ -78,6 +93,7 @@ def home(request):
             "languages_card": languages_card,
             "areas_card": areas_card,
             "competitive_capitals_card": competitive_capitals_card,
+            "competitive_currencies_card": competitive_currencies_card,
             "competitive_languages_card": competitive_languages_card,
         },
     )
@@ -482,5 +498,126 @@ def areas(request):
                 "score": score,
                 "highscore": areas_highscore,
                 "is_correct": is_correct,
+            }
+        )
+
+
+def code_to_currency_name(request, code):
+    currency_name = CurrencyData().code_to_currency_name(code)
+    return JsonResponse({"currency_name": currency_name})
+
+
+@login_required
+def competitive_currencies(request):
+    if request.method == "GET":
+        country = CountryData().get_random_countries(1, filter_empty=["currencies"])[0]
+        request.session["country"] = country
+
+        score = 0
+        request.session["score"] = score
+
+        currencies_highscore = request.user.currencies_highscore
+
+        country_cleaned = {
+            "name": country["name.common"].strip(),
+            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
+        }
+
+        correct_currencies = country["currencies"].strip().lower()
+        correct_currencies = list(
+            map(lambda currency: currency.strip(), correct_currencies.split(","))
+        )
+        correct_currencies = list(
+            filter(lambda currency: currency != "", correct_currencies)
+        )
+        correct_currency = random.choice(correct_currencies)
+
+        answers = CountryData().get_random_currencies(3, exclude=correct_currency)
+        answers.append(correct_currency)
+        random.shuffle(answers)
+
+        choices = {
+            "A": answers[0],
+            "B": answers[1],
+            "C": answers[2],
+            "D": answers[3],
+        }
+
+        # Leaderboard
+        users = currencies_leaders()[:20]
+
+        return render(
+            request,
+            "worldle/competitive_currencies.html",
+            {
+                "country": country_cleaned,
+                "choices": choices,
+                "score": score,
+                "highscore": currencies_highscore,
+                "users": users,
+            },
+        )
+
+    elif request.method == "POST":
+        country = request.session.get("country")
+        user_choice = request.POST.get("choice")
+
+        correct_answers = country["currencies"].strip().lower()
+        correct_answers = list(
+            map(lambda currency: currency.strip(), correct_answers.split(","))
+        )
+        correct_answers = list(filter(lambda currency: currency != "", correct_answers))
+
+        is_correct = user_choice in correct_answers
+
+        if is_correct:
+            request.session["score"] += 1
+        else:
+            request.session["score"] = 0
+
+        score = request.session["score"]
+        currencies_highscore = request.user.currencies_highscore
+        if score > currencies_highscore:
+            request.user.currencies_highscore = score
+            request.user.save()
+            currencies_highscore = score
+
+        # generate new country
+        country = CountryData().get_random_countries(1, filter_empty=["currencies"])[0]
+        request.session["country"] = country
+
+        country_cleaned = {
+            "name": country["name.common"].strip(),
+            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
+        }
+
+        correct_currencies = country["currencies"].strip().lower()
+        correct_currencies = list(
+            map(lambda currency: currency.strip(), correct_currencies.split(","))
+        )
+        correct_currencies = list(
+            filter(lambda currency: currency != "", correct_currencies)
+        )
+        correct_currency = random.choice(correct_currencies)
+
+        answers = CountryData().get_random_currencies(3, exclude=correct_currency)
+        answers.append(correct_currency)
+        random.shuffle(answers)
+
+        choices = {
+            "A": answers[0],
+            "B": answers[1],
+            "C": answers[2],
+            "D": answers[3],
+        }
+
+        return JsonResponse(
+            {
+                "country": country_cleaned,
+                "choices": choices,
+                "score": score,
+                "highscore": currencies_highscore,
+                "is_correct": is_correct,
+                "correct_answers": ", ".join(correct_answers).upper(),
             }
         )

@@ -38,6 +38,10 @@ class CustomUser(AbstractUser):
         null=False, default=0, blank=True
     )
 
+    currencies_highscore = models.PositiveSmallIntegerField(
+        null=False, default=0, blank=True
+    )
+
     languages_highscore = models.PositiveSmallIntegerField(
         null=False, default=0, blank=True
     )

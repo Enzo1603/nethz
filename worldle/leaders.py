@@ -9,5 +9,9 @@ def capitals_leaders():
     return CustomUser.objects.order_by("-capitals_highscore")
 
 
+def currencies_leaders():
+    return CustomUser.objects.order_by("-currencies_highscore")
+
+
 def languages_leaders():
     return CustomUser.objects.order_by("-languages_highscore")

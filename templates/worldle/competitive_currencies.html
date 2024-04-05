@@ -1,0 +1,290 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+{% load macros %}
+
+{% block style %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
+<link rel="stylesheet" href="{% static 'css/animation.css' %}">
+
+<style>
+    /* For Correct/Incorrect overlay */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        /* Richtung auf Spalte ändern */
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        /* Start mit unsichtbarem Overlay */
+        transition: visibility 0.4s ease;
+        /* Füge einen sanften Übergang für die Sichtbarkeit hinzu */
+    }
+
+    .overlay i {
+        font-size: 5rem;
+    }
+
+    .overlay p {
+        margin-top: 20px;
+        /* Fügt einen oberen Rand hinzu, um Platz zwischen dem Symbol und dem Text zu schaffen */
+        color: white;
+        /* Setzt die Textfarbe auf Weiß */
+        font-size: 2rem;
+        /* Setzt die Schriftgröße */
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- HTML-Code für die Symbole -->
+<div id="correct-overlay" class="overlay">
+    <i class="bi bi-check-circle-fill" style="color: green;"></i>
+    <p class="correct-text fw-bold"></p>
+</div>
+
+<div id="incorrect-overlay" class="overlay">
+    <i class="bi bi-x-circle-fill" style="color: red"></i>
+    <p class="correct-text fw-bold"></p>
+</div>
+
+
+
+<div class="row align-items-end mb-4">
+    <div class="col-6">
+        <h1 class="text-start">Competitive Currencies</h1>
+    </div>
+    <div class="col-6">
+        <h4 class="text-end">Highscore: <span id="high_score"></span></h4>
+    </div>
+</div>
+
+<div class="col-8 mx-auto">
+    <div class="text-center">
+
+        <h3 id="country-name"></h3>
+
+        <br>
+
+        <img id="image" src="" alt="flag of country" class="img-fluid zoom" style="max-width: 45%;">
+
+        <br>
+        <br>
+
+        <span class="order-1 order-md-2 my-1">score: <span id="score"></span></span>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <button id="button-a" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
+                    <span>A.</span>
+                    <span id="choice-a-text">Choice A</span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button id="button-b" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
+                    <span>B.</span>
+                    <span id="choice-b-text">Choice B</span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <button id="button-c" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
+                    <span>C.</span>
+                    <span id="choice-c-text">Choice C</span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button id="button-d" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
+                    <span>D.</span>
+                    <span id="choice-d-text">Choice D</span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Leaderboard Accordion -->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Leaderboard
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Highscore</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <th scpoe="row">{{ forloop.counter }}</th>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.currencies_highscore }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<script>
+    let score = {{ score }}
+    let highscore = {{ highscore }}
+
+    let country = {{ country | safe }}
+    let choices = {{ choices | safe }}
+
+    // DOM-Elemente initialisieren
+    const country_name = document.getElementById("country-name")
+    const image = document.getElementById("image")
+    const score_span = document.getElementById("score")
+    const highscore_span = document.getElementById("high_score")
+
+    let choice_a_text = document.getElementById("choice-a-text")
+    let choice_b_text = document.getElementById("choice-b-text")
+    let choice_c_text = document.getElementById("choice-c-text")
+    let choice_d_text = document.getElementById("choice-d-text")
+
+    const button_a = document.getElementById("button-a")
+    const button_b = document.getElementById("button-b")
+    const button_c = document.getElementById("button-c")
+    const button_d = document.getElementById("button-d")
+
+    // Register Eventhandlers
+    button_a.addEventListener("click", () => sendChoice("A"))
+    button_b.addEventListener("click", () => sendChoice("B"))
+    button_c.addEventListener("click", () => sendChoice("C"))
+    button_d.addEventListener("click", () => sendChoice("D"))
+
+    // First load initialization
+    updateDisplay()
+
+    function sendChoice(userChoice) {
+        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+        if (userChoice === "A") { userChoice = choices["A"] }
+        else if (userChoice === "B") { userChoice = choices["B"] }
+        else if (userChoice === "C") { userChoice = choices["C"] }
+        else if (userChoice === "D") { userChoice = choices["D"] }
+        else { console.error("Invalid userChoice: " + userChoice) }
+
+        fetch("/worldle/currencies/competitive/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken
+            },
+            body: 'choice=' + userChoice
+        })
+            .then(response => response.json())
+            .then(data => {
+                country = data["country"]
+                choices = data["choices"]
+                score = data["score"]
+                highscore = data["highscore"]
+                updateDisplay()
+
+                const is_correct = data["is_correct"]
+                const correct_answers = data["correct_answers"]
+                showOverlay(is_correct, correct_answers)
+
+            })
+            .catch(error => console.error('Error:', error))
+    }
+
+    function showOverlay(isCorrect, correct_answers) {
+        let id = ""
+        if (isCorrect) {
+            id = "correct-overlay"
+        } else {
+            id = "incorrect-overlay"
+        }
+
+        const overlay = document.getElementById(id)
+        const overlayTexts = document.getElementsByClassName("correct-text")
+
+        overlayTexts[0].textContent = correct_answers
+        overlayTexts[1].textContent = correct_answers
+
+        overlay.style.visibility = "visible"
+
+        // verzögertes Ausblenden des Overlays
+        setTimeout(() => {
+            overlay.style.visibility = "hidden"
+        }, 500)
+    }
+
+    function updateDisplay() {
+        country_name.innerText = country["name"]
+        image.src = country["image_url"]
+        score_span.innerText = score
+        highscore_span.innerText = highscore
+
+        choice_a_text.innerText = choices["A"].toUpperCase()
+        choice_b_text.innerText = choices["B"].toUpperCase()
+        choice_c_text.innerText = choices["C"].toUpperCase()
+        choice_d_text.innerText = choices["D"].toUpperCase()
+        appendCurrencyNames()
+    }
+
+    function appendCurrencyNames() {
+        const buttons = [button_a, button_b, button_c, button_d]
+        const choiceTexts = [choice_a_text, choice_b_text, choice_c_text, choice_d_text]
+
+        for (let i = 0; i < buttons.length; i++) {
+            const button = buttons[i]
+            const choiceText = choiceTexts[i]
+            const code = choiceText.innerText
+
+            fetch(`/worldle/code_to_currency_name/${code}/`)
+                .then(response => response.json())
+                .then(data => {
+                    const currencyName = data["currency_name"]
+                    if (currencyName.length !== 0) {
+                        console.error("Currency name is undefined")
+                        choiceText.innerText += ` (${currencyName})`
+                    }
+                })
+                .catch(error => console.error('Error:', error))
+        }
+    }
+
+</script>
+
+{% endblock content %}
