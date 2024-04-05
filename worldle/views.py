@@ -532,7 +532,7 @@ def competitive_currencies(request):
         )
         correct_currency = random.choice(correct_currencies)
 
-        answers = CountryData().get_random_currencies(3, exclude=correct_currency)
+        answers = CountryData().get_random_currencies(5, exclude=correct_currency)
         answers.append(correct_currency)
         random.shuffle(answers)
 
@@ -541,6 +541,8 @@ def competitive_currencies(request):
             "B": answers[1],
             "C": answers[2],
             "D": answers[3],
+            "E": answers[4],
+            "F": answers[5],
         }
 
         # Leaderboard
@@ -600,7 +602,7 @@ def competitive_currencies(request):
         )
         correct_currency = random.choice(correct_currencies)
 
-        answers = CountryData().get_random_currencies(3, exclude=correct_currency)
+        answers = CountryData().get_random_currencies(5, exclude=correct_currency)
         answers.append(correct_currency)
         random.shuffle(answers)
 
@@ -609,6 +611,8 @@ def competitive_currencies(request):
             "B": answers[1],
             "C": answers[2],
             "D": answers[3],
+            "E": answers[4],
+            "F": answers[5],
         }
 
         return JsonResponse(

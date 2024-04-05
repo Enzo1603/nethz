@@ -116,6 +116,20 @@
                     <span></span>
                 </button>
             </div>
+            <div class="col-12 col-md-6">
+                <button id="button-e" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
+                    <span>E.</span>
+                    <span id="choice-e-text">Choice E</span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button id="button-f" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
+                    <span>F.</span>
+                    <span id="choice-f-text">Choice F</span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -180,17 +194,23 @@
     let choice_b_text = document.getElementById("choice-b-text")
     let choice_c_text = document.getElementById("choice-c-text")
     let choice_d_text = document.getElementById("choice-d-text")
+    let choice_e_text = document.getElementById("choice-e-text")
+    let choice_f_text = document.getElementById("choice-f-text")
 
     const button_a = document.getElementById("button-a")
     const button_b = document.getElementById("button-b")
     const button_c = document.getElementById("button-c")
     const button_d = document.getElementById("button-d")
+    const button_e = document.getElementById("button-e")
+    const button_f = document.getElementById("button-f")
 
     // Register Eventhandlers
     button_a.addEventListener("click", () => sendChoice("A"))
     button_b.addEventListener("click", () => sendChoice("B"))
     button_c.addEventListener("click", () => sendChoice("C"))
     button_d.addEventListener("click", () => sendChoice("D"))
+    button_e.addEventListener("click", () => sendChoice("E"))
+    button_f.addEventListener("click", () => sendChoice("F"))
 
     // First load initialization
     updateDisplay()
@@ -202,6 +222,8 @@
         else if (userChoice === "B") { userChoice = choices["B"] }
         else if (userChoice === "C") { userChoice = choices["C"] }
         else if (userChoice === "D") { userChoice = choices["D"] }
+        else if (userChoice === "E") { userChoice = choices["E"] }
+        else if (userChoice === "F") { userChoice = choices["F"] }
         else { console.error("Invalid userChoice: " + userChoice) }
 
         fetch("/worldle/currencies/competitive/", {
@@ -260,12 +282,14 @@
         choice_b_text.innerText = choices["B"].toUpperCase()
         choice_c_text.innerText = choices["C"].toUpperCase()
         choice_d_text.innerText = choices["D"].toUpperCase()
+        choice_e_text.innerText = choices["E"].toUpperCase()
+        choice_f_text.innerText = choices["F"].toUpperCase()
         appendCurrencyNames()
     }
 
     function appendCurrencyNames() {
-        const buttons = [button_a, button_b, button_c, button_d]
-        const choiceTexts = [choice_a_text, choice_b_text, choice_c_text, choice_d_text]
+        const buttons = [button_a, button_b, button_c, button_d, button_e, button_f]
+        const choiceTexts = [choice_a_text, choice_b_text, choice_c_text, choice_d_text, choice_e_text, choice_f_text]
 
         for (let i = 0; i < buttons.length; i++) {
             const button = buttons[i]
