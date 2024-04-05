@@ -40,13 +40,11 @@ ALLOWED_HOSTS = []
 
 if ENVIRONMENT == "development":
     DEBUG = True
-    ALLOWED_HOSTS.append("127.0.0.1")
-    ALLOWED_HOSTS.append("localhost")
+    ALLOWED_HOSTS.append("*")
 
 if ENVIRONMENT == "testing":
     DEBUG = False
-    ALLOWED_HOSTS.append("127.0.0.1")
-    ALLOWED_HOSTS.append("localhost")
+    ALLOWED_HOSTS.append("*")
 
 if ENVIRONMENT == "production":
     DEBUG = False
