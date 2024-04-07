@@ -1,0 +1,143 @@
+{% extends "components/_base.html" %}
+
+{% load static %}
+{% load macros %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/animation.css' %}" />
+
+  <style>
+    .rounded-table {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #dee2e6;
+    }
+  </style>
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="mb-4">Leaderboards <i class="bi bi-trophy"></i></h1>
+
+
+
+<div class="row">
+
+    <!-- Areas Leaderboard -->
+    <div class="col-md-6 mb-5">
+        <div class="table-responsive border border-3 border-primary rounded-3">
+            <table class="table mb-0">
+                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
+                    <h3>Areas</h3>
+                    <a class="btn btn-light" href="{% url 'worldle:areas' %}">Go to Game</a>
+                </div>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Highscore</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in areas_leaders %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.areas_highscore }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Capitals Leaderboard -->
+    <div class="col-md-6 mb-5">
+        <div class="table-responsive border border-3 border-primary rounded-3">
+            <table class="table mb-0">
+                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
+                    <h3>Languages</h3>
+                    <a class="btn btn-light" href="{% url 'worldle:competitive_languages' %}">Go to Game</a>
+                </div>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Highscore</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in capitals_leaders %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.capitals_highscore }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Currencies Leaderboard -->
+    <div class="col-md-6 mb-5">
+        <div class="table-responsive border border-3 border-primary rounded-3">
+            <table class="table mb-0">
+                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
+                    <h3>Currencies</h3>
+                    <a class="btn btn-light" href="{% url 'worldle:competitive_currencies' %}">Go to Game</a>
+                </div>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Highscore</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in currencies_leaders %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.currencies_highscore }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Languages Leaderboard -->
+    <div class="col-md-6 mb-5">
+        <div class="table-responsive border border-3 border-primary rounded-3">
+            <table class="table mb-0">
+                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
+                    <h3>Languages</h3>
+                    <a class="btn btn-light" href="{% url 'worldle:competitive_languages' %}">Go to Game</a>
+                </div>
+
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Highscore</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in languages_leaders %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.languages_highscore }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

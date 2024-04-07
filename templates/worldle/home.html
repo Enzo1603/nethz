@@ -26,6 +26,9 @@
 <div class="row">
     <h4>Competitive (Account required)</h4>
     <hr>
+    <div class="d-grid gap-2 mb-3">
+        <a class="btn btn-outline-primary" href="{% url 'worldle:leaderboards' %}"><i class="bi bi-trophy pe-2"></i>Leaderboards</a>
+    </div>
 
     {% card areas_card %}
 
@@ -36,6 +39,7 @@
     {% card competitive_languages_card %}
 
     {% coming_soon_card %}
+
 </div>
 
 

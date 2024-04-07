@@ -99,6 +99,24 @@ def home(request):
     )
 
 
+def leaderboards(request):
+    capitals_leaders_list = capitals_leaders()
+    currencies_leaders_list = currencies_leaders()
+    languages_leaders_list = languages_leaders()
+    areas_leaders_list = areas_leaders()
+
+    return render(
+        request,
+        "worldle/leaderboards.html",
+        {
+            "capitals_leaders": capitals_leaders_list,
+            "currencies_leaders": currencies_leaders_list,
+            "languages_leaders": languages_leaders_list,
+            "areas_leaders": areas_leaders_list,
+        },
+    )
+
+
 def default_capitals(request):
     return redirect(reverse("worldle:capitals", args=[DEFAULT_REGION]))
 
