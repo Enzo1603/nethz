@@ -138,7 +138,6 @@ class CustomUserChangeForm(UserChangeForm):
                     "username",
                     placeholder="Username",
                     maxlength=16,
-                    minlength=4,
                 ),
                 FloatingField("email", placeholder="Email Address"),
                 FloatingField("first_name", placeholder="First Name"),
