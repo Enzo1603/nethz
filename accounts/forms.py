@@ -123,9 +123,7 @@ class CustomUserChangeForm(UserChangeForm):
         password2 = cleaned_data.get("password2")
 
         if password1 and password1 != password2:
-            raise forms.ValidationError(
-                "Die beiden Passworteingaben stimmen nicht überein."
-            )
+            raise forms.ValidationError("The two password entries do not match.")
 
         return cleaned_data
 
