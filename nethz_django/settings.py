@@ -48,13 +48,13 @@ if ENVIRONMENT == "testing":
 
 if ENVIRONMENT == "production":
     DEBUG = False
-    print(f"{PRODUCTION_DOMAINS=}")
+
     if PRODUCTION_DOMAINS:
         # To avoid adding empty strings to allowed hosts
         ALLOWED_HOSTS.extend(
             domain.strip() for domain in PRODUCTION_DOMAINS.split(",") if domain.strip()
         )
-    print(f"{ALLOWED_HOSTS=}")
+
     if not ALLOWED_HOSTS:
         raise ImproperlyConfigured(
             "PRODUCTION_DOMAINS must be set in production environment OR"
