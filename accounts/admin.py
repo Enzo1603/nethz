@@ -23,6 +23,8 @@ class CustomUserAdmin(UserAdmin):
                 "fields": (
                     "areas_highscore",
                     "capitals_highscore",
+                    "currencies_highscore",
+                    "languages_highscore",
                 )
             },
         ),
