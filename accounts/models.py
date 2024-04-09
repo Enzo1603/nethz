@@ -16,9 +16,6 @@ class CustomUser(AbstractUser):
                 "numbers, and @/./+/-/_ characters.",
                 flags=0,
             ),
-            validators.MinLengthValidator(
-                limit_value=4, message="Username must be at least 4 characters long."
-            ),
         ],
         error_messages={
             "unique": "A user with that username already exists.",
