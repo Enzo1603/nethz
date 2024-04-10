@@ -86,12 +86,16 @@ class CountryData:
     ) -> list:
         languages = []
         for entry in cls.get_csv_entries():
-            language = entry["languages"].strip().lower()
-            language = list(map(lambda language: language.strip(), language.split(",")))
-            language = list(filter(lambda language: language != "", language))
+            language_entry = entry["languages"].strip().lower()
+            language_entry = list(
+                map(lambda language: language.strip(), language_entry.split(","))
+            )
+            language_entry = list(
+                filter(lambda language: language != "", language_entry)
+            )
 
-            for l in language:
-                languages.append(l)
+            for language in language_entry:
+                languages.append(language)
 
         result = random.sample(languages, number_of_languages)
 
