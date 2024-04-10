@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0006_customuser_languages_highscore'),
+        ("accounts", "0006_customuser_languages_highscore"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customuser',
-            name='currencies_highscore',
+            model_name="customuser",
+            name="currencies_highscore",
             field=models.PositiveSmallIntegerField(blank=True, default=0),
         ),
     ]

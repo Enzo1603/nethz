@@ -5,15 +5,27 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0007_customuser_currencies_highscore'),
+        ("accounts", "0007_customuser_currencies_highscore"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='username',
-            field=models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Choose your unique username of 4 to 16 characters.', max_length=16, unique=True, validators=[django.core.validators.RegexValidator(flags=0, message='Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.', regex='^[\\w.@+-]+\\Z')], verbose_name='username'),
+            model_name="customuser",
+            name="username",
+            field=models.CharField(
+                error_messages={"unique": "A user with that username already exists."},
+                help_text="Choose your unique username of 4 to 16 characters.",
+                max_length=16,
+                unique=True,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        flags=0,
+                        message="Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.",
+                        regex="^[\\w.@+-]+\\Z",
+                    )
+                ],
+                verbose_name="username",
+            ),
         ),
     ]
