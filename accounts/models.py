@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
         "username",
         max_length=16,
         unique=True,
-        help_text="Choose your unique username of 4 to 16 characters.",
+        help_text="Choose your unique username.",
         validators=[
             validators.RegexValidator(
                 regex=r"^[\w.@+-]+\Z",
