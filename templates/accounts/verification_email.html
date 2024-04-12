@@ -1,0 +1,12 @@
+{% autoescape off %}
+Hallo {{ user.username }},
+
+Vielen Dank für Ihre Registrierung. Bitte klicken Sie auf den Link unten, um Ihre E-Mail-Adresse zu bestätigen und Ihr Konto zu aktivieren:
+
+http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}
+
+Wenn Sie diese E-Mail nicht angefordert haben, ignorieren Sie sie bitte.
+
+Vielen Dank,
+Ihr Team
+{% endautoescape %}

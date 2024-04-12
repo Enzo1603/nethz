@@ -186,3 +186,30 @@ if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# ENVIRONMENT = config("ENVIRONMENT", default="production", cast=str)
+# PRODUCTION_DOMAINS = config("PRODUCTION_DOMAINS", default=None)
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config("EMAIL_HOST", default=None)
+EMAIL_PORT = config("EMAIL_PORT", default=None, cast=int)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default=None)
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default=None)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
+DEFAULT_FROM_EMAIL = config("EMAIL_HOST", default=None)
+
+if any(
+    [
+        not EMAIL_HOST,
+        not EMAIL_PORT,
+        not EMAIL_HOST_USER,
+        not EMAIL_HOST_PASSWORD,
+        # not DEFAULT_FROM_EMAIL,
+    ]
+):
+    raise ImproperlyConfigured(
+        "Email not properly configured!\n\n"
+        "EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, DEFAULT_FROM_EMAIL must be set in the environment."
+    )
