@@ -15,8 +15,17 @@ def send_verification_email(user, request):
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         current_site = get_current_site(request)
 
-        mail_subject = "Activate your account."
-        message = render_to_string(
+        mail_subject = "Activate your account"
+        txt_message = render_to_string(
+            "accounts/verification_email.txt",
+            {
+                "user": user,
+                "domain": current_site.domain,
+                "uid": uid,
+                "token": token,
+            },
+        )
+        html_message = render_to_string(
             "accounts/verification_email.html",
             {
                 "user": user,
@@ -25,6 +34,12 @@ def send_verification_email(user, request):
                 "token": token,
             },
         )
-        send_mail(mail_subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+        send_mail(
+            mail_subject,
+            txt_message,
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email],
+            html_message=html_message,
+        )
 
     Thread(target=_send_email).start()

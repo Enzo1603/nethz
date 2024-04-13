@@ -1,12 +1,47 @@
-{% autoescape off %}
-Hallo {{ user.username }},
+{% load static %}
 
-Vielen Dank für Ihre Registrierung. Bitte klicken Sie auf den Link unten, um Ihre E-Mail-Adresse zu bestätigen und Ihr Konto zu aktivieren:
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
 
-http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-Wenn Sie diese E-Mail nicht angefordert haben, ignorieren Sie sie bitte.
+    {% include "dependencies/_bootstrap.html" %}
 
-Vielen Dank,
-Ihr Team
-{% endautoescape %}
+    {% include "dependencies/_google_fonts.html" %}
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/eth-logo.ico' %}">
+
+    <title>Email Confirmation</title>
+</head>
+
+<body>
+    <div class="container col-10">
+        <br>
+        <br>
+
+        <p>Hello {{ user.username }},</p>
+
+        <p>Thank you for registering. Please click the link below to confirm your email address and activate your account:</p>
+
+        <div class="text-center">
+            <a class="btn btn-primary" href="https://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}">Activate my account</a>
+        </div>
+
+        <br>
+        <br>
+        <p>If you are having trouble with the button, you can also confirm your email by copying and pasting the following link into your browser:</p>
+        <p><a href="http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}">https://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}</a></p>
+
+    </div>
+
+
+</body>
+
+</html>
