@@ -93,6 +93,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "nethz_django.middleware.EmailVerificationMiddleware",
 ]
 
 ROOT_URLCONF = "nethz_django.urls"
