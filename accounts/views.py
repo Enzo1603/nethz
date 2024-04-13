@@ -8,7 +8,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -48,7 +48,16 @@ class SignUpView(CreateView):
 
         send_verification_email(user, self.request)
 
-        return HttpResponse("Activation E-Mail was sent.")
+        messages.success(
+            self.request,
+            "Account creation successful. A confirmation email has been sent to your email address.",
+        )
+        messages.warning(
+            self.request,
+            "You will not be able to log in until you have confirmed your email.",
+        )
+
+        return redirect("main:home")
 
 
 class CustomLoginView(LoginView):
@@ -63,17 +72,19 @@ class CustomLoginView(LoginView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # response = super().form_valid(form)
         user = form.get_user()
         if user.is_email_verified:
             login(self.request, user)
             messages.success(self.request, "You successfully logged in.")
             return redirect(self.success_url)
 
-        messages.warning(self.request, "Activation E-Mail was sent.")
+        messages.warning(
+            self.request,
+            "Another confirmation email has been sent to your email address since you have not confirmed it yet.",
+        )
         # Resend activation email
         send_verification_email(user, self.request)
-        return redirect("main:home")
+        return redirect("accounts:login")
 
 
 def logout_view(request):
@@ -90,15 +101,18 @@ class ActivateAccountView(View):
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
             user = None
         if user is not None and default_token_generator.check_token(user, token):
-            # user.is_active = True
             user.is_email_verified = True
             user.save()
-            # login(request, user)
-            return HttpResponse(
-                "Vielen Dank für Ihre E-Mail-Bestätigung. Jetzt können Sie sich in Ihr Konto einloggen."
+
+            messages.success(
+                request,
+                "Thank you for confirming your email. You can now log in to your account.",
             )
+            return redirect("accounts:login")
         else:
-            return HttpResponse("Aktivierungslink ist ungültig!")
+            raise Http404(
+                "Invalid confirmation link. Please make sure you are using the correct link provided in the confirmation email."
+            )
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
