@@ -1,19 +1,13 @@
-from threading import Thread
-
-from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
 from django.views import View
 from django.views.generic import CreateView, UpdateView
 
@@ -124,12 +118,42 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        self.old_email = form.initial[
+            "email"
+        ]  # Speichern Sie die ursprüngliche E-Mail-Adresse
+        return form
+
     def form_valid(self, form):
         response = super().form_valid(form)
+        new_email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password1")
+
         if password:
             self.object.set_password(password)
             self.object.save()
+            messages.success(self.request, "Your password has been updated.")
+        if self.old_email != new_email:
+            self.object.is_email_verified = False
+            self.object.save()
+            send_verification_email(self.object, self.request)
+            logout(self.request)
+            messages.success(
+                self.request,
+                "Your email has been updated. A confirmation link has been sent to your new email address. Please confirm your email to log in.",
+            )
+            return redirect("main:home")
+        else:
+            messages.success(self.request, "Your data has been successfully updated.")
 
-        messages.success(self.request, "Your data has been successfully updated.")
         return response
+
+        # response = super().form_valid(form)
+        # password = form.cleaned_data.get("password1")
+        # if password:
+        #     self.object.set_password(password)
+        #     self.object.save()
+
+        # messages.success(self.request, "Your data has been successfully updated.")
+        # return response
