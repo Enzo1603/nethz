@@ -7,12 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
-from .leaders import (
-    areas_leaders,
-    capitals_leaders,
-    currencies_leaders,
-    languages_leaders,
-)
+from .leaders import get_leaders, get_leaders_dict
 from .country_data import CountryData, DEFAULT_REGION, VALID_REGIONS
 from .currency_data import CurrencyData
 
@@ -87,20 +82,10 @@ def home(request):
 
 
 def leaderboards(request):
-    capitals_leaders_list = capitals_leaders()
-    currencies_leaders_list = currencies_leaders()
-    languages_leaders_list = languages_leaders()
-    areas_leaders_list = areas_leaders()
-
     return render(
         request,
         "worldle/leaderboards.html",
-        {
-            "capitals_leaders": capitals_leaders_list,
-            "currencies_leaders": currencies_leaders_list,
-            "languages_leaders": languages_leaders_list,
-            "areas_leaders": areas_leaders_list,
-        },
+        get_leaders_dict(["areas", "capitals", "currencies", "languages"]),
     )
 
 
@@ -169,7 +154,7 @@ def competitive_capitals(request):
         }
 
         # Leaderboard
-        users = capitals_leaders()[:20]
+        users = get_leaders("capitals")[:20]
 
         return render(
             request,
@@ -313,7 +298,7 @@ def competitive_languages(request):
         }
 
         # Leaderboard
-        users = languages_leaders()[:20]
+        users = get_leaders("languages")[:20]
 
         return render(
             request,
@@ -418,7 +403,7 @@ def areas(request):
         }
 
         # Leaderboard
-        users = areas_leaders()[:20]
+        users = get_leaders("areas")[:20]
 
         return render(
             request,
@@ -529,7 +514,7 @@ def competitive_currencies(request):
         }
 
         # Leaderboard
-        users = currencies_leaders()[:20]
+        users = get_leaders("currencies")[:20]
 
         return render(
             request,
