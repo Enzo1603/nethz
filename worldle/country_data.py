@@ -1,9 +1,22 @@
+from copy import deepcopy
 import csv
 import random
 from pathlib import Path
 
 
 FILE_PATH = Path(__file__).resolve().parent
+
+
+DEFAULT_REGION = "worldwide"
+VALID_REGIONS = {
+    "africa",
+    "americas",
+    "antarctic",
+    "asia",
+    "europe",
+    "oceania",
+    "worldwide",
+}
 
 
 class CountryData:
@@ -22,6 +35,25 @@ class CountryData:
     @classmethod
     def get_csv_entries(cls):
         return cls.__CSV_ENTRIES
+
+    @classmethod
+    def get_random_filtered_entry(self, region, field):
+        entries = deepcopy(self.get_csv_entries())
+
+        if region != DEFAULT_REGION:
+            entries = [
+                entry
+                for entry in entries
+                if entry["region"].strip().lower() == region.strip().lower()
+            ]
+
+        # Filter entries with no specified field
+        entries = [entry for entry in entries if entry[field].strip()]
+
+        # Get random row
+        random_row = random.choice(entries)
+
+        return random_row
 
     @classmethod
     def get_random_countries(

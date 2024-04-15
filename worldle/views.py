@@ -1,5 +1,4 @@
 import random
-from copy import deepcopy
 
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
@@ -14,20 +13,8 @@ from .leaders import (
     currencies_leaders,
     languages_leaders,
 )
-from .country_data import CountryData
+from .country_data import CountryData, DEFAULT_REGION, VALID_REGIONS
 from .currency_data import CurrencyData
-
-
-DEFAULT_REGION = "worldwide"
-VALID_REGIONS = {
-    "africa",
-    "americas",
-    "antarctic",
-    "asia",
-    "europe",
-    "oceania",
-    "worldwide",
-}
 
 
 def home(request):
@@ -125,17 +112,7 @@ def capitals(request, region):
     if region not in VALID_REGIONS:
         raise Http404()
 
-    entries = deepcopy(CountryData().get_csv_entries())
-
-    if region != DEFAULT_REGION:
-        entries = [
-            entry for entry in entries if entry["region"].lower().strip() == region
-        ]
-
-    # Filter entries with no capitals
-    entries = [entry for entry in entries if entry["capital"].strip()]
-
-    random_row = random.choice(entries)
+    random_row = CountryData().get_random_filtered_entry(region, "capital")
 
     country_name = random_row["name.common"].strip()
     country_cca3 = random_row["cca3"].strip().lower()
@@ -277,17 +254,7 @@ def languages(request, region):
     if region not in VALID_REGIONS:
         raise Http404()
 
-    entries = deepcopy(CountryData().get_csv_entries())
-
-    if region != DEFAULT_REGION:
-        entries = [
-            entry for entry in entries if entry["region"].lower().strip() == region
-        ]
-
-    # Filter entries with no languages
-    entries = [entry for entry in entries if entry["languages"].strip()]
-
-    random_row = random.choice(entries)
+    random_row = CountryData().get_random_filtered_entry(region, "languages")
 
     country_name = random_row["name.common"].strip()
     country_cca3 = random_row["cca3"].strip().lower()
