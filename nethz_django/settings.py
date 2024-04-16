@@ -153,7 +153,7 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 LOGIN_URL = "accounts:login"
 LOGOUT_URL = "accounts:logout"
 
-LOGIN_REDIRECT_URL = "main:home"
+LOGIN_REDIRECT_URL = "worldle:home"
 LOGOUT_REDIRECT_URL = "main:home"
 
 # Internationalization

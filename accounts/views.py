@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -57,7 +58,7 @@ class SignUpView(CreateView):
 class CustomLoginView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = "accounts/login.html"
-    success_url = reverse_lazy("main:home")
+    success_url = reverse_lazy(settings.LOGIN_REDIRECT_URL)
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
