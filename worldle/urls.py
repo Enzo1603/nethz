@@ -37,5 +37,5 @@ urlpatterns = [
     ),
     path("languages/<str:region>", views.languages, name="languages"),
     # AREAS
-    path("areas/", views.areas, name="areas"),
+    path("areas/competitive/", views.competitive_areas, name="competitive_areas"),
 ]

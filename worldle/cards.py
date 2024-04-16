@@ -20,12 +20,12 @@ languages_card = {
     "disable": False,
 }
 
-areas_card = {
-    "title": "Areas",
+competitive_areas_card = {
+    "title": "Competitive Areas",
     "description": "Higher Lower mit Landesflächen",
     "button_text": "Zum Spiel",
     "image_path": static("images/World-Map.jpg"),
-    "link": reverse("worldle:areas"),
+    "link": reverse("worldle:competitive_areas"),
     "disable": False,
 }
 

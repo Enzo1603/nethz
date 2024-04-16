@@ -16,7 +16,7 @@ def home(request):
     from .cards import (
         capitals_card,
         languages_card,
-        areas_card,
+        competitive_areas_card,
         competitive_capitals_card,
         competitive_currencies_card,
         competitive_languages_card,
@@ -28,7 +28,7 @@ def home(request):
         {
             "capitals_card": capitals_card,
             "languages_card": languages_card,
-            "areas_card": areas_card,
+            "competitive_areas_card": competitive_areas_card,
             "competitive_capitals_card": competitive_capitals_card,
             "competitive_currencies_card": competitive_currencies_card,
             "competitive_languages_card": competitive_languages_card,
@@ -333,7 +333,7 @@ def competitive_languages(request):
 
 
 @login_required
-def areas(request):
+def competitive_areas(request):
     if request.method == "GET":
         country1, country2 = CountryData().get_random_countries(
             2, filter_empty=["area"]
@@ -362,7 +362,7 @@ def areas(request):
 
         return render(
             request,
-            "worldle/areas.html",
+            "worldle/competitive_areas.html",
             {
                 "country1": country1_cleaned,
                 "country2": country2_cleaned,
