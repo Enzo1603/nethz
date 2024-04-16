@@ -175,7 +175,7 @@
     function sendChoice(userChoice) {
         let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
-        fetch('/worldle/areas/competitive', {
+        fetch('/worldle/areas/competitive/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
