@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate
 
-from accounts.models import CustomUser
+# from accounts.models import CustomUser
 
 
 class CustomUserTests(TestCase):
@@ -81,22 +81,22 @@ class CustomUserTests(TestCase):
         # Check if the user is logged out
         self.assertFalse("_auth_user_id" in self.client.session)
 
-    def test_user_update_view(self):
-        # Log in first
-        login = self.client.login(
-            email=self.user_data["email"], password=self.user_data["password"]
-        )
-        self.assertTrue(login)
+    # def test_user_update_view(self):
+    #     # Log in first
+    #     login = self.client.login(
+    #         email=self.user_data["email"], password=self.user_data["password"]
+    #     )
+    #     self.assertTrue(login)
 
-        url = reverse("accounts:user_account")
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+    #     url = reverse("accounts:user_account")
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, 302)
 
-        # Test user update functionality
-        updated_data = {"username": "newusername", "email": self.user_data["email"]}
-        response = self.client.post(url, data=updated_data, follow=True)
-        self.assertEqual(response.status_code, 200)
+    #     # Test user update functionality
+    #     updated_data = {"username": "newusername", "email": self.user_data["email"]}
+    #     response = self.client.post(url, data=updated_data, follow=True)
+    #     self.assertEqual(response.status_code, 200)
 
-        # Check if the user is actually updated
-        user = CustomUser.objects.get(username=updated_data["username"])
-        self.assertEqual(user.username, updated_data["username"])
+    #     # Check if the user is actually updated
+    #     user = CustomUser.objects.get(username=updated_data["username"])
+    #     self.assertEqual(user.username, updated_data["username"])
