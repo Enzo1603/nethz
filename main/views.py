@@ -7,19 +7,11 @@ from django.urls import reverse
 # Create your views here.
 def home(request):
     tm_card = {
-        "title": "Technische Mechanik 2023",
+        "title": "Technische Mechanik 2024",
         "button_text": "Zu den Unterlagen",
         "image_path": static("images/technische_mechanik_6px.jpg"),
         "link": reverse("main:technische_mechanik", args=["HS23"]),
         "disable": False,
-    }
-
-    ph_card = {
-        "title": "Physik I 2024",
-        "button_text": "Zu den Unterlagen",
-        "image_path": static("images/physik1_2px.jpg"),
-        "link": "#",
-        "disable": True,
     }
 
     inf_card = {
@@ -44,7 +36,6 @@ def home(request):
         "main/home.html",
         {
             "tm_card": tm_card,
-            "ph_card": ph_card,
             "inf_card": inf_card,
             "worldle_card": worldle_card,
         },
