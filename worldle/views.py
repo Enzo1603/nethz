@@ -2,13 +2,16 @@ import random
 
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
-from django.templatetags.static import static
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-
-from .leaders import get_leaders, get_leaders_dict
-from .country_data import CountryData, DEFAULT_REGION, VALID_REGIONS
+from .leaders import get_leaders, get_leaders_dict, LeaderDatabase
+from .country_data import (
+    CountryData,
+    CountryHeader,
+    DEFAULT_REGION,
+    VALID_REGIONS,
+)
 from .currency_data import CurrencyData
 
 
@@ -40,7 +43,14 @@ def leaderboards(request):
     return render(
         request,
         "worldle/leaderboards.html",
-        get_leaders_dict(["areas", "capitals", "currencies", "languages"]),
+        get_leaders_dict(
+            [
+                LeaderDatabase.areas_highscore,
+                LeaderDatabase.capitals_highscore,
+                LeaderDatabase.currencies_highscore,
+                LeaderDatabase.languages_highscore,
+            ]
+        ),
     )
 
 
@@ -52,13 +62,13 @@ def capitals(request, region):
     if region not in VALID_REGIONS:
         raise Http404()
 
-    random_row = CountryData().get_random_filtered_entry(region, "capital")
+    random_row = CountryData().get_random_filtered_entry(region, CountryHeader.capital)
 
-    country_name = random_row["name.common"].strip()
-    country_cca3 = random_row["cca3"].strip().lower()
+    country_name = random_row[CountryHeader.common_name].strip()
+    country_cca3 = random_row[CountryHeader.cca3].strip().lower()
     country_image_name = f"worldle/{country_cca3}.svg"
 
-    capitals_list = random_row["capital"].strip().split(",")
+    capitals_list = random_row[CountryHeader.capital].strip().split(",")
     capitals_list = list(map(str.strip, capitals_list))
     country_capital = ", ".join(capitals_list)
 
@@ -77,7 +87,9 @@ def capitals(request, region):
 @login_required
 def competitive_capitals(request):
     if request.method == "GET":
-        country = CountryData().get_random_countries(1, filter_empty=["capital"])[0]
+        country = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.capital]
+        )[0]
         request.session["country"] = country
 
         score = 0
@@ -85,31 +97,19 @@ def competitive_capitals(request):
 
         capitals_highscore = request.user.capitals_highscore
 
-        country_cleaned = {
-            "name": country["name.common"].strip(),
-            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
-        }
+        country_cleaned = CountryData().clean_country_data(country)
 
-        correct_capitals = country["capital"].strip().lower()
-        correct_capitals = list(
-            map(lambda capital: capital.strip(), correct_capitals.split(","))
+        correct_answers = CountryData().generate_correct_answers(
+            country[CountryHeader.capital]
         )
-        correct_capitals = list(filter(lambda capital: capital != "", correct_capitals))
-        correct_capital = random.choice(correct_capitals)
+        correct_answer = random.choice(correct_answers)
 
-        answers = CountryData().get_random_capitals(3, exclude=correct_capital)
-        answers.append(correct_capital)
-        random.shuffle(answers)
-
-        choices = {
-            "A": answers[0],
-            "B": answers[1],
-            "C": answers[2],
-            "D": answers[3],
-        }
+        choices = CountryData().generate_choices(
+            4, CountryHeader.capital, correct_answer
+        )
 
         # Leaderboard
-        users = get_leaders("capitals")[:20]
+        users = get_leaders(LeaderDatabase.capitals_highscore)[:20]
 
         return render(
             request,
@@ -127,13 +127,10 @@ def competitive_capitals(request):
         country = request.session.get("country")
         user_choice = request.POST.get("choice")
 
-        correct_answers = country["capital"].strip().lower()
-        correct_answers = list(
-            map(lambda capital: capital.strip(), correct_answers.split(","))
+        correct_answers_old = CountryData().generate_correct_answers(
+            country[CountryHeader.capital]
         )
-        correct_answers = list(filter(lambda capital: capital != "", correct_answers))
-
-        is_correct = user_choice in correct_answers
+        is_correct = user_choice in correct_answers_old
 
         if is_correct:
             request.session["score"] += 1
@@ -148,31 +145,21 @@ def competitive_capitals(request):
             capitals_highscore = score
 
         # generate new country
-        country = CountryData().get_random_countries(1, filter_empty=["capital"])[0]
+        country = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.capital]
+        )[0]
         request.session["country"] = country
 
-        country_cleaned = {
-            "name": country["name.common"].strip(),
-            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
-        }
+        country_cleaned = CountryData().clean_country_data(country)
 
-        correct_capitals = country["capital"].strip().lower()
-        correct_capitals = list(
-            map(lambda capital: capital.strip(), correct_capitals.split(","))
+        correct_answers = CountryData().generate_correct_answers(
+            country[CountryHeader.capital]
         )
-        correct_capitals = list(filter(lambda capital: capital != "", correct_capitals))
-        correct_capital = random.choice(correct_capitals)
+        correct_answer = random.choice(correct_answers)
 
-        answers = CountryData().get_random_capitals(3, exclude=correct_capital)
-        answers.append(correct_capital)
-        random.shuffle(answers)
-
-        choices = {
-            "A": answers[0],
-            "B": answers[1],
-            "C": answers[2],
-            "D": answers[3],
-        }
+        choices = CountryData().generate_choices(
+            4, CountryHeader.capital, correct_answer
+        )
 
         return JsonResponse(
             {
@@ -181,7 +168,7 @@ def competitive_capitals(request):
                 "score": score,
                 "highscore": capitals_highscore,
                 "is_correct": is_correct,
-                "correct_answers": ", ".join(correct_answers).upper(),
+                "correct_answers": ", ".join(correct_answers_old).upper(),
             }
         )
 
@@ -194,13 +181,15 @@ def languages(request, region):
     if region not in VALID_REGIONS:
         raise Http404()
 
-    random_row = CountryData().get_random_filtered_entry(region, "languages")
+    random_row = CountryData().get_random_filtered_entry(
+        region, CountryHeader.languages
+    )
 
-    country_name = random_row["name.common"].strip()
-    country_cca3 = random_row["cca3"].strip().lower()
+    country_name = random_row[CountryHeader.common_name].strip()
+    country_cca3 = random_row[CountryHeader.cca3].strip().lower()
     country_image_name = f"worldle/{country_cca3}.svg"
 
-    languages_list = random_row["languages"].strip().split(",")
+    languages_list = random_row[CountryHeader.languages].strip().split(",")
     languages_list = list(map(str.strip, languages_list))
     country_languages = ", ".join(languages_list)
 
@@ -219,7 +208,9 @@ def languages(request, region):
 @login_required
 def competitive_languages(request):
     if request.method == "GET":
-        country = CountryData().get_random_countries(1, filter_empty=["languages"])[0]
+        country = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.languages]
+        )[0]
         request.session["country"] = country
 
         score = 0
@@ -227,33 +218,19 @@ def competitive_languages(request):
 
         languages_highscore = request.user.languages_highscore
 
-        country_cleaned = {
-            "name": country["name.common"].strip(),
-            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
-        }
+        country_cleaned = CountryData().clean_country_data(country)
 
-        correct_languages = country["languages"].strip().lower()
-        correct_languages = list(
-            map(lambda language: language.strip(), correct_languages.split(","))
+        correct_answers = CountryData().generate_correct_answers(
+            country[CountryHeader.languages]
         )
-        correct_languages = list(
-            filter(lambda language: language != "", correct_languages)
+        correct_answer = random.choice(correct_answers)
+
+        choices = CountryData().generate_choices(
+            4, CountryHeader.languages, correct_answer
         )
-        correct_language = random.choice(correct_languages)
-
-        answers = CountryData().get_random_languages(3, exclude=correct_language)
-        answers.append(correct_language)
-        random.shuffle(answers)
-
-        choices = {
-            "A": answers[0],
-            "B": answers[1],
-            "C": answers[2],
-            "D": answers[3],
-        }
 
         # Leaderboard
-        users = get_leaders("languages")[:20]
+        users = get_leaders(LeaderDatabase.languages_highscore)[:20]
 
         return render(
             request,
@@ -271,13 +248,10 @@ def competitive_languages(request):
         country = request.session.get("country")
         user_choice = request.POST.get("choice")
 
-        correct_answers = country["languages"].strip().lower()
-        correct_answers = list(
-            map(lambda language: language.strip(), correct_answers.split(","))
+        correct_answers_old = CountryData().generate_correct_answers(
+            country[CountryHeader.languages]
         )
-        correct_answers = list(filter(lambda language: language != "", correct_answers))
-
-        is_correct = user_choice in correct_answers
+        is_correct = user_choice in correct_answers_old
 
         if is_correct:
             request.session["score"] += 1
@@ -292,33 +266,21 @@ def competitive_languages(request):
             languages_highscore = score
 
         # generate new country
-        country = CountryData().get_random_countries(1, filter_empty=["languages"])[0]
+        country = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.languages]
+        )[0]
         request.session["country"] = country
 
-        country_cleaned = {
-            "name": country["name.common"].strip(),
-            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
-        }
+        country_cleaned = CountryData().clean_country_data(country)
 
-        correct_languages = country["languages"].strip().lower()
-        correct_languages = list(
-            map(lambda language: language.strip(), correct_languages.split(","))
+        correct_answers = CountryData().generate_correct_answers(
+            country[CountryHeader.languages]
         )
-        correct_languages = list(
-            filter(lambda language: language != "", correct_languages)
+        correct_answer = random.choice(correct_answers)
+
+        choices = CountryData().generate_choices(
+            4, CountryHeader.languages, correct_answer
         )
-        correct_language = random.choice(correct_languages)
-
-        answers = CountryData().get_random_languages(3, exclude=correct_language)
-        answers.append(correct_language)
-        random.shuffle(answers)
-
-        choices = {
-            "A": answers[0],
-            "B": answers[1],
-            "C": answers[2],
-            "D": answers[3],
-        }
 
         return JsonResponse(
             {
@@ -327,7 +289,7 @@ def competitive_languages(request):
                 "score": score,
                 "highscore": languages_highscore,
                 "is_correct": is_correct,
-                "correct_answers": ", ".join(correct_answers).upper(),
+                "correct_answers": ", ".join(correct_answers_old).upper(),
             }
         )
 
@@ -336,7 +298,7 @@ def competitive_languages(request):
 def competitive_areas(request):
     if request.method == "GET":
         country1, country2 = CountryData().get_random_countries(
-            2, filter_empty=["area"]
+            2, filter_empty=[CountryHeader.area]
         )
         request.session["country1"] = country1
         request.session["country2"] = country2
@@ -346,19 +308,13 @@ def competitive_areas(request):
 
         areas_highscore = request.user.areas_highscore
 
-        country1_cleaned = {
-            "name": country1["name.common"].strip(),
-            "image_url": static(f"worldle/{country1['cca3'].lower()}.svg"),
-            "area": float(country1["area"]),
-        }
+        country1_cleaned = CountryData().clean_country_data(country1)
+        country1_cleaned["area"] = float(country1[CountryHeader.area])
 
-        country2_cleaned = {
-            "name": country2["name.common"].strip(),
-            "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
-        }
+        country2_cleaned = CountryData().clean_country_data(country2)
 
         # Leaderboard
-        users = get_leaders("areas")[:20]
+        users = get_leaders(LeaderDatabase.areas_highscore)[:20]
 
         return render(
             request,
@@ -401,20 +357,16 @@ def competitive_areas(request):
 
         # generate new countries
         country1 = country2  # old country2 becomes new country1
-        country2 = CountryData().get_random_countries(1, filter_empty=["area"])[0]
+        country2 = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.area]
+        )[0]
         request.session["country1"] = country1
         request.session["country2"] = country2
 
-        country1_cleaned = {
-            "name": country1["name.common"].strip(),
-            "image_url": static(f"worldle/{country1['cca3'].lower()}.svg"),
-            "area": float(country1["area"]),
-        }
+        country1_cleaned = CountryData().clean_country_data(country1)
+        country1_cleaned["area"] = float(country1[CountryHeader.area])
 
-        country2_cleaned = {
-            "name": country2["name.common"].strip(),
-            "image_url": static(f"worldle/{country2['cca3'].lower()}.svg"),
-        }
+        country2_cleaned = CountryData().clean_country_data(country2)
 
         return JsonResponse(
             {
@@ -435,7 +387,9 @@ def code_to_currency_name(request, code):
 @login_required
 def competitive_currencies(request):
     if request.method == "GET":
-        country = CountryData().get_random_countries(1, filter_empty=["currencies"])[0]
+        country = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.currencies]
+        )[0]
         request.session["country"] = country
 
         score = 0
@@ -443,33 +397,19 @@ def competitive_currencies(request):
 
         currencies_highscore = request.user.currencies_highscore
 
-        country_cleaned = {
-            "name": country["name.common"].strip(),
-            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
-        }
+        country_cleaned = CountryData().clean_country_data(country)
 
-        correct_currencies = country["currencies"].strip().lower()
-        correct_currencies = list(
-            map(lambda currency: currency.strip(), correct_currencies.split(","))
+        correct_answers = CountryData().generate_correct_answers(
+            country[CountryHeader.currencies]
         )
-        correct_currencies = list(
-            filter(lambda currency: currency != "", correct_currencies)
+        correct_answer = random.choice(correct_answers)
+
+        choices = CountryData().generate_choices(
+            4, CountryHeader.currencies, correct_answer
         )
-        correct_currency = random.choice(correct_currencies)
-
-        answers = CountryData().get_random_currencies(3, exclude=correct_currency)
-        answers.append(correct_currency)
-        random.shuffle(answers)
-
-        choices = {
-            "A": answers[0],
-            "B": answers[1],
-            "C": answers[2],
-            "D": answers[3],
-        }
 
         # Leaderboard
-        users = get_leaders("currencies")[:20]
+        users = get_leaders(LeaderDatabase.currencies_highscore)[:20]
 
         return render(
             request,
@@ -487,13 +427,10 @@ def competitive_currencies(request):
         country = request.session.get("country")
         user_choice = request.POST.get("choice")
 
-        correct_answers = country["currencies"].strip().lower()
-        correct_answers = list(
-            map(lambda currency: currency.strip(), correct_answers.split(","))
+        correct_answers_old = CountryData().generate_correct_answers(
+            country[CountryHeader.currencies]
         )
-        correct_answers = list(filter(lambda currency: currency != "", correct_answers))
-
-        is_correct = user_choice in correct_answers
+        is_correct = user_choice in correct_answers_old
 
         if is_correct:
             request.session["score"] += 1
@@ -508,33 +445,21 @@ def competitive_currencies(request):
             currencies_highscore = score
 
         # generate new country
-        country = CountryData().get_random_countries(1, filter_empty=["currencies"])[0]
+        country = CountryData().get_random_countries(
+            1, filter_empty=[CountryHeader.currencies]
+        )[0]
         request.session["country"] = country
 
-        country_cleaned = {
-            "name": country["name.common"].strip(),
-            "image_url": static(f"worldle/{country['cca3'].lower()}.svg"),
-        }
+        country_cleaned = CountryData().clean_country_data(country)
 
-        correct_currencies = country["currencies"].strip().lower()
-        correct_currencies = list(
-            map(lambda currency: currency.strip(), correct_currencies.split(","))
+        correct_answers = CountryData().generate_correct_answers(
+            country[CountryHeader.currencies]
         )
-        correct_currencies = list(
-            filter(lambda currency: currency != "", correct_currencies)
+        correct_answer = random.choice(correct_answers)
+
+        choices = CountryData().generate_choices(
+            4, CountryHeader.currencies, correct_answer
         )
-        correct_currency = random.choice(correct_currencies)
-
-        answers = CountryData().get_random_currencies(3, exclude=correct_currency)
-        answers.append(correct_currency)
-        random.shuffle(answers)
-
-        choices = {
-            "A": answers[0],
-            "B": answers[1],
-            "C": answers[2],
-            "D": answers[3],
-        }
 
         return JsonResponse(
             {
@@ -543,6 +468,6 @@ def competitive_currencies(request):
                 "score": score,
                 "highscore": currencies_highscore,
                 "is_correct": is_correct,
-                "correct_answers": ", ".join(correct_answers).upper(),
+                "correct_answers": ", ".join(correct_answers_old).upper(),
             }
         )

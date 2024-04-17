@@ -5,6 +5,11 @@ from pathlib import Path
 FILE_PATH = Path(__file__).resolve().parent
 
 
+class CurrencyHeader:
+    alphabetic_code = "AlphabeticCode"
+    currency = "Currency"
+
+
 class CurrencyData:
     __instance = None
     __CSV_ENTRIES = None
@@ -25,7 +30,10 @@ class CurrencyData:
     @classmethod
     def code_to_currency_name(cls, code: str) -> str:
         for entry in cls.get_csv_entries():
-            if entry["AlphabeticCode"].strip().lower() == code.strip().lower():
-                return entry["Currency"]
+            if (
+                entry[CurrencyHeader.alphabetic_code].strip().lower()
+                == code.strip().lower()
+            ):
+                return entry[CurrencyHeader.currency]
 
         return ""
