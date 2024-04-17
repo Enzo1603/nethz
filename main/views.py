@@ -8,7 +8,6 @@ from django.urls import reverse
 def home(request):
     tm_card = {
         "title": "Technische Mechanik 2023",
-        "description": "Übungsbetrieb und wichtige Unterlagen",
         "button_text": "Zu den Unterlagen",
         "image_path": static("images/technische_mechanik_6px.jpg"),
         "link": reverse("main:technische_mechanik", args=["HS23"]),
@@ -17,7 +16,6 @@ def home(request):
 
     ph_card = {
         "title": "Physik I 2024",
-        "description": "Übungsbetrieb und wichtige Unterlagen",
         "button_text": "Zu den Unterlagen",
         "image_path": static("images/physik1_2px.jpg"),
         "link": "#",
@@ -26,7 +24,6 @@ def home(request):
 
     inf_card = {
         "title": "Informatik I 2024",
-        "description": "Übungsbetrieb und wichtige Unterlagen",
         "button_text": "Zu den Unterlagen",
         "image_path": static("images/informatik1_3px.jpg"),
         "link": "#",

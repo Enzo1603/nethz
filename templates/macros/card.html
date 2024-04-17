@@ -1,16 +1,23 @@
 <!-- {{ title | title }} Card -->
 <div class="col-md-6 col-sm-12 mt-2 mb-4">
-    <div class="card rounded-3 zoom">
-        <a href="{{ link }}">
-            <img src="{{ image_path }}" class="card-img rounded-3" style="filter: brightness(70%);" alt="...">
-            <div class="card-img-overlay text-white text-center">
-                <div style="margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 90%;">
-                    <h2 class="card-title fs-2">{{ title }}</h2>
-                    <p class="card-text fs-6 mb-3">{{ description }}</p>
-                    <a class="btn btn-light btn-lg {% if disable %} disabled {% endif %}" href="{{ link }}">
-                        {{ button_text }}</a>
+    <div class="card border-0">
+        <div class="ratio ratio-16x9 rounded-3 zoom">
+            <img src="{{ image_path }}" class="card-img rounded-3" style="object-fit: cover; filter: brightness(70%);" alt="...">
+            <a href="{{ link }}">
+                <div class="card-img-overlay text-white text-center">
+                    <div style="margin: 0; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 90%;">
+                        <h3 class="card-title">{{ title }}</h3>
+                        {% if description %}
+                        <p class="card-text mb-3">{{ description }}</p>
+                        {% else %}
+                        <div class="mb-4"></div>
+                        {% endif %}
+                        <a class="btn btn-light btn-lg {% if disable %} disabled {% endif %}" href="{{ link }}">
+                            {{ button_text }}
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 </div>
