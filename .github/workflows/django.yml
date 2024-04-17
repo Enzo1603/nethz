@@ -18,6 +18,10 @@ jobs:
         env:
             SECRET_KEY: dummy-secret-key-to-run-github-actions
             PRODUCTION_DOMAINS: dummy.domain.com
+            EMAIL_HOST: dummy-email-host
+            EMAIL_PORT: dummy-email-port
+            EMAIL_HOST_USER: dummy-email-host-user
+            EMAIL_HOST_PASSWORD: dummy-email-host-password
 
         steps:
             - uses: actions/checkout@v3
