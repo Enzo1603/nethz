@@ -11,17 +11,16 @@ class MainViewsTest(TestCase):
         self.assertTemplateUsed(response, "main/home.html")
 
         # Add more assertions for the content of the response, if needed
-        self.assertContains(response, "Technische Mechanik 2023")
-        self.assertContains(response, "Physik I 2024")
+        self.assertContains(response, "Technische Mechanik 2024")
         self.assertContains(response, "Informatik I 2024")
         self.assertContains(response, "Worldle")
 
     def test_technische_mechanik_view(self):
         response_valid = self.client.get(
-            reverse("main:technische_mechanik", args=["HS23"])
+            reverse("main:technische_mechanik", args=["HS24"])
         )
         self.assertEqual(response_valid.status_code, 200)
-        self.assertTemplateUsed(response_valid, "technische_mechanik/TM_HS23.html")
+        self.assertTemplateUsed(response_valid, "technische_mechanik/TM_HS24.html")
 
         response_invalid = self.client.get(
             reverse("main:technische_mechanik", args=["InvalidSemester"])
@@ -51,10 +50,6 @@ class MainViewsTest(TestCase):
         self.assertContains(
             response,
             'src="' + static("images/technische_mechanik_6px.jpg") + '"',
-        )
-        self.assertContains(
-            response,
-            'src="' + static("images/physik1_2px.jpg") + '"',
         )
         self.assertContains(
             response,

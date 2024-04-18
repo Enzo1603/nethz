@@ -45,7 +45,7 @@ def home(request):
 def technische_mechanik(request, semester: str):
     template_name = f"TM_{semester}"
 
-    valid_template_names = {"TM_HS23"}
+    valid_template_names = {"TM_HS24"}
     if template_name not in valid_template_names:
         raise Http404()
 
