@@ -35,3 +35,8 @@ def coming_soon_card():
 @register.inclusion_tag("macros/regions.html")
 def region_select(region):
     return {"region": region}
+
+
+@register.inclusion_tag("macros/leaderboard.html")
+def leaderboard(leaderboard_config):
+    return leaderboard_config

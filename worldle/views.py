@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .leaders import get_leaders, get_leaders_dict, LeaderDatabase
+from .leaders import get_leaders, LeaderDatabase
 from .country_data import (
     CountryData,
     CountryHeader,
@@ -59,17 +59,29 @@ def leaderboard_data(request, highscore_db: str):
 
 
 def leaderboards(request):
+    context = {}
+    context["leaderboard_configs"] = [
+        {
+            "Title": "Areas",
+            "link": reverse("worldle:competitive_areas"),
+        },
+        {
+            "Title": "Capitals",
+            "link": reverse("worldle:competitive_capitals"),
+        },
+        {
+            "Title": "Currencies",
+            "link": reverse("worldle:competitive_currencies"),
+        },
+        {
+            "Title": "Languages",
+            "link": reverse("worldle:competitive_languages"),
+        },
+    ]
     return render(
         request,
         "worldle/leaderboards.html",
-        get_leaders_dict(
-            [
-                LeaderDatabase.areas_highscore,
-                LeaderDatabase.capitals_highscore,
-                LeaderDatabase.currencies_highscore,
-                LeaderDatabase.languages_highscore,
-            ]
-        ),
+        context,
     )
 
 

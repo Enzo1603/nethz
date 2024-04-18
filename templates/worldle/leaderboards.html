@@ -24,120 +24,53 @@
 
 <div class="row">
 
-    <!-- Areas Leaderboard -->
-    <div class="col-md-6 mb-5">
-        <div class="table-responsive border border-3 border-primary rounded-3">
-            <table class="table mb-0">
-                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
-                    <h3>Areas</h3>
-                    <a class="btn btn-light" href="{% url 'worldle:competitive_areas' %}">Go to Game</a>
-                </div>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Highscore</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in areas_highscore_leaders %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.areas_highscore }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <!-- Capitals Leaderboard -->
-    <div class="col-md-6 mb-5">
-        <div class="table-responsive border border-3 border-primary rounded-3">
-            <table class="table mb-0">
-                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
-                    <h3>Capitals</h3>
-                    <a class="btn btn-light" href="{% url 'worldle:competitive_languages' %}">Go to Game</a>
-                </div>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Highscore</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in capitals_highscore_leaders %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.capitals_highscore }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Currencies Leaderboard -->
-    <div class="col-md-6 mb-5">
-        <div class="table-responsive border border-3 border-primary rounded-3">
-            <table class="table mb-0">
-                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
-                    <h3>Currencies</h3>
-                    <a class="btn btn-light" href="{% url 'worldle:competitive_currencies' %}">Go to Game</a>
-                </div>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Highscore</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in currencies_highscore_leaders %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.currencies_highscore }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Languages Leaderboard -->
-    <div class="col-md-6 mb-5">
-        <div class="table-responsive border border-3 border-primary rounded-3">
-            <table class="table mb-0">
-                <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
-                    <h3>Languages</h3>
-                    <a class="btn btn-light" href="{% url 'worldle:competitive_languages' %}">Go to Game</a>
-                </div>
-
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Highscore</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in languages_highscore_leaders %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.languages_highscore }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+    {% for leaderboard_config in leaderboard_configs %}
+    {% leaderboard leaderboard_config %}
+    {% endfor %}
 
 </div>
+
+<script>
+    updateAllLeaderboards()
+    setInterval(updateAllLeaderboards, 20000)  // Update every 20 seconds
+
+    function updateAllLeaderboards() {
+        updateLeaderboard('Areas', '/worldle/leaderboards/areas_highscore/')
+        updateLeaderboard('Capitals', '/worldle/leaderboards/capitals_highscore/')
+        updateLeaderboard('Currencies', '/worldle/leaderboards/currencies_highscore/')
+        updateLeaderboard('Languages', '/worldle/leaderboards/languages_highscore/')
+    }
+
+    function updateLeaderboard(tableId, url) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+
+                const tbody = document.querySelector(`#${tableId} tbody`)
+                tbody.innerHTML = ""
+
+                data.forEach((user, index) => {
+                    const tr = document.createElement("tr")
+                    const th = document.createElement("th")
+                    th.scope = "row"
+                    th.textContent = index + 1
+
+                    const tdUsername = document.createElement("td")
+                    tdUsername.textContent = user.username
+
+                    const tdHighscore = document.createElement("td")
+                    tdHighscore.textContent = user.highscore
+
+                    tr.appendChild(th)
+                    tr.appendChild(tdUsername)
+                    tr.appendChild(tdHighscore)
+
+                    tbody.appendChild(tr)
+                })
+
+            }).catch(error => console.error('Error:', error))
+    }
+</script>
 
 {% endblock content %}
