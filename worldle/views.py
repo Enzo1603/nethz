@@ -39,6 +39,25 @@ def home(request):
     )
 
 
+def leaderboard_data(request, highscore_db: str):
+    if highscore_db not in (
+        LeaderDatabase.areas_highscore,
+        LeaderDatabase.capitals_highscore,
+        LeaderDatabase.currencies_highscore,
+        LeaderDatabase.languages_highscore,
+    ):
+        raise Http404()
+    users = get_leaders(highscore_db)[:20]
+    data = [
+        {
+            "username": user.username,
+            "highscore": getattr(user, highscore_db),
+        }
+        for user in users
+    ]
+    return JsonResponse(data, safe=False)
+
+
 def leaderboards(request):
     return render(
         request,
@@ -313,9 +332,6 @@ def competitive_areas(request):
 
         country2_cleaned = CountryData().clean_country_data(country2)
 
-        # Leaderboard
-        users = get_leaders(LeaderDatabase.areas_highscore)[:20]
-
         return render(
             request,
             "worldle/competitive_areas.html",
@@ -324,7 +340,6 @@ def competitive_areas(request):
                 "country2": country2_cleaned,
                 "score": score,
                 "highscore": areas_highscore,
-                "users": users,
             },
         )
 

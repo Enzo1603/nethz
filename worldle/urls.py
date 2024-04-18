@@ -11,6 +11,11 @@ urlpatterns = [
     path("", views.home, name="home"),
     # LEADERBOARDS
     path("leaderboards/", views.leaderboards, name="leaderboards"),
+    path(
+        "leaderboards/<str:highscore_db>/",
+        views.leaderboard_data,
+        name="leaderboard_data",
+    ),
     # CAPITALS
     path("capitals/", views.default_capitals, name="default_capitals"),
     path(
