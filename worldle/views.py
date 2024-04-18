@@ -127,9 +127,6 @@ def competitive_capitals(request):
             4, CountryHeader.capital, correct_answer
         )
 
-        # Leaderboard
-        users = get_leaders(LeaderDatabase.capitals_highscore)[:20]
-
         return render(
             request,
             "worldle/competitive_capitals.html",
@@ -138,7 +135,6 @@ def competitive_capitals(request):
                 "choices": choices,
                 "score": score,
                 "highscore": capitals_highscore,
-                "users": users,
             },
         )
 
@@ -423,9 +419,6 @@ def competitive_currencies(request):
             4, CountryHeader.currencies, correct_answer
         )
 
-        # Leaderboard
-        users = get_leaders(LeaderDatabase.currencies_highscore)[:20]
-
         return render(
             request,
             "worldle/competitive_currencies.html",
@@ -434,7 +427,6 @@ def competitive_currencies(request):
                 "choices": choices,
                 "score": score,
                 "highscore": currencies_highscore,
-                "users": users,
             },
         )
 

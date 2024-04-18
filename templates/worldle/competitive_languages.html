@@ -143,13 +143,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for user in users %}
-                                <tr>
-                                    <th scpoe="row">{{ forloop.counter }}</th>
-                                    <td>{{ user.username }}</td>
-                                    <td>{{ user.languages_highscore }}</td>
-                                </tr>
-                                {% endfor %}
+
                             </tbody>
                         </table>
                     </div>
@@ -251,6 +245,8 @@
     }
 
     function updateDisplay() {
+        updateLeaderboard()
+
         country_name.innerText = country["name"]
         image.src = country["image_url"]
         score_span.innerText = score
@@ -260,6 +256,37 @@
         choice_b_text.innerText = choices["B"].toUpperCase()
         choice_c_text.innerText = choices["C"].toUpperCase()
         choice_d_text.innerText = choices["D"].toUpperCase()
+    }
+
+    function updateLeaderboard() {
+        fetch('/worldle/leaderboards/languages_highscore/')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+
+                const tbody = document.querySelector(".table tbody")
+                tbody.innerHTML = ""
+
+                data.forEach((user, index) => {
+                    const tr = document.createElement("tr")
+                    const th = document.createElement("th")
+                    th.scope = "row"
+                    th.textContent = index + 1
+
+                    const tdUsername = document.createElement("td")
+                    tdUsername.textContent = user.username
+
+                    const tdHighscore = document.createElement("td")
+                    tdHighscore.textContent = user.highscore
+
+                    tr.appendChild(th)
+                    tr.appendChild(tdUsername)
+                    tr.appendChild(tdHighscore)
+
+                    tbody.appendChild(tr)
+                })
+
+            }).catch(error => console.error('Error:', error))
     }
 
 </script>
