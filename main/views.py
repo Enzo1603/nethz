@@ -47,6 +47,6 @@ def technische_mechanik(request, semester: str):
 
     valid_template_names = {"TM_HS24"}
     if template_name not in valid_template_names:
-        raise Http404()
+        raise Http404("Invalid link")
 
     return render(request, f"technische_mechanik/{template_name}.html")
