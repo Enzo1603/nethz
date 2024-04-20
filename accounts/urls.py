@@ -26,10 +26,4 @@ urlpatterns = [
         views.CustomPasswordResetConfirmView.as_view(),
         name="password_reset_confirm",
     ),
-    # TODO: remove this when custompasswordresetform is implemented
-    path(
-        "reset/done/",
-        views.CustomPasswordResetCompleteView.as_view(),
-        name="password_reset_complete",
-    ),
 ]

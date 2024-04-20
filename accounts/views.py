@@ -10,20 +10,54 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetCompleteView,
 )
+from django.core.exceptions import ValidationError
 from django.http import Http404
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from django.views import View
 from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.tokens import default_token_generator
 
+
+from urllib.parse import urlparse, urlunparse
+
+from django.conf import settings
+
+# Avoid shadowing the login() and logout() views below.
+from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    PasswordChangeForm,
+    PasswordResetForm,
+    SetPasswordForm,
+)
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.http import HttpResponseRedirect, QueryDict
+from django.shortcuts import resolve_url
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.utils.http import url_has_allowed_host_and_scheme, urlsafe_base64_decode
+from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
 
 from .forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     CustomUserChangeForm,
     CustomPasswordResetForm,
+    CustomSetPasswordForm,
 )
 from .models import CustomUser
 from .emails import send_verification_email
@@ -185,12 +219,54 @@ class CustomPasswordResetView(PasswordResetView):
         return response
 
 
+INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
+
+
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "accounts/password_reset/password_reset_confirm.html"
-    # TODO: use CustomPasswordConfirmForm
-    # TODO: change success url to login page with message
+    form_class = CustomSetPasswordForm
+    success_url = reverse_lazy("accounts:login")
 
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        if "uidb64" not in kwargs or "token" not in kwargs:
+            raise ImproperlyConfigured(
+                "The URL path must contain 'uidb64' and 'token' parameters."
+            )
 
-class CustomPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = "accounts/password_reset/password_reset_complete.html"
-    # TODO: remove this when custompasswordresetform is implemented
+        self.validlink = False
+        self.user = self.get_user(kwargs["uidb64"])
+
+        if self.user is not None:
+            token = kwargs["token"]
+            if token == self.reset_url_token:
+                session_token = self.request.session.get(INTERNAL_RESET_SESSION_TOKEN)
+                if self.token_generator.check_token(self.user, session_token):
+                    # If the token is valid, display the password reset form.
+                    self.validlink = True
+                    return super().dispatch(*args, **kwargs)
+            else:
+                if self.token_generator.check_token(self.user, token):
+                    # Store the token in the session and redirect to the
+                    # password reset form at a URL without the token. That
+                    # avoids the possibility of leaking the token in the
+                    # HTTP Referer header.
+                    self.request.session[INTERNAL_RESET_SESSION_TOKEN] = token
+                    redirect_url = self.request.path.replace(
+                        token, self.reset_url_token
+                    )
+                    return HttpResponseRedirect(redirect_url)
+
+        # Display the "Password reset unsuccessful" page.
+        raise Http404(
+            "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
+        )
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(
+            self.request,
+            "Your password has been successfully reset. You can now log in with your new password.",
+        )
+        return response

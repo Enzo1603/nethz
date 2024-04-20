@@ -5,6 +5,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     AuthenticationForm,
     PasswordResetForm,
+    SetPasswordForm,
 )
 from django.forms.renderers import BaseRenderer
 from django.forms.utils import ErrorList
@@ -176,7 +177,7 @@ class CustomPasswordResetForm(PasswordResetForm):
                 Submit(
                     "submit",
                     "Reset my password",
-                    css_class="btn btn-primary mx-4",
+                    css_class="btn btn-danger mx-4",
                 ),
                 css_class="d-grid col-12",
             ),
@@ -184,3 +185,31 @@ class CustomPasswordResetForm(PasswordResetForm):
 
 
 # TODO: Add a custom PasswordResetConfirmForm
+class CustomSetPasswordForm(SetPasswordForm):
+    """Used in Password Reset Confirm View."""
+
+    new_password1 = forms.CharField(
+        label="New Password",
+        strip=False,
+        widget=forms.PasswordInput,
+        help_text="Minimum length of 8 characters.",
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(CustomSetPasswordForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                FloatingField("new_password1", placeholder="New Password", minlength=8),
+                FloatingField("new_password2", placeholder="New Password"),
+                css_class="m-4",
+            ),
+            Div(
+                Submit(
+                    "submit",
+                    "Change my password",
+                    css_class="btn btn-primary mx-4 mb-4",
+                ),
+                css_class="d-grid col-12",
+            ),
+        )
