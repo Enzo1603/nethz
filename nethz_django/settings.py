@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 
 from django.core.exceptions import ImproperlyConfigured
+from django.contrib.messages import constants as messages
 
 APPEND_SLASH = False
 
@@ -41,6 +42,7 @@ ALLOWED_HOSTS = []
 if ENVIRONMENT == "development":
     DEBUG = True
     ALLOWED_HOSTS.append("*")
+    MESSAGE_LEVEL = messages.DEBUG
 
 if ENVIRONMENT == "testing":
     DEBUG = False
