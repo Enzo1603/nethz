@@ -15,4 +15,15 @@ urlpatterns = [
         views.ActivateAccountView.as_view(),
         name="activate_account",
     ),
+    # Password reset
+    path(
+        "password_reset/",
+        views.CustomPasswordResetView.as_view(),
+        name="password_reset",
+    ),
+    path(
+        "reset/<uidb64>/<token>/",
+        views.CustomPasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
 ]

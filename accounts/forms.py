@@ -3,11 +3,14 @@ from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
     AuthenticationForm,
+    PasswordResetForm,
+    SetPasswordForm,
 )
+from django.urls import reverse
 
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Submit
+from crispy_forms.layout import Div, Layout, Submit, HTML
 from crispy_bootstrap5.bootstrap5 import FloatingField
 
 
@@ -78,7 +81,10 @@ class CustomAuthenticationForm(AuthenticationForm):
                 css_class="m-4",
             ),
             Div(
-                Submit("submit", "Login", css_class="btn btn-primary m-4 mt-3"),
+                Submit("submit", "Login", css_class="btn btn-primary mx-4 mt-3 mb-2"),
+                HTML(
+                    f"<a href='{reverse('accounts:password_reset')}' class='btn btn-outline-danger mx-4 mt-2'>Forgot Password?</a>",
+                ),
                 css_class="d-grid col-12",
             ),
         )
@@ -149,6 +155,56 @@ class CustomUserChangeForm(UserChangeForm):
                     "submit",
                     "Update",
                     css_class="btn btn-primary m-4 mt-3",
+                ),
+                css_class="d-grid col-12",
+            ),
+        )
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                FloatingField("email", placeholder="Email Address"),
+                css_class="m-4",
+            ),
+            Div(
+                Submit(
+                    "submit",
+                    "Reset my password",
+                    css_class="btn btn-danger mx-4",
+                ),
+                css_class="d-grid col-12",
+            ),
+        )
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+    """Used in Password Reset Confirm View."""
+
+    new_password1 = forms.CharField(
+        label="New Password",
+        strip=False,
+        widget=forms.PasswordInput,
+        help_text="Minimum length of 8 characters.",
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(CustomSetPasswordForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                FloatingField("new_password1", placeholder="New Password", minlength=8),
+                FloatingField("new_password2", placeholder="New Password"),
+                css_class="m-4",
+            ),
+            Div(
+                Submit(
+                    "submit",
+                    "Change my password",
+                    css_class="btn btn-primary mx-4 mb-4",
                 ),
                 css_class="d-grid col-12",
             ),

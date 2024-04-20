@@ -3,20 +3,29 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import LoginView
-from django.http import Http404
+from django.contrib.auth.views import (
+    LoginView,
+    PasswordResetView,
+    PasswordResetConfirmView,
+)
+from django.core.exceptions import ImproperlyConfigured
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.utils.http import urlsafe_base64_decode
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
 from django.views import View
+from django.views.decorators.cache import never_cache
+from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, UpdateView
-
 
 from .forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     CustomUserChangeForm,
+    CustomPasswordResetForm,
+    CustomSetPasswordForm,
 )
 from .models import CustomUser
 from .emails import send_verification_email
@@ -158,3 +167,74 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
         # messages.success(self.request, "Your data has been successfully updated.")
         # return response
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = "accounts/password_reset/password_reset_form.html"
+    form_class = CustomPasswordResetForm
+    success_url = reverse_lazy("accounts:password_reset")
+    html_email_template_name = "accounts/password_reset/password_reset_email.html"
+    subject_template_name = "accounts/password_reset/password_reset_subject.txt"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(
+            self.request,
+            "If your email address is linked to an account, a password reset link has been sent to it.",
+        )
+        return response
+
+
+INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "accounts/password_reset/password_reset_confirm.html"
+    form_class = CustomSetPasswordForm
+    success_url = reverse_lazy("accounts:login")
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        if "uidb64" not in kwargs or "token" not in kwargs:
+            raise ImproperlyConfigured(
+                "The URL path must contain 'uidb64' and 'token' parameters."
+            )
+
+        self.validlink = False
+        self.user = self.get_user(kwargs["uidb64"])
+
+        if self.user is not None:
+            token = kwargs["token"]
+            if token == self.reset_url_token:
+                session_token = self.request.session.get(INTERNAL_RESET_SESSION_TOKEN)
+                if self.token_generator.check_token(self.user, session_token):
+                    # If the token is valid, display the password reset form.
+                    self.validlink = True
+                    return super().dispatch(*args, **kwargs)
+            else:
+                if self.token_generator.check_token(self.user, token):
+                    # Store the token in the session and redirect to the
+                    # password reset form at a URL without the token. That
+                    # avoids the possibility of leaking the token in the
+                    # HTTP Referer header.
+                    self.request.session[INTERNAL_RESET_SESSION_TOKEN] = token
+                    redirect_url = self.request.path.replace(
+                        token, self.reset_url_token
+                    )
+                    return HttpResponseRedirect(redirect_url)
+
+        # Display the "Password reset unsuccessful" page.
+        messages.error(
+            self.request,
+            "The password reset link was invalid, possibly because it has already been used. Please request a new password reset.",
+        )
+        return redirect("accounts:password_reset")
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(
+            self.request,
+            "Your password has been successfully reset. You can now log in with your new password.",
+        )
+        return response
