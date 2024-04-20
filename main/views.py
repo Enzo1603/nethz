@@ -10,7 +10,7 @@ def home(request):
         "title": "Technische Mechanik 2024",
         "button_text": "Zu den Unterlagen",
         "image_path": static("images/technische_mechanik_6px.jpg"),
-        "link": reverse("main:technische_mechanik", args=["HS23"]),
+        "link": reverse("main:technische_mechanik", args=["HS24"]),
         "disable": False,
     }
 
