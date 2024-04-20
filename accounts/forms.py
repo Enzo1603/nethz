@@ -1,4 +1,3 @@
-from typing import Any, Mapping
 from django import forms
 from django.contrib.auth.forms import (
     UserCreationForm,
@@ -7,8 +6,6 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
-from django.forms.renderers import BaseRenderer
-from django.forms.utils import ErrorList
 from django.urls import reverse
 
 
@@ -184,7 +181,6 @@ class CustomPasswordResetForm(PasswordResetForm):
         )
 
 
-# TODO: Add a custom PasswordResetConfirmForm
 class CustomSetPasswordForm(SetPasswordForm):
     """Used in Password Reset Confirm View."""
 

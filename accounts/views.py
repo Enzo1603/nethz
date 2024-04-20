@@ -6,51 +6,19 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import (
     LoginView,
     PasswordResetView,
-    PasswordResetDoneView,
     PasswordResetConfirmView,
-    PasswordResetCompleteView,
 )
-from django.core.exceptions import ValidationError
-from django.http import Http404
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
-from django.utils.http import urlsafe_base64_decode
-from django.utils.encoding import force_str
-from django.views import View
-from django.views.generic import CreateView, UpdateView
-from django.contrib.auth.tokens import default_token_generator
-
-
-from urllib.parse import urlparse, urlunparse
-
-from django.conf import settings
-
-# Avoid shadowing the login() and logout() views below.
-from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import (
-    AuthenticationForm,
-    PasswordChangeForm,
-    PasswordResetForm,
-    SetPasswordForm,
-)
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.exceptions import ImproperlyConfigured, ValidationError
-from django.http import HttpResponseRedirect, QueryDict
-from django.shortcuts import resolve_url
+from django.core.exceptions import ImproperlyConfigured
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.http import url_has_allowed_host_and_scheme, urlsafe_base64_decode
-from django.utils.translation import gettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
+from django.views import View
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic import CreateView, UpdateView
 
 from .forms import (
     CustomUserCreationForm,
@@ -204,11 +172,9 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 class CustomPasswordResetView(PasswordResetView):
     template_name = "accounts/password_reset/password_reset_form.html"
     form_class = CustomPasswordResetForm
-    success_url = reverse_lazy("accounts:login")
+    success_url = reverse_lazy("accounts:password_reset")
     html_email_template_name = "accounts/password_reset/password_reset_email.html"
     subject_template_name = "accounts/password_reset/password_reset_subject.txt"
-
-    # TODO: if user is logged in, redirect to user update view to change password with message
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -259,9 +225,11 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
                     return HttpResponseRedirect(redirect_url)
 
         # Display the "Password reset unsuccessful" page.
-        raise Http404(
-            "The password reset link was invalid, possibly because it has already been used. Please request a new password reset."
+        messages.error(
+            self.request,
+            "The password reset link was invalid, possibly because it has already been used. Please request a new password reset.",
         )
+        return redirect("accounts:password_reset")
 
     def form_valid(self, form):
         response = super().form_valid(form)
