@@ -34,7 +34,7 @@ class MainViewsTest(TestCase):
         # Test that the links in the cards are correct
         self.assertContains(
             response,
-            'href="' + reverse("main:technische_mechanik", args=["HS23"]) + '"',
+            'href="' + reverse("main:technische_mechanik", args=["HS24"]) + '"',
         )
         self.assertContains(
             response,
