@@ -176,6 +176,15 @@ class CustomPasswordResetView(PasswordResetView):
     html_email_template_name = "accounts/password_reset/password_reset_email.html"
     subject_template_name = "accounts/password_reset/password_reset_subject.txt"
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            messages.warning(
+                request,
+                "You're already logged in. You can change your password in your account settings.",
+            )
+            return redirect("accounts:user_account")
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(
@@ -196,6 +205,12 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     @method_decorator(sensitive_post_parameters())
     @method_decorator(never_cache)
     def dispatch(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            messages.warning(
+                self.request,
+                "You're already logged in. You can change your password in your account settings.",
+            )
+            return redirect("accounts:user_account")
         if "uidb64" not in kwargs or "token" not in kwargs:
             raise ImproperlyConfigured(
                 "The URL path must contain 'uidb64' and 'token' parameters."
