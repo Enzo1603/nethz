@@ -1,13 +1,18 @@
+from typing import Any, Mapping
 from django import forms
 from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
     AuthenticationForm,
+    PasswordResetForm,
 )
+from django.forms.renderers import BaseRenderer
+from django.forms.utils import ErrorList
+from django.urls import reverse
 
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Submit
+from crispy_forms.layout import Div, Layout, Submit, HTML
 from crispy_bootstrap5.bootstrap5 import FloatingField
 
 
@@ -78,7 +83,10 @@ class CustomAuthenticationForm(AuthenticationForm):
                 css_class="m-4",
             ),
             Div(
-                Submit("submit", "Login", css_class="btn btn-primary m-4 mt-3"),
+                Submit("submit", "Login", css_class="btn btn-primary mx-4 mt-3 mb-2"),
+                HTML(
+                    f"<a href='{reverse('accounts:password_reset')}' class='btn btn-outline-danger mx-4 mt-2'>Forgot Password?</a>",
+                ),
                 css_class="d-grid col-12",
             ),
         )
@@ -153,3 +161,26 @@ class CustomUserChangeForm(UserChangeForm):
                 css_class="d-grid col-12",
             ),
         )
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                FloatingField("email", placeholder="Email Address"),
+                css_class="m-4",
+            ),
+            Div(
+                Submit(
+                    "submit",
+                    "Reset my password",
+                    css_class="btn btn-primary mx-4",
+                ),
+                css_class="d-grid col-12",
+            ),
+        )
+
+
+# TODO: Add a custom PasswordResetConfirmForm

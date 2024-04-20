@@ -3,7 +3,13 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import (
+    LoginView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+)
 from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -17,6 +23,7 @@ from .forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     CustomUserChangeForm,
+    CustomPasswordResetForm,
 )
 from .models import CustomUser
 from .emails import send_verification_email
@@ -158,3 +165,32 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
         # messages.success(self.request, "Your data has been successfully updated.")
         # return response
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = "accounts/password_reset/password_reset_form.html"
+    form_class = CustomPasswordResetForm
+    success_url = reverse_lazy("accounts:login")
+    html_email_template_name = "accounts/password_reset/password_reset_email.html"
+    subject_template_name = "accounts/password_reset/password_reset_subject.txt"
+
+    # TODO: if user is logged in, redirect to user update view to change password with message
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(
+            self.request,
+            "If your email address is linked to an account, a password reset link has been sent to it.",
+        )
+        return response
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "accounts/password_reset/password_reset_confirm.html"
+    # TODO: use CustomPasswordConfirmForm
+    # TODO: change success url to login page with message
+
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = "accounts/password_reset/password_reset_complete.html"
+    # TODO: remove this when custompasswordresetform is implemented
