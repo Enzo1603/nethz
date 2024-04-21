@@ -1,12 +1,13 @@
 # from threading import Thread
 
+from django.conf import settings
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from django.conf import settings
+from django.utils.http import urlsafe_base64_encode
+from django.utils.translation import gettext as _
 
 
 def send_verification_email(user, request):
@@ -15,7 +16,7 @@ def send_verification_email(user, request):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     current_site = get_current_site(request)
 
-    mail_subject = "Activate your account"
+    mail_subject = _("Activate your account")
     txt_message = render_to_string(
         "accounts/verification_email.txt",
         {

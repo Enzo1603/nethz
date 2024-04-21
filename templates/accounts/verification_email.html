@@ -1,7 +1,10 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8" />
@@ -18,7 +21,7 @@
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'images/eth-logo.ico' %}">
 
-    <title>Email Confirmation</title>
+    <title>{% trans "Email Confirmation" %}</title>
 </head>
 
 <body>
@@ -26,17 +29,17 @@
         <br>
         <br>
 
-        <p>Hello {{ user.username }},</p>
+        <p>{% trans "Hello" %} {{ user.username }},</p>
 
-        <p>Please click the link below to confirm your email address and activate your account:</p>
+        <p>{% trans "Please click the link below to confirm your email address and activate your account" %}:</p>
 
         <div class="text-center">
-            <a class="btn btn-primary" href="http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}">Activate my account</a>
+            <a class="btn btn-primary" href="http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}">{% trans "Activate my account" %}</a>
         </div>
 
         <br>
         <br>
-        <p>If you are having trouble with the button, you can also confirm your email by copying and pasting the following link into your browser:</p>
+        <p>{% trans "If you are having trouble with the button, you can also confirm your email by copying and pasting the following link into your browser" %}:</p>
         <p><a href="http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}">http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}</a></p>
 
     </div>

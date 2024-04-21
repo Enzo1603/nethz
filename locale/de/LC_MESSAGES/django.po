@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-21 20:42+0000\n"
+"POT-Creation-Date: 2024-04-21 21:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/emails.py:19
+msgid "Activate your account"
+msgstr "Aktivieren Sie Ihr Konto"
 
 #: accounts/forms.py:24 accounts/forms.py:60 accounts/forms.py:163
 #: accounts/forms.py:209
@@ -132,11 +136,11 @@ msgstr "Ein Benutzer mit diesem Benutzernamen existiert bereits."
 msgid "email address"
 msgstr "E-Mail-Adresse"
 
-#: accounts/views.py:45 accounts/views.py:77
+#: accounts/views.py:44 accounts/views.py:76
 msgid "You're already logged in."
 msgstr "Sie sind bereits angemeldet."
 
-#: accounts/views.py:59
+#: accounts/views.py:58
 msgid ""
 "Account creation successful. A confirmation email has been sent to your "
 "email address."
@@ -144,15 +148,15 @@ msgstr ""
 "Kontenerstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-"
 "Adresse gesendet."
 
-#: accounts/views.py:64
+#: accounts/views.py:63
 msgid "You will not be able to log in until you have confirmed your email."
 msgstr "Sie können sich nicht anmelden, bis Sie Ihre E-Mail bestätigt haben."
 
-#: accounts/views.py:85
+#: accounts/views.py:84
 msgid "You successfully logged in."
 msgstr "Sie haben sich erfolgreich angemeldet."
 
-#: accounts/views.py:91
+#: accounts/views.py:90
 #, fuzzy
 #| msgid ""
 #| "Account creation successful. A confirmation email has been sent to your "
@@ -164,17 +168,17 @@ msgstr ""
 "Da Sie Ihre E-Mail-Adresse noch nicht bestätigt haben, wurde eine weitere "
 "Bestätigungs-E-Mail an Ihre E-Mail-Adresse gesendet."
 
-#: accounts/views.py:101
+#: accounts/views.py:100
 msgid "You successfully logged out."
 msgstr "Sie haben sich erfolgreich abgemeldet."
 
-#: accounts/views.py:119
+#: accounts/views.py:118
 msgid ""
 "Thank you for confirming your email. You can now log in to your account."
 msgstr ""
 "Vielen Dank für die Bestätigung Ihrer E-Mail. Sie können sich jetzt anmelden."
 
-#: accounts/views.py:126
+#: accounts/views.py:125
 msgid ""
 "Invalid confirmation link. Please make sure you are using the correct link "
 "provided in the confirmation email."
@@ -182,11 +186,11 @@ msgstr ""
 "Ungültiger Bestätigungslink. Stellen Sie sicher, dass Sie den korrekten Link "
 "aus der Bestätigungs-E-Mail verwenden."
 
-#: accounts/views.py:155
+#: accounts/views.py:154
 msgid "Your password has been updated."
 msgstr "Ihr Passwort wurde aktualisiert."
 
-#: accounts/views.py:164
+#: accounts/views.py:163
 msgid ""
 "Your email has been updated. A confirmation link has been sent to your new "
 "email address. Please confirm your email to log in."
@@ -195,11 +199,11 @@ msgstr ""
 "neue E-Mail-Adresse gesendet. Bitte bestätigen Sie Ihre E-Mail, um sich "
 "anzumelden."
 
-#: accounts/views.py:170
+#: accounts/views.py:169
 msgid "Your data has been successfully updated."
 msgstr "Ihre Daten wurden erfolgreich aktualisiert."
 
-#: accounts/views.py:188 accounts/views.py:220
+#: accounts/views.py:187 accounts/views.py:219
 msgid ""
 "You're already logged in. You can change your password in your account "
 "settings."
@@ -207,7 +211,7 @@ msgstr ""
 "Sie sind bereits angemeldet. Sie können Ihr Passwort in Ihren "
 "Kontoeinstellungen ändern."
 
-#: accounts/views.py:199
+#: accounts/views.py:198
 msgid ""
 "If your email address is linked to an account, a password reset link has "
 "been sent to it."
@@ -215,18 +219,20 @@ msgstr ""
 "Wenn Ihre E-Mail-Adresse mit einem Konto verknüpft ist, wird ein Link zum "
 "Zurücksetzen des Passworts an Sie gesendet."
 
-#: accounts/views.py:256
+#: accounts/views.py:255
 msgid ""
 "The password reset link is invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr "Der Link zum Zurücksetzen des Passworts ist ungültig, möglicherweise weil "
-"er bereits verwendet worden ist. Bitte fordern Sie ein neues Passwort zurück."
+msgstr ""
+"Der Link zum Zurücksetzen des Passworts ist ungültig, möglicherweise weil er "
+"bereits verwendet worden ist. Bitte fordern Sie ein neues Passwort zurück."
 
-#: accounts/views.py:266
+#: accounts/views.py:265
 msgid ""
 "Your password has been successfully reset. You can now log in with your new "
 "password."
-msgstr "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit "
+msgstr ""
+"Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit "
 "Ihrem neuen Passwort anmelden."
 
 #: lib/templatetags/macros.py:45
@@ -241,23 +247,23 @@ msgstr "hier gibt es nichts zu sehen"
 msgid "Go away"
 msgstr "Geh weg"
 
-#: main/views.py:11
+#: main/views.py:10
 msgid "Engineering Mechanics 2024"
 msgstr "Technische Mechanik 2024"
 
-#: main/views.py:12 main/views.py:20
+#: main/views.py:11 main/views.py:19
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
 
-#: main/views.py:19
+#: main/views.py:18
 msgid "Computer Science I 2024"
 msgstr "Informatik I 2024"
 
-#: main/views.py:28
+#: main/views.py:27
 msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
-#: main/views.py:29
+#: main/views.py:28
 msgid "To the game modes"
 msgstr "Zu den Unterlagen"
 
@@ -280,6 +286,36 @@ msgstr "Haben Sie bereits ein Konto?"
 #: templates/accounts/user_account.html:14 templates/components/_navbar.html:57
 msgid "My Account"
 msgstr "Mein Konto"
+
+#: templates/accounts/verification_email.html:24
+msgid "Email Confirmation"
+msgstr "E-Mail-Bestätigung"
+
+#: templates/accounts/verification_email.html:32
+#: templates/accounts/verification_email.txt:3
+msgid "Hello"
+msgstr "Hallo"
+
+#: templates/accounts/verification_email.html:34
+#: templates/accounts/verification_email.txt:5
+msgid ""
+"Please click the link below to confirm your email address and activate your "
+"account"
+msgstr ""
+"Bitte klicken Sie auf den Link unten, um Ihre E-Mail-Adresse zu bestätigen "
+"und Ihr Konto zu aktivieren."
+
+#: templates/accounts/verification_email.html:37
+msgid "Activate my account"
+msgstr "Mein Konto aktivieren"
+
+#: templates/accounts/verification_email.html:42
+msgid ""
+"If you are having trouble with the button, you can also confirm your email "
+"by copying and pasting the following link into your browser"
+msgstr ""
+"Wenn Sie Probleme mit dem Button haben, können Sie Ihre E-Mail-Adresse auch "
+"bestätigen, indem Sie den folgenden Link in Ihren Browser kopieren"
 
 #: templates/components/_errors.html:14
 msgid "Oops! You ran out of oxygen."

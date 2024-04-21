@@ -1,5 +1,7 @@
-Hello {{ user.username }},
+{% load i18n %}
 
-Please click the link below to confirm your email address and activate your account:
+{% trans "Hello" %} {{ user.username }},
+
+{% trans "Please click the link below to confirm your email address and activate your account" %}:
 
 http://{{ domain }}{% url 'accounts:activate_account' uidb64=uid token=token %}

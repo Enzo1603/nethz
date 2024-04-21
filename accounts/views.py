@@ -34,7 +34,6 @@ from .emails import send_verification_email
 UserModel = get_user_model()
 
 
-# Create your views here.
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     template_name = "accounts/signup.html"

@@ -5,7 +5,6 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 
-# Create your views here.
 def home(request):
     tm_card = {
         "title": _("Engineering Mechanics 2024"),
