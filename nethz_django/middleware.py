@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 
 class EmailVerificationMiddleware:
@@ -9,7 +10,7 @@ class EmailVerificationMiddleware:
     def __call__(self, request):
         if request.user.is_authenticated and not request.user.is_email_verified:
             messages.warning(
-                request, "You have to confirm your email address to log in."
+                request, _("You have to confirm your email address to log in.")
             )
             logout(request)
 

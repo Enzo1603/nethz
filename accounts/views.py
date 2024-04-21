@@ -82,7 +82,6 @@ class CustomLoginView(LoginView):
         user = form.get_user()
         if user.is_email_verified:
             login(self.request, user)
-            # TODO: internationalize django messages
             messages.success(self.request, _("You successfully logged in."))
             return redirect(self.success_url)
 
@@ -153,7 +152,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         if password:
             self.object.set_password(password)
             self.object.save()
-            messages.success(self.request, "Your password has been updated.")
+            messages.success(self.request, _("Your password has been updated."))
         if self.old_email != new_email:
             self.object.is_email_verified = False
             self.object.save()
@@ -161,22 +160,17 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
             logout(self.request)
             messages.success(
                 self.request,
-                "Your email has been updated. A confirmation link has been sent to your new email address. Please confirm your email to log in.",
+                _(
+                    "Your email has been updated. A confirmation link has been sent to your new email address. Please confirm your email to log in."
+                ),
             )
             return redirect("main:home")
         else:
-            messages.success(self.request, "Your data has been successfully updated.")
+            messages.success(
+                self.request, _("Your data has been successfully updated.")
+            )
 
         return response
-
-        # response = super().form_valid(form)
-        # password = form.cleaned_data.get("password1")
-        # if password:
-        #     self.object.set_password(password)
-        #     self.object.save()
-
-        # messages.success(self.request, "Your data has been successfully updated.")
-        # return response
 
 
 class CustomPasswordResetView(PasswordResetView):
@@ -190,7 +184,9 @@ class CustomPasswordResetView(PasswordResetView):
         if request.user.is_authenticated:
             messages.warning(
                 request,
-                "You're already logged in. You can change your password in your account settings.",
+                _(
+                    "You're already logged in. You can change your password in your account settings."
+                ),
             )
             return redirect("accounts:user_account")
         return super().dispatch(request, *args, **kwargs)
@@ -199,7 +195,9 @@ class CustomPasswordResetView(PasswordResetView):
         response = super().form_valid(form)
         messages.success(
             self.request,
-            "If your email address is linked to an account, a password reset link has been sent to it.",
+            _(
+                "If your email address is linked to an account, a password reset link has been sent to it."
+            ),
         )
         return response
 
@@ -218,7 +216,9 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         if self.request.user.is_authenticated:
             messages.warning(
                 self.request,
-                "You're already logged in. You can change your password in your account settings.",
+                _(
+                    "You're already logged in. You can change your password in your account settings."
+                ),
             )
             return redirect("accounts:user_account")
         if "uidb64" not in kwargs or "token" not in kwargs:
@@ -252,7 +252,9 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         # Display the "Password reset unsuccessful" page.
         messages.error(
             self.request,
-            "The password reset link was invalid, possibly because it has already been used. Please request a new password reset.",
+            _(
+                "The password reset link is invalid, possibly because it has already been used. Please request a new password reset."
+            ),
         )
         return redirect("accounts:password_reset")
 
@@ -260,6 +262,8 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         response = super().form_valid(form)
         messages.success(
             self.request,
-            "Your password has been successfully reset. You can now log in with your new password.",
+            _(
+                "Your password has been successfully reset. You can now log in with your new password."
+            ),
         )
         return response

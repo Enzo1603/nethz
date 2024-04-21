@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-21 15:19+0000\n"
+"POT-Creation-Date: 2024-04-21 20:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,7 +132,7 @@ msgstr "Ein Benutzer mit diesem Benutzernamen existiert bereits."
 msgid "email address"
 msgstr "E-Mail-Adresse"
 
-#: accounts/views.py:45
+#: accounts/views.py:45 accounts/views.py:77
 msgid "You're already logged in."
 msgstr "Sie sind bereits angemeldet."
 
@@ -141,12 +141,93 @@ msgid ""
 "Account creation successful. A confirmation email has been sent to your "
 "email address."
 msgstr ""
-"Kontenerstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre "
-"E-Mail-Adresse gesendet."
+"Kontenerstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-"
+"Adresse gesendet."
 
 #: accounts/views.py:64
 msgid "You will not be able to log in until you have confirmed your email."
 msgstr "Sie können sich nicht anmelden, bis Sie Ihre E-Mail bestätigt haben."
+
+#: accounts/views.py:85
+msgid "You successfully logged in."
+msgstr "Sie haben sich erfolgreich angemeldet."
+
+#: accounts/views.py:91
+#, fuzzy
+#| msgid ""
+#| "Account creation successful. A confirmation email has been sent to your "
+#| "email address."
+msgid ""
+"Another confirmation email has been sent to your email address since you "
+"have not confirmed it yet."
+msgstr ""
+"Da Sie Ihre E-Mail-Adresse noch nicht bestätigt haben, wurde eine weitere "
+"Bestätigungs-E-Mail an Ihre E-Mail-Adresse gesendet."
+
+#: accounts/views.py:101
+msgid "You successfully logged out."
+msgstr "Sie haben sich erfolgreich abgemeldet."
+
+#: accounts/views.py:119
+msgid ""
+"Thank you for confirming your email. You can now log in to your account."
+msgstr ""
+"Vielen Dank für die Bestätigung Ihrer E-Mail. Sie können sich jetzt anmelden."
+
+#: accounts/views.py:126
+msgid ""
+"Invalid confirmation link. Please make sure you are using the correct link "
+"provided in the confirmation email."
+msgstr ""
+"Ungültiger Bestätigungslink. Stellen Sie sicher, dass Sie den korrekten Link "
+"aus der Bestätigungs-E-Mail verwenden."
+
+#: accounts/views.py:155
+msgid "Your password has been updated."
+msgstr "Ihr Passwort wurde aktualisiert."
+
+#: accounts/views.py:164
+msgid ""
+"Your email has been updated. A confirmation link has been sent to your new "
+"email address. Please confirm your email to log in."
+msgstr ""
+"Ihre E-Mail-Adresse wurde aktualisiert. Ein Bestätigungslink wurde an Ihre "
+"neue E-Mail-Adresse gesendet. Bitte bestätigen Sie Ihre E-Mail, um sich "
+"anzumelden."
+
+#: accounts/views.py:170
+msgid "Your data has been successfully updated."
+msgstr "Ihre Daten wurden erfolgreich aktualisiert."
+
+#: accounts/views.py:188 accounts/views.py:220
+msgid ""
+"You're already logged in. You can change your password in your account "
+"settings."
+msgstr ""
+"Sie sind bereits angemeldet. Sie können Ihr Passwort in Ihren "
+"Kontoeinstellungen ändern."
+
+#: accounts/views.py:199
+msgid ""
+"If your email address is linked to an account, a password reset link has "
+"been sent to it."
+msgstr ""
+"Wenn Ihre E-Mail-Adresse mit einem Konto verknüpft ist, wird ein Link zum "
+"Zurücksetzen des Passworts an Sie gesendet."
+
+#: accounts/views.py:256
+msgid ""
+"The password reset link is invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr "Der Link zum Zurücksetzen des Passworts ist ungültig, möglicherweise weil "
+"er bereits verwendet worden ist. Bitte fordern Sie ein neues Passwort zurück."
+
+#: accounts/views.py:266
+msgid ""
+"Your password has been successfully reset. You can now log in with your new "
+"password."
+msgstr "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit "
+"Ihrem neuen Passwort anmelden."
 
 #: lib/templatetags/macros.py:45
 msgid "Coming soon (or never)"
@@ -179,6 +260,10 @@ msgstr "Verschiedene Länderquizzes"
 #: main/views.py:29
 msgid "To the game modes"
 msgstr "Zu den Unterlagen"
+
+#: nethz_django/middleware.py:13
+msgid "You have to confirm your email address to log in."
+msgstr "Sie müssen Ihre E-Mail-Adresse bestätigen, um sich anzumelden."
 
 #: templates/accounts/login.html:24
 msgid "Don't have an account yet?"
