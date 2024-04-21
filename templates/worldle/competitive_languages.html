@@ -1,6 +1,8 @@
 {% extends "components/_base.html" %}
 
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
 {% load static %}
 {% load macros %}
 
@@ -199,7 +201,7 @@
         else if (userChoice === "D") { userChoice = choices["D"] }
         else { console.error("Invalid userChoice: " + userChoice) }
 
-        fetch("/worldle/languages/competitive/", {
+        fetch("/{{ LANGUAGE_CODE }}/worldle/languages/competitive/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -260,7 +262,7 @@
     }
 
     function updateLeaderboard() {
-        fetch('/worldle/leaderboards/languages_highscore/')
+        fetch('/{{ LANGUAGE_CODE }}/worldle/leaderboards/languages_highscore/')
             .then(response => response.json())
             .then(data => {
                 console.log(data)

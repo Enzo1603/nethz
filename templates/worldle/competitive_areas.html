@@ -1,6 +1,8 @@
 {% extends "components/_base.html" %}
 
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
 {% load static %}
 
 {% block style %}
@@ -170,7 +172,7 @@
     function sendChoice(userChoice) {
         let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
-        fetch('/worldle/areas/competitive/', {
+        fetch('/{{ LANGUAGE_CODE }}/worldle/areas/competitive/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -225,7 +227,7 @@
 
 
     function updateLeaderboard() {
-        fetch('/worldle/leaderboards/areas_highscore/')
+        fetch('/{{ LANGUAGE_CODE }}/worldle/leaderboards/areas_highscore/')
             .then(response => response.json())
             .then(data => {
                 console.log(data)
