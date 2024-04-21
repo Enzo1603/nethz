@@ -11,8 +11,8 @@ class MainViewsTest(TestCase):
         self.assertTemplateUsed(response, "main/home.html")
 
         # Add more assertions for the content of the response, if needed
-        self.assertContains(response, "Technische Mechanik 2024")
-        self.assertContains(response, "Informatik I 2024")
+        self.assertContains(response, "Engineering Mechanics 2024")
+        self.assertContains(response, "Computer Science I 2024")
         self.assertContains(response, "Worldle")
 
     def test_technische_mechanik_view(self):
