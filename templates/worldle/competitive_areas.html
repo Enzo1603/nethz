@@ -1,5 +1,6 @@
 {% extends "components/_base.html" %}
 
+{% load i18n %}
 {% load static %}
 
 {% block style %}
@@ -87,12 +88,12 @@
 
     </div>
 
-    <p class="text-center my-5">Is the area of the country on the right higher or lower?</p>
+    <p class="text-center my-5">{% trans "Is the area of the country on the right higher or lower?" %}</p>
 
     <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center text-center">
-        <button id="lower-button" type="button" class="btn btn-outline-danger my-1 mx-5 order-3 order-md-1">Lower <i class="bi bi-chevron-double-down ms-1"></i></button>
-        <span class="order-1 order-md-2 my-1">score: <span id="score"></span></span>
-        <button id="higher-button" type="button" class="btn btn-outline-success my-1 mx-5 order-2 order-md-3">Higher <i class="bi bi-chevron-double-up ms-1"></i></button>
+        <button id="lower-button" type="button" class="btn btn-outline-danger my-1 mx-5 order-3 order-md-1">{% trans "Lower" %} <i class="bi bi-chevron-double-down ms-1"></i></button>
+        <span class="order-1 order-md-2 my-1">{% trans "score" %}: <span id="score"></span></span>
+        <button id="higher-button" type="button" class="btn btn-outline-success my-1 mx-5 order-2 order-md-3">{% trans "Higher" %} <i class="bi bi-chevron-double-up ms-1"></i></button>
     </div>
 
     <br>
@@ -103,7 +104,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Leaderboard
+                    {% trans "Leaderboard" %}
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -114,7 +115,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Username</th>
+                                    <th scope="col">{% trans "Username" %}</th>
                                     <th scope="col">Highscore</th>
                                 </tr>
                             </thead>

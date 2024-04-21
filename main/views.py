@@ -2,21 +2,22 @@ from django.http import Http404
 from django.shortcuts import render
 from django.templatetags.static import static
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 
 # Create your views here.
 def home(request):
     tm_card = {
-        "title": "Technische Mechanik 2024",
-        "button_text": "Zu den Unterlagen",
+        "title": _("Engineering Mechanics 2024"),
+        "button_text": _("To the documents"),
         "image_path": static("images/technische_mechanik_6px.jpg"),
         "link": reverse("main:technische_mechanik", args=["HS24"]),
         "disable": False,
     }
 
     inf_card = {
-        "title": "Informatik I 2024",
-        "button_text": "Zu den Unterlagen",
+        "title": _("Computer Science I 2024"),
+        "button_text": _("To the documents"),
         "image_path": static("images/informatik1_3px.jpg"),
         "link": "#",
         "disable": True,
@@ -24,8 +25,8 @@ def home(request):
 
     worldle_card = {
         "title": "Worldle",
-        "description": "Verschiedene Länderquizzes",
-        "button_text": "Zu den Spielmodi",
+        "description": _("Various country quizzes"),
+        "button_text": _("To the game modes"),
         "image_path": static("images/Earth_2px.jpg"),
         "link": reverse("worldle:home"),
         "disable": False,

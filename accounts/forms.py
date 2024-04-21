@@ -7,7 +7,8 @@ from django.contrib.auth.forms import (
     SetPasswordForm,
 )
 from django.urls import reverse
-
+from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit, HTML
@@ -20,16 +21,16 @@ from .utils import PROFANITIES
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
-        label="Email",
-        help_text="We'll never share your email address with anyone else.",
+        label=_("Email Address"),
+        help_text=_("We'll never share your email address with anyone else."),
         required=True,
     )
 
     password1 = forms.CharField(
-        label="Password",
+        label=_("Password"),
         strip=False,
         widget=forms.PasswordInput,
-        help_text="Minimum length of 8 characters.",
+        help_text=_("Minimum length of 8 characters."),
     )
 
     class Meta(UserCreationForm):
@@ -40,7 +41,9 @@ class CustomUserCreationForm(UserCreationForm):
         username = self.cleaned_data.get("username")
         username_lower = username.lower()
         if any(word in username_lower for word in PROFANITIES):
-            raise forms.ValidationError("The username contains not allowed characters.")
+            raise forms.ValidationError(
+                _("The username contains not allowed characters.")
+            )
         return username
 
     def __init__(self, *args, **kwargs):
@@ -50,19 +53,19 @@ class CustomUserCreationForm(UserCreationForm):
             Div(
                 FloatingField(
                     "username",
-                    placeholder="Username",
+                    placeholder=_("Username"),
                     maxlength=16,
                     autofocus=True,
                 ),
-                FloatingField("email", placeholder="Email Address"),
-                FloatingField("password1", placeholder="Password", minlength=8),
-                FloatingField("password2", placeholder="Confirm Password"),
+                FloatingField("email", placeholder=_("Email Address")),
+                FloatingField("password1", placeholder=_("Password"), minlength=8),
+                FloatingField("password2", placeholder=_("Confirm Password")),
                 css_class="m-4",
             ),
             Div(
                 Submit(
                     "submit",
-                    "Sign up",
+                    _("Sign up"),
                     css_class="btn btn-primary m-4 mt-3",
                 ),
                 css_class="d-grid col-12",
@@ -76,14 +79,20 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                FloatingField("username", placeholder="Username"),
-                FloatingField("password", placeholder="Password"),
+                FloatingField("username", placeholder=_("Username")),
+                FloatingField("password", placeholder=_("Password")),
                 css_class="m-4",
             ),
             Div(
-                Submit("submit", "Login", css_class="btn btn-primary mx-4 mt-3 mb-2"),
+                Submit(
+                    "submit", _("Login"), css_class="btn btn-primary mx-4 mt-3 mb-2"
+                ),
                 HTML(
-                    f"<a href='{reverse('accounts:password_reset')}' class='btn btn-outline-danger mx-4 mt-2'>Forgot Password?</a>",
+                    format_html(
+                        "<a href='{}' class='btn btn-outline-danger mx-4 mt-2'>{}</a>",
+                        reverse("accounts:password_reset"),
+                        _("Forgot Password?"),
+                    ),
                 ),
                 css_class="d-grid col-12",
             ),
@@ -92,14 +101,14 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 class CustomUserChangeForm(UserChangeForm):
     password1 = forms.CharField(
-        label="Password",
+        label=_("Password"),
         strip=False,
         widget=forms.PasswordInput,
-        help_text="Minimum length of 8 characters.",
+        help_text=_("Minimum length of 8 characters."),
         required=False,
     )
     password2 = forms.CharField(
-        label="Confirm Password",
+        label=_("Confirm Password"),
         strip=False,
         widget=forms.PasswordInput,
         required=False,
@@ -120,7 +129,9 @@ class CustomUserChangeForm(UserChangeForm):
         username = self.cleaned_data.get("username")
         username_lower = username.lower()
         if any(word in username_lower for word in PROFANITIES):
-            raise forms.ValidationError("The username contains not allowed characters.")
+            raise forms.ValidationError(
+                _("The username contains not allowed characters.")
+            )
         return username
 
     def clean(self):
@@ -129,7 +140,7 @@ class CustomUserChangeForm(UserChangeForm):
         password2 = cleaned_data.get("password2")
 
         if password1 and password1 != password2:
-            raise forms.ValidationError("The two password entries do not match.")
+            raise forms.ValidationError(_("The two password entries do not match."))
 
         return cleaned_data
 
@@ -138,25 +149,53 @@ class CustomUserChangeForm(UserChangeForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                FloatingField(
-                    "username",
-                    placeholder="Username",
-                    maxlength=16,
+                Div(
+                    HTML(
+                        format_html(
+                            "<h4 class='mb-4'>{}</h4>", _("Username and Email Address")
+                        )
+                    ),
+                    FloatingField(
+                        "username",
+                        placeholder=_("Username"),
+                        maxlength=16,
+                    ),
+                    FloatingField("email", placeholder=_("Email Address")),
+                    css_class="m-4",
                 ),
-                FloatingField("email", placeholder="Email Address"),
-                FloatingField("first_name", placeholder="First Name"),
-                FloatingField("last_name", placeholder="Last Name"),
-                FloatingField("password1", placeholder="New Password", minlength=8),
-                FloatingField("password2", placeholder="Confirm New Password"),
-                css_class="m-4",
+                css_class="col-lg-6 col-md-8 mx-auto mb-5 p-1 rounded-3 bg-body-tertiary zoom",
+            ),
+            Div(
+                Div(
+                    HTML(
+                        format_html(
+                            "<h4 class='mb-4'>{}</h4>", _("First and Last name")
+                        )
+                    ),
+                    FloatingField("first_name", placeholder=_("First Name")),
+                    FloatingField("last_name", placeholder=_("Last Name")),
+                    css_class="m-4",
+                ),
+                css_class="col-lg-6 col-md-8 mx-auto mb-5 p-1 rounded-3 bg-body-tertiary zoom",
+            ),
+            Div(
+                Div(
+                    HTML(format_html("<h4 class='mb-4'>{}</h4>", _("Change Password"))),
+                    FloatingField(
+                        "password1", placeholder=_("New Password"), minlength=8
+                    ),
+                    FloatingField("password2", placeholder=_("Confirm New Password")),
+                    css_class="m-4",
+                ),
+                css_class="col-lg-6 col-md-8 mx-auto mb-5 p-1 rounded-3 bg-body-tertiary zoom",
             ),
             Div(
                 Submit(
                     "submit",
-                    "Update",
-                    css_class="btn btn-primary m-4 mt-3",
+                    _("Update"),
+                    css_class="btn btn-primary",
                 ),
-                css_class="d-grid col-12",
+                css_class="d-grid col-lg-6 col-md-8 mx-auto",
             ),
         )
 
@@ -167,13 +206,13 @@ class CustomPasswordResetForm(PasswordResetForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                FloatingField("email", placeholder="Email Address"),
+                FloatingField("email", placeholder=_("Email Address")),
                 css_class="m-4",
             ),
             Div(
                 Submit(
                     "submit",
-                    "Reset my password",
+                    _("Reset my password"),
                     css_class="btn btn-danger mx-4",
                 ),
                 css_class="d-grid col-12",
@@ -185,10 +224,10 @@ class CustomSetPasswordForm(SetPasswordForm):
     """Used in Password Reset Confirm View."""
 
     new_password1 = forms.CharField(
-        label="New Password",
+        label=_("New Password"),
         strip=False,
         widget=forms.PasswordInput,
-        help_text="Minimum length of 8 characters.",
+        help_text=_("Minimum length of 8 characters."),
     )
 
     def __init__(self, *args, **kwargs):
@@ -196,14 +235,16 @@ class CustomSetPasswordForm(SetPasswordForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                FloatingField("new_password1", placeholder="New Password", minlength=8),
-                FloatingField("new_password2", placeholder="New Password"),
+                FloatingField(
+                    "new_password1", placeholder=_("New Password"), minlength=8
+                ),
+                FloatingField("new_password2", placeholder=_("New Password")),
                 css_class="m-4",
             ),
             Div(
                 Submit(
                     "submit",
-                    "Change my password",
+                    _("Change my password"),
                     css_class="btn btn-primary mx-4 mb-4",
                 ),
                 css_class="d-grid col-12",

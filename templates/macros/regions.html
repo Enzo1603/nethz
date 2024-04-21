@@ -1,13 +1,15 @@
+{% load i18n %}
+
 <!-- Region Select -->
 {# <!-- <label for="regionSelect">Choose a region:</label> --> #}
 <select class="form-select" id="regionSelect" name="regionSelect" onchange="changeRegion()">
-    <option value="worldwide">Worldwide</option>
-    <option value="africa">Africa</option>
-    <option value="americas">Americas</option>
-    <option value="antarctic">Antarctic</option>
-    <option value="asia">Asia</option>
-    <option value="europe">Europe</option>
-    <option value="oceania">Oceania</option>
+    <option value="worldwide">{% trans "Worldwide" %}</option>
+    <option value="africa">{% trans "Africa" %}</option>
+    <option value="americas">{% trans "Americas" %}</option>
+    <option value="antarctic">{% trans "Antarctic" %}</option>
+    <option value="asia">{% trans "Asia" %}</option>
+    <option value="europe">{% trans "Europe" %}</option>
+    <option value="oceania">{% trans "Oceania" %}</option>
 </select>
 
 <script>

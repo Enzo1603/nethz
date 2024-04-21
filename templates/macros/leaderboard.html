@@ -1,15 +1,17 @@
+{% load i18n %}
+
 <!-- {{ Title }} Leaderboard -->
 <div class="col-md-6 mb-5">
     <div class="table-responsive border border-3 border-primary rounded-3">
         <table id="{{Title}}" class="table mb-0">
             <div class="d-flex justify-content-between bg-primary text-white p-3 mb-0">
                 <h3>{{ Title }}</h3>
-                <a class="btn btn-light" href="{{ link }}">Go to Game</a>
+                <a class="btn btn-light" href="{{ link }}">{% trans "Go to Game" %}</a>
             </div>
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">{% trans "Username" %}</th>
                     <th scope="col">Highscore</th>
                 </tr>
             </thead>

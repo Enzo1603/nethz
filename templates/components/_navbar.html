@@ -1,3 +1,6 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fs-5 fixed-top bg-body-tertiary mb-5" data-bs-theme="dark">
     <div class="container-fluid">
@@ -19,7 +22,7 @@
 
                 <li class="nav-item ms-3">
                     <a class="nav-link" href="{% url 'main:technische_mechanik' 'HS24' %}">
-                        Technische Mechanik
+                        {% trans "Engineering Mechanics" %}
                     </a>
                 </li>
 
@@ -32,31 +35,44 @@
             </ul>
 
             <!-- Rechtsbündige Buttons -->
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto  align-items-center">
                 {% if not user.is_authenticated %}
+
                 <li class="nav-item">
-                    <a class="btn btn-primary mx-2 my-1" href="{% url 'accounts:login' %}">Login</a>
-                    <a class="btn btn-primary mx-2 my-1" href="{% url 'accounts:signup' %}">Sign Up</a>
+                    <a class="btn btn-primary mx-2 my-1" href="{% url 'accounts:login' %}">
+                        {% trans "Login" %}
+                    </a>
+                    <a class="btn btn-primary mx-2 my-1" href="{% url 'accounts:signup' %}">
+                        {% trans "Sign Up" %}
+                    </a>
                 </li>
 
                 {% else %}
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ user.username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{% url 'accounts:user_account' %}">My Account</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:user_account' %}">{% trans "My Account" %}</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-in-left"></i> {% trans "Logout" %}</a></li>
                     </ul>
                 </li>
 
-
-
                 {% endif %}
+
+
+                <li class="nav-item ms-3 my-2">
+                    <div class="btn-group btn-group-sm" style="margin-top: auto;">
+                        <a href="{% url 'set_language' %}?next=/de{{ request.path|slice:'3:' }}&language=de" class="btn btn-{% if LANGUAGE_CODE != 'de'  %}outline-{% endif %}light">DE</a>
+                        <a href="{% url 'set_language' %}?next=/en{{ request.path|slice:'3:' }}&language=en" class="btn btn-{% if LANGUAGE_CODE != 'en'  %}outline-{% endif %}light">EN</a>
+                    </div>
                 </li>
+
+
             </ul>
 
         </div>

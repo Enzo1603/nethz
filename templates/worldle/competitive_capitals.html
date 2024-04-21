@@ -1,5 +1,6 @@
 {% extends "components/_base.html" %}
 
+{% load i18n %}
 {% load static %}
 {% load macros %}
 
@@ -80,7 +81,7 @@
         <br>
         <br>
 
-        <span class="order-1 order-md-2 my-1">score: <span id="score"></span></span>
+        <span class="order-1 order-md-2 my-1">{% trans "score" %}: <span id="score"></span></span>
 
         <br>
         <br>
@@ -127,7 +128,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Leaderboard
+                    {% trans "Leaderboard" %}
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

@@ -1,10 +1,12 @@
 {% extends "components/_base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 
 <!-- Title -->
 <div>
-    <h5>Technische Mechanik HS2024</h5>
+    <h5>{% trans "Engineering Mechanics HS2024" %}</h5>
 </div>
 
 <!-- Polybox -->
@@ -18,10 +20,10 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Woche</th>
-                <th scope="col">Übungsunterlagen</th>
-                <th scope="col">Serie</th>
-                <th scope="col">Lösungen</th>
+                <th scope="col">{% trans "Week" %}</th>
+                <th scope="col">{% trans "Exercise Materials" %}</th>
+                <th scope="col">{% trans "Exercises" %}</th>
+                <th scope="col">{% trans "Solutions" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,13 +31,13 @@
                 <th scope="row">1</th>
                 <td>
                     <a class="btn btn-outline-primary">
-                        <i class="bi bi-download me-md-2"></i>Übungsunterlagen&nbsp;1</a>
+                        <i class="bi bi-download me-md-2"></i>{% trans "Exercise Material" %}&nbsp;1</a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-primary"><i class="bi bi-download me-md-2"></i>Serie&nbsp;1</a>
+                    <a class="btn btn-outline-primary"><i class="bi bi-download me-md-2"></i>{% trans "Exercise" %}&nbsp;1</a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-primary"><i class="bi bi-download me-md-2"></i>Lösungen&nbsp;1</a>
+                    <a class="btn btn-outline-primary"><i class="bi bi-download me-md-2"></i>{% trans "Solution" %}&nbsp;1</a>
                 </td>
             </tr>
 

@@ -1,5 +1,6 @@
 {% extends "components/_base.html" %}
 
+{% load i18n %}
 {% load static %}
 
 {% block style %}
@@ -10,9 +11,9 @@
 
 <div class="container bg-container bg-img">
     <div class="container col-lg-8 col-md-10 py-3 mb-4 text-center">
-        <h1 class="text-light">Oops! You ran out of oxygen.</h1>
+        <h1 class="text-light">{% trans "Oops! You ran out of oxygen." %}</h1>
         <br>
-        <h3 class="text-light">The page you're looking for is now beyond your reach...</h3>
+        <h3 class="text-light">{% trans "The page you're looking for is now beyond your reach..." %}</h3>
         <br>
         <h1 class="float text-light">{% block error_code %}{% endblock %}</h1>
         <br>
@@ -21,7 +22,7 @@
         {% endif %}
         <br>
         <br>
-        <a href="{% url 'main:home' %}" class="btn btn-light btn-lg me-4 mb-4">Return to Home Page</a>
+        <a href="{% url 'main:home' %}" class="btn btn-light btn-lg me-4 mb-4">{% trans "Return to Home Page" %}</a>
 
         <img id="astronaut-img" src="{% static 'images/errors/astronaut.png' %}" alt="astronaut picture">
     </div>

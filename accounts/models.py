@@ -1,28 +1,31 @@
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 from django.core import validators
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomUser(AbstractUser):
     username = models.CharField(
-        "username",
+        _("username"),
         max_length=16,
         unique=True,
-        help_text="Choose your unique username.",
+        help_text=_("Choose your unique username."),
         validators=[
             validators.RegexValidator(
                 regex=r"^[\w.@+-]+\Z",
-                message="Enter a valid username. This value may contain only letters, "
-                "numbers, and @/./+/-/_ characters.",
+                message=_(
+                    "Enter a valid username. This username may contain only letters, "
+                    "numbers, and @/./+/-/_ characters."
+                ),
                 flags=0,
             ),
         ],
         error_messages={
-            "unique": "A user with that username already exists.",
+            "unique": _("A user with that username already exists."),
         },
     )
 
-    email = models.EmailField("email address", unique=True, blank=False, null=False)
+    email = models.EmailField(_("email address"), unique=True, blank=False, null=False)
     is_email_verified = models.BooleanField(default=False, null=False)
 
     USERNAME_FIELD = "email"

@@ -90,6 +90,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -161,13 +162,17 @@ LOGOUT_REDIRECT_URL = "main:home"
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
+LANGUAGE_CODE = "en"
 USE_I18N = True
+LANGUAGES = [
+    ("en", "English (US)"),
+    ("de", "German (CH)"),
+]
+LOCALE_PATHS = [BASE_DIR / "locale"]
+
 
 USE_TZ = True
+TIME_ZONE = "UTC"
 
 
 # Static files (CSS, JavaScript, Images)

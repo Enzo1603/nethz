@@ -1,5 +1,6 @@
 {% extends "components/_base.html" %}
 
+{% load i18n %}
 {% load static %}
 {% load macros %}
 
@@ -9,12 +10,18 @@
 
 
 {% block content %}
+{% get_current_language as LANGUAGE_CODE %}
 
-<h1 class="mb-4">Spielmodi</h1>
+{% if LANGUAGE_CODE != "en" %}
+{% trans "Please note that the games themselves will continue to be in English." as message_txt %}
+{% template_message "info" message_txt True %}
+{% endif %}
+
+<h1 class="mb-4">{% trans "Game Modes" %}</h1>
 
 
 <div class="row">
-    <h4>Practice (No account required)</h4>
+    <h4>{% trans "Practice (No account required)" %}</h4>
     <hr>
 
     {% card capitals_card %}
@@ -24,10 +31,10 @@
 
 
 <div class="row">
-    <h4>Competitive (Account required)</h4>
+    <h4>{% trans "Competitive (Account required)" %}</h4>
     <hr>
     <div class="d-grid gap-2 mb-3">
-        <a class="btn btn-outline-primary" href="{% url 'worldle:leaderboards' %}"><i class="bi bi-trophy pe-2"></i>Leaderboards</a>
+        <a class="btn btn-outline-primary" href="{% url 'worldle:leaderboards' %}"><i class="bi bi-trophy pe-2"></i>{% trans "Leaderboards" %}</a>
     </div>
 
     {% card competitive_areas_card %}

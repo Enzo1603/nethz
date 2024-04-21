@@ -1,5 +1,6 @@
 {% extends "components/_base.html" %}
 
+{% load i18n %}
 {% load static %}
 {% load macros %}
 
@@ -32,9 +33,9 @@
         <br>
         <br>
 
-        <input class="form-control" type="text" id="userAnswer" placeholder="Enter the capital(s)">
+        <input class="form-control" type="text" id="userAnswer" placeholder="{% trans 'Enter the capital(s)' %}">
         <br>
-        <button class="btn btn-primary" onclick="checkAnswer(userAnswerElement, correctAnswer)">Check Answer</button>
+        <button class="btn btn-primary" onclick="checkAnswer(userAnswerElement, correctAnswer)">{% trans "Check Answer" %}</button>
 
         <br>
         <br>
@@ -45,7 +46,7 @@
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Show me the solution
+                        {% trans "Show me the solution" %}
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
