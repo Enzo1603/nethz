@@ -157,10 +157,6 @@ msgid "You successfully logged in."
 msgstr "Sie haben sich erfolgreich angemeldet."
 
 #: accounts/views.py:90
-#, fuzzy
-#| msgid ""
-#| "Account creation successful. A confirmation email has been sent to your "
-#| "email address."
 msgid ""
 "Another confirmation email has been sent to your email address since you "
 "have not confirmed it yet."
