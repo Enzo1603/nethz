@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-21 14:52+0200\n"
+"POT-Creation-Date: 2024-04-21 15:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr "Der Benutzername enthält nicht erlaubte Zeichen."
 
 #: accounts/forms.py:56 accounts/forms.py:82 accounts/forms.py:160
 #: templates/macros/leaderboard.html:14
-#: templates/worldle/competitive_areas.html:118
+#: templates/worldle/competitive_areas.html:120
 msgid "Username"
 msgstr "Benutzername"
 
@@ -131,6 +131,22 @@ msgstr "Ein Benutzer mit diesem Benutzernamen existiert bereits."
 #: accounts/models.py:28
 msgid "email address"
 msgstr "E-Mail-Adresse"
+
+#: accounts/views.py:45
+msgid "You're already logged in."
+msgstr "Sie sind bereits angemeldet."
+
+#: accounts/views.py:59
+msgid ""
+"Account creation successful. A confirmation email has been sent to your "
+"email address."
+msgstr ""
+"Kontenerstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre "
+"E-Mail-Adresse gesendet."
+
+#: accounts/views.py:64
+msgid "You will not be able to log in until you have confirmed your email."
+msgstr "Sie können sich nicht anmelden, bis Sie Ihre E-Mail bestätigt haben."
 
 #: lib/templatetags/macros.py:45
 msgid "Coming soon (or never)"
@@ -280,33 +296,33 @@ msgstr "Antwort überprüfen"
 msgid "Show me the solution"
 msgstr "Zeige mir die Lösung"
 
-#: templates/worldle/competitive_areas.html:91
+#: templates/worldle/competitive_areas.html:93
 msgid "Is the area of the country on the right higher or lower?"
 msgstr "Ist die Fläche des Landes auf der rechten Seite grösser oder kleiner?"
 
-#: templates/worldle/competitive_areas.html:94
+#: templates/worldle/competitive_areas.html:96
 msgid "Lower"
 msgstr "Kleiner"
 
-#: templates/worldle/competitive_areas.html:95
-#: templates/worldle/competitive_capitals.html:84
-#: templates/worldle/competitive_currencies.html:84
-#: templates/worldle/competitive_languages.html:84
+#: templates/worldle/competitive_areas.html:97
+#: templates/worldle/competitive_capitals.html:86
+#: templates/worldle/competitive_currencies.html:86
+#: templates/worldle/competitive_languages.html:86
 msgid "score"
 msgstr "Score"
 
-#: templates/worldle/competitive_areas.html:96
+#: templates/worldle/competitive_areas.html:98
 msgid "Higher"
 msgstr "Grösser"
 
-#: templates/worldle/competitive_areas.html:107
-#: templates/worldle/competitive_capitals.html:131
-#: templates/worldle/competitive_currencies.html:135
-#: templates/worldle/competitive_languages.html:131
+#: templates/worldle/competitive_areas.html:109
+#: templates/worldle/competitive_capitals.html:133
+#: templates/worldle/competitive_currencies.html:137
+#: templates/worldle/competitive_languages.html:133
 msgid "Leaderboard"
 msgstr "Rangliste"
 
-#: templates/worldle/competitive_currencies.html:127
+#: templates/worldle/competitive_currencies.html:129
 msgid ""
 "To make this game more challenging, hints to the country in the currency's "
 "name are replaced by an asterisk."
@@ -316,7 +332,8 @@ msgstr ""
 
 #: templates/worldle/home.html:16
 msgid "Please note that the games themselves will continue to be in English."
-msgstr "Bitte beachten Sie, dass die Spiele selbst weiterhin auf Englisch sind."
+msgstr ""
+"Bitte beachten Sie, dass die Spiele selbst weiterhin auf Englisch sind."
 
 #: templates/worldle/home.html:20
 msgid "Game Modes"

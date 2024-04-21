@@ -15,6 +15,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
+from django.utils.translation import gettext_lazy as _
 from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.decorators.debug import sensitive_post_parameters
@@ -41,7 +42,7 @@ class SignUpView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            messages.warning(request, "You're already logged in.")
+            messages.warning(request, _("You're already logged in."))
             return redirect(self.success_url)
         return super().dispatch(request, *args, **kwargs)
 
@@ -54,11 +55,13 @@ class SignUpView(CreateView):
 
         messages.success(
             self.request,
-            "Account creation successful. A confirmation email has been sent to your email address.",
+            _(
+                "Account creation successful. A confirmation email has been sent to your email address."
+            ),
         )
         messages.warning(
             self.request,
-            "You will not be able to log in until you have confirmed your email.",
+            _("You will not be able to log in until you have confirmed your email."),
         )
 
         return redirect("main:home")
@@ -71,7 +74,7 @@ class CustomLoginView(LoginView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            messages.warning(request, "You're already logged in.")
+            messages.warning(request, _("You're already logged in."))
             return redirect(self.success_url)
         return super().dispatch(request, *args, **kwargs)
 
@@ -80,12 +83,14 @@ class CustomLoginView(LoginView):
         if user.is_email_verified:
             login(self.request, user)
             # TODO: internationalize django messages
-            messages.success(self.request, "You successfully logged in.")
+            messages.success(self.request, _("You successfully logged in."))
             return redirect(self.success_url)
 
         messages.warning(
             self.request,
-            "Another confirmation email has been sent to your email address since you have not confirmed it yet.",
+            _(
+                "Another confirmation email has been sent to your email address since you have not confirmed it yet."
+            ),
         )
         # Resend activation email
         send_verification_email(user, self.request)
@@ -94,7 +99,7 @@ class CustomLoginView(LoginView):
 
 def logout_view(request):
     logout(request)
-    messages.success(request, "You successfully logged out.")
+    messages.success(request, _("You successfully logged out."))
     return redirect("main:home")
 
 
@@ -111,12 +116,16 @@ class ActivateAccountView(View):
 
             messages.success(
                 request,
-                "Thank you for confirming your email. You can now log in to your account.",
+                _(
+                    "Thank you for confirming your email. You can now log in to your account."
+                ),
             )
             return redirect("accounts:login")
         else:
             raise Http404(
-                "Invalid confirmation link. Please make sure you are using the correct link provided in the confirmation email."
+                _(
+                    "Invalid confirmation link. Please make sure you are using the correct link provided in the confirmation email."
+                )
             )
 
 
