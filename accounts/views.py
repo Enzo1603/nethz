@@ -79,6 +79,7 @@ class CustomLoginView(LoginView):
         user = form.get_user()
         if user.is_email_verified:
             login(self.request, user)
+            # TODO: internationalize django messages
             messages.success(self.request, "You successfully logged in.")
             return redirect(self.success_url)
 
