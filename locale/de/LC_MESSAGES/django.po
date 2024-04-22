@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-21 21:11+0000\n"
+"POT-Creation-Date: 2024-04-22 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "Wir werden Ihre E-Mail-Adresse niemals mit anderen teilen."
 #: accounts/forms.py:30 accounts/forms.py:61 accounts/forms.py:83
 #: accounts/forms.py:104
 msgid "Password"
-msgstr "Password"
+msgstr "Passwort"
 
 #: accounts/forms.py:33 accounts/forms.py:107 accounts/forms.py:230
 msgid "Minimum length of 8 characters."
@@ -59,13 +59,14 @@ msgid "Sign up"
 msgstr "Registrieren"
 
 #: accounts/forms.py:88 templates/accounts/login.html:14
+#: templates/accounts/password_reset/password_reset_form.html:25
 #: templates/accounts/signup.html:28 templates/components/_navbar.html:43
 msgid "Login"
 msgstr "Anmelden"
 
 #: accounts/forms.py:94
 msgid "Forgot Password?"
-msgstr "Password vergessen?"
+msgstr "Passwort vergessen?"
 
 #: accounts/forms.py:143
 msgid "The two password entries do not match."
@@ -105,6 +106,7 @@ msgid "Update"
 msgstr "Aktualisieren"
 
 #: accounts/forms.py:215
+#: templates/accounts/password_reset/password_reset_email.html:39
 msgid "Reset my password"
 msgstr "Mein Passwort zurücksetzen"
 
@@ -271,6 +273,45 @@ msgstr "Sie müssen Ihre E-Mail-Adresse bestätigen, um sich anzumelden."
 msgid "Don't have an account yet?"
 msgstr "Noch kein Konto?"
 
+#: templates/accounts/password_reset/password_reset_confirm.html:11
+#: templates/accounts/password_reset/password_reset_email.html:24
+#: templates/accounts/password_reset/password_reset_form.html:12
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: templates/accounts/password_reset/password_reset_email.html:32
+#: templates/accounts/verification_email.html:32
+#: templates/accounts/verification_email.txt:3
+msgid "Hello"
+msgstr "Hallo"
+
+#: templates/accounts/password_reset/password_reset_email.html:34
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at"
+msgstr ""
+"Sie erhalten diese E-Mail, weil Sie eine Passwortzurücksetzung für Ihr Benutzerkonto angefordert haben bei"
+
+#: templates/accounts/password_reset/password_reset_email.html:36
+msgid "Please go to the following page and choose a new password"
+msgstr "Bitte gehen Sie zur folgenden Seite und setzen Sie ein neues Passwort"
+
+#: templates/accounts/password_reset/password_reset_email.html:44
+msgid ""
+"If you are having trouble with the button, you can also reset your password "
+"by copying and pasting the following link into your browser"
+msgstr ""
+"Wenn Sie Probleme mit dem Button haben, können Sie Ihr Passwort auch "
+"zurücksetzen, indem Sie den folgenden Link in Ihren Browser kopieren"
+
+#: templates/accounts/password_reset/password_reset_form.html:22
+msgid "Accidentally here?"
+msgstr "Aus Versehen hier?"
+
+#: templates/accounts/password_reset/password_reset_subject.txt:3
+msgid "Password reset request for your account"
+msgstr "Passwort zurücksetzen"
+
 #: templates/accounts/signup.html:15 templates/components/_navbar.html:46
 msgid "Sign Up"
 msgstr "Registrieren"
@@ -286,11 +327,6 @@ msgstr "Mein Konto"
 #: templates/accounts/verification_email.html:24
 msgid "Email Confirmation"
 msgstr "E-Mail-Bestätigung"
-
-#: templates/accounts/verification_email.html:32
-#: templates/accounts/verification_email.txt:3
-msgid "Hello"
-msgstr "Hallo"
 
 #: templates/accounts/verification_email.html:34
 #: templates/accounts/verification_email.txt:5
