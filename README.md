@@ -9,16 +9,28 @@ This section outlines the environment variables used in this project. You can cr
 - `ENVIRONMENT`: (optional) Specifies the mode in which the application runs. It can be set to `development`, `testing`, or `production`. The default value is `production`.
   - In `development` mode:
     - `DEBUG` is activated, allowing error details to be displayed.
-    - `ALLOWED_HOSTS` includes `127.0.0.1` and `localhost`.
+    - `ALLOWED_HOSTS` is set to the wildcard operator `*` (any domain is allowed).
     - `STATIC_URL` is set to `"static/"`.
   - In `testing` mode:
     - `DEBUG` is set to `false` to facilitate the testing of error pages and other non-development scenarios. Therefore you can simulate your production mode inside your development environment.
-    - `ALLOWED_HOSTS` includes `localhost` and `127.0.0.1`.
+    - `ALLOWED_HOSTS` is set to the wildcard operator `*` (any domain is allowed).
     - `STATIC_URL` is set to `"assets/"`. You therefore need to run `python manage.py collectstatic` (already done for you in the docker image).
   - In `production` mode:
     - `DEBUG` is set to `false` for security and performance.
     - `ALLOWED_HOSTS` is set to your `PRODUCTION_DOMAINS`.
     - `STATIC_URL` is `"assets/"`. You therefore need to run `python manage.py collectstatic` (already done for you in the docker image).
+
+- `EMAIL_HOST`: (**required**) The host of your email server. For example, for Gmail it would be `smtp.gmail.com`.
+
+- `EMAIL_PORT`: (**required**) The port to use for the SMTP server defined in `EMAIL_HOST`.
+
+- `EMAIL_HOST_USER`: (**required**) The username to use for the SMTP server.
+
+- `EMAIL_HOST_PASSWORD`: (**required**) The password to use for the SMTP server.
+
+- `EMAIL_USE_TLS`: (optional) Whether to use a secure TLS connection when connecting to the SMTP server. If not provided, it defaults to `True`.
+
+- `DEFAULT_FROM_EMAIL`: (**required**) The default email address to use for various automated correspondence from the site managers.
 
 # Build Docker Container
 
@@ -34,10 +46,19 @@ To run your docker container in the `production` environment, you need to specif
 
 To run your docker container in the `testing` or `development` environment, you do not need to set a production domain.
 
-Here you need to provide your `SECRET_KEY`. Otherwise your container will crash immediately due to the missing secret key (see the logs of your docker container).
+Here you need to provide your `SECRET_KEY`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`,`EMAIL_HOST_PASSWORD`, and`DEFAULT_FROM_EMAIL`. Otherwise your container will crash immediately due to the missing secret key (see the logs of your docker container).
 
 To make the database persistent you need to specify a volume.
 
 ```bash
-sudo docker run -dit -p 6000:80 -e ENVIRONMENT=environment -e SECRET_KEY=secret_key -v /host/path/to/container_volume/db:/app/db --name container_name image_name
+sudo docker run -dit -p 6000:80 \ 
+-e ENVIRONMENT=environment \
+-e SECRET_KEY=secret_key \
+-e EMAIL_HOST=email_host \
+-e EMAIL_PORT=email_port \
+-e EMAIL_HOST_USER=email_host_user \
+-e EMAIL_HOST_PASSWORD=email_host_password \
+-e DEFAULT_FROM_EMAIL=default_from_email \
+-v /host/path/to/container_volume/db:/app/db \
+--name container_name image_name
 ```
