@@ -33,6 +33,11 @@ RUN poetry config virtualenvs.create false && \
 
 # Otherwise Django will throw an ImproperlyConfigured Exception
 ARG PRODUCTION_DOMAINS="dummy.domain.com,dummy.domain2.com"
+ARG EMAIL_HOST="dummy-email-host"
+ARG EMAIL_PORT="dummy-email-port"
+ARG EMAIL_HOST_USER="dummy-email-host-user"
+ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
+ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
 # Otherwise 'python manage.py collectstatic' will throw an error (not saved to the final image)
 ARG SECRET_KEY="dummy-secret-key"
 # Otherwise the secret key would be saved to the image (not desired)
