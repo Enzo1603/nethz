@@ -46,7 +46,7 @@ To run your docker container in the `production` environment, you need to specif
 
 To run your docker container in the `testing` or `development` environment, you do not need to set a production domain.
 
-Here you need to provide your `SECRET_KEY`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`,`EMAIL_HOST_PASSWORD`, and`DEFAULT_FROM_EMAIL`. Otherwise your container will crash immediately due to the missing secret key (see the logs of your docker container).
+Here you need to provide your `SECRET_KEY`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`,`EMAIL_HOST_PASSWORD`, and`DEFAULT_FROM_EMAIL`. Otherwise your container will crash immediately due to the missing environment variables (see the logs of your docker container).
 
 To make the database persistent you need to specify a volume.
 
