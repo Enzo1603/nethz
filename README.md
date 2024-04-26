@@ -51,7 +51,7 @@ Here you need to provide your `SECRET_KEY`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_H
 To make the database persistent you need to specify a volume.
 
 ```bash
-sudo docker run -dit -p 6000:80 \ 
+sudo docker run -dit -p 5000:80 \ 
 -e ENVIRONMENT=environment \
 -e SECRET_KEY=secret_key \
 -e EMAIL_HOST=email_host \
@@ -59,6 +59,6 @@ sudo docker run -dit -p 6000:80 \
 -e EMAIL_HOST_USER=email_host_user \
 -e EMAIL_HOST_PASSWORD=email_host_password \
 -e DEFAULT_FROM_EMAIL=default_from_email \
--v /host/path/to/container_volume/db:/app/db \
+-v /host/path/to/container_volume/db:/app/nethz_django/db \
 --name container_name image_name
 ```

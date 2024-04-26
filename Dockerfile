@@ -34,7 +34,7 @@ RUN poetry config virtualenvs.create false && \
 # Otherwise Django will throw an ImproperlyConfigured Exception
 ARG PRODUCTION_DOMAINS="dummy.domain.com,dummy.domain2.com"
 ARG EMAIL_HOST="dummy-email-host"
-ARG EMAIL_PORT="dummy-email-port"
+ARG EMAIL_PORT="999"
 ARG EMAIL_HOST_USER="dummy-email-host-user"
 ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
 ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
@@ -45,6 +45,10 @@ ARG SECRET_KEY="dummy-secret-key"
 
 # Sammeln von statischen Dateien
 RUN python manage.py collectstatic --noinput
+
+# Compile messages for translation
+RUN apk add --update --no-cache gettext
+RUN python manage.py compilemessages
 
 # Ausführen von Django-spezifischen Befehlen wie z.B. das Migrieren der Datenbank
 # RUN python manage.py migrate
