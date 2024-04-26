@@ -37,7 +37,7 @@ This section outlines the environment variables used in this project. You can cr
 ## Build Docker Image
 
 ```bash
-sudo docker build -t image_name /path/to/nethz_django
+sudo docker build -t image_name /path/to/nethz_django_root_project_folder
 ```
 
 ## Run Docker Container
@@ -59,6 +59,6 @@ sudo docker run -dit -p 5000:80 \
 -e EMAIL_HOST_USER=email_host_user \
 -e EMAIL_HOST_PASSWORD=email_host_password \
 -e DEFAULT_FROM_EMAIL=default_from_email \
--v /host/path/to/container_volume/db:/app/nethz_django/db \
+-v /host/path/to/container_volume/db:/app/db \
 --name container_name image_name
 ```
