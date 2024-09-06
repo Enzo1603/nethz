@@ -4,7 +4,7 @@ from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
-from .models import ExerciseSession, WeekEntry
+from .models import ExerciseSession
 
 
 def home(request):
