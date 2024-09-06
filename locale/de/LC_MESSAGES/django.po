@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-22 08:43+0000\n"
+"POT-Creation-Date: 2024-09-06 18:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,8 +41,8 @@ msgid "Minimum length of 8 characters."
 msgstr "Mindestlänge von 8 Zeichen."
 
 #: accounts/forms.py:45 accounts/forms.py:133
-msgid "The username contains not allowed characters."
-msgstr "Der Benutzername enthält nicht erlaubte Zeichen."
+msgid "The username contains not allowed characters or expressions."
+msgstr "Der Benutzername enthält nicht erlaubte Zeichen oder Ausdrücke."
 
 #: accounts/forms.py:56 accounts/forms.py:82 accounts/forms.py:160
 #: templates/macros/leaderboard.html:14
@@ -147,7 +147,7 @@ msgid ""
 "Account creation successful. A confirmation email has been sent to your "
 "email address."
 msgstr ""
-"Kontenerstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-"
+"Konto-Erstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-"
 "Adresse gesendet."
 
 #: accounts/views.py:63
@@ -273,7 +273,7 @@ msgstr "Sie müssen Ihre E-Mail-Adresse bestätigen, um sich anzumelden."
 msgid "Don't have an account yet?"
 msgstr "Noch kein Konto?"
 
-#: templates/accounts/password_reset/password_reset_confirm.html:11
+#: templates/accounts/password_reset/password_reset_confirm.html:12
 #: templates/accounts/password_reset/password_reset_email.html:24
 #: templates/accounts/password_reset/password_reset_form.html:12
 msgid "Password reset"
@@ -290,7 +290,8 @@ msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at"
 msgstr ""
-"Sie erhalten diese E-Mail, weil Sie eine Passwortzurücksetzung für Ihr Benutzerkonto angefordert haben bei"
+"Sie erhalten diese E-Mail, weil Sie eine Passwortzurücksetzung für Ihr "
+"Benutzerkonto angefordert haben bei"
 
 #: templates/accounts/password_reset/password_reset_email.html:36
 msgid "Please go to the following page and choose a new password"
@@ -528,6 +529,9 @@ msgstr "Higher Lower mit Landesflächen"
 #: worldle/cards.py:45
 msgid "Guess the currency"
 msgstr "Errate die Währung"
+
+#~ msgid "The username contains not allowed characters."
+#~ msgstr "Der Benutzername enthält nicht erlaubte Zeichen."
 
 #~ msgid "Email"
 #~ msgstr "E-Mail"

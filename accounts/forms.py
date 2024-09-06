@@ -42,7 +42,7 @@ class CustomUserCreationForm(UserCreationForm):
         username_lower = username.lower()
         if any(word in username_lower for word in PROFANITIES):
             raise forms.ValidationError(
-                _("The username contains not allowed characters.")
+                _("The username contains not allowed characters or expressions.")
             )
         return username
 
@@ -130,7 +130,7 @@ class CustomUserChangeForm(UserChangeForm):
         username_lower = username.lower()
         if any(word in username_lower for word in PROFANITIES):
             raise forms.ValidationError(
-                _("The username contains not allowed characters.")
+                _("The username contains not allowed characters or expressions.")
             )
         return username
 
