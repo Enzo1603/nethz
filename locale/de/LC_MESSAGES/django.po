@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-06 18:25+0000\n"
+"POT-Creation-Date: 2024-09-06 21:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,23 +245,99 @@ msgstr "hier gibt es nichts zu sehen"
 msgid "Go away"
 msgstr "Geh weg"
 
-#: main/views.py:10
+#: main/models.py:8
+msgid "Short name for the exercise session"
+msgstr "Kurzname für die Übungsstunde"
+
+#: main/models.py:9
+msgid "Short name for the exercise session (e.g. TM_HS24)."
+msgstr "Kurzname für die Übungsstunde (z. B. TM_HS24)."
+
+#: main/models.py:14
+msgid "Name of the exercise session"
+msgstr "Name der Übungsstunde"
+
+#: main/models.py:15
+msgid "Name of the exercise session (e.g. Engineering Mechanics HS24)."
+msgstr "Name der Übungsstunde (z. B. Technische Mechanik HS24)."
+
+#: main/models.py:19 main/models.py:34
+msgid "Exercise Session"
+msgstr "Übungsstunde"
+
+#: main/models.py:20
+msgid "Exercise Sessions"
+msgstr "Übungsstunden"
+
+#: main/models.py:35
+msgid "The exercise session for this week entry belongs to."
+msgstr "Die Übungsstunde für diesen Wochen-Eintrag gehört dazu."
+
+#: main/models.py:39
+msgid "Week Number"
+msgstr "Wochennummer"
+
+#: main/models.py:40
+msgid "The week number for this entry."
+msgstr "Die Wochennummer für diesen Eintrag."
+
+#: main/models.py:46
+msgid "Link to the exercise materials"
+msgstr "Link zu den Übungsunterlagen"
+
+#: main/models.py:47
+msgid "Link to the exercise materials for the week."
+msgstr "Link zu den Übungsunterlagen für die Woche."
+
+#: main/models.py:54
+msgid "Link to the exercise"
+msgstr "Link zur Serie"
+
+#: main/models.py:55
+msgid "Link to the exercise for the week."
+msgstr "Link zur Serie für die Woche."
+
+#: main/models.py:62
+msgid "Link to the solutions"
+msgstr "Link zu den Lösungen"
+
+#: main/models.py:63
+msgid "Link to the solutions for the week."
+msgstr "Link zu den Lösungen für die Woche."
+
+#: main/models.py:70 templates/technische_mechanik/TM_HS24.html:70
+msgid "Remarks"
+msgstr "Anmerkungen"
+
+#: main/models.py:71
+msgid "You can enter notes and remarks here. HTML is allowed."
+msgstr "Sie können hier Notizen und Anmerkungen eingeben. HTML ist erlaubt."
+
+#: main/models.py:78
+msgid "Week Entry"
+msgstr "Wochen-Eintrag"
+
+#: main/models.py:79
+msgid "Week Entries"
+msgstr "Wochen-Einträge"
+
+#: main/views.py:12
 msgid "Engineering Mechanics 2024"
 msgstr "Technische Mechanik 2024"
 
-#: main/views.py:11 main/views.py:19
+#: main/views.py:13 main/views.py:21
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
 
-#: main/views.py:18
+#: main/views.py:20
 msgid "Computer Science I 2024"
 msgstr "Informatik I 2024"
 
-#: main/views.py:27
+#: main/views.py:29
 msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
-#: main/views.py:28
+#: main/views.py:30
 msgid "To the game modes"
 msgstr "Zu den Unterlagen"
 
@@ -402,39 +478,78 @@ msgstr "Europa"
 msgid "Oceania"
 msgstr "Ozeanien"
 
-#: templates/main/home.html:19
+#: templates/main/home.html:19 templates/technische_mechanik/TM_HS24.html:18
 msgid "To the Polybox"
 msgstr "Zur Polybox"
 
+#: templates/main/home.html:24 templates/technische_mechanik/TM_HS24.html:24
+msgid "Useful Links"
+msgstr "Nützliche Links"
+
+#: templates/main/home.html:27
+msgid "AMIV new Study Documents"
+msgstr "AMIV neue Studienunterlagen"
+
+#: templates/main/home.html:28
+msgid "AMIV old Study Documents"
+msgstr "AMIV alte Studienunterlagen"
+
+#: templates/main/home.html:29
+msgid ""
+"Polybox with additional old exams (especially useful for EM in 4th semester)"
+msgstr ""
+"Polybox mit zusätzlichen alten Prüfungen (besonders nützlich für EM im 4. "
+"Semester)"
+
 #: templates/technische_mechanik/TM_HS24.html:9
 msgid "Engineering Mechanics HS2024"
-msgstr "Technische Mechanik 2024"
+msgstr "Technische Mechanik HS2024"
 
-#: templates/technische_mechanik/TM_HS24.html:23
+#: templates/technische_mechanik/TM_HS24.html:27
+msgid "Solution Videos"
+msgstr "Lösungsvideos"
+
+#: templates/technische_mechanik/TM_HS24.html:28
+msgid "Lina de Windt Website"
+msgstr "Lina de Windt Webseite"
+
+#: templates/technische_mechanik/TM_HS24.html:29
+msgid "Lina de Windt PVK"
+msgstr "Lina de Windt PVK"
+
+#: templates/technische_mechanik/TM_HS24.html:30
+msgid "YT - EE4ETH - Engineering Mechanics Playlist"
+msgstr "YT - EE4ETH - Technische Mechanik Playlist"
+
+#: templates/technische_mechanik/TM_HS24.html:31
+msgid "Felix Stalder (auf lina de windt webseite zu finden)"
+msgstr ""
+
+#: templates/technische_mechanik/TM_HS24.html:42
 msgid "Week"
 msgstr "Woche"
 
-#: templates/technische_mechanik/TM_HS24.html:24
+#: templates/technische_mechanik/TM_HS24.html:43
 msgid "Exercise Materials"
 msgstr "Übungsunterlagen"
 
-#: templates/technische_mechanik/TM_HS24.html:25
+#: templates/technische_mechanik/TM_HS24.html:44
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/technische_mechanik/TM_HS24.html:26
+#: templates/technische_mechanik/TM_HS24.html:45
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/technische_mechanik/TM_HS24.html:34
+#: templates/technische_mechanik/TM_HS24.html:55
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
 
-#: templates/technische_mechanik/TM_HS24.html:37
+#: templates/technische_mechanik/TM_HS24.html:58
 msgid "Exercise"
 msgstr "Serie"
 
-#: templates/technische_mechanik/TM_HS24.html:40
+#: templates/technische_mechanik/TM_HS24.html:61
 msgid "Solution"
 msgstr "Lösung"
 
