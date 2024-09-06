@@ -4,25 +4,39 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0002_alter_weekentry_exercise_link_and_more'),
+        ("main", "0002_alter_weekentry_exercise_link_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='weekentry',
-            name='exercise_link',
-            field=models.URLField(blank=True, default='no.link.available', help_text='Link to the exercise for the week.', verbose_name='Link to the exercise'),
+            model_name="weekentry",
+            name="exercise_link",
+            field=models.URLField(
+                blank=True,
+                default="no.link.available",
+                help_text="Link to the exercise for the week.",
+                verbose_name="Link to the exercise",
+            ),
         ),
         migrations.AlterField(
-            model_name='weekentry',
-            name='exercise_materials_link',
-            field=models.URLField(blank=True, default='no.link.available', help_text='Link to the exercise materials for the week.', verbose_name='Link to the exercise materials'),
+            model_name="weekentry",
+            name="exercise_materials_link",
+            field=models.URLField(
+                blank=True,
+                default="no.link.available",
+                help_text="Link to the exercise materials for the week.",
+                verbose_name="Link to the exercise materials",
+            ),
         ),
         migrations.AlterField(
-            model_name='weekentry',
-            name='solutions_link',
-            field=models.URLField(blank=True, default='no.link.available', help_text='Link to the solutions for the week.', verbose_name='Link to the solutions'),
+            model_name="weekentry",
+            name="solutions_link",
+            field=models.URLField(
+                blank=True,
+                default="no.link.available",
+                help_text="Link to the solutions for the week.",
+                verbose_name="Link to the solutions",
+            ),
         ),
     ]

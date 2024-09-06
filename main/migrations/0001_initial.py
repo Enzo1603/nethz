@@ -5,42 +5,111 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ExerciseSession',
+            name="ExerciseSession",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('short_name', models.CharField(help_text='Short name for the exercise session (e.g. TM_HS24).', max_length=20, verbose_name='Short name for the exercise session')),
-                ('name', models.CharField(help_text='Name of the exercise session (e.g. Engineering Mechanics HS24).', max_length=100, verbose_name='Name of the exercise session')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "short_name",
+                    models.CharField(
+                        help_text="Short name for the exercise session (e.g. TM_HS24).",
+                        max_length=20,
+                        verbose_name="Short name for the exercise session",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Name of the exercise session (e.g. Engineering Mechanics HS24).",
+                        max_length=100,
+                        verbose_name="Name of the exercise session",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Exercise Session',
-                'verbose_name_plural': 'Exercise Sessions',
-                'ordering': ['short_name'],
+                "verbose_name": "Exercise Session",
+                "verbose_name_plural": "Exercise Sessions",
+                "ordering": ["short_name"],
             },
         ),
         migrations.CreateModel(
-            name='WeekEntry',
+            name="WeekEntry",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('week_number', models.PositiveSmallIntegerField(help_text='The week number for this entry.', verbose_name='Week Number')),
-                ('exercise_materials_link', models.URLField(help_text='Link to the exercise materials for the week.', verbose_name='Link to the exercise materials')),
-                ('exercise_link', models.URLField(help_text='Link to the exercise for the week.', verbose_name='Link to the exercise')),
-                ('solutions_link', models.URLField(help_text='Link to the solutions for the week.', verbose_name='Link to the solutions')),
-                ('remarks', models.TextField(blank=True, default='', help_text='You can enter notes and remarks here. HTML is allowed.', verbose_name='Remarks')),
-                ('exercise_session', models.ForeignKey(help_text='The exercise session for this week entry belongs to.', on_delete=django.db.models.deletion.CASCADE, related_name='week_entries', to='main.exercisesession', verbose_name='Exercise Session')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "week_number",
+                    models.PositiveSmallIntegerField(
+                        help_text="The week number for this entry.",
+                        verbose_name="Week Number",
+                    ),
+                ),
+                (
+                    "exercise_materials_link",
+                    models.URLField(
+                        help_text="Link to the exercise materials for the week.",
+                        verbose_name="Link to the exercise materials",
+                    ),
+                ),
+                (
+                    "exercise_link",
+                    models.URLField(
+                        help_text="Link to the exercise for the week.",
+                        verbose_name="Link to the exercise",
+                    ),
+                ),
+                (
+                    "solutions_link",
+                    models.URLField(
+                        help_text="Link to the solutions for the week.",
+                        verbose_name="Link to the solutions",
+                    ),
+                ),
+                (
+                    "remarks",
+                    models.TextField(
+                        blank=True,
+                        default="",
+                        help_text="You can enter notes and remarks here. HTML is allowed.",
+                        verbose_name="Remarks",
+                    ),
+                ),
+                (
+                    "exercise_session",
+                    models.ForeignKey(
+                        help_text="The exercise session for this week entry belongs to.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="week_entries",
+                        to="main.exercisesession",
+                        verbose_name="Exercise Session",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Week Entry',
-                'verbose_name_plural': 'Week Entries',
-                'ordering': ['exercise_session', 'week_number'],
-                'unique_together': {('exercise_session', 'week_number')},
+                "verbose_name": "Week Entry",
+                "verbose_name_plural": "Week Entries",
+                "ordering": ["exercise_session", "week_number"],
+                "unique_together": {("exercise_session", "week_number")},
             },
         ),
     ]
