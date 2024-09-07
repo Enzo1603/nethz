@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-06 21:58+0000\n"
+"POT-Creation-Date: 2024-09-07 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -282,42 +282,50 @@ msgid "The week number for this entry."
 msgstr "Die Wochennummer für diesen Eintrag."
 
 #: main/models.py:46
+msgid "Materials Number"
+msgstr "Unterlagennummer"
+
+#: main/models.py:47
+msgid "The materials number for this entry."
+msgstr "Die Unterlagennummer für diesen Eintrag."
+
+#: main/models.py:53
 msgid "Link to the exercise materials"
 msgstr "Link zu den Übungsunterlagen"
 
-#: main/models.py:47
+#: main/models.py:54
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:54
+#: main/models.py:61
 msgid "Link to the exercise"
 msgstr "Link zur Serie"
 
-#: main/models.py:55
+#: main/models.py:62
 msgid "Link to the exercise for the week."
 msgstr "Link zur Serie für die Woche."
 
-#: main/models.py:62
+#: main/models.py:69
 msgid "Link to the solutions"
 msgstr "Link zu den Lösungen"
 
-#: main/models.py:63
+#: main/models.py:70
 msgid "Link to the solutions for the week."
 msgstr "Link zu den Lösungen für die Woche."
 
-#: main/models.py:70 templates/technische_mechanik/TM_HS24.html:70
+#: main/models.py:77 templates/technische_mechanik/TM_HS24.html:111
 msgid "Remarks"
 msgstr "Anmerkungen"
 
-#: main/models.py:71
+#: main/models.py:78
 msgid "You can enter notes and remarks here. HTML is allowed."
 msgstr "Sie können hier Notizen und Anmerkungen eingeben. HTML ist erlaubt."
 
-#: main/models.py:78
+#: main/models.py:85
 msgid "Week Entry"
 msgstr "Wochen-Eintrag"
 
-#: main/models.py:79
+#: main/models.py:86
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
@@ -505,51 +513,47 @@ msgstr ""
 msgid "Engineering Mechanics HS2024"
 msgstr "Technische Mechanik HS2024"
 
-#: templates/technische_mechanik/TM_HS24.html:27
-msgid "Solution Videos"
-msgstr "Lösungsvideos"
-
-#: templates/technische_mechanik/TM_HS24.html:28
-msgid "Lina de Windt Website"
-msgstr "Lina de Windt Webseite"
-
-#: templates/technische_mechanik/TM_HS24.html:29
-msgid "Lina de Windt PVK"
-msgstr "Lina de Windt PVK"
-
 #: templates/technische_mechanik/TM_HS24.html:30
 msgid "YT - EE4ETH - Engineering Mechanics Playlist"
 msgstr "YT - EE4ETH - Technische Mechanik Playlist"
 
-#: templates/technische_mechanik/TM_HS24.html:31
-msgid "Felix Stalder (auf lina de windt webseite zu finden)"
-msgstr ""
+#: templates/technische_mechanik/TM_HS24.html:36
+msgid "Lina de Windt's website"
+msgstr "Lina de Windts Webseite"
 
 #: templates/technische_mechanik/TM_HS24.html:42
+msgid "Lina de Windt's PVK"
+msgstr "Lina de Windts PVK"
+
+#: templates/technische_mechanik/TM_HS24.html:49
+msgid "Theory Recap by Felix Stalder"
+msgstr "Theorieblätter von Felix Stalder"
+
+#: templates/technische_mechanik/TM_HS24.html:63
 msgid "Week"
 msgstr "Woche"
 
-#: templates/technische_mechanik/TM_HS24.html:43
+#: templates/technische_mechanik/TM_HS24.html:64
 msgid "Exercise Materials"
 msgstr "Übungsunterlagen"
 
-#: templates/technische_mechanik/TM_HS24.html:44
+#: templates/technische_mechanik/TM_HS24.html:65
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/technische_mechanik/TM_HS24.html:45
+#: templates/technische_mechanik/TM_HS24.html:66
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/technische_mechanik/TM_HS24.html:55
+#: templates/technische_mechanik/TM_HS24.html:76
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
 
-#: templates/technische_mechanik/TM_HS24.html:58
+#: templates/technische_mechanik/TM_HS24.html:86
 msgid "Exercise"
 msgstr "Serie"
 
-#: templates/technische_mechanik/TM_HS24.html:61
+#: templates/technische_mechanik/TM_HS24.html:96
 msgid "Solution"
 msgstr "Lösung"
 
@@ -644,9 +648,3 @@ msgstr "Higher Lower mit Landesflächen"
 #: worldle/cards.py:45
 msgid "Guess the currency"
 msgstr "Errate die Währung"
-
-#~ msgid "The username contains not allowed characters."
-#~ msgstr "Der Benutzername enthält nicht erlaubte Zeichen."
-
-#~ msgid "Email"
-#~ msgstr "E-Mail"

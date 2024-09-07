@@ -25,7 +25,7 @@ class ExerciseSession(models.Model):
 
 
 class WeekEntry(models.Model):
-    NO_LINK_AVAILABLE = "no.link.available"
+    NO_LINK_AVAILABLE = ""
 
     exercise_session = models.ForeignKey(
         ExerciseSession,
@@ -38,6 +38,13 @@ class WeekEntry(models.Model):
     week_number = models.PositiveSmallIntegerField(
         verbose_name=_("Week Number"),
         help_text=_("The week number for this entry."),
+        blank=False,
+        null=False,
+    )
+
+    materials_number = models.PositiveSmallIntegerField(
+        verbose_name=_("Materials Number"),
+        help_text=_("The materials number for this entry."),
         blank=False,
         null=False,
     )
@@ -85,12 +92,12 @@ class WeekEntry(models.Model):
 
     @property
     def has_exercise_materials(self):
-        return self.exercise_materials_link != f"http://{self.NO_LINK_AVAILABLE}"
+        return self.exercise_materials_link != self.NO_LINK_AVAILABLE
 
     @property
     def has_exercise(self):
-        return self.exercise_link != f"http://{self.NO_LINK_AVAILABLE}"
+        return self.exercise_link != self.NO_LINK_AVAILABLE
 
     @property
     def has_solutions(self):
-        return self.solutions_link != f"http://{self.NO_LINK_AVAILABLE}"
+        return self.solutions_link != self.NO_LINK_AVAILABLE

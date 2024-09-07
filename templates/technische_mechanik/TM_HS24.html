@@ -24,11 +24,32 @@
     <h5>{% trans "Useful Links" %}</h5>
 
     <ul>
-        <li><a class="link-primary fw-bold" href="#" target="_blank">{% trans "Solution Videos" %}</a></li>
-        <li><a class="link-primary fw-bold" href="#" target="_blank">{% trans "Lina de Windt Website" %}</a></li>
-        <li><a class="link-primary fw-bold" href="#" target="_blank">{% trans "Lina de Windt PVK" %}</a></li>
-        <li><a class="link-primary fw-bold" href="#" target="_blank">{% trans "YT - EE4ETH - Engineering Mechanics Playlist" %}</a></li>
-        <li><a class="link-primary fw-bold" href="#" target="_blank">{% trans "Felix Stalder (auf lina de windt webseite zu finden)" %}</a></li>
+
+        <li>
+            <a class="link-primary fw-bold" href="https://www.youtube.com/playlist?list=PL0WLWTsoAENhKG7he0XBQmgDnFfcJnfoi" target="_blank">
+                {% trans "YT - EE4ETH - Engineering Mechanics Playlist" %}
+            </a>
+        </li>
+
+        <li>
+            <a class="link-primary fw-bold" href="https://www.n.ethz.ch/~ldewindt/index.html" target="_blank">
+                {% trans "Lina de Windt's website" %}
+            </a>
+        </li>
+
+        <li>
+            <a class="link-primary fw-bold" href="https://www.n.ethz.ch/~ldewindt/TechMechHS22_PVK/index.html" target="_blank">
+                {% trans "Lina de Windt's PVK" %}
+            </a>
+        </li>
+
+
+        <li>
+            <a class="link-primary fw-bold" href="https://polybox.ethz.ch/index.php/s/02HfRGcmPqc00lA" target="_blank">
+                {% trans "Theory Recap by Felix Stalder" %}
+            </a>
+        </li>
+
     </ul>
 </div>
 
@@ -52,13 +73,33 @@
 
                 <td>
                     <a class="btn btn-outline-primary {% if not entry.has_exercise_materials %}disabled{% endif %}" href="{{ entry.exercise_materials_link }}" target="_blank">
-                        <i class="bi bi-download me-md-2"></i>{% trans "Exercise Material" %}&nbsp;{{ entry.week_number }}</a>
+                        <i class="bi bi-download me-md-2"></i>{% trans "Exercise Material" %}&nbsp;
+                        {% if entry.materials_number != 0 %}
+                        {{ entry.materials_number }}
+                        {% else %}
+                        n/a
+                        {% endif %}
+                    </a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-primary {% if not entry.has_exercise %}disabled{% endif %}" href="{{ entry.exercise_link }}" target="_blank"><i class="bi bi-download me-md-2"></i>{% trans "Exercise" %}&nbsp;{{ entry.week_number }}</a>
+                    <a class="btn btn-outline-primary {% if not entry.has_exercise %}disabled{% endif %}" href="{{ entry.exercise_link }}" target="_blank">
+                        <i class="bi bi-download me-md-2"></i>{% trans "Exercise" %}&nbsp;
+                        {% if entry.materials_number != 0 %}
+                        {{ entry.materials_number }}
+                        {% else %}
+                        n/a
+                        {% endif %}
+                    </a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-primary {% if not entry.has_solutions %}disabled{% endif %}" href="{{ entry.solutions_link }}" target="_blank"><i class="bi bi-download me-md-2"></i>{% trans "Solution" %}&nbsp;{{ entry.week_number }}</a>
+                    <a class="btn btn-outline-primary {% if not entry.has_solutions %}disabled{% endif %}" href="{{ entry.solutions_link }}" target="_blank">
+                        <i class="bi bi-download me-md-2"></i>{% trans "Solution" %}&nbsp;
+                        {% if entry.materials_number != 0 %}
+                        {{ entry.materials_number }}
+                        {% else %}
+                        n/a
+                        {% endif %}
+                    </a>
                 </td>
 
             </tr>

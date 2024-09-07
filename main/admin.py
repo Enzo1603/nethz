@@ -19,6 +19,7 @@ class WeekEntryAdmin(admin.ModelAdmin):
     list_display = (
         "exercise_session",
         "week_number",
+        "materials_number",
         "exercise_materials_link",
         "exercise_link",
         "solutions_link",
