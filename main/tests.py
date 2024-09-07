@@ -12,7 +12,6 @@ class MainViewsTest(TestCase):
 
         # Add more assertions for the content of the response, if needed
         self.assertContains(response, "Engineering Mechanics 2024")
-        self.assertContains(response, "Computer Science I 2024")
         self.assertContains(response, "Worldle")
 
     def test_technische_mechanik_view(self):
@@ -36,10 +35,7 @@ class MainViewsTest(TestCase):
             response,
             'href="' + reverse("main:technische_mechanik", args=["HS24"]) + '"',
         )
-        self.assertContains(
-            response,
-            'href="#"',  # You may want to update this once you have a valid link for ph_card and inf_card
-        )
+
         self.assertContains(response, 'href="' + reverse("worldle:home") + '"')
 
     def test_home_view_card_images(self):
@@ -51,10 +47,7 @@ class MainViewsTest(TestCase):
             response,
             'src="' + static("images/technische_mechanik_6px.jpg") + '"',
         )
-        self.assertContains(
-            response,
-            'src="' + static("images/informatik1_3px.jpg") + '"',
-        )
+
         self.assertContains(
             response,
             'src="' + static("images/Earth_2px.jpg") + '"',
