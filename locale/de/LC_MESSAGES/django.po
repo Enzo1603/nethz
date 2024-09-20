@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-07 08:27+0000\n"
+"POT-Creation-Date: 2024-09-20 19:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -297,35 +297,19 @@ msgstr "Link zu den Übungsunterlagen"
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:61
-msgid "Link to the exercise"
-msgstr "Link zur Serie"
-
-#: main/models.py:62
-msgid "Link to the exercise for the week."
-msgstr "Link zur Serie für die Woche."
-
-#: main/models.py:69
-msgid "Link to the solutions"
-msgstr "Link zu den Lösungen"
-
-#: main/models.py:70
-msgid "Link to the solutions for the week."
-msgstr "Link zu den Lösungen für die Woche."
-
-#: main/models.py:77 templates/technische_mechanik/TM_HS24.html:111
+#: main/models.py:61 templates/technische_mechanik/TM_HS24.html:67
 msgid "Remarks"
 msgstr "Anmerkungen"
 
-#: main/models.py:78
+#: main/models.py:62
 msgid "You can enter notes and remarks here. HTML is allowed."
 msgstr "Sie können hier Notizen und Anmerkungen eingeben. HTML ist erlaubt."
 
-#: main/models.py:85
+#: main/models.py:69
 msgid "Week Entry"
 msgstr "Wochen-Eintrag"
 
-#: main/models.py:86
+#: main/models.py:70
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
@@ -545,17 +529,9 @@ msgstr "Serien"
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/technische_mechanik/TM_HS24.html:76
+#: templates/technische_mechanik/TM_HS24.html:78
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
-
-#: templates/technische_mechanik/TM_HS24.html:86
-msgid "Exercise"
-msgstr "Serie"
-
-#: templates/technische_mechanik/TM_HS24.html:96
-msgid "Solution"
-msgstr "Lösung"
 
 #: templates/worldle/capitals.html:36
 msgid "Enter the capital(s)"
