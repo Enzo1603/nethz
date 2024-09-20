@@ -4,23 +4,27 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('main', '0004_weekentry_materials_number'),
+        ("main", "0004_weekentry_materials_number"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='weekentry',
-            name='exercise_link',
+            model_name="weekentry",
+            name="exercise_link",
         ),
         migrations.RemoveField(
-            model_name='weekentry',
-            name='solutions_link',
+            model_name="weekentry",
+            name="solutions_link",
         ),
         migrations.AlterField(
-            model_name='weekentry',
-            name='exercise_materials_link',
-            field=models.URLField(blank=True, default='', help_text='Link to the exercise materials for the week.', verbose_name='Link to the exercise materials'),
+            model_name="weekentry",
+            name="exercise_materials_link",
+            field=models.URLField(
+                blank=True,
+                default="",
+                help_text="Link to the exercise materials for the week.",
+                verbose_name="Link to the exercise materials",
+            ),
         ),
     ]
