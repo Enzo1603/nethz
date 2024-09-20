@@ -57,22 +57,6 @@ class WeekEntry(models.Model):
         null=False,
     )
 
-    exercise_link = models.URLField(
-        verbose_name=_("Link to the exercise"),
-        help_text=_("Link to the exercise for the week."),
-        blank=True,
-        default=NO_LINK_AVAILABLE,
-        null=False,
-    )
-
-    solutions_link = models.URLField(
-        verbose_name=_("Link to the solutions"),
-        help_text=_("Link to the solutions for the week."),
-        blank=True,
-        default=NO_LINK_AVAILABLE,
-        null=False,
-    )
-
     remarks = models.TextField(
         verbose_name=_("Remarks"),
         help_text=_("You can enter notes and remarks here. HTML is allowed."),
@@ -93,11 +77,3 @@ class WeekEntry(models.Model):
     @property
     def has_exercise_materials(self):
         return self.exercise_materials_link != self.NO_LINK_AVAILABLE
-
-    @property
-    def has_exercise(self):
-        return self.exercise_link != self.NO_LINK_AVAILABLE
-
-    @property
-    def has_solutions(self):
-        return self.solutions_link != self.NO_LINK_AVAILABLE

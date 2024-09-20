@@ -57,16 +57,18 @@
 
 <!-- Table -->
 <div class="table-responsive">
-    <table class="table table-borderless">
+    <table class="table table-borderless table-hover">
         <thead>
             <tr>
                 <th scope="col">{% trans "Week" %}</th>
                 <th scope="col">{% trans "Exercise Materials" %}</th>
-                <th scope="col">{% trans "Exercises" %}</th>
-                <th scope="col">{% trans "Solutions" %}</th>
+                <!-- <th scope="col">{% trans "Exercises" %}</th>
+                <th scope="col">{% trans "Solutions" %}</th> -->
+                <th scope="col">{% trans "Remarks" %}</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
+
             {% for entry in week_entries %}
             <tr>
                 <th scope="row">{{ entry.week_number }}</th>
@@ -81,40 +83,14 @@
                         {% endif %}
                     </a>
                 </td>
+
                 <td>
-                    <a class="btn btn-outline-primary {% if not entry.has_exercise %}disabled{% endif %}" href="{{ entry.exercise_link }}" target="_blank">
-                        <i class="bi bi-download me-md-2"></i>{% trans "Exercise" %}&nbsp;
-                        {% if entry.materials_number != 0 %}
-                        {{ entry.materials_number }}
-                        {% else %}
-                        n/a
-                        {% endif %}
-                    </a>
-                </td>
-                <td>
-                    <a class="btn btn-outline-primary {% if not entry.has_solutions %}disabled{% endif %}" href="{{ entry.solutions_link }}" target="_blank">
-                        <i class="bi bi-download me-md-2"></i>{% trans "Solution" %}&nbsp;
-                        {% if entry.materials_number != 0 %}
-                        {{ entry.materials_number }}
-                        {% else %}
-                        n/a
-                        {% endif %}
-                    </a>
+                    <p class="fst-italic text-body-secondary">{{ entry.remarks | safe }}</p>
                 </td>
 
             </tr>
-
-            {% if entry.remarks %}
-            <tr>
-                <td></td>
-                <td colspan="3">
-                    <p class="fst-italic text-body-secondary">{% trans "Remarks" %}: {{ entry.remarks | safe }}</p>
-                </td>
-            </tr>
-            {% endif %}
-
-
             {% endfor %}
+
         </tbody>
     </table>
 </div>

@@ -21,8 +21,6 @@ class WeekEntryAdmin(admin.ModelAdmin):
         "week_number",
         "materials_number",
         "exercise_materials_link",
-        "exercise_link",
-        "solutions_link",
     )
     list_filter = ("exercise_session", "week_number")
     search_fields = (
