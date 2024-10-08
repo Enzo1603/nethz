@@ -331,7 +331,7 @@ msgstr "Verschiedene Länderquizzes"
 
 #: main/views.py:30
 msgid "To the game modes"
-msgstr "Zu den Unterlagen"
+msgstr "Zu den Spielmodi"
 
 #: nethz_django/middleware.py:13
 msgid "You have to confirm your email address to log in."
