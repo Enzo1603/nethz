@@ -1,3 +1,7 @@
+:root {
+    --bs-body-bg: #1a1d23;
+}
+
 ::selection {
     background: #4a525b;
     color: white;
@@ -6,41 +10,35 @@
 .alert-danger::selection {
     background: #d9534f;
     color: white;
-
 }
 
 .alert-warning::selection {
     background: #f0ad4e;
     color: white;
-
 }
 
 .alert-success::selection {
     background: #5cb85c;
     color: white;
-
 }
 
 .alert-primary::selection {
     background: #337ab7;
     color: white;
-
 }
 
 .alert-info::selection {
     background: #5bc0de;
     color: white;
-
 }
 
 .bg-primary ::selection {
     background: #0e62cf;
     color: white;
-
 }
 
 body {
-    font-family: 'Roboto Serif', 'Roboto', Arial, Helvetica, serif;
+    font-family: "Roboto Serif", "Roboto", Arial, Helvetica, serif;
 }
 
 a {
@@ -49,7 +47,7 @@ a {
 }
 
 nav {
-    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
 .is-partial-correct {
