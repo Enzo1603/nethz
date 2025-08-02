@@ -1,26 +1,19 @@
-[tool.poetry]
-name = "nethz-django"
+[project]
+name = "nethz"
 version = "0.1.0"
 description = "\"Personal ETHZ website\""
-authors = ["Enzo1603 <96661578+Enzo1603@users.noreply.github.com>"]
 readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "crispy-bootstrap5>=2025.6",
+    "django>=5.2.4",
+    "django-crispy-forms>=2.4",
+    "gunicorn>=23.0.0",
+    "python-decouple>=3.8",
+    "whitenoise>=6.9.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10.5"
-Django = "^5.0.0"
-python-decouple = "^3.8"
-django-crispy-forms = "^2.1"
-crispy-bootstrap5 = "^2024.10"
-gunicorn = "^21.2.0"
-whitenoise = "^6.6.0"
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.7.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.pyright]
-venvPath = "/home/enzo/.cache/pypoetry/virtualenvs"
-venv = "nethz-django-yVTm6Tkj-py3.12"
+[dependency-groups]
+dev = [
+    "ruff>=0.12.7",
+]
