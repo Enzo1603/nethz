@@ -1,5 +1,5 @@
-:root {
-    --bs-body-bg: #1a1d23;
+[data-bs-theme="dark"] {
+    --bs-body-bg: rgb(18, 30, 40) !important;
 }
 
 ::selection {
@@ -35,6 +35,10 @@
 .bg-primary ::selection {
     background: #0e62cf;
     color: white;
+}
+
+[data-bs-theme="dark"] .bg-body-tertiary {
+    background-color: rgb(10, 20, 30) !important;
 }
 
 body {
