@@ -4,14 +4,11 @@ from django.db import migrations
 
 
 def create_hs25_session(apps, schema_editor):
-    ExerciseSession = apps.get_model('main', 'ExerciseSession')
+    ExerciseSession = apps.get_model("main", "ExerciseSession")
 
     # Create HS25 session
     hs25_session, created = ExerciseSession.objects.get_or_create(
-        short_name="TM_HS25",
-        defaults={
-            "name": "Engineering Mechanics HS2025"
-        }
+        short_name="TM_HS25", defaults={"name": "Engineering Mechanics HS2025"}
     )
 
     if created:
@@ -19,7 +16,7 @@ def create_hs25_session(apps, schema_editor):
 
 
 def reverse_create_hs25_session(apps, schema_editor):
-    ExerciseSession = apps.get_model('main', 'ExerciseSession')
+    ExerciseSession = apps.get_model("main", "ExerciseSession")
 
     # Delete HS25 session if it exists
     try:
@@ -31,7 +28,6 @@ def reverse_create_hs25_session(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("main", "0005_remove_weekentry_exercise_link_and_more"),
     ]
