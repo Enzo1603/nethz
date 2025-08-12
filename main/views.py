@@ -5,14 +5,15 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from .models import ExerciseSession
+from django.db.models import Q
 
 
 def home(request):
     tm_card = {
-        "title": _("Engineering Mechanics 2024"),
+        "title": _("Engineering Mechanics"),
         "button_text": _("To the documents"),
         "image_path": static("images/technische_mechanik_6px.jpg"),
-        "link": reverse("main:technische_mechanik", args=["HS24"]),
+        "link": reverse("main:technische_mechanik"),
         "disable": False,
     }
 
@@ -44,21 +45,39 @@ def home(request):
     )
 
 
-def technische_mechanik(request, semester: str):
-    template_name = f"TM_{semester}"
+def technische_mechanik(request, semester: str | None = None):
+    # Get all available TM exercise sessions
+    tm_sessions = ExerciseSession.objects.filter(
+        Q(short_name__startswith="TM_")
+    ).order_by("-short_name")
 
-    # Check if the template name is valid
-    valid_template_names = {"TM_HS24"}
-    if template_name not in valid_template_names:
-        raise Http404("Invalid link")
+    if not tm_sessions.exists():
+        raise Http404("No Engineering Mechanics sessions available")
 
-    # Get the exercise session and the week entries
-    exercise_session = ExerciseSession.objects.filter(short_name=template_name).first()
-    week_entries = exercise_session.week_entries.all() if exercise_session else None
+    # If no semester specified, use the latest one (HS25 > HS24)
+    if not semester:
+        current_session = tm_sessions.first()
+        current_semester = current_session.short_name.replace("TM_", "")
+    else:
+        template_name = f"TM_{semester}"
+        current_session = tm_sessions.filter(short_name=template_name).first()
+        if not current_session:
+            raise Http404("Invalid semester")
+        current_semester = semester
+
+    # Get available semesters for dropdown
+    available_semesters = [
+        session.short_name.replace("TM_", "") for session in tm_sessions
+    ]
+
+    # Get the week entries
+    week_entries = current_session.week_entries.all() if current_session else None
 
     context = {
-        "exercise_session": exercise_session,
+        "exercise_session": current_session,
         "week_entries": week_entries,
+        "current_semester": current_semester,
+        "available_semesters": available_semesters,
     }
 
-    return render(request, f"technische_mechanik/{template_name}.html", context)
+    return render(request, "technische_mechanik/technische_mechanik.html", context)
