@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-20 19:23+0000\n"
+"POT-Creation-Date: 2025-08-12 18:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -297,7 +297,7 @@ msgstr "Link zu den Übungsunterlagen"
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:61 templates/technische_mechanik/TM_HS24.html:67
+#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:105
 msgid "Remarks"
 msgstr "Anmerkungen"
 
@@ -313,23 +313,24 @@ msgstr "Wochen-Eintrag"
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
-#: main/views.py:12
-msgid "Engineering Mechanics 2024"
-msgstr "Technische Mechanik 2024"
+#: main/views.py:13 templates/components/_navbar.html:25
+#: templates/exercise_sessions/technische_mechanik.html:5
+msgid "Engineering Mechanics"
+msgstr "Technische Mechanik"
 
-#: main/views.py:13 main/views.py:21
+#: main/views.py:14 main/views.py:22
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
 
-#: main/views.py:20
+#: main/views.py:21
 msgid "Computer Science I 2024"
 msgstr "Informatik I 2024"
 
-#: main/views.py:29
+#: main/views.py:30
 msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
-#: main/views.py:30
+#: main/views.py:31
 msgid "To the game modes"
 msgstr "Zu den Spielmodi"
 
@@ -427,16 +428,62 @@ msgid "The page you're looking for is now beyond your reach..."
 msgstr "Die Seite, die du suchst, ist jetzt ausserhalb deiner Reichweite..."
 
 #: templates/components/_errors.html:25
-msgid "Return to Home Page"
-msgstr "Zurück zur Startseite"
+msgid "Return Home"
+msgstr "Zur Startseite"
 
-#: templates/components/_navbar.html:25
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
+#: templates/components/_navbar.html:59
+msgid "Admin Portal"
+msgstr "Admin-Portal"
 
-#: templates/components/_navbar.html:61
+#: templates/components/_navbar.html:64
 msgid "Logout"
 msgstr "Abmelden"
+
+#: templates/exercise_sessions/technische_mechanik.html:42
+#: templates/main/home.html:19
+msgid "To the Polybox"
+msgstr "Zur Polybox"
+
+#: templates/exercise_sessions/technische_mechanik.html:49
+#: templates/main/home.html:24
+msgid "Useful Links"
+msgstr "Nützliche Links"
+
+#: templates/exercise_sessions/technische_mechanik.html:58
+msgid "YT - EE4ETH - Engineering Mechanics Playlist"
+msgstr "YT - EE4ETH - Technische Mechanik Playlist"
+
+#: templates/exercise_sessions/technische_mechanik.html:68
+msgid "Lina de Windt's website"
+msgstr "Lina de Windts Webseite"
+
+#: templates/exercise_sessions/technische_mechanik.html:78
+msgid "Lina de Windt's PVK"
+msgstr "Lina de Windts PVK"
+
+#: templates/exercise_sessions/technische_mechanik.html:88
+msgid "Theory Recap by Felix Stalder"
+msgstr "Theorieblätter von Felix Stalder"
+
+#: templates/exercise_sessions/technische_mechanik.html:101
+msgid "Week"
+msgstr "Woche"
+
+#: templates/exercise_sessions/technische_mechanik.html:102
+msgid "Exercise Materials"
+msgstr "Übungsunterlagen"
+
+#: templates/exercise_sessions/technische_mechanik.html:103
+msgid "Exercises"
+msgstr "Serien"
+
+#: templates/exercise_sessions/technische_mechanik.html:104
+msgid "Solutions"
+msgstr "Lösungen"
+
+#: templates/exercise_sessions/technische_mechanik.html:119
+msgid "Exercise Material"
+msgstr "Übungsunterlage"
 
 #: templates/macros/leaderboard.html:9
 msgid "Go to Game"
@@ -470,14 +517,6 @@ msgstr "Europa"
 msgid "Oceania"
 msgstr "Ozeanien"
 
-#: templates/main/home.html:19 templates/technische_mechanik/TM_HS24.html:18
-msgid "To the Polybox"
-msgstr "Zur Polybox"
-
-#: templates/main/home.html:24 templates/technische_mechanik/TM_HS24.html:24
-msgid "Useful Links"
-msgstr "Nützliche Links"
-
 #: templates/main/home.html:27
 msgid "AMIV new Study Documents"
 msgstr "AMIV neue Studienunterlagen"
@@ -492,46 +531,6 @@ msgid ""
 msgstr ""
 "Polybox mit zusätzlichen alten Prüfungen (besonders nützlich für EM im 4. "
 "Semester)"
-
-#: templates/technische_mechanik/TM_HS24.html:9
-msgid "Engineering Mechanics HS2024"
-msgstr "Technische Mechanik HS2024"
-
-#: templates/technische_mechanik/TM_HS24.html:30
-msgid "YT - EE4ETH - Engineering Mechanics Playlist"
-msgstr "YT - EE4ETH - Technische Mechanik Playlist"
-
-#: templates/technische_mechanik/TM_HS24.html:36
-msgid "Lina de Windt's website"
-msgstr "Lina de Windts Webseite"
-
-#: templates/technische_mechanik/TM_HS24.html:42
-msgid "Lina de Windt's PVK"
-msgstr "Lina de Windts PVK"
-
-#: templates/technische_mechanik/TM_HS24.html:49
-msgid "Theory Recap by Felix Stalder"
-msgstr "Theorieblätter von Felix Stalder"
-
-#: templates/technische_mechanik/TM_HS24.html:63
-msgid "Week"
-msgstr "Woche"
-
-#: templates/technische_mechanik/TM_HS24.html:64
-msgid "Exercise Materials"
-msgstr "Übungsunterlagen"
-
-#: templates/technische_mechanik/TM_HS24.html:65
-msgid "Exercises"
-msgstr "Serien"
-
-#: templates/technische_mechanik/TM_HS24.html:66
-msgid "Solutions"
-msgstr "Lösungen"
-
-#: templates/technische_mechanik/TM_HS24.html:78
-msgid "Exercise Material"
-msgstr "Übungsunterlage"
 
 #: templates/worldle/capitals.html:36
 msgid "Enter the capital(s)"
