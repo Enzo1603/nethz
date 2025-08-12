@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.templatetags.static import static
-from django.http import Http404
 
 
 class MainViewsTest(TestCase):
@@ -29,7 +28,9 @@ class MainViewsTest(TestCase):
         # May return 404 or 200 depending on available semesters
         self.assertIn(response.status_code, [200, 404])
         if response.status_code == 200:
-            self.assertTemplateUsed(response, "exercise_sessions/technische_mechanik.html")
+            self.assertTemplateUsed(
+                response, "exercise_sessions/technische_mechanik.html"
+            )
 
     def test_technische_mechanik_view_with_invalid_semester(self):
         """Test technische mechanik view with invalid semester returns 404"""
@@ -79,8 +80,8 @@ class MainViewsTest(TestCase):
         self.assertIn(response.status_code, [200, 404])
 
         # Check if semester is in context only if view returns 200
-        if response.status_code == 200 and 'semester' in response.context:
-            self.assertEqual(response.context['semester'], 'HS24')
+        if response.status_code == 200 and "semester" in response.context:
+            self.assertEqual(response.context["semester"], "HS24")
 
     def test_technische_mechanik_default_semester(self):
         """Test technische mechanik view without semester uses default"""
@@ -88,7 +89,7 @@ class MainViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Should have a default semester in context (if the view supports it)
-        if hasattr(response, 'context') and response.context:
+        if hasattr(response, "context") and response.context:
             # Context may or may not include semester depending on implementation
             pass
 
@@ -106,7 +107,7 @@ class MainViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Check content type
-        self.assertEqual(response['Content-Type'], 'text/html; charset=utf-8')
+        self.assertEqual(response["Content-Type"], "text/html; charset=utf-8")
 
     def test_all_semester_codes_valid(self):
         """Test various semester codes that should be valid"""
@@ -143,4 +144,6 @@ class MainViewsTest(TestCase):
         self.assertTrue("technische-mechanik" in tm_url)
 
         tm_semester_url = reverse("main:technische_mechanik_semester", args=["HS24"])
-        self.assertTrue("technische-mechanik" in tm_semester_url and "HS24" in tm_semester_url)
+        self.assertTrue(
+            "technische-mechanik" in tm_semester_url and "HS24" in tm_semester_url
+        )

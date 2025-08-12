@@ -1,9 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate
-from django.contrib.auth.forms import AuthenticationForm
-
-from accounts.models import CustomUser
 
 
 class CustomUserTests(TestCase):
@@ -32,7 +29,7 @@ class CustomUserTests(TestCase):
             get_user_model().objects.create_user(
                 username="anotheruser",
                 email=self.user_data["email"],  # Same email
-                password="anotherpassword"
+                password="anotherpassword",
             )
 
     def test_signup_view_get(self):
@@ -76,7 +73,9 @@ class CustomUserTests(TestCase):
         self.assertEqual(response.status_code, 200)  # Should stay on same page
 
         # User should not be created
-        user = get_user_model().objects.filter(username=invalid_data["username"]).first()
+        user = (
+            get_user_model().objects.filter(username=invalid_data["username"]).first()
+        )
         self.assertIsNone(user)
 
     def test_login_view_get(self):
@@ -103,7 +102,7 @@ class CustomUserTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Check if user is logged in
-        self.assertTrue('_auth_user_id' in self.client.session)
+        self.assertTrue("_auth_user_id" in self.client.session)
 
     def test_login_view_post_invalid_password(self):
         """Test login with wrong password"""
@@ -117,7 +116,7 @@ class CustomUserTests(TestCase):
         self.assertEqual(response.status_code, 200)  # Should stay on login page
 
         # User should not be logged in
-        self.assertFalse('_auth_user_id' in self.client.session)
+        self.assertFalse("_auth_user_id" in self.client.session)
 
     def test_login_view_unverified_email(self):
         """Test that unverified users cannot login"""
@@ -139,7 +138,7 @@ class CustomUserTests(TestCase):
         self.client.force_login(self.user)
 
         # Verify user is logged in
-        self.assertTrue('_auth_user_id' in self.client.session)
+        self.assertTrue("_auth_user_id" in self.client.session)
 
         # Now logout
         url = reverse("accounts:logout")
@@ -147,7 +146,7 @@ class CustomUserTests(TestCase):
         self.assertEqual(response.status_code, 302)  # Redirects after logout
 
         # Check if the user is logged out
-        self.assertFalse('_auth_user_id' in self.client.session)
+        self.assertFalse("_auth_user_id" in self.client.session)
 
     def test_user_account_view_requires_login(self):
         """Test that user account view requires authentication"""
@@ -155,7 +154,7 @@ class CustomUserTests(TestCase):
         response = self.client.get(url)
         # Should redirect to login
         self.assertEqual(response.status_code, 302)
-        self.assertIn('/accounts/login/', response.url)
+        self.assertIn("/accounts/login/", response.url)
 
     def test_user_account_view_authenticated(self):
         """Test user account view for authenticated user"""
@@ -176,16 +175,14 @@ class CustomUserTests(TestCase):
         """Test Django's authenticate function with custom user"""
         # Test with correct credentials
         user = authenticate(
-            email=self.user_data["email"],
-            password=self.user_data["password"]
+            email=self.user_data["email"], password=self.user_data["password"]
         )
         self.assertIsNotNone(user)
         self.assertEqual(user, self.user)
 
         # Test with wrong credentials
         wrong_user = authenticate(
-            email=self.user_data["email"],
-            password="wrongpassword"
+            email=self.user_data["email"], password="wrongpassword"
         )
         self.assertIsNone(wrong_user)
 

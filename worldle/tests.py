@@ -1,7 +1,6 @@
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
-from django.contrib.sessions.middleware import SessionMiddleware
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from accounts.models import CustomUser
 from worldle.views import DEFAULT_REGION
@@ -11,9 +10,7 @@ class WorldleViewsTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.user = CustomUser.objects.create_user(
-            username="testuser",
-            email="test@example.com",
-            password="testpass"
+            username="testuser", email="test@example.com", password="testpass"
         )
         self.client.force_login(self.user)
 
@@ -56,14 +53,12 @@ class WorldleViewsTest(TestCase):
         self.assertTemplateUsed(response, "worldle/capitals.html")
 
         # Check that the region is in context
-        self.assertIn('region', response.context)
-        self.assertEqual(response.context['region'], 'africa')
+        self.assertIn("region", response.context)
+        self.assertEqual(response.context["region"], "africa")
 
     def test_capitals_view_invalid_region(self):
         """Test capitals view with invalid region returns 404"""
-        response = self.client.get(
-            reverse("worldle:capitals", args=["invalid_region"])
-        )
+        response = self.client.get(reverse("worldle:capitals", args=["invalid_region"]))
         self.assertEqual(response.status_code, 404)
 
     def test_default_languages_view(self):
@@ -80,8 +75,8 @@ class WorldleViewsTest(TestCase):
         self.assertTemplateUsed(response, "worldle/languages.html")
 
         # Check that the region is in context
-        self.assertIn('region', response.context)
-        self.assertEqual(response.context['region'], 'americas')
+        self.assertIn("region", response.context)
+        self.assertEqual(response.context["region"], "americas")
 
     def test_languages_view_invalid_region(self):
         """Test languages view with invalid region returns 404"""
@@ -122,13 +117,15 @@ class WorldleViewsTest(TestCase):
             },
         ]
 
-        response = self.client.post(reverse("worldle:competitive_areas"), {"choice": "higher"})
+        response = self.client.post(
+            reverse("worldle:competitive_areas"), {"choice": "higher"}
+        )
         # May redirect if login required or return 200 if authenticated
         self.assertIn(response.status_code, [200, 302])
 
         # Only check JSON if we get a 200 response
         if response.status_code == 200:
-            self.assertEqual(response['Content-Type'], 'application/json')
+            self.assertEqual(response["Content-Type"], "application/json")
 
             json_response = response.json()
             self.assertIn("country1", json_response)
@@ -159,7 +156,9 @@ class WorldleViewsTest(TestCase):
             },
         ]
 
-        response = self.client.post(reverse("worldle:competitive_areas"), {"choice": "lower"})
+        response = self.client.post(
+            reverse("worldle:competitive_areas"), {"choice": "lower"}
+        )
         # May redirect if login required or return 200 if authenticated
         self.assertIn(response.status_code, [200, 302])
 
@@ -169,7 +168,9 @@ class WorldleViewsTest(TestCase):
 
     def test_areas_view_post_invalid_choice(self):
         """Test areas view POST request with invalid choice"""
-        response = self.client.post(reverse("worldle:competitive_areas"), {"choice": "invalid"})
+        response = self.client.post(
+            reverse("worldle:competitive_areas"), {"choice": "invalid"}
+        )
         # Should handle invalid choice gracefully or redirect if login required
         self.assertIn(response.status_code, [200, 302])
 
@@ -201,11 +202,15 @@ class WorldleViewsTest(TestCase):
             with self.subTest(region=region):
                 # Test capitals
                 response = self.client.get(reverse("worldle:capitals", args=[region]))
-                self.assertIn(response.status_code, [200, 404])  # Depends on implementation
+                self.assertIn(
+                    response.status_code, [200, 404]
+                )  # Depends on implementation
 
                 # Test languages
                 response = self.client.get(reverse("worldle:languages", args=[region]))
-                self.assertIn(response.status_code, [200, 404])  # Depends on implementation
+                self.assertIn(
+                    response.status_code, [200, 404]
+                )  # Depends on implementation
 
     def test_game_score_persistence(self):
         """Test that game scores persist across requests"""
@@ -262,17 +267,15 @@ class WorldleModelsTest(TestCase):
 
     def setUp(self):
         self.user = CustomUser.objects.create_user(
-            username="testuser",
-            email="test@example.com",
-            password="testpass"
+            username="testuser", email="test@example.com", password="testpass"
         )
 
     def test_user_highscore_fields_exist(self):
         """Test that all required highscore fields exist on CustomUser"""
-        self.assertTrue(hasattr(self.user, 'areas_highscore'))
-        self.assertTrue(hasattr(self.user, 'capitals_highscore'))
-        self.assertTrue(hasattr(self.user, 'currencies_highscore'))
-        self.assertTrue(hasattr(self.user, 'languages_highscore'))
+        self.assertTrue(hasattr(self.user, "areas_highscore"))
+        self.assertTrue(hasattr(self.user, "capitals_highscore"))
+        self.assertTrue(hasattr(self.user, "currencies_highscore"))
+        self.assertTrue(hasattr(self.user, "languages_highscore"))
 
     def test_highscore_default_values(self):
         """Test that highscore fields have correct default values"""
