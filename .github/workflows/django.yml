@@ -1,42 +1,42 @@
 name: Django CI
 
 on:
-    push:
-        branches: ["main"]
-    pull_request:
-        branches: ["main"]
-    workflow_dispatch:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        strategy:
-            max-parallel: 4
-            matrix:
-                python-version: ["3.10", "3.11", "3.12"]
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
 
-        env:
-            SECRET_KEY: dummy-secret-key-to-run-github-actions
-            PRODUCTION_DOMAINS: dummy.domain.com
-            EMAIL_HOST: dummy-email-host
-            EMAIL_PORT: 999
-            EMAIL_HOST_USER: dummy-email-host-user
-            EMAIL_HOST_PASSWORD: dummy-email-host-password
+    env:
+      SECRET_KEY: dummy-secret-key-to-run-github-actions
+      PRODUCTION_DOMAINS: dummy.domain.com
+      EMAIL_HOST: dummy-email-host
+      EMAIL_PORT: 999
+      EMAIL_HOST_USER: dummy-email-host-user
+      EMAIL_HOST_PASSWORD: dummy-email-host-password
 
-        steps:
-            - uses: actions/checkout@v3
-            - name: Set up Python ${{ matrix.python-version }}
-              uses: actions/setup-python@v3
-              with:
-                  python-version: ${{ matrix.python-version }}
-            - name: Install Dependencies
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install poetry
-                  poetry config virtualenvs.create false
-                  poetry install --only main
-            - name: Django collectstatic
-              run: python manage.py collectstatic --noinput
-            - name: Run Tests
-              run: |
-                  python manage.py test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry config virtualenvs.create false
+          poetry install --only main
+      - name: Django collectstatic
+        run: python manage.py collectstatic --noinput
+      - name: Run Tests
+        run: |
+          python manage.py test

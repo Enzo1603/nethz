@@ -3,7 +3,7 @@ name = "nethz"
 version = "2.0.0"
 description = "\"Personal ETHZ website\""
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "crispy-bootstrap5>=2025.6",
     "django>=5.2.4",
