@@ -90,6 +90,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "lib.middleware.GermanDefaultRedirectMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -162,7 +163,7 @@ LOGOUT_REDIRECT_URL = "main:home"
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = "de"
 USE_I18N = True
 LANGUAGES = [
     ("en", "English (US)"),
