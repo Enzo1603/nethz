@@ -80,4 +80,4 @@ def technische_mechanik(request, semester: str | None = None):
         "available_semesters": available_semesters,
     }
 
-    return render(request, "technische_mechanik/technische_mechanik.html", context)
+    return render(request, "exercise_sessions/technische_mechanik.html", context)
