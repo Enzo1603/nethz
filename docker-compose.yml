@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-here}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - PRODUCTION_DOMAINS=${PRODUCTION_DOMAINS:-localhost,127.0.0.1}
+      - EMAIL_HOST=${EMAIL_HOST:-smtp.gmail.com}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER:-your-email@gmail.com}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD:-your-email-password}
+      - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL:-your-email@gmail.com}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS:-True}
+    volumes:
+      - ./db:/app/db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

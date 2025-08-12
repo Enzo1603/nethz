@@ -1,8 +1,10 @@
 #!/bin/sh
 
+# Exit on any error
+set -e
 
-# Migrationen ausführen
-python manage.py migrate
+# Run database migrations
+uv run python manage.py migrate
 
-# Starten des Gunicorn-Servers
-exec gunicorn --bind 0.0.0.0:80 nethz_django.wsgi:application
+# Start Gunicorn server
+exec uv run gunicorn --bind 0.0.0.0:8000 --workers 2 --timeout 120 nethz_django.wsgi:application

@@ -1,57 +1,66 @@
-# Zugrundeliegendes Image
-FROM python:3.12.1-alpine3.19
+# Use Python 3.13 slim image for smaller size and better security
+FROM python:3.13-slim
+
+# Create non-root user for security
+RUN groupadd -r appuser && useradd -r -g appuser appuser
 
 WORKDIR /app
 
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+ENV UV_CACHE_DIR=/tmp/uv-cache
 
-# Setzen von Umgebungsvariablen
-# - PYTHONDONTWRITEBYTECODE verhindert, dass Python .pyc Dateien erstellt werden
-# - PYTHONUNBUFFERED stellt sicher, dass Python-Logs sofort in den Docker-Log ausgegeben werden.
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Install system dependencies and uv
+RUN apt-get update && apt-get install -y \
+    gettext \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir uv
 
+# Copy dependency files first for better layer caching
+COPY pyproject.toml uv.lock ./
 
-# Kopieren des Projekts
-ADD . /app/
+# Install Python dependencies
+RUN uv sync --frozen --no-dev
 
-# Installieren von Poetry und Python-Dependendecies
-RUN pip install --trusted-host pypi.python.org --no-cache-dir poetry
-RUN poetry config virtualenvs.create false && \
-    poetry install --no-dev
+# Copy application code
+COPY . .
 
-# Otherwise Django will throw an ImproperlyConfigured Exception
-ARG PRODUCTION_DOMAINS="dummy.domain.com,dummy.domain2.com"
+# Build arguments for collectstatic (not saved to final image)
+ARG SECRET_KEY="dummy-secret-key"
+ARG PRODUCTION_DOMAINS="dummy.domain.com"
 ARG EMAIL_HOST="dummy-email-host"
 ARG EMAIL_PORT="999"
 ARG EMAIL_HOST_USER="dummy-email-host-user"
 ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
 ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
-# Otherwise 'python manage.py collectstatic' will throw an error (not saved to the final image)
-ARG SECRET_KEY="dummy-secret-key"
-# Otherwise the secret key would be saved to the image (not desired)
-# ENV SECRET_KEY=${SECRET_KEY}
 
-# Sammeln von statischen Dateien
-RUN python manage.py collectstatic --noinput
+# Collect static files and compile messages
+RUN export SECRET_KEY="$SECRET_KEY" && \
+    export PRODUCTION_DOMAINS="$PRODUCTION_DOMAINS" && \
+    export EMAIL_HOST="$EMAIL_HOST" && \
+    export EMAIL_PORT="$EMAIL_PORT" && \
+    export EMAIL_HOST_USER="$EMAIL_HOST_USER" && \
+    export EMAIL_HOST_PASSWORD="$EMAIL_HOST_PASSWORD" && \
+    export DEFAULT_FROM_EMAIL="$DEFAULT_FROM_EMAIL" && \
+    uv run python manage.py collectstatic --noinput && \
+    uv run python manage.py compilemessages
 
-# Compile messages for translation
-RUN apk add --update --no-cache gettext
-RUN python manage.py compilemessages
+# Create cache directory and change ownership
+RUN mkdir -p /tmp/uv-cache && \
+    chown -R appuser:appuser /app /tmp/uv-cache
 
-# Ausführen von Django-spezifischen Befehlen wie z.B. das Migrieren der Datenbank
-# RUN python manage.py migrate
-
-# Entfernen der Build-Abhängigkeiten, um die Größe des Images zu reduzieren
-# RUN apk del build-base
-
-# Port 80 veröffentlichen
-EXPOSE 80
-
-# Starten des Gunicorn-Servers
-# CMD ["gunicorn", "--bind", "0.0.0.0:80", "nethz_django.wsgi:application"]
-
-# Machen Sie entrypoint.sh ausführbar
+# Make entrypoint executable
 RUN chmod +x ./entrypoint.sh
 
-# Setzen Sie entrypoint.sh als Eintrittspunkt
+# Switch to non-root user
+USER appuser
+
+# Expose port
+EXPOSE 8000
+
+# Set entrypoint
 ENTRYPOINT ["./entrypoint.sh"]
