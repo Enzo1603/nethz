@@ -54,7 +54,10 @@
                         {{ user.username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{% url 'accounts:user_account' %}">{% trans "My Account" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:user_account' %}"><i class="bi bi-person-circle"></i> {% trans "My Account" %}</a></li>
+                        {% if user.is_staff %}
+                        <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="bi bi-gear"></i> {% trans "Admin Portal" %}</a></li>
+                        {% endif %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
