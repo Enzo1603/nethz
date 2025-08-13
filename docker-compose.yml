@@ -18,5 +18,5 @@ services:
     volumes:
       - ./db:/app/db
     # Set user at runtime - use your host user ID to avoid permission issues
-    user: "${UID:-1000}:${GID:-1000}"
+    user: ${UID:-1000}:${GID:-1000}
     restart: unless-stopped
