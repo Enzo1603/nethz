@@ -1,7 +1,6 @@
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.urls import reverse
 from django.templatetags.static import static
-from django.http import Http404
 
 
 class MainViewsTest(TestCase):
@@ -15,7 +14,7 @@ class MainViewsTest(TestCase):
         content = response.content.decode()
         self.assertTrue(
             "Technische Mechanik" in content or "Engineering Mechanics" in content,
-            f"Expected mechanics text not found in response: {content[:500]}..."
+            f"Expected mechanics text not found in response: {content[:500]}...",
         )
         self.assertContains(response, "Worldle")
 

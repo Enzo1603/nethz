@@ -1,4 +1,4 @@
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate
 
@@ -41,7 +41,7 @@ class CustomUserTests(TestCase):
         content = response.content.decode()
         self.assertTrue(
             "Registrieren" in content or "Sign Up" in content or "Register" in content,
-            f"Expected signup text not found in response: {content[:500]}..."
+            f"Expected signup text not found in response: {content[:500]}...",
         )
 
     def test_signup_view_post_valid(self):
@@ -92,7 +92,7 @@ class CustomUserTests(TestCase):
         content = response.content.decode()
         self.assertTrue(
             "Anmelden" in content or "Login" in content or "Sign In" in content,
-            f"Expected login text not found in response: {content[:500]}..."
+            f"Expected login text not found in response: {content[:500]}...",
         )
 
     def test_login_view_post_valid(self):
