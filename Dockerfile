@@ -1,8 +1,7 @@
 # Use Python 3.13 slim image for smaller size and better security
 FROM python:3.13-slim
 
-# Create non-root user for security
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+# User will be set at runtime via docker-compose
 
 WORKDIR /app
 
@@ -42,15 +41,14 @@ ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
 RUN uv run python manage.py collectstatic --noinput && \
     uv run python manage.py compilemessages
 
-# Create cache directory and change ownership
+# Create cache directory with open permissions for runtime user
 RUN mkdir -p /tmp/uv-cache && \
-    chown -R appuser:appuser /app /tmp/uv-cache
+    chmod 777 /tmp/uv-cache
 
 # Make entrypoint executable
 RUN chmod +x ./entrypoint.sh
 
-# Switch to non-root user
-USER appuser
+# User will be set at runtime via docker-compose
 
 # Expose port
 EXPOSE 8000
