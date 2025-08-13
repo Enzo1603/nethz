@@ -43,10 +43,12 @@ if ENVIRONMENT == "development":
     DEBUG = True
     ALLOWED_HOSTS.append("*")
     MESSAGE_LEVEL = messages.DEBUG
+    CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1"]
 
 if ENVIRONMENT == "testing":
     DEBUG = False
     ALLOWED_HOSTS.append("*")
+    CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://127.0.0.1"]
 
 if ENVIRONMENT == "production":
     DEBUG = False
@@ -56,6 +58,11 @@ if ENVIRONMENT == "production":
         ALLOWED_HOSTS.extend(
             domain.strip() for domain in PRODUCTION_DOMAINS.split(",") if domain.strip()
         )
+
+        # Add CSRF trusted origins for HTTPS
+        CSRF_TRUSTED_ORIGINS = [
+            f"https://{domain.strip()}" for domain in PRODUCTION_DOMAINS.split(",") if domain.strip()
+        ]
 
     if not ALLOWED_HOSTS:
         raise ImproperlyConfigured(
