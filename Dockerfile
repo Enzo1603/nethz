@@ -1,29 +1,35 @@
-# Use Python 3.13 slim image for smaller size and better security
-FROM python:3.13-slim
-
-# User will be set at runtime via docker-compose
+# Multi-stage build for smaller final image
+FROM python:3.13-slim AS builder
 
 WORKDIR /app
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_LINK_MODE=copy
-ENV UV_NO_CACHE=1
-
-# Install system dependencies and uv
-RUN apt-get update && apt-get install -y \
-    gettext \
-    --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir uv
+# Install uv for faster dependency resolution
+RUN pip install --no-cache-dir uv
 
 # Copy dependency files first for better layer caching
 COPY pyproject.toml uv.lock ./
 
-# Install Python dependencies
+# Install dependencies to a virtual environment
 RUN uv sync --frozen --no-dev
+
+# Production stage
+FROM python:3.13-slim
+
+WORKDIR /app
+
+# Install only essential system dependencies
+RUN apt-get update && apt-get install -y \
+    gettext \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy virtual environment from builder stage
+COPY --from=builder /app/.venv /app/.venv
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PATH="/app/.venv/bin:$PATH"
 
 # Copy application code
 COPY . .
@@ -38,13 +44,11 @@ ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
 ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
 
 # Collect static files and compile messages
-RUN uv run python manage.py collectstatic --noinput && \
-    uv run python manage.py compilemessages
+RUN python manage.py collectstatic --noinput && \
+    python manage.py compilemessages
 
 # Make entrypoint executable
 RUN chmod +x ./entrypoint.sh
-
-# User will be set at runtime via docker-compose
 
 # Expose port
 EXPOSE 8000

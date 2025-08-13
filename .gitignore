@@ -8,6 +8,9 @@ assets/
 .fleet/
 .idea/
 
+# Build artifacts
+.last_build_hash
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
