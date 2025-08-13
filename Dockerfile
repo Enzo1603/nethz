@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
-ENV UV_CACHE_DIR=/tmp/uv-cache
+ENV UV_NO_CACHE=1
 
 # Install system dependencies and uv
 RUN apt-get update && apt-get install -y \
@@ -40,10 +40,6 @@ ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
 # Collect static files and compile messages
 RUN uv run python manage.py collectstatic --noinput && \
     uv run python manage.py compilemessages
-
-# Create cache directory with open permissions for runtime user
-RUN mkdir -p /tmp/uv-cache && \
-    chmod 777 /tmp/uv-cache
 
 # Make entrypoint executable
 RUN chmod +x ./entrypoint.sh
