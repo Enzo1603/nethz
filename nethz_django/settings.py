@@ -172,7 +172,7 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 
 
 USE_TZ = True
-TIME_ZONE = "UTC"
+TIME_ZONE = config("TZ", default="UTC", cast=str)
 
 
 # Static files (CSS, JavaScript, Images)
