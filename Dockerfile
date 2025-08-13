@@ -39,14 +39,7 @@ ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
 ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
 
 # Collect static files and compile messages
-RUN export SECRET_KEY="$SECRET_KEY" && \
-    export PRODUCTION_DOMAINS="$PRODUCTION_DOMAINS" && \
-    export EMAIL_HOST="$EMAIL_HOST" && \
-    export EMAIL_PORT="$EMAIL_PORT" && \
-    export EMAIL_HOST_USER="$EMAIL_HOST_USER" && \
-    export EMAIL_HOST_PASSWORD="$EMAIL_HOST_PASSWORD" && \
-    export DEFAULT_FROM_EMAIL="$DEFAULT_FROM_EMAIL" && \
-    uv run python manage.py collectstatic --noinput && \
+RUN uv run python manage.py collectstatic --noinput && \
     uv run python manage.py compilemessages
 
 # Create cache directory and change ownership
