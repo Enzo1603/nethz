@@ -7,4 +7,4 @@ set -e
 uv run python manage.py migrate
 
 # Start Gunicorn server
-exec uv run gunicorn --bind 0.0.0.0:8000 --workers 2 --timeout 120 nethz_django.wsgi:application
+exec uv run gunicorn --bind 0.0.0.0:8000 --workers 2 --timeout 120 --access-logfile - nethz_django.wsgi:application
