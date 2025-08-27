@@ -10,16 +10,17 @@ function checkAnswer(userAnswerElement, correctAnswer) {
   const userText = userAnswerElement.value.trim().toLowerCase();
 
   /* Teile den userText/correctAnswer bei den Kommas, entferne Leerzeichen,
+    normalisiere mehrere Leerzeichen zu einem (z.B. "Ulan  Bator" → "Ulan Bator"),
     filtere leere Strings, sortiere alphabetisch */
   const userItems = userText
     .split(",")
-    .map((item) => item.trim())
+    .map((item) => item.trim().replace(/\s+/g, " "))
     .filter((item) => item !== "")
     .sort();
 
   const correctItems = correctAnswer
     .split(",")
-    .map((item) => item.trim())
+    .map((item) => item.trim().replace(/\s+/g, " "))
     .filter((item) => item !== "")
     .sort();
 
