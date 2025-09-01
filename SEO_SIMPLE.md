@@ -25,8 +25,8 @@
 ## 🧪 Test your setup
 
 ```bash
-# Check everything works
-python manage.py validate_seo --verbose
+# Quick SEO check (simple output)
+python manage.py validate_seo
 
 # View sitemap (22+ URLs automatically generated)
 curl http://localhost:8000/sitemap.xml

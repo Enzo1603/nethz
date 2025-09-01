@@ -16,9 +16,9 @@ class SEOData:
     def to_context(self):
         """Convert to dictionary for template context"""
         return {
-            'title': self.title,
-            'meta_description': self.description,
-            'meta_keywords': self.keywords,
+            "title": self.title,
+            "meta_description": self.description,
+            "meta_keywords": self.keywords,
         }
 
 
@@ -26,8 +26,12 @@ def get_home_seo():
     """SEO data for the home page"""
     return SEOData(
         title="Enzo Baraldi",
-        description=_("Engineering mechanics study materials and geography games for ETH Zurich students"),
-        keywords=_("ETH Zurich, engineering mechanics, worldle, geography, study materials"),
+        description=_(
+            "Engineering mechanics study materials and geography games for ETH Zurich students"
+        ),
+        keywords=_(
+            "ETH Zurich, engineering mechanics, worldle, geography, study materials"
+        ),
     )
 
 
@@ -35,11 +39,15 @@ def get_technische_mechanik_seo(semester=None):
     """SEO data for Technische Mechanik pages"""
     if semester:
         title = _("Engineering Mechanics {}").format(semester.upper())
-        description = _("Engineering mechanics study materials and solutions for ETH Zurich students")
+        description = _(
+            "Engineering mechanics study materials and solutions for ETH Zurich students"
+        )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
     else:
         title = _("Engineering Mechanics")
-        description = _("Engineering mechanics study materials and solutions for ETH Zurich students")
+        description = _(
+            "Engineering mechanics study materials and solutions for ETH Zurich students"
+        )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
 
     return SEOData(title=title, description=description, keywords=keywords)
@@ -49,7 +57,9 @@ def get_worldle_home_seo():
     """SEO data for Worldle home page"""
     return SEOData(
         title="Worldle",
-        description=_("Geography games - guess capitals, languages, currencies and countries"),
+        description=_(
+            "Geography games - guess capitals, languages, currencies and countries"
+        ),
         keywords=_("worldle, geography, capitals, languages, currencies, quiz, game"),
     )
 
@@ -57,7 +67,7 @@ def get_worldle_home_seo():
 def get_worldle_capitals_seo(region=None):
     """SEO data for Worldle capitals pages"""
     if region:
-        region_display = region.replace('-', ' ').title()
+        region_display = region.replace("-", " ").title()
         title = "Worldle {}".format(region_display)
         description = _("Geography quiz game - guess the capitals")
         keywords = _("capitals, geography, worldle, quiz, game")
@@ -72,7 +82,7 @@ def get_worldle_capitals_seo(region=None):
 def get_worldle_languages_seo(region=None):
     """SEO data for Worldle languages pages"""
     if region:
-        region_display = region.replace('-', ' ').title()
+        region_display = region.replace("-", " ").title()
         title = "Worldle {}".format(region_display)
         description = _("Geography quiz game - guess the languages")
         keywords = _("languages, geography, worldle, quiz, game")

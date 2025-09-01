@@ -61,13 +61,10 @@ class TechnischeMechanikSitemap(Sitemap):
     def lastmod(self, obj):
         """Return last modification date from database"""
         try:
-            session = ExerciseSession.objects.filter(
-                short_name=f"TM_{obj.upper()}"
-            ).first()
             # Since we don't have a modified date field, use current time
             # You could add a 'modified' field to the model later
             return timezone.now()
-        except:
+        except Exception:
             return timezone.now()
 
 

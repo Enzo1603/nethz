@@ -289,9 +289,6 @@ def competitive_languages(request):
             4, CountryHeader.languages, correct_answer
         )
 
-        # Leaderboard
-        users = get_leaders(LeaderDatabase.languages_highscore)[:20]
-
         context = {
             "country": country_cleaned,
             "choices": choices,
