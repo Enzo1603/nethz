@@ -10,7 +10,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    # Google Indexing
+
+    <!-- SEO Meta Tags -->
+    {% include "seo_meta.html" %}
+
+    <!-- Google Indexing-->
     <meta name="google-site-verification" content="yE_G--nodNypdq72VR-Bw07R-C6riUMCn2a46es_jtY" />
 
     {% include "dependencies/_bootstrap.html" %}
@@ -26,7 +30,7 @@
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'images/eth-logo.ico' %}">
 
-    <title>Enzo Baraldi</title>
+    <title>{{ title|default:"Enzo Baraldi" }}</title>
 </head>
 
 <body>

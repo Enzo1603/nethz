@@ -13,6 +13,14 @@ from .country_data import (
     VALID_REGIONS,
 )
 from .currency_data import CurrencyData
+from lib.seo_utils import (
+    get_worldle_home_seo,
+    get_worldle_capitals_seo,
+    get_worldle_languages_seo,
+    get_worldle_competitive_seo,
+    get_leaderboards_seo,
+    add_seo_to_context,
+)
 
 
 def home(request):
@@ -25,18 +33,20 @@ def home(request):
         competitive_languages_card,
     )
 
-    return render(
-        request,
-        "worldle/home.html",
-        {
-            "capitals_card": capitals_card,
-            "languages_card": languages_card,
-            "competitive_areas_card": competitive_areas_card,
-            "competitive_capitals_card": competitive_capitals_card,
-            "competitive_currencies_card": competitive_currencies_card,
-            "competitive_languages_card": competitive_languages_card,
-        },
-    )
+    context = {
+        "capitals_card": capitals_card,
+        "languages_card": languages_card,
+        "competitive_areas_card": competitive_areas_card,
+        "competitive_capitals_card": competitive_capitals_card,
+        "competitive_currencies_card": competitive_currencies_card,
+        "competitive_languages_card": competitive_languages_card,
+    }
+
+    # Add SEO data
+    seo_data = get_worldle_home_seo()
+    add_seo_to_context(context, seo_data)
+
+    return render(request, "worldle/home.html", context)
 
 
 def leaderboard_data(request, highscore_db: str):
@@ -78,6 +88,11 @@ def leaderboards(request):
             "link": reverse("worldle:competitive_languages"),
         },
     ]
+
+    # Add SEO data
+    seo_data = get_leaderboards_seo()
+    add_seo_to_context(context, seo_data)
+
     return render(
         request,
         "worldle/leaderboards.html",
@@ -103,15 +118,21 @@ def capitals(request, region):
     capitals_list = list(map(str.strip, capitals_list))
     country_capital = ", ".join(capitals_list)
 
+    context = {
+        "region": region,
+        "country_image_name": country_image_name,
+        "country_name": country_name,
+        "country_capital": country_capital,
+    }
+
+    # Add SEO data
+    seo_data = get_worldle_capitals_seo(region)
+    add_seo_to_context(context, seo_data)
+
     return render(
         request,
         "worldle/capitals.html",
-        {
-            "region": region,
-            "country_image_name": country_image_name,
-            "country_name": country_name,
-            "country_capital": country_capital,
-        },
+        context,
     )
 
 
@@ -139,15 +160,21 @@ def competitive_capitals(request):
             4, CountryHeader.capital, correct_answer
         )
 
+        context = {
+            "country": country_cleaned,
+            "choices": choices,
+            "score": score,
+            "highscore": capitals_highscore,
+        }
+
+        # Add SEO data
+        seo_data = get_worldle_competitive_seo("capitals")
+        add_seo_to_context(context, seo_data)
+
         return render(
             request,
             "worldle/competitive_capitals.html",
-            {
-                "country": country_cleaned,
-                "choices": choices,
-                "score": score,
-                "highscore": capitals_highscore,
-            },
+            context,
         )
 
     elif request.method == "POST":
@@ -220,15 +247,21 @@ def languages(request, region):
     languages_list = list(map(str.strip, languages_list))
     country_languages = ", ".join(languages_list)
 
+    context = {
+        "region": region,
+        "country_image_name": country_image_name,
+        "country_name": country_name,
+        "country_languages": country_languages,
+    }
+
+    # Add SEO data
+    seo_data = get_worldle_languages_seo(region)
+    add_seo_to_context(context, seo_data)
+
     return render(
         request,
         "worldle/languages.html",
-        {
-            "region": region,
-            "country_image_name": country_image_name,
-            "country_name": country_name,
-            "country_languages": country_languages,
-        },
+        context,
     )
 
 
@@ -259,16 +292,21 @@ def competitive_languages(request):
         # Leaderboard
         users = get_leaders(LeaderDatabase.languages_highscore)[:20]
 
+        context = {
+            "country": country_cleaned,
+            "choices": choices,
+            "score": score,
+            "highscore": languages_highscore,
+        }
+
+        # Add SEO data
+        seo_data = get_worldle_competitive_seo("languages")
+        add_seo_to_context(context, seo_data)
+
         return render(
             request,
             "worldle/competitive_languages.html",
-            {
-                "country": country_cleaned,
-                "choices": choices,
-                "score": score,
-                "highscore": languages_highscore,
-                "users": users,
-            },
+            context,
         )
 
     elif request.method == "POST":
@@ -340,15 +378,21 @@ def competitive_areas(request):
 
         country2_cleaned = CountryData().clean_country_data(country2)
 
+        context = {
+            "country1": country1_cleaned,
+            "country2": country2_cleaned,
+            "score": score,
+            "highscore": areas_highscore,
+        }
+
+        # Add SEO data
+        seo_data = get_worldle_competitive_seo("areas")
+        add_seo_to_context(context, seo_data)
+
         return render(
             request,
             "worldle/competitive_areas.html",
-            {
-                "country1": country1_cleaned,
-                "country2": country2_cleaned,
-                "score": score,
-                "highscore": areas_highscore,
-            },
+            context,
         )
 
     elif request.method == "POST":
@@ -431,15 +475,21 @@ def competitive_currencies(request):
             4, CountryHeader.currencies, correct_answer
         )
 
+        context = {
+            "country": country_cleaned,
+            "choices": choices,
+            "score": score,
+            "highscore": currencies_highscore,
+        }
+
+        # Add SEO data
+        seo_data = get_worldle_competitive_seo("currencies")
+        add_seo_to_context(context, seo_data)
+
         return render(
             request,
             "worldle/competitive_currencies.html",
-            {
-                "country": country_cleaned,
-                "choices": choices,
-                "score": score,
-                "highscore": currencies_highscore,
-            },
+            context,
         )
 
     elif request.method == "POST":

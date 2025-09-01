@@ -6,6 +6,7 @@ from django.utils.translation import gettext as _
 
 from .models import ExerciseSession
 from django.db.models import Q
+from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_context
 
 
 def home(request):
@@ -34,15 +35,17 @@ def home(request):
         "disable": False,
     }
 
-    return render(
-        request,
-        "main/home.html",
-        {
-            "tm_card": tm_card,
-            "inf_card": inf_card,
-            "worldle_card": worldle_card,
-        },
-    )
+    context = {
+        "tm_card": tm_card,
+        "inf_card": inf_card,
+        "worldle_card": worldle_card,
+    }
+
+    # Add SEO data
+    seo_data = get_home_seo()
+    add_seo_to_context(context, seo_data)
+
+    return render(request, "main/home.html", context)
 
 
 def technische_mechanik(request, semester: str | None = None):
@@ -79,5 +82,9 @@ def technische_mechanik(request, semester: str | None = None):
         "current_semester": current_semester,
         "available_semesters": available_semesters,
     }
+
+    # Add SEO data
+    seo_data = get_technische_mechanik_seo(current_semester)
+    add_seo_to_context(context, seo_data)
 
     return render(request, "exercise_sessions/technische_mechanik.html", context)
