@@ -17,4 +17,7 @@ def get_version():
 
 
 def inject_global_context(request):
-    return {"utcnow": datetime.now(timezone.utc), "version": get_version()}
+    return {
+        "utcnow": datetime.now(timezone.utc),
+        "version": get_version(),
+    }

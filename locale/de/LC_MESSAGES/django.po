@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-12 18:17+0000\n"
+"POT-Creation-Date: 2025-09-01 21:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,6 +233,83 @@ msgstr ""
 "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit "
 "Ihrem neuen Passwort anmelden."
 
+#: lib/seo_utils.py:29
+msgid ""
+"Engineering mechanics study materials and geography games for ETH Zurich "
+"students"
+msgstr ""
+"Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH Zürich "
+"Studierende"
+
+#: lib/seo_utils.py:30
+msgid "ETH Zurich, engineering mechanics, worldle, geography, study materials"
+msgstr ""
+"ETH Zürich, Technische Mechanik, Worldle, Geografie, Studienmaterialien"
+
+#: lib/seo_utils.py:37
+msgid "Engineering Mechanics {}"
+msgstr "Technische Mechanik {}"
+
+#: lib/seo_utils.py:38 lib/seo_utils.py:42
+msgid ""
+"Engineering mechanics study materials and solutions for ETH Zurich students"
+msgstr ""
+"Technische Mechanik Studienmaterialien und Lösungen für ETH Zürich "
+"Studierende"
+
+#: lib/seo_utils.py:39 lib/seo_utils.py:43
+msgid "engineering mechanics, ETH Zurich, study materials, engineering"
+msgstr "Technische Mechanik, ETH Zürich, Studienmaterialien, Ingenieurwesen"
+
+#: lib/seo_utils.py:41 main/views.py:14 templates/components/_navbar.html:25
+#: templates/exercise_sessions/technische_mechanik.html:5
+msgid "Engineering Mechanics"
+msgstr "Technische Mechanik"
+
+#: lib/seo_utils.py:52
+msgid "Geography games - guess capitals, languages, currencies and countries"
+msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
+
+#: lib/seo_utils.py:53
+msgid "worldle, geography, capitals, languages, currencies, quiz, game"
+msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
+
+#: lib/seo_utils.py:62 lib/seo_utils.py:66
+msgid "Geography quiz game - guess the capitals"
+msgstr "Geografie-Spiel - Hauptstädte erraten"
+
+#: lib/seo_utils.py:63 lib/seo_utils.py:67
+msgid "capitals, geography, worldle, quiz, game"
+msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
+
+#: lib/seo_utils.py:77 lib/seo_utils.py:81
+msgid "Geography quiz game - guess the languages"
+msgstr "Geografie-Spiel - Sprachen erraten"
+
+#: lib/seo_utils.py:78 lib/seo_utils.py:82
+msgid "languages, geography, worldle, quiz, game"
+msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
+
+#: lib/seo_utils.py:91
+msgid "Competitive geography quiz with leaderboards"
+msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
+
+#: lib/seo_utils.py:92
+msgid "worldle, geography, competitive, quiz, leaderboard"
+msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
+
+#: lib/seo_utils.py:99
+msgid "Worldle Leaderboards"
+msgstr "Worldle-Ranglisten"
+
+#: lib/seo_utils.py:100
+msgid "View top players in geography quiz games"
+msgstr "Top-Spieler in Geografie-Spielen anzeigen"
+
+#: lib/seo_utils.py:101
+msgid "leaderboards, worldle, geography, quiz, rankings"
+msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
+
 #: lib/templatetags/macros.py:45
 msgid "Coming soon (or never)"
 msgstr "Demnächst (oder nie)"
@@ -313,24 +390,19 @@ msgstr "Wochen-Eintrag"
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
-#: main/views.py:13 templates/components/_navbar.html:25
-#: templates/exercise_sessions/technische_mechanik.html:5
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
-
-#: main/views.py:14 main/views.py:22
+#: main/views.py:15 main/views.py:23
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
 
-#: main/views.py:21
+#: main/views.py:22
 msgid "Computer Science I 2024"
 msgstr "Informatik I 2024"
 
-#: main/views.py:30
+#: main/views.py:31
 msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
-#: main/views.py:31
+#: main/views.py:32
 msgid "To the game modes"
 msgstr "Zu den Spielmodi"
 
@@ -445,7 +517,7 @@ msgid "To the Polybox"
 msgstr "Zur Polybox"
 
 #: templates/exercise_sessions/technische_mechanik.html:49
-#: templates/main/home.html:24
+#: templates/main/home.html:34
 msgid "Useful Links"
 msgstr "Nützliche Links"
 
@@ -517,15 +589,15 @@ msgstr "Europa"
 msgid "Oceania"
 msgstr "Ozeanien"
 
-#: templates/main/home.html:27
+#: templates/main/home.html:37
 msgid "AMIV new Study Documents"
 msgstr "AMIV neue Studienunterlagen"
 
-#: templates/main/home.html:28
+#: templates/main/home.html:38
 msgid "AMIV old Study Documents"
 msgstr "AMIV alte Studienunterlagen"
 
-#: templates/main/home.html:29
+#: templates/main/home.html:39
 msgid ""
 "Polybox with additional old exams (especially useful for EM in 4th semester)"
 msgstr ""
