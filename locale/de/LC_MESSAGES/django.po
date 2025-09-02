@@ -400,11 +400,11 @@ msgstr "Die Unterlagennummer für diesen Eintrag."
 
 #: main/models.py:53
 msgid "Link to the exercise materials"
-msgstr "Link zu den Übungsunterlagen"
+msgstr "Link zu den Übungsmaterialien"
 
 #: main/models.py:54
 msgid "Link to the exercise materials for the week."
-msgstr "Link zu den Übungsunterlagen für die Woche."
+msgstr "Link zu den Übungsmaterialien für die Woche."
 
 #: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:105
 msgid "Remarks"
@@ -575,7 +575,7 @@ msgstr "Woche"
 
 #: templates/exercise_sessions/technische_mechanik.html:102
 msgid "Exercise Materials"
-msgstr "Übungsunterlagen"
+msgstr "Übungsmaterialien"
 
 #: templates/exercise_sessions/technische_mechanik.html:103
 msgid "Exercises"
@@ -587,7 +587,7 @@ msgstr "Lösungen"
 
 #: templates/exercise_sessions/technische_mechanik.html:119
 msgid "Exercise Material"
-msgstr "Übungsunterlage"
+msgstr "Übungsmaterial"
 
 #: templates/macros/leaderboard.html:9
 msgid "Go to Game"
