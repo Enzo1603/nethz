@@ -25,12 +25,12 @@ class SEOData:
 def get_home_seo():
     """SEO data for the home page"""
     return SEOData(
-        title="Enzo Baraldi",
+        title="Enzo Baraldi - ETH Zurich NETHZ",
         description=_(
-            "Engineering mechanics study materials and geography games for ETH Zurich students"
+            "Enzo Baraldi's engineering mechanics study materials and geography games for ETH Zurich NETHZ students"
         ),
         keywords=_(
-            "ETH Zurich, engineering mechanics, worldle, geography, study materials"
+            "Enzo Baraldi, ETH Zurich, NETHZ, engineering mechanics, worldle, geography, study materials, technische mechanik"
         ),
     )
 
@@ -38,17 +38,23 @@ def get_home_seo():
 def get_technische_mechanik_seo(semester=None):
     """SEO data for Technische Mechanik pages"""
     if semester:
-        title = _("Engineering Mechanics {}").format(semester.upper())
-        description = _(
-            "Engineering mechanics study materials and solutions for ETH Zurich students"
+        title = _("Engineering Mechanics {} - Enzo Baraldi ETH").format(
+            semester.upper()
         )
-        keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
+        description = _(
+            "Engineering mechanics study materials and solutions by Enzo Baraldi for ETH Zurich NETHZ students"
+        )
+        keywords = _(
+            "Enzo Baraldi, engineering mechanics, ETH Zurich, NETHZ, study materials, technische mechanik, engineering"
+        )
     else:
-        title = _("Engineering Mechanics")
+        title = _("Engineering Mechanics - Enzo Baraldi ETH")
         description = _(
-            "Engineering mechanics study materials and solutions for ETH Zurich students"
+            "Engineering mechanics study materials and solutions by Enzo Baraldi for ETH Zurich NETHZ students"
         )
-        keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
+        keywords = _(
+            "Enzo Baraldi, engineering mechanics, ETH Zurich, NETHZ, study materials, technische mechanik, engineering"
+        )
 
     return SEOData(title=title, description=description, keywords=keywords)
 

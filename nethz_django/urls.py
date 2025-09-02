@@ -20,6 +20,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
+from django.shortcuts import redirect
+from main.views import root_redirect
 from .sitemaps import (
     StaticViewSitemap,
     TechnischeMechanikSitemap,
@@ -36,6 +38,9 @@ sitemaps = {
 }
 
 urlpatterns = [
+    path(
+        "", root_redirect, name="root_redirect"
+    ),  # Root redirect for language detection
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     # SEO URLs
@@ -50,6 +55,8 @@ urlpatterns = [
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
         name="robots_txt",
     ),
+    # Serve favicon from static files
+    path("favicon.ico", lambda request: redirect("/static/images/eth-logo.ico")),
 ]
 
 urlpatterns += i18n_patterns(

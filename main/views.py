@@ -1,12 +1,25 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.templatetags.static import static
 from django.urls import reverse
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext as _, activate
+from django.utils import translation
 
 from .models import ExerciseSession
 from django.db.models import Q
 from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_context
+
+
+def root_redirect(request):
+    """Redirect to appropriate language based on browser preference"""
+    # Get browser's preferred language
+    accepted_languages = request.META.get("HTTP_ACCEPT_LANGUAGE", "")
+
+    # Check if German is preferred
+    if "de" in accepted_languages.lower():
+        return redirect("/de/")
+    else:
+        return redirect("/en/")
 
 
 def home(request):
