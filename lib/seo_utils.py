@@ -25,12 +25,12 @@ class SEOData:
 def get_home_seo():
     """SEO data for the home page"""
     return SEOData(
-        title="Enzo Baraldi - ETH Zurich NETHZ",
+        title="Enzo Baraldi",
         description=_(
-            "Enzo Baraldi's engineering mechanics study materials and geography games for ETH Zurich NETHZ students"
+            "Engineering mechanics study materials and geography games for ETH students"
         ),
         keywords=_(
-            "Enzo Baraldi, ETH Zurich, NETHZ, engineering mechanics, worldle, geography, study materials, technische mechanik"
+            "Enzo Baraldi, ETH Zurich, ETHZ, engineering mechanics, technische mechanik, worldle, geography, study materials"
         ),
     )
 
@@ -38,22 +38,20 @@ def get_home_seo():
 def get_technische_mechanik_seo(semester=None):
     """SEO data for Technische Mechanik pages"""
     if semester:
-        title = _("Engineering Mechanics {} - Enzo Baraldi ETH").format(
-            semester.upper()
-        )
+        title = _("Engineering Mechanics {}").format(semester.upper())
         description = _(
-            "Engineering mechanics study materials and solutions by Enzo Baraldi for ETH Zurich NETHZ students"
+            "Engineering mechanics study materials and solutions for ETH students"
         )
         keywords = _(
-            "Enzo Baraldi, engineering mechanics, ETH Zurich, NETHZ, study materials, technische mechanik, engineering"
+            "Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, study materials"
         )
     else:
-        title = _("Engineering Mechanics - Enzo Baraldi ETH")
+        title = _("Engineering Mechanics")
         description = _(
-            "Engineering mechanics study materials and solutions by Enzo Baraldi for ETH Zurich NETHZ students"
+            "Engineering mechanics study materials and solutions for ETH students"
         )
         keywords = _(
-            "Enzo Baraldi, engineering mechanics, ETH Zurich, NETHZ, study materials, technische mechanik, engineering"
+            "Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, study materials"
         )
 
     return SEOData(title=title, description=description, keywords=keywords)

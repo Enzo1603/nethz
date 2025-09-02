@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-02 10:15+0200\n"
+"POT-Creation-Date: 2025-09-02 10:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,83 +235,82 @@ msgstr ""
 
 #: lib/seo_utils.py:30
 msgid ""
-"Enzo Baraldi's engineering mechanics study materials and geography games for "
-"ETH Zurich NETHZ students"
+"Engineering mechanics study materials and geography games for ETH students"
 msgstr ""
-"Enzo Baraldis Technische Mechanik Studienmaterialien und Geografie-Spiele für "
-"ETH Zürich NETHZ Studierende"
+"Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH "
+"Studierende"
 
 #: lib/seo_utils.py:33
 msgid ""
-"Enzo Baraldi, ETH Zurich, NETHZ, engineering mechanics, worldle, geography, "
-"study materials, technische mechanik"
+"Enzo Baraldi, ETH Zurich, ETHZ, engineering mechanics, technische mechanik, "
+"worldle, geography, study materials"
 msgstr ""
-"Enzo Baraldi, ETH Zurich, NETHZ, engineering mechanics, worldle, geography, "
-"study materials, technische mechanik"
+"Enzo Baraldi, ETH Zürich, ETHZ, engineering mechanics, technische mechanik, "
+"worldle, geography, study materials"
 
 #: lib/seo_utils.py:41
-msgid "Engineering Mechanics {} - Enzo Baraldi ETH"
-msgstr "Technische Mechanik {} - Enzo Baraldi ETH"
+msgid "Engineering Mechanics"
+msgstr "Technische Mechanik"
 
-#: lib/seo_utils.py:45 lib/seo_utils.py:53
-msgid ""
-"Engineering mechanics study materials and solutions by Enzo Baraldi for ETH "
-"Zurich NETHZ students"
+#: lib/seo_utils.py:43 lib/seo_utils.py:51
+msgid "Engineering mechanics study materials and solutions for ETH students"
 msgstr ""
-"Technische Mechanik Studienmaterialien und Lösungen von Enzo Baraldi für ETH "
-"Zürich NETHZ Studierende"
+"Technische Mechanik Studienmaterialien und Lösungen für ETH Studierende"
 
-#: lib/seo_utils.py:48 lib/seo_utils.py:56
+#: lib/seo_utils.py:46 lib/seo_utils.py:54
 msgid ""
-"Enzo Baraldi, engineering mechanics, ETH Zurich, NETHZ, study materials, "
-"technische mechanik, engineering"
-msgstr "Enzo Baraldi, engineering mechanics, ETH Zürich, NETHZ, Studienmaterialien, technische mechanik, Ingenieurwesen"
+"Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, "
+"study materials"
+msgstr ""
+"Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zürich, ETHZ, "
+"Studienmaterialien"
 
-#: lib/seo_utils.py:51
-msgid "Engineering Mechanics - Enzo Baraldi ETH"
-msgstr "Technische Mechanik - Enzo Baraldi ETH"
+#: lib/seo_utils.py:49 main/views.py:27 templates/components/_navbar.html:25
+#: templates/exercise_sessions/technische_mechanik.html:5
+msgid "Engineering Mechanics"
+msgstr "Technische Mechanik"
 
-#: lib/seo_utils.py:67
+#: lib/seo_utils.py:65
 msgid "Geography games - guess capitals, languages, currencies and countries"
 msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
 
-#: lib/seo_utils.py:69
+#: lib/seo_utils.py:67
 msgid "worldle, geography, capitals, languages, currencies, quiz, game"
 msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
 
-#: lib/seo_utils.py:78 lib/seo_utils.py:82
+#: lib/seo_utils.py:76 lib/seo_utils.py:80
 msgid "Geography quiz game - guess the capitals"
 msgstr "Geografie-Spiel - Hauptstädte erraten"
 
-#: lib/seo_utils.py:79 lib/seo_utils.py:83
+#: lib/seo_utils.py:77 lib/seo_utils.py:81
 msgid "capitals, geography, worldle, quiz, game"
 msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
 
-#: lib/seo_utils.py:93 lib/seo_utils.py:97
+#: lib/seo_utils.py:91 lib/seo_utils.py:95
 msgid "Geography quiz game - guess the languages"
 msgstr "Geografie-Spiel - Sprachen erraten"
 
-#: lib/seo_utils.py:94 lib/seo_utils.py:98
+#: lib/seo_utils.py:92 lib/seo_utils.py:96
 msgid "languages, geography, worldle, quiz, game"
 msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
 
-#: lib/seo_utils.py:107
+#: lib/seo_utils.py:105
 msgid "Competitive geography quiz with leaderboards"
 msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
 
-#: lib/seo_utils.py:108
+#: lib/seo_utils.py:106
 msgid "worldle, geography, competitive, quiz, leaderboard"
 msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
 
-#: lib/seo_utils.py:115
+#: lib/seo_utils.py:113
 msgid "Worldle Leaderboards"
 msgstr "Worldle-Ranglisten"
 
-#: lib/seo_utils.py:116
+#: lib/seo_utils.py:114
 msgid "View top players in geography quiz games"
 msgstr "Top-Spieler in Geografie-Spielen anzeigen"
 
-#: lib/seo_utils.py:117
+#: lib/seo_utils.py:115
 msgid "leaderboards, worldle, geography, quiz, rankings"
 msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
 
@@ -394,11 +393,6 @@ msgstr "Wochen-Eintrag"
 #: main/models.py:70
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
-
-#: main/views.py:27 templates/components/_navbar.html:25
-#: templates/exercise_sessions/technische_mechanik.html:5
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
 
 #: main/views.py:28 main/views.py:36
 msgid "To the documents"
