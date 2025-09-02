@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-02 10:43+0200\n"
+"POT-Creation-Date: 2025-09-02 23:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,7 +293,7 @@ msgstr ""
 "Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zürich, ETHZ, "
 "Studienmaterialien"
 
-#: lib/seo_utils.py:63 main/views.py:41 templates/components/_navbar.html:25
+#: lib/seo_utils.py:63 main/views.py:40 templates/components/_navbar.html:25
 #: templates/exercise_sessions/technische_mechanik.html:5
 msgid "Engineering Mechanics"
 msgstr "Technische Mechanik"
@@ -406,7 +406,7 @@ msgstr "Link zu den Übungsmaterialien"
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsmaterialien für die Woche."
 
-#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:105
+#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:95
 msgid "Remarks"
 msgstr "Anmerkungen"
 
@@ -422,19 +422,19 @@ msgstr "Wochen-Eintrag"
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
-#: main/views.py:42 main/views.py:50
+#: main/views.py:41 main/views.py:49
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
 
-#: main/views.py:49
+#: main/views.py:48
 msgid "Computer Science I 2024"
 msgstr "Informatik I 2024"
 
-#: main/views.py:58
+#: main/views.py:57
 msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
-#: main/views.py:59
+#: main/views.py:58
 msgid "To the game modes"
 msgstr "Zu den Spielmodi"
 
@@ -554,38 +554,34 @@ msgid "Useful Links"
 msgstr "Nützliche Links"
 
 #: templates/exercise_sessions/technische_mechanik.html:58
-msgid "YT - EE4ETH - Engineering Mechanics Playlist"
-msgstr "YT - EE4ETH - Technische Mechanik Playlist"
-
-#: templates/exercise_sessions/technische_mechanik.html:68
-msgid "Lina de Windt's website"
-msgstr "Lina de Windts Webseite"
-
-#: templates/exercise_sessions/technische_mechanik.html:78
 msgid "Lina de Windt's PVK"
 msgstr "Lina de Windts PVK"
 
-#: templates/exercise_sessions/technische_mechanik.html:88
+#: templates/exercise_sessions/technische_mechanik.html:68
 msgid "Theory Recap by Felix Stalder"
 msgstr "Theorieblätter von Felix Stalder"
 
-#: templates/exercise_sessions/technische_mechanik.html:101
+#: templates/exercise_sessions/technische_mechanik.html:78
+msgid "YT - EE4ETH - Engineering Mechanics Playlist"
+msgstr "YT - EE4ETH - Technische Mechanik Playlist"
+
+#: templates/exercise_sessions/technische_mechanik.html:91
 msgid "Week"
 msgstr "Woche"
 
-#: templates/exercise_sessions/technische_mechanik.html:102
+#: templates/exercise_sessions/technische_mechanik.html:92
 msgid "Exercise Materials"
 msgstr "Übungsmaterialien"
 
-#: templates/exercise_sessions/technische_mechanik.html:103
+#: templates/exercise_sessions/technische_mechanik.html:93
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/exercise_sessions/technische_mechanik.html:104
+#: templates/exercise_sessions/technische_mechanik.html:94
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/exercise_sessions/technische_mechanik.html:119
+#: templates/exercise_sessions/technische_mechanik.html:109
 msgid "Exercise Material"
 msgstr "Übungsmaterial"
 
@@ -594,19 +590,19 @@ msgid "Go to Game"
 msgstr "Zum Spiel"
 
 #: templates/main/home.html:37
-msgid "AMIV new Study Documents"
-msgstr "AMIV neue Studienunterlagen"
+msgid "«Community Solutions» by AMIV"
+msgstr "«Community Solutions» des AMIV"
 
 #: templates/main/home.html:38
-msgid "AMIV old Study Documents"
-msgstr "AMIV alte Studienunterlagen"
+msgid ""
+"Polybox with additional ITET exams (especially useful for EM in 4th semester)"
+msgstr ""
+"Polybox mit zusätzlichen ITET-Prüfungen (besonders nützlich für EM im 4. "
+"Semester)"
 
 #: templates/main/home.html:39
-msgid ""
-"Polybox with additional old exams (especially useful for EM in 4th semester)"
-msgstr ""
-"Polybox mit zusätzlichen alten Prüfungen (besonders nützlich für EM im 4. "
-"Semester)"
+msgid "YouTube Channel - EE4ETH"
+msgstr "YouTube-Kanal - EE4ETH"
 
 #: templates/worldle/capitals.html:36
 msgid "Enter the capital(s)"
