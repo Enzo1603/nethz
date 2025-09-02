@@ -5,6 +5,20 @@ Simple SEO utility functions for basic meta tag management.
 from django.utils.translation import gettext as _
 
 
+def translate_region_name(region):
+    """Translate region names for display"""
+    region_translations = {
+        "worldwide": _("Worldwide"),
+        "africa": _("Africa"),
+        "americas": _("Americas"),
+        "asia": _("Asia"),
+        "europe": _("Europe"),
+        "oceania": _("Oceania"),
+        "antarctic": _("Antarctic"),
+    }
+    return region_translations.get(region, region.replace("-", " ").title())
+
+
 class SEOData:
     """Container for basic SEO meta data"""
 
@@ -71,7 +85,7 @@ def get_worldle_home_seo():
 def get_worldle_capitals_seo(region=None):
     """SEO data for Worldle capitals pages"""
     if region:
-        region_display = region.replace("-", " ").title()
+        region_display = translate_region_name(region)
         title = "Worldle {}".format(region_display)
         description = _("Geography quiz game - guess the capitals")
         keywords = _("capitals, geography, worldle, quiz, game")
@@ -86,7 +100,7 @@ def get_worldle_capitals_seo(region=None):
 def get_worldle_languages_seo(region=None):
     """SEO data for Worldle languages pages"""
     if region:
-        region_display = region.replace("-", " ").title()
+        region_display = translate_region_name(region)
         title = "Worldle {}".format(region_display)
         description = _("Geography quiz game - guess the languages")
         keywords = _("languages, geography, worldle, quiz, game")

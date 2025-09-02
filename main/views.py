@@ -11,15 +11,29 @@ from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_
 
 
 def root_redirect(request):
-    """Redirect to appropriate language based on browser preference"""
-    # Get browser's preferred language
-    accepted_languages = request.META.get("HTTP_ACCEPT_LANGUAGE", "")
+    """Redirect to appropriate language based on saved preference or browser language"""
+    # Check if user has a saved language preference in cookies (Django's standard cookie)
+    saved_language = request.COOKIES.get('django_language')
+
+    if saved_language in ['de', 'en']:
+        # Use saved language preference
+        response = redirect(f'/{saved_language}/')
+        return response
+
+    # First visit - use browser's preferred language
+    accepted_languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
 
     # Check if German is preferred
-    if "de" in accepted_languages.lower():
-        return redirect("/de/")
+    if 'de' in accepted_languages.lower():
+        response = redirect('/de/')
+        # Set the language cookie for future visits (same as Django's set_language view does)
+        response.set_cookie('django_language', 'de', max_age=365*24*60*60)
+        return response
     else:
-        return redirect("/en/")
+        response = redirect('/en/')
+        # Set the language cookie for future visits (same as Django's set_language view does)
+        response.set_cookie('django_language', 'en', max_age=365*24*60*60)
+        return response
 
 
 def home(request):

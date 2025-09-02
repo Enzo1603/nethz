@@ -70,9 +70,24 @@
 
                 <li class="nav-item ms-3 my-2">
                     <div class="btn-group btn-group-sm" style="margin-top: auto;">
-                        <a href="{% url 'set_language' %}?next=/de{{ request.path|slice:'3:' }}&language=de" class="btn btn-{% if LANGUAGE_CODE != 'de'  %}outline-{% endif %}light">DE</a>
-                        <a href="{% url 'set_language' %}?next=/en{{ request.path|slice:'3:' }}&language=en" class="btn btn-{% if LANGUAGE_CODE != 'en'  %}outline-{% endif %}light">EN</a>
+                        <button onclick="switchLanguage('de')" class="btn btn-{% if LANGUAGE_CODE != 'de'  %}outline-{% endif %}light">DE</button>
+                        <button onclick="switchLanguage('en')" class="btn btn-{% if LANGUAGE_CODE != 'en'  %}outline-{% endif %}light">EN</button>
                     </div>
+                    
+                    <!-- Hidden form for language switching -->
+                    <form id="language-form" method="post" action="{% url 'set_language' %}" style="display: none;">
+                        {% csrf_token %}
+                        <input type="hidden" name="language" id="language-input">
+                        <input type="hidden" name="next" id="next-input">
+                    </form>
+                    
+                    <script>
+                    function switchLanguage(lang) {
+                        document.getElementById('language-input').value = lang;
+                        document.getElementById('next-input').value = '/' + lang + '{{ request.path|slice:"3:" }}';
+                        document.getElementById('language-form').submit();
+                    }
+                    </script>
                 </li>
 
 
