@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-02 10:25+0200\n"
+"POT-Creation-Date: 2025-09-02 10:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -249,8 +249,8 @@ msgstr ""
 "worldle, geography, study materials"
 
 #: lib/seo_utils.py:41
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
+msgid "Engineering Mechanics {}"
+msgstr "Technische Mechanik {}"
 
 #: lib/seo_utils.py:43 lib/seo_utils.py:51
 msgid "Engineering mechanics study materials and solutions for ETH students"
