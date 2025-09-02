@@ -2,8 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.templatetags.static import static
 from django.urls import reverse
-from django.utils.translation import gettext as _, activate
-from django.utils import translation
+from django.utils.translation import gettext as _
 
 from .models import ExerciseSession
 from django.db.models import Q
@@ -13,26 +12,26 @@ from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_
 def root_redirect(request):
     """Redirect to appropriate language based on saved preference or browser language"""
     # Check if user has a saved language preference in cookies (Django's standard cookie)
-    saved_language = request.COOKIES.get('django_language')
+    saved_language = request.COOKIES.get("django_language")
 
-    if saved_language in ['de', 'en']:
+    if saved_language in ["de", "en"]:
         # Use saved language preference
-        response = redirect(f'/{saved_language}/')
+        response = redirect(f"/{saved_language}/")
         return response
 
     # First visit - use browser's preferred language
-    accepted_languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
+    accepted_languages = request.META.get("HTTP_ACCEPT_LANGUAGE", "")
 
     # Check if German is preferred
-    if 'de' in accepted_languages.lower():
-        response = redirect('/de/')
+    if "de" in accepted_languages.lower():
+        response = redirect("/de/")
         # Set the language cookie for future visits (same as Django's set_language view does)
-        response.set_cookie('django_language', 'de', max_age=365*24*60*60)
+        response.set_cookie("django_language", "de", max_age=365 * 24 * 60 * 60)
         return response
     else:
-        response = redirect('/en/')
+        response = redirect("/en/")
         # Set the language cookie for future visits (same as Django's set_language view does)
-        response.set_cookie('django_language', 'en', max_age=365*24*60*60)
+        response.set_cookie("django_language", "en", max_age=365 * 24 * 60 * 60)
         return response
 
 
