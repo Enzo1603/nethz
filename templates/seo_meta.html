@@ -3,12 +3,23 @@
     <meta name="keywords" content="{{ meta_keywords|default:'ETH Zurich, engineering mechanics, worldle, geography, capitals, languages' }}">
     <meta name="author" content="Enzo Baraldi">
     <meta name="robots" content="{{ meta_robots|default:'index, follow' }}">
-    
+
     <!-- Canonical URL -->
     {% get_current_language as LANGUAGE_CODE %}
-    <link rel="canonical" href="https://nethz.baraldi.ch{% if LANGUAGE_CODE == 'de' %}/de{% else %}/en{% endif %}{{ request.path|slice:'3:' }}">
-    
+    {% url 'main:home' as home_url %}
+    {% if '/accounts/login/' in request.path %}
+        <link rel="canonical" href="https://nethz.baraldi.ch{% if LANGUAGE_CODE == 'de' %}/de{% else %}/en{% endif %}{{ home_url|slice:'3:' }}">
+    {% else %}
+        <link rel="canonical" href="https://nethz.baraldi.ch{% if LANGUAGE_CODE == 'de' %}/de{% else %}/en{% endif %}{{ request.path|slice:'3:' }}">
+    {% endif %}
+
     <!-- Hreflang for multilingual SEO -->
-    <link rel="alternate" hreflang="en" href="https://nethz.baraldi.ch/en{{ request.path|slice:'3:' }}">
-    <link rel="alternate" hreflang="de" href="https://nethz.baraldi.ch/de{{ request.path|slice:'3:' }}">
-    <link rel="alternate" hreflang="x-default" href="https://nethz.baraldi.ch/en{{ request.path|slice:'3:' }}">
+    {% if '/accounts/login/' in request.path %}
+        <link rel="alternate" hreflang="en" href="https://nethz.baraldi.ch/en{{ home_url|slice:'3:' }}">
+        <link rel="alternate" hreflang="de" href="https://nethz.baraldi.ch/de{{ home_url|slice:'3:' }}">
+        <link rel="alternate" hreflang="x-default" href="https://nethz.baraldi.ch/en{{ home_url|slice:'3:' }}">
+    {% else %}
+        <link rel="alternate" hreflang="en" href="https://nethz.baraldi.ch/en{{ request.path|slice:'3:' }}">
+        <link rel="alternate" hreflang="de" href="https://nethz.baraldi.ch/de{{ request.path|slice:'3:' }}">
+        <link rel="alternate" hreflang="x-default" href="https://nethz.baraldi.ch/en{{ request.path|slice:'3:' }}">
+    {% endif %}
