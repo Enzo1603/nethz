@@ -6,37 +6,11 @@ Sitemap: https://{{ request.get_host }}/sitemap.xml
 
 # Disallow admin and private areas
 Disallow: /admin/
-Disallow: /accounts/login/
-Disallow: /accounts/signup/
-Disallow: /accounts/password_reset/
-Disallow: /accounts/reset/
-Disallow: /accounts/activate/
+Disallow: /accounts/
 Disallow: /i18n/
 
-# Disallow login pages with query parameters
-Disallow: /accounts/login/?next=*
-Disallow: /*/accounts/login/?next=*
-
 # Disallow competitive games (require login)
-Disallow: /*/worldle/capitals/competitive/
-Disallow: /*/worldle/languages/competitive/
-Disallow: /*/worldle/currencies/competitive/
-Disallow: /*/worldle/areas/competitive/
-Disallow: /worldle/capitals/competitive/
-Disallow: /worldle/languages/competitive/
-Disallow: /worldle/currencies/competitive/
-Disallow: /worldle/areas/competitive/
+Disallow: /*/worldle/*/competitive/
+Disallow: /worldle/*/competitive/
 
-# Allow public worldle pages
-Allow: /*/worldle/
-Allow: /*/worldle/capitals/
-Allow: /*/worldle/languages/
-Allow: /*/worldle/leaderboards/
-Allow: /worldle/
-Allow: /worldle/capitals/
-Allow: /worldle/languages/
-Allow: /worldle/leaderboards/
-
-# Allow technische mechanik
-Allow: /*/technische-mechanik/
-Allow: /technische-mechanik/
+# Everything else is allowed by default
