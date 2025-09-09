@@ -19,11 +19,7 @@ class StaticViewSitemap(Sitemap):
             "main:technische_mechanik",
             "worldle:home",
             "worldle:default_capitals",
-            "worldle:competitive_capitals",
             "worldle:default_languages",
-            "worldle:competitive_languages",
-            "worldle:competitive_currencies",
-            "worldle:competitive_areas",
             "worldle:leaderboards",
         ]
 

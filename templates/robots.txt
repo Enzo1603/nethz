@@ -17,7 +17,26 @@ Disallow: /i18n/
 Disallow: /accounts/login/?next=*
 Disallow: /*/accounts/login/?next=*
 
-# Allow important pages
-Allow: /
+# Disallow competitive games (require login)
+Disallow: /*/worldle/capitals/competitive/
+Disallow: /*/worldle/languages/competitive/
+Disallow: /*/worldle/currencies/competitive/
+Disallow: /*/worldle/areas/competitive/
+Disallow: /worldle/capitals/competitive/
+Disallow: /worldle/languages/competitive/
+Disallow: /worldle/currencies/competitive/
+Disallow: /worldle/areas/competitive/
+
+# Allow public worldle pages
+Allow: /*/worldle/
+Allow: /*/worldle/capitals/
+Allow: /*/worldle/languages/
+Allow: /*/worldle/leaderboards/
 Allow: /worldle/
+Allow: /worldle/capitals/
+Allow: /worldle/languages/
+Allow: /worldle/leaderboards/
+
+# Allow technische mechanik
+Allow: /*/technische-mechanik/
 Allow: /technische-mechanik/
