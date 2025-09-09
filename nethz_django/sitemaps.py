@@ -51,7 +51,7 @@ class TechnischeMechanikSitemap(Sitemap):
         ).values_list("short_name", flat=True)
 
         # Extract semester part from "TM_HS24" -> "HS24"
-        semesters = [session.replace("TM_", "").lower() for session in tm_sessions]
+        semesters = [session.replace("TM_", "") for session in tm_sessions]
         return semesters
 
     def location(self, item):
