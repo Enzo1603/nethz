@@ -13,7 +13,7 @@ def home(request):
     tm_card = {
         "title": _("Engineering Mechanics"),
         "button_text": _("To the documents"),
-        "image_path": static("images/technische_mechanik_6px.jpg"),
+        "image_path": static("images/technische_mechanik_6px.webp"),
         "link": reverse("main:technische_mechanik"),
         "disable": False,
     }
@@ -21,7 +21,7 @@ def home(request):
     inf_card = {
         "title": _("Computer Science I 2024"),
         "button_text": _("To the documents"),
-        "image_path": static("images/informatik1_3px.jpg"),
+        "image_path": static("images/informatik1_3px.webp"),
         "link": "#",
         "disable": True,
     }
@@ -30,7 +30,7 @@ def home(request):
         "title": "Worldle",
         "description": _("Various country quizzes"),
         "button_text": _("To the game modes"),
-        "image_path": static("images/Earth_2px.jpg"),
+        "image_path": static("images/Earth_2px.webp"),
         "link": reverse("worldle:home"),
         "disable": False,
     }
