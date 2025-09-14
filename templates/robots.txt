@@ -6,6 +6,7 @@ Sitemap: https://{{ request.get_host }}/sitemap.xml
 
 # Disallow admin and private areas
 Disallow: /admin/
+<<<<<<< HEAD
 Disallow: /accounts/login/
 Disallow: /accounts/signup/
 Disallow: /accounts/password_reset/
@@ -16,6 +17,13 @@ Disallow: /i18n/
 # Disallow login pages with query parameters
 Disallow: /accounts/login/?next=*
 Disallow: /*/accounts/login/?next=*
+=======
+Disallow: /*/accounts/login/
+Disallow: /*/accounts/signup/
+Disallow: /*/accounts/password_reset/
+Disallow: /*/accounts/reset/
+Disallow: /*/accounts/activate/
+>>>>>>> seo
 
 # Allow important pages
 Allow: /

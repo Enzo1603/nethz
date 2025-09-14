@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from .models import ExerciseSession
 from django.db.models import Q
 from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_context
+<<<<<<< HEAD
 
 
 def root_redirect(request):
@@ -33,13 +34,15 @@ def root_redirect(request):
         # Set the language cookie for future visits (same as Django's set_language view does)
         response.set_cookie("django_language", "en", max_age=365 * 24 * 60 * 60)
         return response
+=======
+>>>>>>> seo
 
 
 def home(request):
     tm_card = {
         "title": _("Engineering Mechanics"),
         "button_text": _("To the documents"),
-        "image_path": static("images/technische_mechanik_6px.jpg"),
+        "image_path": static("images/technische_mechanik_6px.webp"),
         "link": reverse("main:technische_mechanik"),
         "disable": False,
     }
@@ -47,7 +50,7 @@ def home(request):
     inf_card = {
         "title": _("Computer Science I 2024"),
         "button_text": _("To the documents"),
-        "image_path": static("images/informatik1_3px.jpg"),
+        "image_path": static("images/informatik1_3px.webp"),
         "link": "#",
         "disable": True,
     }
@@ -56,7 +59,7 @@ def home(request):
         "title": "Worldle",
         "description": _("Various country quizzes"),
         "button_text": _("To the game modes"),
-        "image_path": static("images/Earth_2px.jpg"),
+        "image_path": static("images/Earth_2px.webp"),
         "link": reverse("worldle:home"),
         "disable": False,
     }

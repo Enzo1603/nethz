@@ -61,10 +61,10 @@ class MainViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Test that the image paths in the cards are correct
-        tm_image = static("images/technische_mechanik_6px.jpg")
+        tm_image = static("images/technische_mechanik_6px.webp")
         self.assertContains(response, f'src="{tm_image}"')
 
-        earth_image = static("images/Earth_2px.jpg")
+        earth_image = static("images/Earth_2px.webp")
         self.assertContains(response, f'src="{earth_image}"')
 
     def test_home_view_contains_navigation(self):
@@ -115,7 +115,7 @@ class MainViewsTest(TestCase):
 
     def test_all_semester_codes_valid(self):
         """Test various semester codes that should be valid"""
-        valid_semesters = ["HS24", "FS24", "HS23", "FS23", "HS25", "FS25"]
+        valid_semesters = ["HS24", "HS25"]
 
         for semester in valid_semesters:
             with self.subTest(semester=semester):

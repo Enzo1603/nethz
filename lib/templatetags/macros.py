@@ -45,7 +45,7 @@ def coming_soon_card():
             "title": _("Coming soon (or never)"),
             "description": _("nothing to be seen here"),
             "button_text": _("Go away"),
-            "image_path": static("images/informatik1_3px.jpg"),
+            "image_path": static("images/informatik1_3px.webp"),
             "link": "#",
             "disable": True,
         }

@@ -12,11 +12,9 @@ h5 {
     text-shadow: 0 0 10px black;
 }
 
-
 #astronaut-img {
     height: 100px;
 }
-
 
 .bg-img {
     position: relative;
@@ -25,5 +23,5 @@ h5 {
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
-    background-image: url("/assets/images/errors/space-background.jpg");
+    background-image: url("/assets/images/errors/space-background.webp");
 }
