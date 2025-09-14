@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def translate_region_name(region):
     """Translate region names for display"""
     region_translations = {
@@ -21,6 +22,8 @@ def translate_region_name(region):
     return region_translations.get(region, region.replace("-", " ").title())
 
 
+=======
+>>>>>>> seo
 =======
 >>>>>>> seo
 =======
@@ -49,6 +52,7 @@ def get_home_seo():
         description=_(
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             "Engineering mechanics study materials and geography games for ETH students"
         ),
         keywords=_(
@@ -56,11 +60,16 @@ def get_home_seo():
 =======
 =======
 >>>>>>> seo
+=======
+>>>>>>> seo
             "Engineering mechanics study materials and geography games for ETH Zurich students"
         ),
         keywords=_(
             "ETH Zurich, engineering mechanics, worldle, geography, study materials"
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> seo
+=======
 >>>>>>> seo
 =======
 >>>>>>> seo
@@ -75,6 +84,7 @@ def get_technische_mechanik_seo(semester=None):
         description = _(
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             "Engineering mechanics study materials and solutions for ETH students"
         )
         keywords = _(
@@ -91,6 +101,8 @@ def get_technische_mechanik_seo(semester=None):
 =======
 =======
 >>>>>>> seo
+=======
+>>>>>>> seo
             "Engineering mechanics study materials and solutions for ETH Zurich students"
         )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
@@ -101,6 +113,9 @@ def get_technische_mechanik_seo(semester=None):
         )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> seo
+=======
 >>>>>>> seo
 =======
 >>>>>>> seo
@@ -124,7 +139,11 @@ def get_worldle_capitals_seo(region=None):
     if region:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         region_display = translate_region_name(region)
+=======
+        region_display = region.replace("-", " ").title()
+>>>>>>> seo
 =======
         region_display = region.replace("-", " ").title()
 >>>>>>> seo
@@ -147,7 +166,11 @@ def get_worldle_languages_seo(region=None):
     if region:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         region_display = translate_region_name(region)
+=======
+        region_display = region.replace("-", " ").title()
+>>>>>>> seo
 =======
         region_display = region.replace("-", " ").title()
 >>>>>>> seo

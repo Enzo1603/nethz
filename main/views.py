@@ -9,6 +9,7 @@ from django.db.models import Q
 from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_context
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 def root_redirect(request):
@@ -35,6 +36,8 @@ def root_redirect(request):
         # Set the language cookie for future visits (same as Django's set_language view does)
         response.set_cookie("django_language", "en", max_age=365 * 24 * 60 * 60)
         return response
+=======
+>>>>>>> seo
 =======
 >>>>>>> seo
 =======

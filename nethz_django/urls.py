@@ -22,8 +22,11 @@ from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.shortcuts import redirect
 from main.views import root_redirect
+=======
+>>>>>>> seo
 =======
 >>>>>>> seo
 =======
@@ -63,8 +66,11 @@ urlpatterns = [
     ),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     # Serve favicon from static files
     path("favicon.ico", lambda request: redirect("/static/images/eth-logo.ico")),
+=======
+>>>>>>> seo
 =======
 >>>>>>> seo
 =======
