@@ -7,6 +7,7 @@ Sitemap: https://{{ request.get_host }}/sitemap.xml
 # Disallow admin and private areas
 Disallow: /admin/
 <<<<<<< HEAD
+<<<<<<< HEAD
 Disallow: /accounts/login/
 Disallow: /accounts/signup/
 Disallow: /accounts/password_reset/
@@ -18,11 +19,14 @@ Disallow: /i18n/
 Disallow: /accounts/login/?next=*
 Disallow: /*/accounts/login/?next=*
 =======
+=======
+>>>>>>> seo
 Disallow: /*/accounts/login/
 Disallow: /*/accounts/signup/
 Disallow: /*/accounts/password_reset/
 Disallow: /*/accounts/reset/
 Disallow: /*/accounts/activate/
+<<<<<<< HEAD
 >>>>>>> seo
 
 # Disallow competitive games (require login)
@@ -47,4 +51,10 @@ Allow: /worldle/leaderboards/
 
 # Allow technische mechanik
 Allow: /*/technische-mechanik/
+=======
+
+# Allow important pages
+Allow: /
+Allow: /worldle/
+>>>>>>> seo
 Allow: /technische-mechanik/

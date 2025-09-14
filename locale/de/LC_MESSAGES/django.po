@@ -9,7 +9,11 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "POT-Creation-Date: 2025-09-03 20:59+0200\n"
+=======
+"POT-Creation-Date: 2025-09-01 21:30+0200\n"
+>>>>>>> seo
 =======
 "POT-Creation-Date: 2025-09-01 21:30+0200\n"
 >>>>>>> seo
@@ -422,6 +426,83 @@ msgstr "Top-Spieler in Geografie-Spielen anzeigen"
 msgid "leaderboards, worldle, geography, quiz, rankings"
 msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
 
+#: lib/seo_utils.py:29
+msgid ""
+"Engineering mechanics study materials and geography games for ETH Zurich "
+"students"
+msgstr ""
+"Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH Zürich "
+"Studierende"
+
+#: lib/seo_utils.py:30
+msgid "ETH Zurich, engineering mechanics, worldle, geography, study materials"
+msgstr ""
+"ETH Zürich, Technische Mechanik, Worldle, Geografie, Studienmaterialien"
+
+#: lib/seo_utils.py:37
+msgid "Engineering Mechanics {}"
+msgstr "Technische Mechanik {}"
+
+#: lib/seo_utils.py:38 lib/seo_utils.py:42
+msgid ""
+"Engineering mechanics study materials and solutions for ETH Zurich students"
+msgstr ""
+"Technische Mechanik Studienmaterialien und Lösungen für ETH Zürich "
+"Studierende"
+
+#: lib/seo_utils.py:39 lib/seo_utils.py:43
+msgid "engineering mechanics, ETH Zurich, study materials, engineering"
+msgstr "Technische Mechanik, ETH Zürich, Studienmaterialien, Ingenieurwesen"
+
+#: lib/seo_utils.py:41 main/views.py:14 templates/components/_navbar.html:25
+#: templates/exercise_sessions/technische_mechanik.html:5
+msgid "Engineering Mechanics"
+msgstr "Technische Mechanik"
+
+#: lib/seo_utils.py:52
+msgid "Geography games - guess capitals, languages, currencies and countries"
+msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
+
+#: lib/seo_utils.py:53
+msgid "worldle, geography, capitals, languages, currencies, quiz, game"
+msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
+
+#: lib/seo_utils.py:62 lib/seo_utils.py:66
+msgid "Geography quiz game - guess the capitals"
+msgstr "Geografie-Spiel - Hauptstädte erraten"
+
+#: lib/seo_utils.py:63 lib/seo_utils.py:67
+msgid "capitals, geography, worldle, quiz, game"
+msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
+
+#: lib/seo_utils.py:77 lib/seo_utils.py:81
+msgid "Geography quiz game - guess the languages"
+msgstr "Geografie-Spiel - Sprachen erraten"
+
+#: lib/seo_utils.py:78 lib/seo_utils.py:82
+msgid "languages, geography, worldle, quiz, game"
+msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
+
+#: lib/seo_utils.py:91
+msgid "Competitive geography quiz with leaderboards"
+msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
+
+#: lib/seo_utils.py:92
+msgid "worldle, geography, competitive, quiz, leaderboard"
+msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
+
+#: lib/seo_utils.py:99
+msgid "Worldle Leaderboards"
+msgstr "Worldle-Ranglisten"
+
+#: lib/seo_utils.py:100
+msgid "View top players in geography quiz games"
+msgstr "Top-Spieler in Geografie-Spielen anzeigen"
+
+#: lib/seo_utils.py:101
+msgid "leaderboards, worldle, geography, quiz, rankings"
+msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
+
 #: lib/templatetags/macros.py:45
 msgid "Coming soon (or never)"
 msgstr "Demnächst (oder nie)"
@@ -503,6 +584,7 @@ msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: main/views.py:41 main/views.py:49
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
@@ -516,6 +598,21 @@ msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
 #: main/views.py:58
+=======
+#: main/views.py:15 main/views.py:23
+msgid "To the documents"
+msgstr "Zu den Unterlagen"
+
+#: main/views.py:22
+msgid "Computer Science I 2024"
+msgstr "Informatik I 2024"
+
+#: main/views.py:31
+msgid "Various country quizzes"
+msgstr "Verschiedene Länderquizzes"
+
+#: main/views.py:32
+>>>>>>> seo
 =======
 #: main/views.py:15 main/views.py:23
 msgid "To the documents"
@@ -725,6 +822,9 @@ msgid "AMIV old Study Documents"
 msgstr "AMIV alte Studienunterlagen"
 
 #: templates/main/home.html:39
+<<<<<<< HEAD
+>>>>>>> seo
+=======
 >>>>>>> seo
 msgid ""
 "Polybox with additional ITET exams (especially useful for EM in 4th semester)"

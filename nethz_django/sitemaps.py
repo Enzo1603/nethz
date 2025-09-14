@@ -19,7 +19,15 @@ class StaticViewSitemap(Sitemap):
             "main:technische_mechanik",
             "worldle:home",
             "worldle:default_capitals",
+<<<<<<< HEAD
             "worldle:default_languages",
+=======
+            "worldle:competitive_capitals",
+            "worldle:default_languages",
+            "worldle:competitive_languages",
+            "worldle:competitive_currencies",
+            "worldle:competitive_areas",
+>>>>>>> seo
             "worldle:leaderboards",
         ]
 
@@ -47,7 +55,11 @@ class TechnischeMechanikSitemap(Sitemap):
         ).values_list("short_name", flat=True)
 
         # Extract semester part from "TM_HS24" -> "HS24"
+<<<<<<< HEAD
         semesters = [session.replace("TM_", "") for session in tm_sessions]
+=======
+        semesters = [session.replace("TM_", "").lower() for session in tm_sessions]
+>>>>>>> seo
         return semesters
 
     def location(self, item):

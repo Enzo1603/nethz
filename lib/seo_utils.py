@@ -6,6 +6,7 @@ from django.utils.translation import gettext as _
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def translate_region_name(region):
     """Translate region names for display"""
     region_translations = {
@@ -20,6 +21,8 @@ def translate_region_name(region):
     return region_translations.get(region, region.replace("-", " ").title())
 
 
+=======
+>>>>>>> seo
 =======
 >>>>>>> seo
 class SEOData:
@@ -45,15 +48,21 @@ def get_home_seo():
         title="Enzo Baraldi",
         description=_(
 <<<<<<< HEAD
+<<<<<<< HEAD
             "Engineering mechanics study materials and geography games for ETH students"
         ),
         keywords=_(
             "Enzo Baraldi, ETH Zurich, ETHZ, engineering mechanics, technische mechanik, worldle, geography, study materials"
 =======
+=======
+>>>>>>> seo
             "Engineering mechanics study materials and geography games for ETH Zurich students"
         ),
         keywords=_(
             "ETH Zurich, engineering mechanics, worldle, geography, study materials"
+<<<<<<< HEAD
+>>>>>>> seo
+=======
 >>>>>>> seo
         ),
     )
@@ -64,6 +73,7 @@ def get_technische_mechanik_seo(semester=None):
     if semester:
         title = _("Engineering Mechanics {}").format(semester.upper())
         description = _(
+<<<<<<< HEAD
 <<<<<<< HEAD
             "Engineering mechanics study materials and solutions for ETH students"
         )
@@ -79,6 +89,8 @@ def get_technische_mechanik_seo(semester=None):
             "Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, study materials"
         )
 =======
+=======
+>>>>>>> seo
             "Engineering mechanics study materials and solutions for ETH Zurich students"
         )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
@@ -88,6 +100,9 @@ def get_technische_mechanik_seo(semester=None):
             "Engineering mechanics study materials and solutions for ETH Zurich students"
         )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
+<<<<<<< HEAD
+>>>>>>> seo
+=======
 >>>>>>> seo
 
     return SEOData(title=title, description=description, keywords=keywords)
@@ -108,7 +123,11 @@ def get_worldle_capitals_seo(region=None):
     """SEO data for Worldle capitals pages"""
     if region:
 <<<<<<< HEAD
+<<<<<<< HEAD
         region_display = translate_region_name(region)
+=======
+        region_display = region.replace("-", " ").title()
+>>>>>>> seo
 =======
         region_display = region.replace("-", " ").title()
 >>>>>>> seo
@@ -127,7 +146,11 @@ def get_worldle_languages_seo(region=None):
     """SEO data for Worldle languages pages"""
     if region:
 <<<<<<< HEAD
+<<<<<<< HEAD
         region_display = translate_region_name(region)
+=======
+        region_display = region.replace("-", " ").title()
+>>>>>>> seo
 =======
         region_display = region.replace("-", " ").title()
 >>>>>>> seo
