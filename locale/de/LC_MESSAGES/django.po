@@ -8,19 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-"POT-Creation-Date: 2025-09-03 20:59+0200\n"
-=======
 "POT-Creation-Date: 2025-09-01 21:30+0200\n"
->>>>>>> seo
-=======
-"POT-Creation-Date: 2025-09-01 21:30+0200\n"
->>>>>>> seo
-=======
-"POT-Creation-Date: 2025-09-01 21:30+0200\n"
->>>>>>> seo
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +20,7 @@ msgstr ""
 
 #: accounts/emails.py:19
 msgid "Activate your account"
-msgstr "Aktiviere dein Konto"
+msgstr "Aktivieren Sie Ihr Konto"
 
 #: accounts/forms.py:24 accounts/forms.py:60 accounts/forms.py:163
 #: accounts/forms.py:209
@@ -41,7 +29,7 @@ msgstr "E-Mail-Adresse"
 
 #: accounts/forms.py:25
 msgid "We'll never share your email address with anyone else."
-msgstr "Wir werden deine E-Mail-Adresse niemals mit anderen teilen."
+msgstr "Wir werden Ihre E-Mail-Adresse niemals mit anderen teilen."
 
 #: accounts/forms.py:30 accounts/forms.py:61 accounts/forms.py:83
 #: accounts/forms.py:104
@@ -66,13 +54,13 @@ msgstr "Benutzername"
 msgid "Confirm Password"
 msgstr "Passwort bestätigen"
 
-#: accounts/forms.py:68 templates/accounts/login.html:28
+#: accounts/forms.py:68 templates/accounts/login.html:27
 msgid "Sign up"
 msgstr "Registrieren"
 
-#: accounts/forms.py:88 templates/accounts/login.html:15
-#: templates/accounts/password_reset/password_reset_form.html:26
-#: templates/accounts/signup.html:29 templates/components/_navbar.html:43
+#: accounts/forms.py:88 templates/accounts/login.html:14
+#: templates/accounts/password_reset/password_reset_form.html:25
+#: templates/accounts/signup.html:28 templates/components/_navbar.html:43
 msgid "Login"
 msgstr "Anmelden"
 
@@ -132,14 +120,14 @@ msgstr "Benutzername"
 
 #: accounts/models.py:12
 msgid "Choose your unique username."
-msgstr "Wähle deinen einzigartigen Benutzernamen."
+msgstr "Wählen Sie Ihren einzigartigen Benutzernamen."
 
 #: accounts/models.py:17
 msgid ""
 "Enter a valid username. This username may contain only letters, numbers, and "
 "@/./+/-/_ characters."
 msgstr ""
-"Gib einen gültigen Benutzernamen ein. Dieser Benutzername darf nur "
+"Geben Sie einen gültigen Benutzernamen ein. Dieser Benutzername darf nur "
 "Buchstaben, Zahlen und @/./+/-/_ Zeichen enthalten."
 
 #: accounts/models.py:24
@@ -152,81 +140,82 @@ msgstr "E-Mail-Adresse"
 
 #: accounts/views.py:44 accounts/views.py:76
 msgid "You're already logged in."
-msgstr "Du bist bereits angemeldet."
+msgstr "Sie sind bereits angemeldet."
 
 #: accounts/views.py:58
 msgid ""
 "Account creation successful. A confirmation email has been sent to your "
 "email address."
 msgstr ""
-"Dein Konto wurde erfolgreich erstellt. Eine Bestätigungs-E-Mail wurde an deine E-Mail-"
+"Konto-Erstellung erfolgreich. Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-"
 "Adresse gesendet."
 
 #: accounts/views.py:63
 msgid "You will not be able to log in until you have confirmed your email."
-msgstr "Du kannst dich nicht anmelden, bis du deine E-Mail bestätigt hast."
+msgstr "Sie können sich nicht anmelden, bis Sie Ihre E-Mail bestätigt haben."
 
 #: accounts/views.py:84
 msgid "You successfully logged in."
-msgstr "Du hast dich erfolgreich angemeldet."
+msgstr "Sie haben sich erfolgreich angemeldet."
 
 #: accounts/views.py:90
 msgid ""
 "Another confirmation email has been sent to your email address since you "
 "have not confirmed it yet."
 msgstr ""
-"Da du deine E-Mail-Adresse noch nicht bestätigt hast, wurde eine weitere "
-"Bestätigungs-E-Mail an deine E-Mail-Adresse gesendet."
+"Da Sie Ihre E-Mail-Adresse noch nicht bestätigt haben, wurde eine weitere "
+"Bestätigungs-E-Mail an Ihre E-Mail-Adresse gesendet."
 
 #: accounts/views.py:100
 msgid "You successfully logged out."
-msgstr "Du hast dich erfolgreich abgemeldet."
+msgstr "Sie haben sich erfolgreich abgemeldet."
 
 #: accounts/views.py:118
 msgid ""
 "Thank you for confirming your email. You can now log in to your account."
 msgstr ""
-"Vielen Dank für die Bestätigung deiner E-Mail. Du kannst dich jetzt anmelden."
+"Vielen Dank für die Bestätigung Ihrer E-Mail. Sie können sich jetzt anmelden."
 
 #: accounts/views.py:125
 msgid ""
 "Invalid confirmation link. Please make sure you are using the correct link "
 "provided in the confirmation email."
 msgstr ""
-"Ungültiger Bestätigungslink. Stelle sicher, dass du den korrekten Link "
-"aus der Bestätigungs-E-Mail verwendest."
+"Ungültiger Bestätigungslink. Stellen Sie sicher, dass Sie den korrekten Link "
+"aus der Bestätigungs-E-Mail verwenden."
 
 #: accounts/views.py:154
 msgid "Your password has been updated."
-msgstr "Dein Passwort wurde aktualisiert."
+msgstr "Ihr Passwort wurde aktualisiert."
 
 #: accounts/views.py:163
 msgid ""
 "Your email has been updated. A confirmation link has been sent to your new "
 "email address. Please confirm your email to log in."
 msgstr ""
-"Deine E-Mail-Adresse wurde aktualisiert. Ein Bestätigungslink wurde an deine "
-"neue E-Mail-Adresse gesendet. Bitte bestätige deine E-Mail, um dich "
+"Ihre E-Mail-Adresse wurde aktualisiert. Ein Bestätigungslink wurde an Ihre "
+"neue E-Mail-Adresse gesendet. Bitte bestätigen Sie Ihre E-Mail, um sich "
 "anzumelden."
 
 #: accounts/views.py:169
 msgid "Your data has been successfully updated."
-msgstr "Deine Daten wurden erfolgreich aktualisiert."
+msgstr "Ihre Daten wurden erfolgreich aktualisiert."
 
 #: accounts/views.py:187 accounts/views.py:219
 msgid ""
 "You're already logged in. You can change your password in your account "
 "settings."
 msgstr ""
-"Du bist bereits angemeldet. Du kannst dein Passwort in deinen Kontoeinstellungen ändern."
+"Sie sind bereits angemeldet. Sie können Ihr Passwort in Ihren "
+"Kontoeinstellungen ändern."
 
 #: accounts/views.py:198
 msgid ""
 "If your email address is linked to an account, a password reset link has "
 "been sent to it."
 msgstr ""
-"Wenn deine E-Mail-Adresse mit einem Konto verknüpft ist, ist ein Link zum "
-"Zurücksetzen des Passworts an dich gesendet worden."
+"Wenn Ihre E-Mail-Adresse mit einem Konto verknüpft ist, wird ein Link zum "
+"Zurücksetzen des Passworts an Sie gesendet."
 
 #: accounts/views.py:255
 msgid ""
@@ -234,278 +223,15 @@ msgid ""
 "used. Please request a new password reset."
 msgstr ""
 "Der Link zum Zurücksetzen des Passworts ist ungültig, möglicherweise weil er "
-"bereits verwendet worden ist. Bitte fordere einen neuen Link zum Zurücksetzen deines Passworts an."
+"bereits verwendet worden ist. Bitte fordern Sie ein neues Passwort zurück."
 
 #: accounts/views.py:265
 msgid ""
 "Your password has been successfully reset. You can now log in with your new "
 "password."
 msgstr ""
-"Dein Passwort wurde erfolgreich zurückgesetzt. Du kannst dich jetzt mit "
-"deinem neuen Passwort anmelden."
-
-#: lib/seo_utils.py:11 templates/macros/regions.html:6
-msgid "Worldwide"
-msgstr "Weltweit"
-
-#: lib/seo_utils.py:12 templates/macros/regions.html:7
-msgid "Africa"
-msgstr "Afrika"
-
-#: lib/seo_utils.py:13 templates/macros/regions.html:8
-msgid "Americas"
-msgstr "Amerika"
-
-#: lib/seo_utils.py:14 templates/macros/regions.html:10
-msgid "Asia"
-msgstr "Asien"
-
-#: lib/seo_utils.py:15 templates/macros/regions.html:11
-msgid "Europe"
-msgstr "Europa"
-
-#: lib/seo_utils.py:16 templates/macros/regions.html:12
-msgid "Oceania"
-msgstr "Ozeanien"
-
-#: lib/seo_utils.py:17 templates/macros/regions.html:9
-msgid "Antarctic"
-msgstr "Antarktik"
-
-#: lib/seo_utils.py:44
-msgid ""
-"Engineering mechanics study materials and geography games for ETH students"
-msgstr ""
-"Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH "
-"Studierende"
-
-#: lib/seo_utils.py:47
-msgid ""
-"Enzo Baraldi, ETH Zurich, ETHZ, engineering mechanics, technische mechanik, "
-"worldle, geography, study materials"
-msgstr ""
-"Enzo Baraldi, ETH Zürich, ETHZ, engineering mechanics, technische mechanik, "
-"worldle, geography, study materials"
-
-#: lib/seo_utils.py:55
-msgid "Engineering Mechanics {}"
-msgstr "Technische Mechanik {}"
-
-#: lib/seo_utils.py:57 lib/seo_utils.py:65
-msgid "Engineering mechanics study materials and solutions for ETH students"
-msgstr ""
-"Technische Mechanik Studienmaterialien und Lösungen für ETH Studierende"
-
-#: lib/seo_utils.py:60 lib/seo_utils.py:68
-msgid ""
-"Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, "
-"study materials"
-msgstr ""
-"Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zürich, ETHZ, "
-"Studienmaterialien"
-
-#: lib/seo_utils.py:63 main/views.py:40 templates/components/_navbar.html:25
-#: templates/exercise_sessions/technische_mechanik.html:5
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
-
-#: lib/seo_utils.py:79
-msgid "Geography games - guess capitals, languages, currencies and countries"
-msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
-
-#: lib/seo_utils.py:81
-msgid "worldle, geography, capitals, languages, currencies, quiz, game"
-msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
-
-#: lib/seo_utils.py:90 lib/seo_utils.py:94
-msgid "Geography quiz game - guess the capitals"
-msgstr "Geografie-Spiel - Hauptstädte erraten"
-
-#: lib/seo_utils.py:91 lib/seo_utils.py:95
-msgid "capitals, geography, worldle, quiz, game"
-msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
-
-#: lib/seo_utils.py:105 lib/seo_utils.py:109
-msgid "Geography quiz game - guess the languages"
-msgstr "Geografie-Spiel - Sprachen erraten"
-
-#: lib/seo_utils.py:106 lib/seo_utils.py:110
-msgid "languages, geography, worldle, quiz, game"
-msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
-
-#: lib/seo_utils.py:119
-msgid "Competitive geography quiz with leaderboards"
-msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
-
-#: lib/seo_utils.py:120
-msgid "worldle, geography, competitive, quiz, leaderboard"
-msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
-
-#: lib/seo_utils.py:127
-msgid "Worldle Leaderboards"
-msgstr "Worldle-Ranglisten"
-
-#: lib/seo_utils.py:128
-msgid "View top players in geography quiz games"
-msgstr "Top-Spieler in Geografie-Spielen anzeigen"
-
-#: lib/seo_utils.py:129
-msgid "leaderboards, worldle, geography, quiz, rankings"
-msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
-
-#: lib/seo_utils.py:29
-msgid ""
-"Engineering mechanics study materials and geography games for ETH Zurich "
-"students"
-msgstr ""
-"Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH Zürich "
-"Studierende"
-
-#: lib/seo_utils.py:30
-msgid "ETH Zurich, engineering mechanics, worldle, geography, study materials"
-msgstr ""
-"ETH Zürich, Technische Mechanik, Worldle, Geografie, Studienmaterialien"
-
-#: lib/seo_utils.py:37
-msgid "Engineering Mechanics {}"
-msgstr "Technische Mechanik {}"
-
-#: lib/seo_utils.py:38 lib/seo_utils.py:42
-msgid ""
-"Engineering mechanics study materials and solutions for ETH Zurich students"
-msgstr ""
-"Technische Mechanik Studienmaterialien und Lösungen für ETH Zürich "
-"Studierende"
-
-#: lib/seo_utils.py:39 lib/seo_utils.py:43
-msgid "engineering mechanics, ETH Zurich, study materials, engineering"
-msgstr "Technische Mechanik, ETH Zürich, Studienmaterialien, Ingenieurwesen"
-
-#: lib/seo_utils.py:41 main/views.py:14 templates/components/_navbar.html:25
-#: templates/exercise_sessions/technische_mechanik.html:5
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
-
-#: lib/seo_utils.py:52
-msgid "Geography games - guess capitals, languages, currencies and countries"
-msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
-
-#: lib/seo_utils.py:53
-msgid "worldle, geography, capitals, languages, currencies, quiz, game"
-msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
-
-#: lib/seo_utils.py:62 lib/seo_utils.py:66
-msgid "Geography quiz game - guess the capitals"
-msgstr "Geografie-Spiel - Hauptstädte erraten"
-
-#: lib/seo_utils.py:63 lib/seo_utils.py:67
-msgid "capitals, geography, worldle, quiz, game"
-msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
-
-#: lib/seo_utils.py:77 lib/seo_utils.py:81
-msgid "Geography quiz game - guess the languages"
-msgstr "Geografie-Spiel - Sprachen erraten"
-
-#: lib/seo_utils.py:78 lib/seo_utils.py:82
-msgid "languages, geography, worldle, quiz, game"
-msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
-
-#: lib/seo_utils.py:91
-msgid "Competitive geography quiz with leaderboards"
-msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
-
-#: lib/seo_utils.py:92
-msgid "worldle, geography, competitive, quiz, leaderboard"
-msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
-
-#: lib/seo_utils.py:99
-msgid "Worldle Leaderboards"
-msgstr "Worldle-Ranglisten"
-
-#: lib/seo_utils.py:100
-msgid "View top players in geography quiz games"
-msgstr "Top-Spieler in Geografie-Spielen anzeigen"
-
-#: lib/seo_utils.py:101
-msgid "leaderboards, worldle, geography, quiz, rankings"
-msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
-
-#: lib/seo_utils.py:29
-msgid ""
-"Engineering mechanics study materials and geography games for ETH Zurich "
-"students"
-msgstr ""
-"Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH Zürich "
-"Studierende"
-
-#: lib/seo_utils.py:30
-msgid "ETH Zurich, engineering mechanics, worldle, geography, study materials"
-msgstr ""
-"ETH Zürich, Technische Mechanik, Worldle, Geografie, Studienmaterialien"
-
-#: lib/seo_utils.py:37
-msgid "Engineering Mechanics {}"
-msgstr "Technische Mechanik {}"
-
-#: lib/seo_utils.py:38 lib/seo_utils.py:42
-msgid ""
-"Engineering mechanics study materials and solutions for ETH Zurich students"
-msgstr ""
-"Technische Mechanik Studienmaterialien und Lösungen für ETH Zürich "
-"Studierende"
-
-#: lib/seo_utils.py:39 lib/seo_utils.py:43
-msgid "engineering mechanics, ETH Zurich, study materials, engineering"
-msgstr "Technische Mechanik, ETH Zürich, Studienmaterialien, Ingenieurwesen"
-
-#: lib/seo_utils.py:41 main/views.py:14 templates/components/_navbar.html:25
-#: templates/exercise_sessions/technische_mechanik.html:5
-msgid "Engineering Mechanics"
-msgstr "Technische Mechanik"
-
-#: lib/seo_utils.py:52
-msgid "Geography games - guess capitals, languages, currencies and countries"
-msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
-
-#: lib/seo_utils.py:53
-msgid "worldle, geography, capitals, languages, currencies, quiz, game"
-msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
-
-#: lib/seo_utils.py:62 lib/seo_utils.py:66
-msgid "Geography quiz game - guess the capitals"
-msgstr "Geografie-Spiel - Hauptstädte erraten"
-
-#: lib/seo_utils.py:63 lib/seo_utils.py:67
-msgid "capitals, geography, worldle, quiz, game"
-msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
-
-#: lib/seo_utils.py:77 lib/seo_utils.py:81
-msgid "Geography quiz game - guess the languages"
-msgstr "Geografie-Spiel - Sprachen erraten"
-
-#: lib/seo_utils.py:78 lib/seo_utils.py:82
-msgid "languages, geography, worldle, quiz, game"
-msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
-
-#: lib/seo_utils.py:91
-msgid "Competitive geography quiz with leaderboards"
-msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
-
-#: lib/seo_utils.py:92
-msgid "worldle, geography, competitive, quiz, leaderboard"
-msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
-
-#: lib/seo_utils.py:99
-msgid "Worldle Leaderboards"
-msgstr "Worldle-Ranglisten"
-
-#: lib/seo_utils.py:100
-msgid "View top players in geography quiz games"
-msgstr "Top-Spieler in Geografie-Spielen anzeigen"
-
-#: lib/seo_utils.py:101
-msgid "leaderboards, worldle, geography, quiz, rankings"
-msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
+"Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit "
+"Ihrem neuen Passwort anmelden."
 
 #: lib/seo_utils.py:29
 msgid ""
@@ -642,19 +368,19 @@ msgstr "Die Unterlagennummer für diesen Eintrag."
 
 #: main/models.py:53
 msgid "Link to the exercise materials"
-msgstr "Link zu den Übungsmaterialien"
+msgstr "Link zu den Übungsunterlagen"
 
 #: main/models.py:54
 msgid "Link to the exercise materials for the week."
-msgstr "Link zu den Übungsmaterialien für die Woche."
+msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:95
+#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:105
 msgid "Remarks"
 msgstr "Anmerkungen"
 
 #: main/models.py:62
 msgid "You can enter notes and remarks here. HTML is allowed."
-msgstr "Du kannst hier Notizen und Anmerkungen eingeben. HTML ist erlaubt."
+msgstr "Sie können hier Notizen und Anmerkungen eingeben. HTML ist erlaubt."
 
 #: main/models.py:69
 msgid "Week Entry"
@@ -664,23 +390,6 @@ msgstr "Wochen-Eintrag"
 msgid "Week Entries"
 msgstr "Wochen-Einträge"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: main/views.py:41 main/views.py:49
-msgid "To the documents"
-msgstr "Zu den Unterlagen"
-
-#: main/views.py:48
-msgid "Computer Science I 2024"
-msgstr "Informatik I 2024"
-
-#: main/views.py:57
-msgid "Various country quizzes"
-msgstr "Verschiedene Länderquizzes"
-
-#: main/views.py:58
-=======
 #: main/views.py:15 main/views.py:23
 msgid "To the documents"
 msgstr "Zu den Unterlagen"
@@ -694,51 +403,20 @@ msgid "Various country quizzes"
 msgstr "Verschiedene Länderquizzes"
 
 #: main/views.py:32
->>>>>>> seo
-=======
-#: main/views.py:15 main/views.py:23
-msgid "To the documents"
-msgstr "Zu den Unterlagen"
-
-#: main/views.py:22
-msgid "Computer Science I 2024"
-msgstr "Informatik I 2024"
-
-#: main/views.py:31
-msgid "Various country quizzes"
-msgstr "Verschiedene Länderquizzes"
-
-#: main/views.py:32
->>>>>>> seo
-=======
-#: main/views.py:15 main/views.py:23
-msgid "To the documents"
-msgstr "Zu den Unterlagen"
-
-#: main/views.py:22
-msgid "Computer Science I 2024"
-msgstr "Informatik I 2024"
-
-#: main/views.py:31
-msgid "Various country quizzes"
-msgstr "Verschiedene Länderquizzes"
-
-#: main/views.py:32
->>>>>>> seo
 msgid "To the game modes"
 msgstr "Zu den Spielmodi"
 
 #: nethz_django/middleware.py:13
 msgid "You have to confirm your email address to log in."
-msgstr "Du musst deine E-Mail-Adresse bestätigen, um dich anzumelden."
+msgstr "Sie müssen Ihre E-Mail-Adresse bestätigen, um sich anzumelden."
 
-#: templates/accounts/login.html:25
+#: templates/accounts/login.html:24
 msgid "Don't have an account yet?"
 msgstr "Noch kein Konto?"
 
-#: templates/accounts/password_reset/password_reset_confirm.html:13
+#: templates/accounts/password_reset/password_reset_confirm.html:12
 #: templates/accounts/password_reset/password_reset_email.html:24
-#: templates/accounts/password_reset/password_reset_form.html:13
+#: templates/accounts/password_reset/password_reset_form.html:12
 msgid "Password reset"
 msgstr "Passwort zurücksetzen"
 
@@ -753,22 +431,22 @@ msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at"
 msgstr ""
-"Du erhältst diese E-Mail, weil du eine Passwortzurücksetzung für dein "
-"Benutzerkonto angefordert hast auf"
+"Sie erhalten diese E-Mail, weil Sie eine Passwortzurücksetzung für Ihr "
+"Benutzerkonto angefordert haben bei"
 
 #: templates/accounts/password_reset/password_reset_email.html:36
 msgid "Please go to the following page and choose a new password"
-msgstr "Bitte gehe zur folgenden Seite und setze ein neues Passwort"
+msgstr "Bitte gehen Sie zur folgenden Seite und setzen Sie ein neues Passwort"
 
 #: templates/accounts/password_reset/password_reset_email.html:44
 msgid ""
 "If you are having trouble with the button, you can also reset your password "
 "by copying and pasting the following link into your browser"
 msgstr ""
-"Wenn du Probleme mit dem Button hast, kannst du dein Passwort auch "
-"zurücksetzen, indem du den folgenden Link in deinen Browser kopierst"
+"Wenn Sie Probleme mit dem Button haben, können Sie Ihr Passwort auch "
+"zurücksetzen, indem Sie den folgenden Link in Ihren Browser kopieren"
 
-#: templates/accounts/password_reset/password_reset_form.html:23
+#: templates/accounts/password_reset/password_reset_form.html:22
 msgid "Accidentally here?"
 msgstr "Aus Versehen hier?"
 
@@ -776,13 +454,13 @@ msgstr "Aus Versehen hier?"
 msgid "Password reset request for your account"
 msgstr "Passwort zurücksetzen"
 
-#: templates/accounts/signup.html:16 templates/components/_navbar.html:46
+#: templates/accounts/signup.html:15 templates/components/_navbar.html:46
 msgid "Sign Up"
 msgstr "Registrieren"
 
-#: templates/accounts/signup.html:26
+#: templates/accounts/signup.html:25
 msgid "Already have an account?"
-msgstr "Hast du bereits ein Konto?"
+msgstr "Haben Sie bereits ein Konto?"
 
 #: templates/accounts/user_account.html:14 templates/components/_navbar.html:57
 msgid "My Account"
@@ -798,8 +476,8 @@ msgid ""
 "Please click the link below to confirm your email address and activate your "
 "account"
 msgstr ""
-"Bitte klicke auf den Link unten, um deine E-Mail-Adresse zu bestätigen "
-"und dein Konto zu aktivieren."
+"Bitte klicken Sie auf den Link unten, um Ihre E-Mail-Adresse zu bestätigen "
+"und Ihr Konto zu aktivieren."
 
 #: templates/accounts/verification_email.html:37
 msgid "Activate my account"
@@ -810,8 +488,8 @@ msgid ""
 "If you are having trouble with the button, you can also confirm your email "
 "by copying and pasting the following link into your browser"
 msgstr ""
-"Wenn du Probleme mit dem Button hast, kannst du deine E-Mail-Adresse auch "
-"bestätigen, indem du den folgenden Link in deinen Browser kopierst"
+"Wenn Sie Probleme mit dem Button haben, können Sie Ihre E-Mail-Adresse auch "
+"bestätigen, indem Sie den folgenden Link in Ihren Browser kopieren"
 
 #: templates/components/_errors.html:14
 msgid "Oops! You ran out of oxygen."
@@ -844,48 +522,49 @@ msgid "Useful Links"
 msgstr "Nützliche Links"
 
 #: templates/exercise_sessions/technische_mechanik.html:58
-msgid "Lina de Windt's PVK"
-msgstr "Lina de Windts PVK"
-
-#: templates/exercise_sessions/technische_mechanik.html:68
-msgid "Theory Recap by Felix Stalder"
-msgstr "Theorieblätter von Felix Stalder"
-
-#: templates/exercise_sessions/technische_mechanik.html:78
 msgid "YT - EE4ETH - Engineering Mechanics Playlist"
 msgstr "YT - EE4ETH - Technische Mechanik Playlist"
 
-#: templates/exercise_sessions/technische_mechanik.html:91
+#: templates/exercise_sessions/technische_mechanik.html:68
+msgid "Lina de Windt's website"
+msgstr "Lina de Windts Webseite"
+
+#: templates/exercise_sessions/technische_mechanik.html:78
+msgid "Lina de Windt's PVK"
+msgstr "Lina de Windts PVK"
+
+#: templates/exercise_sessions/technische_mechanik.html:88
+msgid "Theory Recap by Felix Stalder"
+msgstr "Theorieblätter von Felix Stalder"
+
+#: templates/exercise_sessions/technische_mechanik.html:101
 msgid "Week"
 msgstr "Woche"
 
-#: templates/exercise_sessions/technische_mechanik.html:92
+#: templates/exercise_sessions/technische_mechanik.html:102
 msgid "Exercise Materials"
-msgstr "Übungsmaterialien"
+msgstr "Übungsunterlagen"
 
-#: templates/exercise_sessions/technische_mechanik.html:93
+#: templates/exercise_sessions/technische_mechanik.html:103
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/exercise_sessions/technische_mechanik.html:94
+#: templates/exercise_sessions/technische_mechanik.html:104
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/exercise_sessions/technische_mechanik.html:109
+#: templates/exercise_sessions/technische_mechanik.html:119
 msgid "Exercise Material"
-msgstr "Übungsmaterial"
+msgstr "Übungsunterlage"
 
 #: templates/macros/leaderboard.html:9
 msgid "Go to Game"
 msgstr "Zum Spiel"
 
-#: templates/main/home.html:37
-msgid "«Community Solutions» by AMIV"
-msgstr "«Community Solutions» des AMIV"
+#: templates/macros/regions.html:6
+msgid "Worldwide"
+msgstr "Weltweit"
 
-<<<<<<< HEAD
-#: templates/main/home.html:38
-=======
 #: templates/macros/regions.html:7
 msgid "Africa"
 msgstr "Afrika"
@@ -919,26 +598,15 @@ msgid "AMIV old Study Documents"
 msgstr "AMIV alte Studienunterlagen"
 
 #: templates/main/home.html:39
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> seo
-=======
->>>>>>> seo
-=======
->>>>>>> seo
 msgid ""
-"Polybox with additional ITET exams (especially useful for EM in 4th semester)"
+"Polybox with additional old exams (especially useful for EM in 4th semester)"
 msgstr ""
-"Polybox mit zusätzlichen ITET-Prüfungen (besonders nützlich für EM im 4. "
+"Polybox mit zusätzlichen alten Prüfungen (besonders nützlich für EM im 4. "
 "Semester)"
-
-#: templates/main/home.html:39
-msgid "YouTube Channel - EE4ETH"
-msgstr "YouTube-Kanal - EE4ETH"
 
 #: templates/worldle/capitals.html:36
 msgid "Enter the capital(s)"
-msgstr "Trage die Hauptstadt oder die Hauptstädte ein"
+msgstr "Geben Sie die Hauptstadt oder die Hauptstädte ein"
 
 #: templates/worldle/capitals.html:38 templates/worldle/languages.html:38
 msgid "Check Answer"
@@ -985,18 +653,18 @@ msgstr ""
 #: templates/worldle/home.html:16
 msgid "Please note that the games themselves will continue to be in English."
 msgstr ""
-"Beachte, dass die Spiele selbst weiterhin auf Englisch sind."
+"Bitte beachten Sie, dass die Spiele selbst weiterhin auf Englisch sind."
 
 #: templates/worldle/home.html:20
 msgid "Game Modes"
 msgstr "Spielmodi"
 
 #: templates/worldle/home.html:24
-msgid "Practice (no account required)"
-msgstr "Üben (kein Konto erforderlich)"
+msgid "Practice (No account required)"
+msgstr "Üben (Kein Konto erforderlich)"
 
 #: templates/worldle/home.html:34
-msgid "Competitive (account required)"
+msgid "Competitive (Account required)"
 msgstr "Wettbewerb (Konto erforderlich)"
 
 #: templates/worldle/home.html:37 templates/worldle/leaderboards.html:22
@@ -1005,7 +673,7 @@ msgstr "Ranglisten"
 
 #: templates/worldle/languages.html:36
 msgid "Enter the language(s)"
-msgstr "Trage die Sprache(n) ein"
+msgstr "Geben Sie die Sprache(n) ein"
 
 #: worldle/cards.py:9 worldle/cards.py:36
 msgid "Guess the capitals"
@@ -1022,7 +690,7 @@ msgstr "Errate die Landessprachen"
 
 #: worldle/cards.py:27
 msgid "Higher Lower with country areas"
-msgstr "Higher-Lower mit Landesflächen"
+msgstr "Higher Lower mit Landesflächen"
 
 #: worldle/cards.py:45
 msgid "Guess the currency"
