@@ -5,29 +5,6 @@ Simple SEO utility functions for basic meta tag management.
 from django.utils.translation import gettext as _
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-def translate_region_name(region):
-    """Translate region names for display"""
-    region_translations = {
-        "worldwide": _("Worldwide"),
-        "africa": _("Africa"),
-        "americas": _("Americas"),
-        "asia": _("Asia"),
-        "europe": _("Europe"),
-        "oceania": _("Oceania"),
-        "antarctic": _("Antarctic"),
-    }
-    return region_translations.get(region, region.replace("-", " ").title())
-
-
-=======
->>>>>>> seo
-=======
->>>>>>> seo
-=======
->>>>>>> seo
 class SEOData:
     """Container for basic SEO meta data"""
 
@@ -50,29 +27,10 @@ def get_home_seo():
     return SEOData(
         title="Enzo Baraldi",
         description=_(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "Engineering mechanics study materials and geography games for ETH students"
-        ),
-        keywords=_(
-            "Enzo Baraldi, ETH Zurich, ETHZ, engineering mechanics, technische mechanik, worldle, geography, study materials"
-=======
-=======
->>>>>>> seo
-=======
->>>>>>> seo
             "Engineering mechanics study materials and geography games for ETH Zurich students"
         ),
         keywords=_(
             "ETH Zurich, engineering mechanics, worldle, geography, study materials"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> seo
-=======
->>>>>>> seo
-=======
->>>>>>> seo
         ),
     )
 
@@ -82,27 +40,6 @@ def get_technische_mechanik_seo(semester=None):
     if semester:
         title = _("Engineering Mechanics {}").format(semester.upper())
         description = _(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "Engineering mechanics study materials and solutions for ETH students"
-        )
-        keywords = _(
-            "Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, study materials"
-        )
-    else:
-        title = _("Engineering Mechanics")
-        description = _(
-            "Engineering mechanics study materials and solutions for ETH students"
-        )
-        keywords = _(
-            "Enzo Baraldi, technische mechanik, engineering mechanics, ETH Zurich, ETHZ, study materials"
-        )
-=======
-=======
->>>>>>> seo
-=======
->>>>>>> seo
             "Engineering mechanics study materials and solutions for ETH Zurich students"
         )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
@@ -112,13 +49,6 @@ def get_technische_mechanik_seo(semester=None):
             "Engineering mechanics study materials and solutions for ETH Zurich students"
         )
         keywords = _("engineering mechanics, ETH Zurich, study materials, engineering")
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> seo
-=======
->>>>>>> seo
-=======
->>>>>>> seo
 
     return SEOData(title=title, description=description, keywords=keywords)
 
@@ -137,19 +67,7 @@ def get_worldle_home_seo():
 def get_worldle_capitals_seo(region=None):
     """SEO data for Worldle capitals pages"""
     if region:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        region_display = translate_region_name(region)
-=======
         region_display = region.replace("-", " ").title()
->>>>>>> seo
-=======
-        region_display = region.replace("-", " ").title()
->>>>>>> seo
-=======
-        region_display = region.replace("-", " ").title()
->>>>>>> seo
         title = "Worldle {}".format(region_display)
         description = _("Geography quiz game - guess the capitals")
         keywords = _("capitals, geography, worldle, quiz, game")
@@ -164,19 +82,7 @@ def get_worldle_capitals_seo(region=None):
 def get_worldle_languages_seo(region=None):
     """SEO data for Worldle languages pages"""
     if region:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        region_display = translate_region_name(region)
-=======
         region_display = region.replace("-", " ").title()
->>>>>>> seo
-=======
-        region_display = region.replace("-", " ").title()
->>>>>>> seo
-=======
-        region_display = region.replace("-", " ").title()
->>>>>>> seo
         title = "Worldle {}".format(region_display)
         description = _("Geography quiz game - guess the languages")
         keywords = _("languages, geography, worldle, quiz, game")
