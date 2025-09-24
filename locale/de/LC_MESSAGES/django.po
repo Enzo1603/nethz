@@ -653,7 +653,7 @@ msgstr ""
 #: templates/worldle/home.html:16
 msgid "Please note that the games themselves will continue to be in English."
 msgstr ""
-"Bitte beachten Sie, dass die Spiele selbst weiterhin auf Englisch sind."
+"Bitte beachte, dass die Spiele selbst weiterhin auf Englisch sind."
 
 #: templates/worldle/home.html:20
 msgid "Game Modes"
