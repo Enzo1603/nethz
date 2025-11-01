@@ -17,15 +17,16 @@ Including another URLconf
 
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
-from django.views.generic import TemplateView
+from django.urls import include, path
+
 from .sitemaps import (
     StaticViewSitemap,
     TechnischeMechanikSitemap,
-    WorldleRegionSitemap,
     WorldleLanguageRegionSitemap,
+    WorldleRegionSitemap,
 )
+from .views import robots_txt
 
 # Sitemap configuration
 sitemaps = {
@@ -45,11 +46,7 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-    path(
-        "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
-        name="robots_txt",
-    ),
+    path("robots.txt", robots_txt, name="robots_txt"),
 ]
 
 urlpatterns += i18n_patterns(
