@@ -2,7 +2,6 @@ from django.urls import path
 
 from . import views
 
-
 app_name = "worldle"
 
 
@@ -40,7 +39,7 @@ urlpatterns = [
         views.competitive_languages,
         name="competitive_languages",
     ),
-    path("languages/<str:region>", views.languages, name="languages"),
+    path("languages/<str:region>/", views.languages, name="languages"),
     # AREAS
     path("areas/competitive/", views.competitive_areas, name="competitive_areas"),
 ]

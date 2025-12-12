@@ -122,6 +122,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "nethz_django.middleware.EmailVerificationMiddleware",
+    # Workaround: Remove X-Robots-Tag: noindex set by Traefik/Pangolin proxy
+    "nethz_django.middleware.RemoveNoindexHeaderMiddleware",
 ]
 
 ROOT_URLCONF = "nethz_django.urls"
