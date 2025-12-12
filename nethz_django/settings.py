@@ -8,13 +8,19 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
+
+Reverse proxy (Traefik) notes:
+- We trust `X-Forwarded-Proto: https` so `request.is_secure()` works.
+- We trust forwarded host so `request.get_host()` matches the public hostname.
+This is important for SEO endpoints like `robots.txt`/`sitemap.xml` to emit correct
+absolute URLs.
 """
 
 from pathlib import Path
-from decouple import config
 
-from django.core.exceptions import ImproperlyConfigured
+from decouple import config
 from django.contrib.messages import constants as messages
+from django.core.exceptions import ImproperlyConfigured
 
 APPEND_SLASH = False
 
@@ -71,6 +77,15 @@ if ENVIRONMENT == "production":
             "PRODUCTION_DOMAINS must be set in production environment OR"
             "update ALLOWED_HOST in the projects settings.py"
         )
+
+    # --- Reverse proxy / Traefik ---
+    # Ensure Django recognizes the original scheme and host from Traefik.
+    # Traefik sets `X-Forwarded-Proto: https` for TLS-terminated requests.
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+    # If Traefik forwards the Host header, this makes `request.get_host()` use it.
+    # This is needed so robots.txt can emit a correct absolute sitemap URL.
+    USE_X_FORWARDED_HOST = True
 
 
 # Application definition
