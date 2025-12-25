@@ -60,3 +60,36 @@ def region_select(region):
 @register.inclusion_tag("macros/leaderboard.html")
 def leaderboard(leaderboard_config):
     return leaderboard_config
+
+
+@register.inclusion_tag("macros/link_banner.html")
+def link_banner(
+    link,
+    title,
+    icon,
+    gradient,
+    subtitle="",
+    icon_color="primary",
+    target="_blank",
+):
+    """
+    Usage:
+        {% link_banner
+            link="https://example.com"
+            title="Title"
+            subtitle="Subtitle"
+            icon="bi-file-earmark-text"
+            icon_color="primary"
+            gradient="linear-gradient(...)"
+            target="_blank"
+        %}
+    """
+    return {
+        "link": link,
+        "title": title,
+        "subtitle": subtitle,
+        "icon": icon,
+        "icon_color": icon_color,
+        "gradient": gradient,
+        "target": target,
+    }

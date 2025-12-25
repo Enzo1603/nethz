@@ -1,0 +1,19 @@
+<a href="{{ link }}" target="{{ target|default:'_blank' }}" class="text-decoration-none link-banner d-block mb-0">
+    <div class="card border-0 rounded-3 overflow-hidden position-relative text-white">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: {{ gradient }};"></div>
+        <div class="card-body d-flex align-items-start justify-content-between position-relative py-3">
+            <div class="d-flex align-items-start gap-3">
+                <div class="bg-light text-{{ icon_color|default:'primary' }} rounded-circle d-flex align-items-center justify-content-center icon-badge">
+                    <i class="bi {{ icon }}" style="font-size: 1rem;"></i>
+                </div>
+                <div>
+                    <h6 class="mb-1 fw-semibold">{{ title }}</h6>
+                    {% if subtitle %}
+                    <small class="text-white-50">{{ subtitle }}</small>
+                    {% endif %}
+                </div>
+            </div>
+            <i class="bi bi-box-arrow-up-right" style="font-size: 1rem; opacity: 0.9;"></i>
+        </div>
+    </div>
+</a>

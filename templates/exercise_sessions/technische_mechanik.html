@@ -1,4 +1,8 @@
-{% extends "components/_base.html" %} {% load i18n %} {% block content %}
+{% extends "components/_base.html" %}
+{% load i18n %}
+{% load macros %}
+
+{% block content %}
 
 <!-- Title with Semester Dropdown -->
 <div class="d-flex align-items-center justify-content-between flex-wrap">
@@ -29,40 +33,13 @@
 
     <div class="row g-3">
         <div class="col-md-6 col-lg-4">
-            <a href="https://polybox.ethz.ch/index.php/s/jBS5i5tCgrS8ScZ" target="_blank" class="text-decoration-none">
-                <div class="card h-100 border-success link-card link-card-success">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-file-earmark-pdf text-success me-2"></i>
-                            {% trans "Lina de Windt's PVK" %}
-                        </h5>
-                    </div>
-                </div>
-            </a>
+            {% link_banner link="https://polybox.ethz.ch/index.php/s/jBS5i5tCgrS8ScZ" title=_("Lina de Windt's PVK") subtitle=_("Polybox download") icon="bi-file-earmark-pdf" icon_color="success" gradient="linear-gradient(120deg, rgba(25,135,84,0.75) 0%, rgba(25,135,84,0.55) 60%)" %}
         </div>
         <div class="col-md-6 col-lg-4">
-            <a href="https://polybox.ethz.ch/index.php/s/FQWekmyGL5QdJtA" target="_blank" class="text-decoration-none">
-                <div class="card h-100 border-info link-card link-card-info">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-book text-info me-2"></i>
-                            {% trans "Theory Recap by Felix Stalder" %}
-                        </h5>
-                    </div>
-                </div>
-            </a>
+            {% link_banner link="https://polybox.ethz.ch/index.php/s/FQWekmyGL5QdJtA" title=_("Theory Recap by Felix Stalder") subtitle=_("Notes") icon="bi-book" icon_color="info" gradient="linear-gradient(120deg, rgba(13,202,240,0.75) 0%, rgba(13,202,240,0.55) 60%)" %}
         </div>
         <div class="col-md-6 col-lg-4">
-            <a href="https://www.youtube.com/playlist?list=PL0WLWTsoAENhKG7he0XBQmgDnFfcJnfoi" target="_blank" class="text-decoration-none">
-                <div class="card h-100 border-danger link-card link-card-danger">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-youtube text-danger me-2"></i>
-                            {% trans "YT - EE4ETH - Engineering Mechanics Playlist" %}
-                        </h5>
-                    </div>
-                </div>
-            </a>
+            {% link_banner link="https://www.youtube.com/playlist?list=PL0WLWTsoAENhKG7he0XBQmgDnFfcJnfoi" title=_("YT - EE4ETH - Engineering Mechanics Playlist") subtitle=_("YouTube") icon="bi-youtube" icon_color="danger" gradient="linear-gradient(120deg, rgba(220,53,69,0.8) 0%, rgba(220,53,69,0.6) 60%)" %}
         </div>
     </div>
 </div>
