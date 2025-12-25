@@ -3,7 +3,7 @@
     <div class="card border-0">
         <a href="{{ link }}" class="text-decoration-none {% if disable %}pe-none{% endif %}" {% if disable %}aria-disabled="true" tabindex="-1"{% endif %}>
             <div class="ratio ratio-16x9 rounded-3 zoom">
-                <img src="{{ image_path }}" class="card-img rounded-3" style="object-fit: cover; filter: brightness(70%);" alt="{{ title }}">
+                <img src="{{ image_path }}" class="card-img rounded-3" style="object-fit: cover; filter: brightness(70%);" alt="{{ title }}" loading="lazy" decoding="async">
                 <div class="card-img-overlay text-white text-center d-flex align-items-center justify-content-center">
                     <div style="width: 90%;">
                         <h3 class="card-title">{{ title }}</h3>

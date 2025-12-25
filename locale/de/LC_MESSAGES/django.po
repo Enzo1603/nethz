@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 21:30+0200\n"
+"POT-Creation-Date: 2025-12-25 15:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,8 +45,8 @@ msgid "The username contains not allowed characters or expressions."
 msgstr "Der Benutzername enthält nicht erlaubte Zeichen oder Ausdrücke."
 
 #: accounts/forms.py:56 accounts/forms.py:82 accounts/forms.py:160
-#: templates/macros/leaderboard.html:14
-#: templates/worldle/competitive_areas.html:120
+#: templates/macros/leaderboard.html:15
+#: templates/worldle/competitive_areas.html:122
 msgid "Username"
 msgstr "Benutzername"
 
@@ -54,13 +54,13 @@ msgstr "Benutzername"
 msgid "Confirm Password"
 msgstr "Passwort bestätigen"
 
-#: accounts/forms.py:68 templates/accounts/login.html:27
+#: accounts/forms.py:68 templates/accounts/login.html:28
 msgid "Sign up"
 msgstr "Registrieren"
 
-#: accounts/forms.py:88 templates/accounts/login.html:14
-#: templates/accounts/password_reset/password_reset_form.html:25
-#: templates/accounts/signup.html:28 templates/components/_navbar.html:43
+#: accounts/forms.py:88 templates/accounts/login.html:15
+#: templates/accounts/password_reset/password_reset_form.html:26
+#: templates/accounts/signup.html:29 templates/components/_navbar.html:40
 msgid "Login"
 msgstr "Anmelden"
 
@@ -233,7 +233,7 @@ msgstr ""
 "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit "
 "Ihrem neuen Passwort anmelden."
 
-#: lib/seo_utils.py:29
+#: lib/seo_utils.py:34
 msgid ""
 "Engineering mechanics study materials and geography games for ETH Zurich "
 "students"
@@ -241,72 +241,72 @@ msgstr ""
 "Technische Mechanik Studienmaterialien und Geografie-Spiele für ETH Zürich "
 "Studierende"
 
-#: lib/seo_utils.py:30
+#: lib/seo_utils.py:37
 msgid "ETH Zurich, engineering mechanics, worldle, geography, study materials"
 msgstr ""
 "ETH Zürich, Technische Mechanik, Worldle, Geografie, Studienmaterialien"
 
-#: lib/seo_utils.py:37
+#: lib/seo_utils.py:45
 msgid "Engineering Mechanics {}"
 msgstr "Technische Mechanik {}"
 
-#: lib/seo_utils.py:38 lib/seo_utils.py:42
+#: lib/seo_utils.py:47 lib/seo_utils.py:53
 msgid ""
 "Engineering mechanics study materials and solutions for ETH Zurich students"
 msgstr ""
 "Technische Mechanik Studienmaterialien und Lösungen für ETH Zürich "
 "Studierende"
 
-#: lib/seo_utils.py:39 lib/seo_utils.py:43
+#: lib/seo_utils.py:49 lib/seo_utils.py:55
 msgid "engineering mechanics, ETH Zurich, study materials, engineering"
 msgstr "Technische Mechanik, ETH Zürich, Studienmaterialien, Ingenieurwesen"
 
-#: lib/seo_utils.py:41 main/views.py:14 templates/components/_navbar.html:25
+#: lib/seo_utils.py:51 main/views.py:14 templates/components/_navbar.html:22
 #: templates/exercise_sessions/technische_mechanik.html:5
 msgid "Engineering Mechanics"
 msgstr "Technische Mechanik"
 
-#: lib/seo_utils.py:52
+#: lib/seo_utils.py:65
 msgid "Geography games - guess capitals, languages, currencies and countries"
 msgstr "Geografie-Spiele - Hauptstädte, Sprachen, Währungen und Länder erraten"
 
-#: lib/seo_utils.py:53
+#: lib/seo_utils.py:67
 msgid "worldle, geography, capitals, languages, currencies, quiz, game"
 msgstr "Worldle, Geografie, Hauptstädte, Sprachen, Währungen, Quiz, Spiel"
 
-#: lib/seo_utils.py:62 lib/seo_utils.py:66
+#: lib/seo_utils.py:76 lib/seo_utils.py:80
 msgid "Geography quiz game - guess the capitals"
 msgstr "Geografie-Spiel - Hauptstädte erraten"
 
-#: lib/seo_utils.py:63 lib/seo_utils.py:67
+#: lib/seo_utils.py:77 lib/seo_utils.py:81
 msgid "capitals, geography, worldle, quiz, game"
 msgstr "Hauptstädte, Geografie, Worldle, Quiz, Spiel"
 
-#: lib/seo_utils.py:77 lib/seo_utils.py:81
+#: lib/seo_utils.py:91 lib/seo_utils.py:95
 msgid "Geography quiz game - guess the languages"
 msgstr "Geografie-Spiel - Sprachen erraten"
 
-#: lib/seo_utils.py:78 lib/seo_utils.py:82
+#: lib/seo_utils.py:92 lib/seo_utils.py:96
 msgid "languages, geography, worldle, quiz, game"
 msgstr "Sprachen, Geografie, Worldle, Quiz, Spiel"
 
-#: lib/seo_utils.py:91
+#: lib/seo_utils.py:105
 msgid "Competitive geography quiz with leaderboards"
 msgstr "Wettbewerbsgeografie-Spiel mit Ranglisten"
 
-#: lib/seo_utils.py:92
+#: lib/seo_utils.py:106
 msgid "worldle, geography, competitive, quiz, leaderboard"
 msgstr "Worldle, Geografie, Wettbewerb, Quiz, Rangliste"
 
-#: lib/seo_utils.py:99
+#: lib/seo_utils.py:113
 msgid "Worldle Leaderboards"
 msgstr "Worldle-Ranglisten"
 
-#: lib/seo_utils.py:100
+#: lib/seo_utils.py:114
 msgid "View top players in geography quiz games"
 msgstr "Top-Spieler in Geografie-Spielen anzeigen"
 
-#: lib/seo_utils.py:101
+#: lib/seo_utils.py:115
 msgid "leaderboards, worldle, geography, quiz, rankings"
 msgstr "Ranglisten, Worldle, Geografie, Quiz, Ranglisten"
 
@@ -374,7 +374,7 @@ msgstr "Link zu den Übungsunterlagen"
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:105
+#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:95
 msgid "Remarks"
 msgstr "Anmerkungen"
 
@@ -406,17 +406,17 @@ msgstr "Verschiedene Länderquizzes"
 msgid "To the game modes"
 msgstr "Zu den Spielmodi"
 
-#: nethz_django/middleware.py:13
+#: nethz_django/middleware.py:96
 msgid "You have to confirm your email address to log in."
 msgstr "Sie müssen Ihre E-Mail-Adresse bestätigen, um sich anzumelden."
 
-#: templates/accounts/login.html:24
+#: templates/accounts/login.html:25
 msgid "Don't have an account yet?"
 msgstr "Noch kein Konto?"
 
-#: templates/accounts/password_reset/password_reset_confirm.html:12
+#: templates/accounts/password_reset/password_reset_confirm.html:13
 #: templates/accounts/password_reset/password_reset_email.html:24
-#: templates/accounts/password_reset/password_reset_form.html:12
+#: templates/accounts/password_reset/password_reset_form.html:13
 msgid "Password reset"
 msgstr "Passwort zurücksetzen"
 
@@ -446,7 +446,7 @@ msgstr ""
 "Wenn Sie Probleme mit dem Button haben, können Sie Ihr Passwort auch "
 "zurücksetzen, indem Sie den folgenden Link in Ihren Browser kopieren"
 
-#: templates/accounts/password_reset/password_reset_form.html:22
+#: templates/accounts/password_reset/password_reset_form.html:23
 msgid "Accidentally here?"
 msgstr "Aus Versehen hier?"
 
@@ -454,15 +454,15 @@ msgstr "Aus Versehen hier?"
 msgid "Password reset request for your account"
 msgstr "Passwort zurücksetzen"
 
-#: templates/accounts/signup.html:15 templates/components/_navbar.html:46
+#: templates/accounts/signup.html:16 templates/components/_navbar.html:43
 msgid "Sign Up"
 msgstr "Registrieren"
 
-#: templates/accounts/signup.html:25
+#: templates/accounts/signup.html:26
 msgid "Already have an account?"
 msgstr "Haben Sie bereits ein Konto?"
 
-#: templates/accounts/user_account.html:14 templates/components/_navbar.html:57
+#: templates/accounts/user_account.html:14 templates/components/_navbar.html:54
 msgid "My Account"
 msgstr "Mein Konto"
 
@@ -491,6 +491,10 @@ msgstr ""
 "Wenn Sie Probleme mit dem Button haben, können Sie Ihre E-Mail-Adresse auch "
 "bestätigen, indem Sie den folgenden Link in Ihren Browser kopieren"
 
+#: templates/components/_base.html:44
+msgid "Skip to main content"
+msgstr "Zum Hauptinhalt springen"
+
 #: templates/components/_errors.html:14
 msgid "Oops! You ran out of oxygen."
 msgstr "Uups! Du hast keinen Sauerstoff mehr."
@@ -503,11 +507,15 @@ msgstr "Die Seite, die du suchst, ist jetzt ausserhalb deiner Reichweite..."
 msgid "Return Home"
 msgstr "Zur Startseite"
 
-#: templates/components/_navbar.html:59
+#: templates/components/_navbar.html:9
+msgid "Toggle navigation"
+msgstr "Navigation umschalten"
+
+#: templates/components/_navbar.html:56
 msgid "Admin Portal"
 msgstr "Admin-Portal"
 
-#: templates/components/_navbar.html:64
+#: templates/components/_navbar.html:61
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -522,44 +530,48 @@ msgid "Useful Links"
 msgstr "Nützliche Links"
 
 #: templates/exercise_sessions/technische_mechanik.html:58
-msgid "YT - EE4ETH - Engineering Mechanics Playlist"
-msgstr "YT - EE4ETH - Technische Mechanik Playlist"
-
-#: templates/exercise_sessions/technische_mechanik.html:68
-msgid "Lina de Windt's website"
-msgstr "Lina de Windts Webseite"
-
-#: templates/exercise_sessions/technische_mechanik.html:78
 msgid "Lina de Windt's PVK"
 msgstr "Lina de Windts PVK"
 
-#: templates/exercise_sessions/technische_mechanik.html:88
+#: templates/exercise_sessions/technische_mechanik.html:68
 msgid "Theory Recap by Felix Stalder"
 msgstr "Theorieblätter von Felix Stalder"
 
-#: templates/exercise_sessions/technische_mechanik.html:101
+#: templates/exercise_sessions/technische_mechanik.html:78
+msgid "YT - EE4ETH - Engineering Mechanics Playlist"
+msgstr "YT - EE4ETH - Technische Mechanik Playlist"
+
+#: templates/exercise_sessions/technische_mechanik.html:91
 msgid "Week"
 msgstr "Woche"
 
-#: templates/exercise_sessions/technische_mechanik.html:102
+#: templates/exercise_sessions/technische_mechanik.html:92
 msgid "Exercise Materials"
 msgstr "Übungsunterlagen"
 
-#: templates/exercise_sessions/technische_mechanik.html:103
+#: templates/exercise_sessions/technische_mechanik.html:93
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/exercise_sessions/technische_mechanik.html:104
+#: templates/exercise_sessions/technische_mechanik.html:94
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/exercise_sessions/technische_mechanik.html:119
+#: templates/exercise_sessions/technische_mechanik.html:109
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
 
-#: templates/macros/leaderboard.html:9
+#: templates/macros/leaderboard.html:8
 msgid "Go to Game"
 msgstr "Zum Spiel"
+
+#: templates/macros/leaderboard.html:23 templates/macros/leaderboard.html:25
+msgid "Loading..."
+msgstr "Lädt..."
+
+#: templates/macros/leaderboard.html:30
+msgid "No scores yet"
+msgstr "Noch keine Scores"
 
 #: templates/macros/regions.html:6
 msgid "Worldwide"
@@ -616,33 +628,33 @@ msgstr "Antwort überprüfen"
 msgid "Show me the solution"
 msgstr "Zeige mir die Lösung"
 
-#: templates/worldle/competitive_areas.html:93
+#: templates/worldle/competitive_areas.html:95
 msgid "Is the area of the country on the right higher or lower?"
 msgstr "Ist die Fläche des Landes auf der rechten Seite grösser oder kleiner?"
 
-#: templates/worldle/competitive_areas.html:96
+#: templates/worldle/competitive_areas.html:98
 msgid "Lower"
 msgstr "Kleiner"
 
-#: templates/worldle/competitive_areas.html:97
-#: templates/worldle/competitive_capitals.html:86
-#: templates/worldle/competitive_currencies.html:86
-#: templates/worldle/competitive_languages.html:86
+#: templates/worldle/competitive_areas.html:99
+#: templates/worldle/competitive_capitals.html:88
+#: templates/worldle/competitive_currencies.html:88
+#: templates/worldle/competitive_languages.html:88
 msgid "score"
 msgstr "Score"
 
-#: templates/worldle/competitive_areas.html:98
+#: templates/worldle/competitive_areas.html:100
 msgid "Higher"
 msgstr "Grösser"
 
-#: templates/worldle/competitive_areas.html:109
-#: templates/worldle/competitive_capitals.html:133
-#: templates/worldle/competitive_currencies.html:137
-#: templates/worldle/competitive_languages.html:133
+#: templates/worldle/competitive_areas.html:111
+#: templates/worldle/competitive_capitals.html:135
+#: templates/worldle/competitive_currencies.html:139
+#: templates/worldle/competitive_languages.html:135
 msgid "Leaderboard"
 msgstr "Rangliste"
 
-#: templates/worldle/competitive_currencies.html:129
+#: templates/worldle/competitive_currencies.html:131
 msgid ""
 "To make this game more challenging, hints to the country in the currency's "
 "name are replaced by an asterisk."
@@ -652,19 +664,18 @@ msgstr ""
 
 #: templates/worldle/home.html:16
 msgid "Please note that the games themselves will continue to be in English."
-msgstr ""
-"Bitte beachte, dass die Spiele selbst weiterhin auf Englisch sind."
+msgstr "Bitte beachte, dass die Spiele selbst weiterhin auf Englisch sind."
 
 #: templates/worldle/home.html:20
 msgid "Game Modes"
 msgstr "Spielmodi"
 
 #: templates/worldle/home.html:24
-msgid "Practice (No account required)"
-msgstr "Üben (Kein Konto erforderlich)"
+msgid "Practice (no account required)"
+msgstr "Üben (kein Konto erforderlich)"
 
 #: templates/worldle/home.html:34
-msgid "Competitive (Account required)"
+msgid "Competitive (account required)"
 msgstr "Wettbewerb (Konto erforderlich)"
 
 #: templates/worldle/home.html:37 templates/worldle/leaderboards.html:22
@@ -674,6 +685,10 @@ msgstr "Ranglisten"
 #: templates/worldle/languages.html:36
 msgid "Enter the language(s)"
 msgstr "Geben Sie die Sprache(n) ein"
+
+#: templates/worldle/leaderboards.html:104
+msgid "Error loading data"
+msgstr "Fehler beim Laden der Daten"
 
 #: worldle/cards.py:9 worldle/cards.py:36
 msgid "Guess the capitals"
@@ -695,3 +710,6 @@ msgstr "Higher Lower mit Landesflächen"
 #: worldle/cards.py:45
 msgid "Guess the currency"
 msgstr "Errate die Währung"
+
+#~ msgid "Lina de Windt's website"
+#~ msgstr "Lina de Windts Webseite"
