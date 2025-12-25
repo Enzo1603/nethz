@@ -30,6 +30,7 @@ COPY --from=builder /app/.venv /app/.venv
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH="/app"
 
 # Copy application code (templates, locale, static, etc.)
 COPY templates/ /app/templates/
@@ -47,7 +48,15 @@ ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
 ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
 
 # Collect static files and compile messages
-RUN python manage.py collectstatic --noinput && \
+# Set environment variables inline (only for this RUN, not persisted in image)
+RUN SECRET_KEY="${SECRET_KEY}" \
+    PRODUCTION_DOMAINS="${PRODUCTION_DOMAINS}" \
+    EMAIL_HOST="${EMAIL_HOST}" \
+    EMAIL_PORT="${EMAIL_PORT}" \
+    EMAIL_HOST_USER="${EMAIL_HOST_USER}" \
+    EMAIL_HOST_PASSWORD="${EMAIL_HOST_PASSWORD}" \
+    DEFAULT_FROM_EMAIL="${DEFAULT_FROM_EMAIL}" \
+    python manage.py collectstatic --noinput && \
     python manage.py compilemessages
 
 # Make entrypoint executable
