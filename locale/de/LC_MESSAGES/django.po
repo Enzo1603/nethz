@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-25 18:44+0100\n"
+"POT-Creation-Date: 2025-12-25 18:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,11 +45,11 @@ msgid "The username contains not allowed characters or expressions."
 msgstr "Der Benutzername enthält nicht erlaubte Zeichen oder Ausdrücke."
 
 #: accounts/forms.py:56 accounts/forms.py:82 accounts/forms.py:160
-#: templates/macros/leaderboard.html:15
-#: templates/worldle/competitive_areas.html:206
-#: templates/worldle/competitive_capitals.html:211
-#: templates/worldle/competitive_currencies.html:219
-#: templates/worldle/competitive_languages.html:211
+#: templates/macros/leaderboard.html:16
+#: templates/worldle/competitive_areas.html:127
+#: templates/worldle/competitive_capitals.html:125
+#: templates/worldle/competitive_currencies.html:133
+#: templates/worldle/competitive_languages.html:125
 msgid "Username"
 msgstr "Benutzername"
 
@@ -595,15 +595,37 @@ msgstr "Lösungen"
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
 
-#: templates/macros/leaderboard.html:8
-msgid "Go to Game"
-msgstr "Zum Spiel"
+#: templates/macros/leaderboard.html:8 worldle/cards.py:10 worldle/cards.py:19
+#: worldle/cards.py:28 worldle/cards.py:37 worldle/cards.py:46
+#: worldle/cards.py:55
+msgid "Play"
+msgstr "Spielen"
 
-#: templates/macros/leaderboard.html:23 templates/macros/leaderboard.html:25
+#: templates/macros/leaderboard.html:17
+#: templates/worldle/competitive_areas.html:50
+#: templates/worldle/competitive_areas.html:128
+#: templates/worldle/competitive_capitals.html:52
+#: templates/worldle/competitive_capitals.html:126
+#: templates/worldle/competitive_currencies.html:52
+#: templates/worldle/competitive_currencies.html:134
+#: templates/worldle/competitive_languages.html:52
+#: templates/worldle/competitive_languages.html:126
+msgid "Score"
+msgstr "Punkte"
+
+#: templates/macros/leaderboard.html:24 templates/macros/leaderboard.html:26
+#: templates/worldle/competitive_areas.html:135
+#: templates/worldle/competitive_capitals.html:133
+#: templates/worldle/competitive_currencies.html:141
+#: templates/worldle/competitive_languages.html:133
 msgid "Loading..."
 msgstr "Lädt..."
 
-#: templates/macros/leaderboard.html:30
+#: templates/macros/leaderboard.html:31
+#: templates/worldle/competitive_areas.html:215
+#: templates/worldle/competitive_capitals.html:222
+#: templates/worldle/competitive_currencies.html:244
+#: templates/worldle/competitive_languages.html:221
 msgid "No scores yet"
 msgstr "Noch keine Scores"
 
@@ -691,69 +713,66 @@ msgstr "Zeige mir die Lösung"
 msgid "There is no capital. Submit an empty text field."
 msgstr "Es gibt keine Hauptstadt. Reiche ein leeres Textfeld ein."
 
-#: templates/worldle/competitive_areas.html:110 worldle/cards.py:27
+#: templates/worldle/competitive_areas.html:40 worldle/cards.py:27
 msgid "Higher Lower with country areas"
 msgstr "Higher Lower mit Landesflächen"
 
-#: templates/worldle/competitive_areas.html:120
-#: templates/worldle/competitive_capitals.html:129
-#: templates/worldle/competitive_currencies.html:129
-#: templates/worldle/competitive_languages.html:129
-msgid "Score"
-msgstr "Punkte"
-
-#: templates/worldle/competitive_areas.html:129
-#: templates/worldle/competitive_areas.html:207
-#: templates/worldle/competitive_capitals.html:138
-#: templates/worldle/competitive_capitals.html:212
-#: templates/worldle/competitive_currencies.html:138
-#: templates/worldle/competitive_currencies.html:220
-#: templates/worldle/competitive_languages.html:138
-#: templates/worldle/competitive_languages.html:212
+#: templates/worldle/competitive_areas.html:59
+#: templates/worldle/competitive_capitals.html:61
+#: templates/worldle/competitive_currencies.html:61
+#: templates/worldle/competitive_languages.html:61
 msgid "Highscore"
 msgstr "Rekord"
 
-#: templates/worldle/competitive_areas.html:150
-#: templates/worldle/competitive_areas.html:160
+#: templates/worldle/competitive_areas.html:80
+#: templates/worldle/competitive_areas.html:90
 msgid "Area"
 msgstr "Fläche"
 
-#: templates/worldle/competitive_areas.html:169
+#: templates/worldle/competitive_areas.html:97
 msgid "Is the area of the country on the right higher or lower?"
 msgstr "Ist die Fläche des Landes auf der rechten Seite grösser oder kleiner?"
 
-#: templates/worldle/competitive_areas.html:170
+#: templates/worldle/competitive_areas.html:98
 msgid "Is the area of the country below higher or lower?"
 msgstr "Ist die Fläche des Landes unten höher oder niedriger?"
 
-#: templates/worldle/competitive_areas.html:177
+#: templates/worldle/competitive_areas.html:105
 msgid "Lower"
 msgstr "Kleiner"
 
-#: templates/worldle/competitive_areas.html:182
+#: templates/worldle/competitive_areas.html:110
 msgid "Higher"
 msgstr "Grösser"
 
-#: templates/worldle/competitive_areas.html:196
-#: templates/worldle/competitive_capitals.html:201
-#: templates/worldle/competitive_currencies.html:209
-#: templates/worldle/competitive_languages.html:201
+#: templates/worldle/competitive_areas.html:120
+#: templates/worldle/competitive_capitals.html:118
+#: templates/worldle/competitive_currencies.html:126
+#: templates/worldle/competitive_languages.html:118
 msgid "Leaderboard"
 msgstr "Rangliste"
 
-#: templates/worldle/competitive_capitals.html:119
+#: templates/worldle/competitive_areas.html:232
+#: templates/worldle/competitive_capitals.html:239
+#: templates/worldle/competitive_currencies.html:261
+#: templates/worldle/competitive_languages.html:238
+#: templates/worldle/leaderboards.html:81
+msgid "Error loading data"
+msgstr "Fehler beim Laden der Daten"
+
+#: templates/worldle/competitive_capitals.html:42
 msgid "Guess the capital of the displayed country"
 msgstr "Errate die Hauptstadt des angezeigten Landes"
 
-#: templates/worldle/competitive_currencies.html:119
+#: templates/worldle/competitive_currencies.html:42
 msgid "Guess the currency of the displayed country"
 msgstr "Errate die Währung des angezeigten Landes"
 
-#: templates/worldle/competitive_currencies.html:198
+#: templates/worldle/competitive_currencies.html:119
 msgid "Note"
 msgstr "Hinweis"
 
-#: templates/worldle/competitive_currencies.html:198
+#: templates/worldle/competitive_currencies.html:119
 msgid ""
 "To make this game more challenging, hints to the country in the currency's "
 "name are replaced by an asterisk."
@@ -761,7 +780,7 @@ msgstr ""
 "Um dieses Spiel herausfordernder zu gestalten, werden Hinweise auf das Land "
 "im Namen der Währung durch ein Sternchen ersetzt."
 
-#: templates/worldle/competitive_languages.html:119
+#: templates/worldle/competitive_languages.html:42
 msgid "Guess the language(s) of the displayed country"
 msgstr "Errate die Sprache(n) des angezeigten Landes"
 
@@ -781,7 +800,7 @@ msgstr "Üben (kein Konto erforderlich)"
 msgid "Competitive (account required)"
 msgstr "Wettbewerb (Konto erforderlich)"
 
-#: templates/worldle/home.html:45 templates/worldle/leaderboards.html:22
+#: templates/worldle/home.html:45 templates/worldle/leaderboards.html:8
 msgid "Leaderboards"
 msgstr "Ranglisten"
 
@@ -801,18 +820,13 @@ msgstr "Geben Sie die Sprache(n) ein"
 msgid "There is no language. Submit an empty text field."
 msgstr "Es gibt keine Sprache. Reiche ein leeres Textfeld ein."
 
-#: templates/worldle/leaderboards.html:104
-msgid "Error loading data"
-msgstr "Fehler beim Laden der Daten"
+#: templates/worldle/leaderboards.html:10
+msgid "Live updates"
+msgstr "Live-Updates"
 
 #: worldle/cards.py:9 worldle/cards.py:36
 msgid "Guess the capitals"
 msgstr "Errate die Hauptstädte"
-
-#: worldle/cards.py:10 worldle/cards.py:19 worldle/cards.py:28
-#: worldle/cards.py:37 worldle/cards.py:46 worldle/cards.py:55
-msgid "Play"
-msgstr "Spielen"
 
 #: worldle/cards.py:18 worldle/cards.py:54
 msgid "Guess the national languages"
