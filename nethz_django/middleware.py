@@ -21,16 +21,42 @@ class SEORedirectMiddleware:
 
     def __call__(self, request):
         path = request.path
+        chosen_lang = None
+
+        # If user visits a language-prefixed URL, persist that choice (session + cookie)
+        # Supports /de/, /de, /en/, /en/anything...
+        for lang_code, _lang_name in settings.LANGUAGES:
+            prefix = f"/{lang_code}"
+            if path == prefix or path.startswith(prefix + "/"):
+                session_obj = getattr(request, "session", None)
+                if session_obj is not None:
+                    session_obj[settings.LANGUAGE_COOKIE_NAME] = lang_code
+                chosen_lang = lang_code
+                break
 
         # Root URL: override LocaleMiddleware's 302 with a permanent 301
         if path == "/":
-            user_language = translation.get_language_from_request(
-                request, check_path=False
+            # 1) honor persisted choice (cookie or session)
+            lang_cookie = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
+            session_obj = getattr(request, "session", None)
+            lang_session = (
+                session_obj.get(settings.LANGUAGE_COOKIE_NAME) if session_obj else None
             )
+            user_language = lang_cookie or lang_session
+            # 2) fallback to Accept-Language
+            if not user_language:
+                user_language = translation.get_language_from_request(
+                    request, check_path=False
+                )
             supported = [lang[0] for lang in settings.LANGUAGES]
             if user_language not in supported:
                 user_language = settings.LANGUAGE_CODE
-            return HttpResponsePermanentRedirect(f"/{user_language}/")
+            response = HttpResponsePermanentRedirect(f"/{user_language}/")
+            if user_language:
+                response.set_cookie(
+                    settings.LANGUAGE_COOKIE_NAME, user_language, max_age=31536000
+                )
+            return response
 
         # Enforce trailing slash for safe methods (GET/HEAD)
         if (
@@ -42,9 +68,22 @@ class SEORedirectMiddleware:
             new_path = path + "/"
             if request.META.get("QUERY_STRING"):
                 new_path += "?" + request.META["QUERY_STRING"]
-            return HttpResponsePermanentRedirect(new_path)
+            response = HttpResponsePermanentRedirect(new_path)
+            if chosen_lang:
+                response.set_cookie(
+                    settings.LANGUAGE_COOKIE_NAME, chosen_lang, max_age=31536000
+                )
+            return response
 
-        return self.get_response(request)
+        response = self.get_response(request)
+
+        # Persist chosen language on normal responses too
+        if chosen_lang and response:
+            response.set_cookie(
+                settings.LANGUAGE_COOKIE_NAME, chosen_lang, max_age=31536000
+            )
+
+        return response
 
 
 class EmailVerificationMiddleware:

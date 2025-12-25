@@ -114,9 +114,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    # SEO: 301 redirects for root URL and trailing slashes
-    "nethz_django.middleware.SEORedirectMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # SEO: 301 redirects for root URL and trailing slashes (needs session first)
+    "nethz_django.middleware.SEORedirectMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
