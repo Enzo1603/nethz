@@ -43,7 +43,8 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False  # Set to True only in development environment
 
-ALLOWED_HOSTS = []
+# localhost/127.0.0.1 always allowed for internal healthchecks
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 if ENVIRONMENT == "development":
     DEBUG = True
@@ -226,7 +227,7 @@ if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
         BASE_DIR / "assets"
     )  # python manage.py collectstatic saves files there
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    
+
     # WhiteNoise optimization - Better caching and compression
     WHITENOISE_MAX_AGE = 31536000  # 1 year for immutable files
     WHITENOISE_USE_FINDERS = False  # Disable in production (files already collected)
@@ -440,7 +441,7 @@ JAZZMIN_UI_TWEAKS = {
         "info": "btn-info",
         "warning": "btn-warning",
         "danger": "btn-danger",
-        "success": "btn-success"
+        "success": "btn-success",
     },
-    "actions_sticky_top": False
+    "actions_sticky_top": False,
 }

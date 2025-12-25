@@ -44,7 +44,7 @@ COPY nethz_django/ /app/nethz_django/
 COPY manage.py entrypoint.sh ./
 
 # Collect static files and compile messages
-# Dummy values only for build (export so both commands see them)
+# Dummy values only for build
 RUN export SECRET_KEY="build-only-dummy-key" \
     PRODUCTION_DOMAINS="localhost" \
     EMAIL_HOST="localhost" \
@@ -63,7 +63,7 @@ EXPOSE 8000
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/').read()" || exit 1
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/', timeout=5)" || exit 1
 
 # Set entrypoint
 ENTRYPOINT ["./entrypoint.sh"]
