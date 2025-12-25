@@ -43,7 +43,7 @@ def home(request):
 
     # Add SEO data
     seo_data = get_home_seo()
-    add_seo_to_context(context, seo_data)
+    add_seo_to_context(context, seo_data, request=request, url_name="main:home")
 
     return render(request, "main/home.html", context)
 
@@ -85,6 +85,18 @@ def technische_mechanik(request, semester: str | None = None):
 
     # Add SEO data
     seo_data = get_technische_mechanik_seo(current_semester)
-    add_seo_to_context(context, seo_data)
+    if current_semester:
+        add_seo_to_context(
+            context, seo_data, 
+            request=request, 
+            url_name="main:technische_mechanik_semester",
+            url_kwargs={"semester": current_semester}
+        )
+    else:
+        add_seo_to_context(
+            context, seo_data,
+            request=request,
+            url_name="main:technische_mechanik"
+        )
 
     return render(request, "exercise_sessions/technische_mechanik.html", context)

@@ -44,7 +44,7 @@ def home(request):
 
     # Add SEO data
     seo_data = get_worldle_home_seo()
-    add_seo_to_context(context, seo_data)
+    add_seo_to_context(context, seo_data, request=request, url_name="worldle:home")
 
     return render(request, "worldle/home.html", context)
 
@@ -91,7 +91,7 @@ def leaderboards(request):
 
     # Add SEO data
     seo_data = get_leaderboards_seo()
-    add_seo_to_context(context, seo_data)
+    add_seo_to_context(context, seo_data, request=request, url_name="worldle:leaderboards")
 
     return render(
         request,
@@ -101,7 +101,8 @@ def leaderboards(request):
 
 
 def default_capitals(request):
-    return redirect(reverse("worldle:capitals", args=[DEFAULT_REGION]))
+    # Use permanent redirect (301) for SEO - this tells Google the redirect is permanent
+    return redirect(reverse("worldle:capitals", args=[DEFAULT_REGION]), permanent=True)
 
 
 def capitals(request, region):
@@ -127,7 +128,12 @@ def capitals(request, region):
 
     # Add SEO data
     seo_data = get_worldle_capitals_seo(region)
-    add_seo_to_context(context, seo_data)
+    add_seo_to_context(
+        context, seo_data, 
+        request=request, 
+        url_name="worldle:capitals",
+        url_kwargs={"region": region}
+    )
 
     return render(
         request,
@@ -169,7 +175,11 @@ def competitive_capitals(request):
 
         # Add SEO data
         seo_data = get_worldle_competitive_seo("capitals")
-        add_seo_to_context(context, seo_data)
+        add_seo_to_context(
+            context, seo_data,
+            request=request,
+            url_name="worldle:competitive_capitals"
+        )
 
         return render(
             request,
@@ -228,7 +238,8 @@ def competitive_capitals(request):
 
 
 def default_languages(request):
-    return redirect(reverse("worldle:languages", args=[DEFAULT_REGION]))
+    # Use permanent redirect (301) for SEO - this tells Google the redirect is permanent
+    return redirect(reverse("worldle:languages", args=[DEFAULT_REGION]), permanent=True)
 
 
 def languages(request, region):
@@ -256,7 +267,12 @@ def languages(request, region):
 
     # Add SEO data
     seo_data = get_worldle_languages_seo(region)
-    add_seo_to_context(context, seo_data)
+    add_seo_to_context(
+        context, seo_data,
+        request=request,
+        url_name="worldle:languages",
+        url_kwargs={"region": region}
+    )
 
     return render(
         request,
@@ -298,7 +314,11 @@ def competitive_languages(request):
 
         # Add SEO data
         seo_data = get_worldle_competitive_seo("languages")
-        add_seo_to_context(context, seo_data)
+        add_seo_to_context(
+            context, seo_data,
+            request=request,
+            url_name="worldle:competitive_languages"
+        )
 
         return render(
             request,
@@ -384,7 +404,11 @@ def competitive_areas(request):
 
         # Add SEO data
         seo_data = get_worldle_competitive_seo("areas")
-        add_seo_to_context(context, seo_data)
+        add_seo_to_context(
+            context, seo_data,
+            request=request,
+            url_name="worldle:competitive_areas"
+        )
 
         return render(
             request,
@@ -481,7 +505,11 @@ def competitive_currencies(request):
 
         # Add SEO data
         seo_data = get_worldle_competitive_seo("currencies")
-        add_seo_to_context(context, seo_data)
+        add_seo_to_context(
+            context, seo_data,
+            request=request,
+            url_name="worldle:competitive_currencies"
+        )
 
         return render(
             request,

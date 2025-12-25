@@ -3,3 +3,22 @@
     <meta name="keywords" content="{{ meta_keywords|default:'ETH Zurich, engineering mechanics, worldle, geography, capitals, languages' }}">
     <meta name="author" content="Enzo Baraldi">
     <meta name="robots" content="{{ meta_robots|default:'index, follow' }}">
+    
+    {% if canonical_url %}
+    <!-- Canonical URL to prevent duplicate content issues -->
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% else %}
+    <!-- Fallback: use current page URL as canonical -->
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+    {% endif %}
+    
+    {% if hreflang_urls %}
+    <!-- Hreflang tags for bilingual support (tells Google about language alternatives) -->
+    {% for lang_code, url in hreflang_urls.items %}
+    <link rel="alternate" hreflang="{{ lang_code }}" href="{{ url }}">
+    {% endfor %}
+    <!-- x-default points to the default language version (German) -->
+    {% if hreflang_urls.de %}
+    <link rel="alternate" hreflang="x-default" href="{{ hreflang_urls.de }}">
+    {% endif %}
+    {% endif %}

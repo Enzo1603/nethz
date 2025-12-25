@@ -2,16 +2,19 @@
 Simple SEO utility functions for basic meta tag management.
 """
 
+from django.conf import settings
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
 
 class SEOData:
     """Container for basic SEO meta data"""
 
-    def __init__(self, title=None, description=None, keywords=None):
+    def __init__(self, title=None, description=None, keywords=None, canonical_url=None):
         self.title = title
         self.description = description
         self.keywords = keywords
+        self.canonical_url = canonical_url
 
     def to_context(self):
         """Convert to dictionary for template context"""
@@ -19,6 +22,7 @@ class SEOData:
             "title": self.title,
             "meta_description": self.description,
             "meta_keywords": self.keywords,
+            "canonical_url": self.canonical_url,
         }
 
 
@@ -112,8 +116,31 @@ def get_leaderboards_seo():
     )
 
 
-def add_seo_to_context(context, seo_data):
+def add_seo_to_context(context, seo_data, request=None, url_name=None, url_args=None, url_kwargs=None):
     """Helper function to add SEO data to view context"""
     if isinstance(seo_data, SEOData):
         context.update(seo_data.to_context())
+        
+        # Generate canonical URL if not provided but request and url_name are available
+        if request and url_name and not seo_data.canonical_url:
+            # Import here to avoid circular imports
+            from django.urls import reverse
+            scheme = "https" if request.is_secure() else "http"
+            host = request.get_host()
+            path = reverse(url_name, args=url_args or [], kwargs=url_kwargs or {})
+            context["canonical_url"] = f"{scheme}://{host}{path}"
+            
+            # Generate hreflang URLs for bilingual support
+            from django.utils import translation
+            hreflang_urls = {}
+            current_lang = translation.get_language()
+            try:
+                for lang_code, _lang_name in getattr(settings, "LANGUAGES", ()):
+                    with translation.override(lang_code):
+                        path = reverse(url_name, args=url_args or [], kwargs=url_kwargs or {})
+                        hreflang_urls[lang_code] = f"{scheme}://{host}{path}"
+            finally:
+                translation.activate(current_lang)
+            context["hreflang_urls"] = hreflang_urls
+    
     return context
