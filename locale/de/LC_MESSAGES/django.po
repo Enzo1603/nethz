@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-25 16:03+0100\n"
+"POT-Creation-Date: 2025-12-25 17:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid "Activate your account"
 msgstr "Aktivieren Sie Ihr Konto"
 
 #: accounts/forms.py:24 accounts/forms.py:60 accounts/forms.py:163
-#: accounts/forms.py:209
+#: accounts/forms.py:212
 msgid "Email Address"
 msgstr "E-Mail-Adresse"
 
@@ -36,7 +36,7 @@ msgstr "Wir werden Ihre E-Mail-Adresse niemals mit anderen teilen."
 msgid "Password"
 msgstr "Passwort"
 
-#: accounts/forms.py:33 accounts/forms.py:107 accounts/forms.py:230
+#: accounts/forms.py:33 accounts/forms.py:107 accounts/forms.py:233
 msgid "Minimum length of 8 characters."
 msgstr "Mindestlänge von 8 Zeichen."
 
@@ -46,7 +46,10 @@ msgstr "Der Benutzername enthält nicht erlaubte Zeichen oder Ausdrücke."
 
 #: accounts/forms.py:56 accounts/forms.py:82 accounts/forms.py:160
 #: templates/macros/leaderboard.html:15
-#: templates/worldle/competitive_areas.html:122
+#: templates/worldle/competitive_areas.html:204
+#: templates/worldle/competitive_capitals.html:209
+#: templates/worldle/competitive_currencies.html:217
+#: templates/worldle/competitive_languages.html:209
 msgid "Username"
 msgstr "Benutzername"
 
@@ -54,13 +57,13 @@ msgstr "Benutzername"
 msgid "Confirm Password"
 msgstr "Passwort bestätigen"
 
-#: accounts/forms.py:68 templates/accounts/login.html:28
+#: accounts/forms.py:68 templates/accounts/login.html:32
 msgid "Sign up"
 msgstr "Registrieren"
 
-#: accounts/forms.py:88 templates/accounts/login.html:15
+#: accounts/forms.py:88 templates/accounts/login.html:21
 #: templates/accounts/password_reset/password_reset_form.html:26
-#: templates/accounts/signup.html:29 templates/components/_navbar.html:40
+#: templates/accounts/signup.html:33 templates/components/_navbar.html:40
 msgid "Login"
 msgstr "Anmelden"
 
@@ -76,41 +79,45 @@ msgstr "Die beiden Passworteingaben stimmen nicht überein."
 msgid "Username and Email Address"
 msgstr "Benutzername und E-Mail-Adresse"
 
-#: accounts/forms.py:172
+#: accounts/forms.py:170
 msgid "First and Last name"
 msgstr "Vorname und Nachname"
 
-#: accounts/forms.py:175
+#: accounts/forms.py:173
 msgid "First Name"
 msgstr "Vorname"
 
-#: accounts/forms.py:176
+#: accounts/forms.py:174
 msgid "Last Name"
 msgstr "Nachname"
 
-#: accounts/forms.py:183
+#: accounts/forms.py:181
 msgid "Change Password"
 msgstr "Passwort ändern"
 
-#: accounts/forms.py:185 accounts/forms.py:227 accounts/forms.py:239
-#: accounts/forms.py:241
+#: accounts/forms.py:186
+msgid "Leave blank if you don't want to change your password."
+msgstr "Lasse es leer, wenn du dein Passwort nicht ändern möchtest"
+
+#: accounts/forms.py:190 accounts/forms.py:230 accounts/forms.py:242
+#: accounts/forms.py:244
 msgid "New Password"
 msgstr "Neues Passwort"
 
-#: accounts/forms.py:187
+#: accounts/forms.py:192
 msgid "Confirm New Password"
 msgstr "Neues Passwort bestätigen"
 
-#: accounts/forms.py:195
+#: accounts/forms.py:198
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: accounts/forms.py:215
+#: accounts/forms.py:218
 #: templates/accounts/password_reset/password_reset_email.html:39
 msgid "Reset my password"
 msgstr "Mein Passwort zurücksetzen"
 
-#: accounts/forms.py:247
+#: accounts/forms.py:250
 msgid "Change my password"
 msgstr "Mein Passwort ändern"
 
@@ -410,7 +417,11 @@ msgstr "Zu den Spielmodi"
 msgid "You have to confirm your email address to log in."
 msgstr "Sie müssen Ihre E-Mail-Adresse bestätigen, um sich anzumelden."
 
-#: templates/accounts/login.html:25
+#: templates/accounts/login.html:22
+msgid "Welcome back! Please sign in to your account."
+msgstr "Willkommen zurück! Bitte melden Sie sich in Ihrem Konto an."
+
+#: templates/accounts/login.html:30
 msgid "Don't have an account yet?"
 msgstr "Noch kein Konto?"
 
@@ -454,17 +465,29 @@ msgstr "Aus Versehen hier?"
 msgid "Password reset request for your account"
 msgstr "Passwort zurücksetzen"
 
-#: templates/accounts/signup.html:16 templates/components/_navbar.html:43
+#: templates/accounts/signup.html:22 templates/components/_navbar.html:43
 msgid "Sign Up"
 msgstr "Registrieren"
 
-#: templates/accounts/signup.html:26
+#: templates/accounts/signup.html:23
+msgid "Create a new account to get started."
+msgstr "Erstellen Sie ein neues Konto, um loszulegen."
+
+#: templates/accounts/signup.html:31
 msgid "Already have an account?"
 msgstr "Haben Sie bereits ein Konto?"
 
-#: templates/accounts/user_account.html:14 templates/components/_navbar.html:54
+#: templates/accounts/user_account.html:24 templates/components/_navbar.html:54
 msgid "My Account"
 msgstr "Mein Konto"
+
+#: templates/accounts/user_account.html:32
+msgid "Verified"
+msgstr "Verifiziert"
+
+#: templates/accounts/user_account.html:36
+msgid "Not Verified"
+msgstr "Nicht verifiziert"
 
 #: templates/accounts/verification_email.html:24
 msgid "Email Confirmation"
@@ -491,7 +514,7 @@ msgstr ""
 "Wenn Sie Probleme mit dem Button haben, können Sie Ihre E-Mail-Adresse auch "
 "bestätigen, indem Sie den folgenden Link in Ihren Browser kopieren"
 
-#: templates/components/_base.html:44
+#: templates/components/_base.html:45
 msgid "Skip to main content"
 msgstr "Zum Hauptinhalt springen"
 
@@ -518,6 +541,10 @@ msgstr "Admin-Portal"
 #: templates/components/_navbar.html:61
 msgid "Logout"
 msgstr "Abmelden"
+
+#: templates/components/_navbar.html:69
+msgid "Change language"
+msgstr "Ändere die Sprache"
 
 #: templates/exercise_sessions/technische_mechanik.html:28
 #: templates/main/home.html:26
@@ -576,31 +603,32 @@ msgstr "Zur Polybox"
 msgid "Access all study materials and documents"
 msgstr "Zugriff auf alle Studienmaterialien und Dokumente"
 
-#: templates/macros/regions.html:6
+#: templates/macros/regions.html:7 templates/macros/regions.html:13
+#: templates/macros/regions.html:64
 msgid "Worldwide"
 msgstr "Weltweit"
 
-#: templates/macros/regions.html:7
+#: templates/macros/regions.html:20 templates/macros/regions.html:65
 msgid "Africa"
 msgstr "Afrika"
 
-#: templates/macros/regions.html:8
+#: templates/macros/regions.html:27 templates/macros/regions.html:66
 msgid "Americas"
 msgstr "Amerika"
 
-#: templates/macros/regions.html:9
+#: templates/macros/regions.html:34 templates/macros/regions.html:67
 msgid "Antarctic"
 msgstr "Antarktik"
 
-#: templates/macros/regions.html:10
+#: templates/macros/regions.html:41 templates/macros/regions.html:68
 msgid "Asia"
 msgstr "Asien"
 
-#: templates/macros/regions.html:11
+#: templates/macros/regions.html:48 templates/macros/regions.html:69
 msgid "Europe"
 msgstr "Europa"
 
-#: templates/macros/regions.html:12
+#: templates/macros/regions.html:55 templates/macros/regions.html:70
 msgid "Oceania"
 msgstr "Ozeanien"
 
@@ -619,51 +647,99 @@ msgstr ""
 "Polybox mit zusätzlichen alten Prüfungen (besonders nützlich für EM im 4. "
 "Semester)"
 
-#: templates/worldle/capitals.html:36
+#: templates/worldle/capitals.html:31
+msgid "Guess the capital city of the displayed country"
+msgstr "Errate die Hauptstadt des angezeigten Landes"
+
+#: templates/worldle/capitals.html:48
 msgid "Enter the capital(s)"
 msgstr "Geben Sie die Hauptstadt oder die Hauptstädte ein"
 
-#: templates/worldle/capitals.html:38 templates/worldle/languages.html:38
+#: templates/worldle/capitals.html:53 templates/worldle/languages.html:53
 msgid "Check Answer"
 msgstr "Antwort überprüfen"
 
-#: templates/worldle/capitals.html:49 templates/worldle/languages.html:49
+#: templates/worldle/capitals.html:62 templates/worldle/languages.html:62
 msgid "Show me the solution"
 msgstr "Zeige mir die Lösung"
 
-#: templates/worldle/competitive_areas.html:95
+#: templates/worldle/capitals.html:70
+msgid "There is no capital. Submit an empty text field."
+msgstr "Es gibt keine Hauptstadt. Reiche ein leeres Textfeld ein."
+
+#: templates/worldle/competitive_areas.html:110 worldle/cards.py:27
+msgid "Higher Lower with country areas"
+msgstr "Higher Lower mit Landesflächen"
+
+#: templates/worldle/competitive_areas.html:120
+#: templates/worldle/competitive_capitals.html:129
+#: templates/worldle/competitive_currencies.html:129
+#: templates/worldle/competitive_languages.html:129
+msgid "Score"
+msgstr "Punkte"
+
+#: templates/worldle/competitive_areas.html:129
+#: templates/worldle/competitive_areas.html:205
+#: templates/worldle/competitive_capitals.html:138
+#: templates/worldle/competitive_capitals.html:210
+#: templates/worldle/competitive_currencies.html:138
+#: templates/worldle/competitive_currencies.html:218
+#: templates/worldle/competitive_languages.html:138
+#: templates/worldle/competitive_languages.html:210
+msgid "Highscore"
+msgstr "Rekord"
+
+#: templates/worldle/competitive_areas.html:150
+#: templates/worldle/competitive_areas.html:160
+msgid "Area"
+msgstr "Fläche"
+
+#: templates/worldle/competitive_areas.html:167
 msgid "Is the area of the country on the right higher or lower?"
 msgstr "Ist die Fläche des Landes auf der rechten Seite grösser oder kleiner?"
 
-#: templates/worldle/competitive_areas.html:98
+#: templates/worldle/competitive_areas.html:168
+msgid "Is the area of the country below higher or lower?"
+msgstr "Ist die Fläche des Landes unten höher oder niedriger?"
+
+#: templates/worldle/competitive_areas.html:175
 msgid "Lower"
 msgstr "Kleiner"
 
-#: templates/worldle/competitive_areas.html:99
-#: templates/worldle/competitive_capitals.html:88
-#: templates/worldle/competitive_currencies.html:88
-#: templates/worldle/competitive_languages.html:88
-msgid "score"
-msgstr "Score"
-
-#: templates/worldle/competitive_areas.html:100
+#: templates/worldle/competitive_areas.html:180
 msgid "Higher"
 msgstr "Grösser"
 
-#: templates/worldle/competitive_areas.html:111
-#: templates/worldle/competitive_capitals.html:135
-#: templates/worldle/competitive_currencies.html:139
-#: templates/worldle/competitive_languages.html:135
+#: templates/worldle/competitive_areas.html:194
+#: templates/worldle/competitive_capitals.html:199
+#: templates/worldle/competitive_currencies.html:207
+#: templates/worldle/competitive_languages.html:199
 msgid "Leaderboard"
 msgstr "Rangliste"
 
-#: templates/worldle/competitive_currencies.html:131
+#: templates/worldle/competitive_capitals.html:119
+msgid "Guess the capital of the displayed country"
+msgstr "Errate die Hauptstadt des angezeigten Landes"
+
+#: templates/worldle/competitive_currencies.html:119
+msgid "Guess the currency of the displayed country"
+msgstr "Errate die Währung des angezeigten Landes"
+
+#: templates/worldle/competitive_currencies.html:196
+msgid "Note"
+msgstr "Hinweis"
+
+#: templates/worldle/competitive_currencies.html:196
 msgid ""
 "To make this game more challenging, hints to the country in the currency's "
 "name are replaced by an asterisk."
 msgstr ""
 "Um dieses Spiel herausfordernder zu gestalten, werden Hinweise auf das Land "
 "im Namen der Währung durch ein Sternchen ersetzt."
+
+#: templates/worldle/competitive_languages.html:119
+msgid "Guess the language(s) of the displayed country"
+msgstr "Errate die Sprache(n) des angezeigten Landes"
 
 #: templates/worldle/home.html:16
 msgid "Please note that the games themselves will continue to be in English."
@@ -685,9 +761,17 @@ msgstr "Wettbewerb (Konto erforderlich)"
 msgid "Leaderboards"
 msgstr "Ranglisten"
 
-#: templates/worldle/languages.html:36
+#: templates/worldle/languages.html:31
+msgid "Guess the language(s) spoken in the displayed country"
+msgstr "Errate die Sprache(n), die im angezeigten Land gesprochen werden"
+
+#: templates/worldle/languages.html:48
 msgid "Enter the language(s)"
 msgstr "Geben Sie die Sprache(n) ein"
+
+#: templates/worldle/languages.html:70
+msgid "There is no language. Submit an empty text field."
+msgstr "Es gibt keine Sprache. Reiche ein leeres Textfeld ein."
 
 #: templates/worldle/leaderboards.html:104
 msgid "Error loading data"
@@ -706,81 +790,6 @@ msgstr "Spielen"
 msgid "Guess the national languages"
 msgstr "Errate die Landessprachen"
 
-#: worldle/cards.py:27
-msgid "Higher Lower with country areas"
-msgstr "Higher Lower mit Landesflächen"
-
 #: worldle/cards.py:45
 msgid "Guess the currency"
 msgstr "Errate die Währung"
-
-#: templates/accounts/login.html:22
-msgid "Welcome back! Please sign in to your account."
-msgstr "Willkommen zurück! Bitte melden Sie sich in Ihrem Konto an."
-
-#: templates/accounts/signup.html:23
-msgid "Create a new account to get started."
-msgstr "Erstellen Sie ein neues Konto, um loszulegen."
-
-#: templates/accounts/user_account.html:30
-msgid "Verified"
-msgstr "Verifiziert"
-
-#: templates/accounts/user_account.html:33
-msgid "Not Verified"
-msgstr "Nicht verifiziert"
-
-#: templates/worldle/capitals.html:28
-msgid "Guess the capital city of the displayed country"
-msgstr "Errate die Hauptstadt des angezeigten Landes"
-
-#: templates/worldle/languages.html:28
-msgid "Guess the language(s) spoken in the displayed country"
-msgstr "Errate die Sprache(n), die im angezeigten Land gesprochen werden"
-
-#: templates/worldle/competitive_currencies.html:75
-msgid "Guess the currency of the displayed country"
-msgstr "Errate die Währung des angezeigten Landes"
-
-#: templates/worldle/competitive_currencies.html:95
-msgid "Score"
-msgstr "Punkte"
-
-#: templates/worldle/competitive_currencies.html:103
-msgid "Highscore"
-msgstr "Rekord"
-
-#: templates/worldle/competitive_currencies.html:150
-msgid "Note"
-msgstr "Hinweis"
-
-#: templates/worldle/competitive_currencies.html:150
-msgid "To make this game more challenging, hints to the country in the currency's name are replaced by an asterisk."
-msgstr "Um das Spiel herausfordernder zu gestalten, werden Hinweise auf das Land im Währungsnamen durch einen Asterisk ersetzt."
-
-#: templates/worldle/competitive_capitals.html:75
-msgid "Guess the capital of the displayed country"
-msgstr "Errate die Hauptstadt des angezeigten Landes"
-
-#: templates/worldle/competitive_languages.html:75
-msgid "Guess the language(s) of the displayed country"
-msgstr "Errate die Sprache(n) des angezeigten Landes"
-
-#: templates/worldle/competitive_areas.html:75
-msgid "Higher Lower with country areas"
-msgstr "Higher Lower mit Landesflächen"
-
-#: templates/worldle/competitive_areas.html:145
-msgid "Area"
-msgstr "Fläche"
-
-#: templates/worldle/competitive_areas.html:145
-msgid "Area?"
-msgstr "Fläche?"
-
-#: templates/worldle/competitive_areas.html:163
-msgid "Is the area of the country below higher or lower?"
-msgstr "Ist die Fläche des Landes unten höher oder niedriger?"
-
-#~ msgid "Lina de Windt's website"
-#~ msgstr "Lina de Windts Webseite"
