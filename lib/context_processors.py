@@ -56,4 +56,5 @@ def inject_global_context(request):
         "utcnow": datetime.now(timezone.utc),
         "version": get_version(),
         "request": request,  # Make request available in templates for URL generation
+        "debug": settings.DEBUG,  # Make DEBUG available in templates for conditional caching
     }

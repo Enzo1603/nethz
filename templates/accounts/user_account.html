@@ -11,13 +11,46 @@
 
 {% block content %}
 
-<h1>{% trans "My Account" %}</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Header Card -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <i class="bi bi-person-circle text-primary" style="font-size: 3.5rem;"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-4">
+                        <h1 class="mb-1">{% trans "My Account" %}</h1>
+                        <p class="text-body-secondary mb-0">{{ user.username }}</p>
+                        {% if user.email %}
+                        <div class="mt-2">
+                            <small class="text-body-secondary">
+                                <i class="bi bi-envelope me-1"></i>{{ user.email }}
+                                {% if user.is_email_verified %}
+                                <span class="badge bg-success ms-2">
+                                    <i class="bi bi-check-circle me-1"></i>{% trans "Verified" %}
+                                </span>
+                                {% else %}
+                                <span class="badge bg-warning ms-2">
+                                    <i class="bi bi-exclamation-circle me-1"></i>{% trans "Not Verified" %}
+                                </span>
+                                {% endif %}
+                            </small>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<br>
-<br>
-
-{% crispy form %}
-
-<br>
+        <!-- Form Card -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                {% crispy form %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

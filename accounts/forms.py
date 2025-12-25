@@ -149,53 +149,56 @@ class CustomUserChangeForm(UserChangeForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                Div(
-                    HTML(
-                        format_html(
-                            "<h4 class='mb-4'>{}</h4>", _("Username and Email Address")
-                        )
-                    ),
-                    FloatingField(
-                        "username",
-                        placeholder=_("Username"),
-                        maxlength=16,
-                    ),
-                    FloatingField("email", placeholder=_("Email Address")),
-                    css_class="m-4",
+                HTML(
+                    format_html(
+                        '<div class="d-flex align-items-center mb-4"><i class="bi bi-person-badge text-primary me-2" style="font-size: 1.5rem;"></i><h5 class="mb-0">{}</h5></div>',
+                        _("Username and Email Address")
+                    )
                 ),
-                css_class="col-lg-6 col-md-8 mx-auto mb-5 p-1 rounded-3 bg-body-tertiary zoom",
+                FloatingField(
+                    "username",
+                    placeholder=_("Username"),
+                    maxlength=16,
+                ),
+                FloatingField("email", placeholder=_("Email Address")),
+                css_class="mb-4 pb-4 border-bottom",
             ),
             Div(
-                Div(
-                    HTML(
-                        format_html(
-                            "<h4 class='mb-4'>{}</h4>", _("First and Last name")
-                        )
-                    ),
-                    FloatingField("first_name", placeholder=_("First Name")),
-                    FloatingField("last_name", placeholder=_("Last Name")),
-                    css_class="m-4",
+                HTML(
+                    format_html(
+                        '<div class="d-flex align-items-center mb-4"><i class="bi bi-person text-primary me-2" style="font-size: 1.5rem;"></i><h5 class="mb-0">{}</h5></div>',
+                        _("First and Last name")
+                    )
                 ),
-                css_class="col-lg-6 col-md-8 mx-auto mb-5 p-1 rounded-3 bg-body-tertiary zoom",
+                FloatingField("first_name", placeholder=_("First Name")),
+                FloatingField("last_name", placeholder=_("Last Name")),
+                css_class="mb-4 pb-4 border-bottom",
             ),
             Div(
-                Div(
-                    HTML(format_html("<h4 class='mb-4'>{}</h4>", _("Change Password"))),
-                    FloatingField(
-                        "password1", placeholder=_("New Password"), minlength=8
-                    ),
-                    FloatingField("password2", placeholder=_("Confirm New Password")),
-                    css_class="m-4",
+                HTML(
+                    format_html(
+                        '<div class="d-flex align-items-center mb-4"><i class="bi bi-key text-primary me-2" style="font-size: 1.5rem;"></i><h5 class="mb-0">{}</h5></div>',
+                        _("Change Password")
+                    )
                 ),
-                css_class="col-lg-6 col-md-8 mx-auto mb-5 p-1 rounded-3 bg-body-tertiary zoom",
+                HTML(
+                    '<p class="text-body-secondary small mb-3">'
+                    + str(_("Leave blank if you don't want to change your password."))
+                    + "</p>"
+                ),
+                FloatingField(
+                    "password1", placeholder=_("New Password"), minlength=8
+                ),
+                FloatingField("password2", placeholder=_("Confirm New Password")),
+                css_class="mb-4",
             ),
             Div(
                 Submit(
                     "submit",
                     _("Update"),
-                    css_class="btn btn-primary",
+                    css_class="btn btn-primary btn-lg w-100",
                 ),
-                css_class="d-grid col-lg-6 col-md-8 mx-auto",
+                css_class="mt-4",
             ),
         )
 

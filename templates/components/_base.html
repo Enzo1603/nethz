@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- Performance: Resource hints -->
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -45,9 +45,35 @@
     <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2 skip-link">{% trans "Skip to main content" %}</a>
 
     {% load cache %}
+    {% if not debug %}
     {% cache 3600 navbar request.LANGUAGE_CODE %}
     {% include "components/_navbar.html" %}
     {% endcache %}
+    {% else %}
+    {% include "components/_navbar.html" %}
+    {% endif %}
+
+    <!-- Language switcher form (outside cache for fresh CSRF token) -->
+    <form id="language-form" method="post" action="{% url 'set_language' %}" style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="language" id="language-input">
+        <input type="hidden" name="next" id="next-input">
+    </form>
+
+    <script>
+        function switchLanguage(lang) {
+            const form = document.getElementById('language-form');
+            const currentPath = window.location.pathname;
+            // Remove language prefix if present (e.g., /de/ or /en/)
+            const pathWithoutLang = currentPath.replace(/^\/(de|en)(\/|$)/, '/');
+            // Add new language prefix
+            const newPath = '/' + lang + (pathWithoutLang === '/' ? '/' : pathWithoutLang);
+
+            document.getElementById('language-input').value = lang;
+            document.getElementById('next-input').value = newPath;
+            form.submit();
+        }
+    </script>
 
     <main id="main-content" class="container fade-in main-content">
         {% include "components/_messages.html" %}
@@ -58,9 +84,13 @@
 
     </main>
 
+    {% if not debug %}
     {% cache 3600 footer request.LANGUAGE_CODE %}
     {% include "components/_footer.html" %}
     {% endcache %}
+    {% else %}
+    {% include "components/_footer.html" %}
+    {% endif %}
 
 </body>
 

@@ -51,40 +51,41 @@
                         {{ user.username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{% url 'accounts:user_account' %}"><i class="bi bi-person-circle"></i> {% trans "My Account" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:user_account' %}"><i class="bi bi-person-circle me-2"></i>{% trans "My Account" %}</a></li>
                         {% if user.is_staff %}
-                        <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="bi bi-gear"></i> {% trans "Admin Portal" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="bi bi-gear me-2"></i>{% trans "Admin Portal" %}</a></li>
                         {% endif %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-in-left"></i> {% trans "Logout" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="bi bi-box-arrow-in-left me-2"></i>{% trans "Logout" %}</a></li>
                     </ul>
                 </li>
 
                 {% endif %}
 
 
-                <li class="nav-item ms-3 my-2">
-                    <div class="btn-group btn-group-sm" style="margin-top: auto;">
-                        <button onclick="switchLanguage('de')" class="btn btn-{% if LANGUAGE_CODE != 'de'  %}outline-{% endif %}light">DE</button>
-                        <button onclick="switchLanguage('en')" class="btn btn-{% if LANGUAGE_CODE != 'en'  %}outline-{% endif %}light">EN</button>
-                    </div>
-                    
-                    <!-- Hidden form for language switching -->
-                    <form id="language-form" method="post" action="{% url 'set_language' %}" style="display: none;">
-                        {% csrf_token %}
-                        <input type="hidden" name="language" id="language-input">
-                        <input type="hidden" name="next" id="next-input">
-                    </form>
-                    
-                    <script>
-                    function switchLanguage(lang) {
-                        document.getElementById('language-input').value = lang;
-                        document.getElementById('next-input').value = '/' + lang + '{{ request.path|slice:"3:" }}';
-                        document.getElementById('language-form').submit();
-                    }
-                    </script>
+                <li class="nav-item dropdown ms-3">
+                    <a class="nav-link dropdown-toggle language-switcher" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans 'Change language' %}">
+                        <i class="bi bi-globe me-1"></i>
+                        <span class="language-code">{{ LANGUAGE_CODE|upper }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center {% if LANGUAGE_CODE == 'de' %}active{% endif %}" href="#" onclick="switchLanguage('de'); return false;">
+                                <span class="flag-icon me-2">🇩🇪</span>
+                                <span class="flex-grow-1">Deutsch</span>
+                                {% if LANGUAGE_CODE == 'de' %}<i class="bi bi-check2 text-primary"></i>{% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center {% if LANGUAGE_CODE == 'en' %}active{% endif %}" href="#" onclick="switchLanguage('en'); return false;">
+                                <span class="flag-icon me-2">🇬🇧</span>
+                                <span class="flex-grow-1">English</span>
+                                {% if LANGUAGE_CODE == 'en' %}<i class="bi bi-check2 text-primary"></i>{% endif %}
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
 

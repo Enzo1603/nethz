@@ -493,6 +493,68 @@ textarea:focus-visible {
     }
 }
 
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: var(--bs-border-radius);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.language-switcher:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary) !important;
+}
+
+.language-switcher .language-code {
+    font-weight: var(--fw-medium);
+    font-size: 0.9rem;
+}
+
+.language-switcher .bi-globe {
+    font-size: 1rem;
+}
+
+/* Language Dropdown Items */
+.dropdown-item.active {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+}
+
+.dropdown-item.active .bi-check2 {
+    color: var(--bs-primary);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.dropdown-item .flag-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+/* Footer */
+.footer-version-link {
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.footer-version-link:hover {
+    color: var(--bs-primary) !important;
+    opacity: 1;
+}
+
+.footer-version-link .bi-github {
+    font-size: 0.9rem;
+}
+
 /* Responsive Typography */
 @media (max-width: 768px) {
     h1, .h1 {

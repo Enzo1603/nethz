@@ -714,5 +714,21 @@ msgstr "Higher Lower mit Landesflächen"
 msgid "Guess the currency"
 msgstr "Errate die Währung"
 
+#: templates/accounts/login.html:22
+msgid "Welcome back! Please sign in to your account."
+msgstr "Willkommen zurück! Bitte melden Sie sich in Ihrem Konto an."
+
+#: templates/accounts/signup.html:23
+msgid "Create a new account to get started."
+msgstr "Erstellen Sie ein neues Konto, um loszulegen."
+
+#: templates/accounts/user_account.html:30
+msgid "Verified"
+msgstr "Verifiziert"
+
+#: templates/accounts/user_account.html:33
+msgid "Not Verified"
+msgstr "Nicht verifiziert"
+
 #~ msgid "Lina de Windt's website"
 #~ msgstr "Lina de Windts Webseite"
