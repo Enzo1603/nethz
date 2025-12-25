@@ -27,42 +27,74 @@
 
 <div class="row g-3">
     <div class="col-md-6 col-lg-4">
-        <a href="https://exams.amiv.ethz.ch/" target="_blank" class="text-decoration-none">
-            <div class="card h-100 border-success link-card link-card-success">
-                <div class="card-body">
-                    <h5 class="card-title mb-0">
-                        <i class="bi bi-file-earmark-text text-success me-2"></i>
-                        {% trans "AMIV new Study Documents" %}
-                    </h5>
+        <a href="https://exams.amiv.ethz.ch/" target="_blank" class="text-decoration-none link-banner d-block">
+            <div class="card border-0 rounded-3 overflow-hidden position-relative text-white">
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(120deg, rgba(13,110,253,0.75) 0%, rgba(13,110,253,0.55) 60%);"></div>
+                <div class="card-body d-flex align-items-center justify-content-between position-relative py-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 38px; height: 38px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                            <i class="bi bi-file-earmark-text" style="font-size: 1rem;"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 fw-semibold">{% trans "AMIV new Study Documents" %}</h6>
+                            <small class="text-white-50">{% trans "Latest materials" %}</small>
+                        </div>
+                    </div>
+                    <i class="bi bi-box-arrow-up-right" style="font-size: 1rem; opacity: 0.9;"></i>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-md-6 col-lg-4">
-        <a href="https://amiv.ethz.ch/en/studies/documents" target="_blank" class="text-decoration-none">
-            <div class="card h-100 border-info link-card link-card-info">
-                <div class="card-body">
-                    <h5 class="card-title mb-0">
-                        <i class="bi bi-archive text-info me-2"></i>
-                        {% trans "AMIV old Study Documents" %}
-                    </h5>
+        <a href="https://amiv.ethz.ch/en/studies/documents" target="_blank" class="text-decoration-none link-banner d-block">
+            <div class="card border-0 rounded-3 overflow-hidden position-relative text-white">
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(120deg, rgba(13,202,240,0.75) 0%, rgba(13,202,240,0.55) 60%);"></div>
+                <div class="card-body d-flex align-items-center justify-content-between position-relative py-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light text-info rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 38px; height: 38px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                            <i class="bi bi-archive" style="font-size: 1rem;"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 fw-semibold">{% trans "AMIV old Study Documents" %}</h6>
+                            <small class="text-white-50">{% trans "Archive" %}</small>
+                        </div>
+                    </div>
+                    <i class="bi bi-box-arrow-up-right" style="font-size: 1rem; opacity: 0.9;"></i>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-md-6 col-lg-4">
-        <a href="https://polybox.ethz.ch/index.php/s/bJHsmeHpz4i6YZA" target="_blank" class="text-decoration-none">
-            <div class="card h-100 border-warning link-card link-card-warning">
-                <div class="card-body">
-                    <h5 class="card-title mb-0">
-                        <i class="bi bi-cloud-arrow-down text-warning me-2"></i>
-                        {% trans "Polybox with additional old exams (especially useful for EM in 4th semester)" %}
-                    </h5>
+        <a href="https://polybox.ethz.ch/index.php/s/bJHsmeHpz4i6YZA" target="_blank" class="text-decoration-none link-banner d-block">
+            <div class="card border-0 rounded-3 overflow-hidden position-relative text-white">
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(120deg, rgba(255,193,7,0.8) 0%, rgba(255,193,7,0.65) 60%);"></div>
+                <div class="card-body d-flex align-items-center justify-content-between position-relative py-3">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light text-warning rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 38px; height: 38px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                            <i class="bi bi-cloud-arrow-down" style="font-size: 1rem;"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 fw-semibold">{% trans "Polybox with additional old exams (especially useful for EM in 4th semester)" %}</h6>
+                            <small class="text-white-50">{% trans "Download" %}</small>
+                        </div>
+                    </div>
+                    <i class="bi bi-box-arrow-up-right" style="font-size: 1rem; opacity: 0.9;"></i>
                 </div>
             </div>
         </a>
     </div>
 </div>
+
+<style>
+    .link-banner .card {
+        height: 90px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .link-banner:hover .card {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+</style>
 
 <br>
 
