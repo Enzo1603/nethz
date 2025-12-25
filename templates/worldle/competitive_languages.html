@@ -21,29 +21,68 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
         display: flex;
         flex-direction: column;
-        /* Richtung auf Spalte ändern */
         align-items: center;
         justify-content: center;
         visibility: hidden;
-        /* Start mit unsichtbarem Overlay */
-        transition: visibility 0.4s ease;
-        /* Füge einen sanften Übergang für die Sichtbarkeit hinzu */
+        opacity: 0;
+        transition: visibility 0.3s ease, opacity 0.3s ease;
+        z-index: 9999;
+    }
+
+    .overlay.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .overlay-content {
+        background: var(--bs-surface);
+        border-radius: var(--bs-border-radius-lg);
+        padding: 2rem 3rem;
+        box-shadow: var(--bs-box-shadow-lg);
+        text-align: center;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+
+    .overlay.visible .overlay-content {
+        transform: scale(1);
     }
 
     .overlay i {
-        font-size: 5rem;
+        font-size: 4rem;
+        margin-bottom: 1rem;
     }
 
     .overlay p {
-        margin-top: 20px;
-        /* Fügt einen oberen Rand hinzu, um Platz zwischen dem Symbol und dem Text zu schaffen */
-        color: white;
-        /* Setzt die Textfarbe auf Weiß */
-        font-size: 2rem;
-        /* Setzt die Schriftgröße */
+        color: var(--bs-body-color);
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .overlay.correct .overlay-content {
+        border: 2px solid var(--bs-success);
+    }
+
+    .overlay.incorrect .overlay-content {
+        border: 2px solid var(--bs-danger);
+    }
+
+    .choice-button {
+        transition: all 0.2s ease-in-out;
+        min-height: 60px;
+    }
+
+    .choice-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--bs-box-shadow);
+    }
+
+    .choice-button:active {
+        transform: translateY(0);
     }
 </style>
 {% endblock %}
@@ -52,113 +91,136 @@
 {% block content %}
 
 <!-- HTML-Code für die Symbole -->
-<div id="correct-overlay" class="overlay">
-    <i class="bi bi-check-circle-fill" style="color: green;"></i>
-    <p class="correct-text fw-bold"></p>
-</div>
-
-<div id="incorrect-overlay" class="overlay">
-    <i class="bi bi-x-circle-fill" style="color: red"></i>
-    <p class="correct-text fw-bold"></p>
-</div>
-
-
-
-<div class="row align-items-end mb-4">
-    <div class="col-6">
-        <h1 class="text-start">Competitive Languages</h1>
-    </div>
-    <div class="col-6">
-        <h4 class="text-end">Highscore: <span id="high_score"></span></h4>
+<div id="correct-overlay" class="overlay correct">
+    <div class="overlay-content">
+        <i class="bi bi-check-circle-fill text-success"></i>
+        <p class="correct-text fw-bold"></p>
     </div>
 </div>
 
-<div class="col-8 mx-auto">
-    <div class="text-center">
-
-        <h3 id="country-name"></h3>
-
-        <br>
-
-        <img id="image" src="" alt="flag of country" class="img-fluid zoom" style="max-width: 45%;">
-
-        <br>
-        <br>
-
-        <span class="order-1 order-md-2 my-1">{% trans "score" %}: <span id="score"></span></span>
-
-        <br>
-        <br>
-
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <button id="button-a" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
-                    <span>A.</span>
-                    <span id="choice-a-text">Choice A</span>
-                    <span></span>
-                </button>
-            </div>
-            <div class="col-12 col-md-6">
-                <button id="button-b" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
-                    <span>B.</span>
-                    <span id="choice-b-text">Choice B</span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <button id="button-c" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
-                    <span>C.</span>
-                    <span id="choice-c-text">Choice C</span>
-                    <span></span>
-                </button>
-            </div>
-            <div class="col-12 col-md-6">
-                <button id="button-d" type="button" class="btn btn-outline-primary fw-bold my-2 w-100 d-flex justify-content-between">
-                    <span>D.</span>
-                    <span id="choice-d-text">Choice D</span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
+<div id="incorrect-overlay" class="overlay incorrect">
+    <div class="overlay-content">
+        <i class="bi bi-x-circle-fill text-danger"></i>
+        <p class="correct-text fw-bold"></p>
     </div>
+</div>
 
-    <br>
-    <br>
-
-    <!-- Leaderboard Accordion -->
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {% trans "Leaderboard" %}
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Highscore</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+        <!-- Header Card with Stats -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-translate text-primary me-3" style="font-size: 2.5rem;"></i>
+                            <div>
+                                <h1 class="mb-0">Competitive Languages</h1>
+                                <p class="text-body-secondary mb-0 small">{% trans "Guess the language(s) of the displayed country" %}</p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="row text-center text-md-end">
+                            <div class="col-6 col-md-12 mb-2 mb-md-0">
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                                    <i class="bi bi-star-fill text-warning me-2" style="font-size: 1.25rem; line-height: 1; margin-top: -0.1rem;"></i>
+                                    <div class="text-start text-md-end">
+                                        <div class="small text-body-secondary">{% trans "Score" %}</div>
+                                        <div class="h4 mb-0"><span id="score">0</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-12">
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                                    <i class="bi bi-trophy-fill text-primary me-2" style="font-size: 1.25rem; line-height: 1; margin-top: -0.1rem;"></i>
+                                    <div class="text-start text-md-end">
+                                        <div class="small text-body-secondary">{% trans "Highscore" %}</div>
+                                        <div class="h4 mb-0"><span id="high_score">0</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Game Card -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <h3 id="country-name" class="mb-4"></h3>
+                    <div class="mb-4">
+                        <img id="image" src="" alt="flag of country" class="img-fluid rounded" style="max-width: 50%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <button id="button-a" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
+                            <span class="badge bg-primary me-2">A</span>
+                            <span id="choice-a-text" class="flex-grow-1 text-center">Choice A</span>
+                            <span class="badge bg-primary" style="opacity: 0;">A</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button id="button-b" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
+                            <span class="badge bg-primary me-2">B</span>
+                            <span id="choice-b-text" class="flex-grow-1 text-center">Choice B</span>
+                            <span class="badge bg-primary" style="opacity: 0;">B</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button id="button-c" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
+                            <span class="badge bg-primary me-2">C</span>
+                            <span id="choice-c-text" class="flex-grow-1 text-center">Choice C</span>
+                            <span class="badge bg-primary" style="opacity: 0;">C</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button id="button-d" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
+                            <span class="badge bg-primary me-2">D</span>
+                            <span id="choice-d-text" class="flex-grow-1 text-center">Choice D</span>
+                            <span class="badge bg-primary" style="opacity: 0;">D</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Accordion -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <i class="bi bi-trophy me-2"></i>{% trans "Leaderboard" %}
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="table-responsive">
+                                    <table class="table table-modern mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="width: 10%;">#</th>
+                                                <th scope="col">{% trans "Username" %}</th>
+                                                <th scope="col" style="width: 20%;" class="text-end">{% trans "Highscore" %}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
 </div>
 
 
@@ -241,12 +303,12 @@
         overlayTexts[0].textContent = correct_answers
         overlayTexts[1].textContent = correct_answers
 
-        overlay.style.visibility = "visible"
+        overlay.classList.add("visible")
 
         // verzögertes Ausblenden des Overlays
         setTimeout(() => {
-            overlay.style.visibility = "hidden"
-        }, 500)
+            overlay.classList.remove("visible")
+        }, 700)
     }
 
     function updateDisplay() {

@@ -1,27 +1,81 @@
 {% load i18n %}
 
-<!-- Region Select -->
-{# <!-- <label for="regionSelect">Choose a region:</label> --> #}
-<select class="form-select" id="regionSelect" name="regionSelect" onchange="changeRegion()">
-    <option value="worldwide">{% trans "Worldwide" %}</option>
-    <option value="africa">{% trans "Africa" %}</option>
-    <option value="americas">{% trans "Americas" %}</option>
-    <option value="antarctic">{% trans "Antarctic" %}</option>
-    <option value="asia">{% trans "Asia" %}</option>
-    <option value="europe">{% trans "Europe" %}</option>
-    <option value="oceania">{% trans "Oceania" %}</option>
-</select>
+<!-- Modern Region Select Dropdown -->
+<div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle w-100 w-md-auto" type="button" id="regionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-globe me-2"></i>
+        <span id="region-display">{% trans "Worldwide" %}</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end w-100" aria-labelledby="regionDropdown">
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'worldwide' %}active{% endif %}" href="#" onclick="changeRegion('worldwide'); return false;">
+                <i class="bi bi-globe me-2"></i>
+                <span>{% trans "Worldwide" %}</span>
+                {% if region == 'worldwide' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'africa' %}active{% endif %}" href="#" onclick="changeRegion('africa'); return false;">
+                <i class="bi bi-geo-alt me-2"></i>
+                <span>{% trans "Africa" %}</span>
+                {% if region == 'africa' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'americas' %}active{% endif %}" href="#" onclick="changeRegion('americas'); return false;">
+                <i class="bi bi-geo-alt me-2"></i>
+                <span>{% trans "Americas" %}</span>
+                {% if region == 'americas' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'antarctic' %}active{% endif %}" href="#" onclick="changeRegion('antarctic'); return false;">
+                <i class="bi bi-geo-alt me-2"></i>
+                <span>{% trans "Antarctic" %}</span>
+                {% if region == 'antarctic' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'asia' %}active{% endif %}" href="#" onclick="changeRegion('asia'); return false;">
+                <i class="bi bi-geo-alt me-2"></i>
+                <span>{% trans "Asia" %}</span>
+                {% if region == 'asia' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'europe' %}active{% endif %}" href="#" onclick="changeRegion('europe'); return false;">
+                <i class="bi bi-geo-alt me-2"></i>
+                <span>{% trans "Europe" %}</span>
+                {% if region == 'europe' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item d-flex align-items-center {% if region == 'oceania' %}active{% endif %}" href="#" onclick="changeRegion('oceania'); return false;">
+                <i class="bi bi-geo-alt me-2"></i>
+                <span>{% trans "Oceania" %}</span>
+                {% if region == 'oceania' %}<i class="bi bi-check2 ms-auto text-primary"></i>{% endif %}
+            </a>
+        </li>
+    </ul>
+</div>
 
 <script>
-    let regionSelect = document.getElementById("regionSelect")
-    regionSelect.value = "{{ region }}"  // Set select tag to current region
+    const regionNames = {
+        'worldwide': '{% trans "Worldwide" %}',
+        'africa': '{% trans "Africa" %}',
+        'americas': '{% trans "Americas" %}',
+        'antarctic': '{% trans "Antarctic" %}',
+        'asia': '{% trans "Asia" %}',
+        'europe': '{% trans "Europe" %}',
+        'oceania': '{% trans "Oceania" %}'
+    };
 
-    function changeRegion() {
-        const selectedRegion = regionSelect.value
+    // Set initial display
+    document.getElementById('region-display').textContent = regionNames['{{ region }}'] || regionNames['worldwide'];
 
-        let currentURL = window.location.href
-        let newURL = currentURL.replace("{{ region }}", selectedRegion)
-        // let newURL = currentURL.replace(/\/capital\/[^/]+$/, "/capital/" + selectedRegion)
-        window.location.href = newURL
+    function changeRegion(selectedRegion) {
+        let currentURL = window.location.href;
+        let newURL = currentURL.replace("{{ region }}", selectedRegion);
+        window.location.href = newURL;
     }
 </script>

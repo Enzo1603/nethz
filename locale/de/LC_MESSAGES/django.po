@@ -730,5 +730,57 @@ msgstr "Verifiziert"
 msgid "Not Verified"
 msgstr "Nicht verifiziert"
 
+#: templates/worldle/capitals.html:28
+msgid "Guess the capital city of the displayed country"
+msgstr "Errate die Hauptstadt des angezeigten Landes"
+
+#: templates/worldle/languages.html:28
+msgid "Guess the language(s) spoken in the displayed country"
+msgstr "Errate die Sprache(n), die im angezeigten Land gesprochen werden"
+
+#: templates/worldle/competitive_currencies.html:75
+msgid "Guess the currency of the displayed country"
+msgstr "Errate die Währung des angezeigten Landes"
+
+#: templates/worldle/competitive_currencies.html:95
+msgid "Score"
+msgstr "Punkte"
+
+#: templates/worldle/competitive_currencies.html:103
+msgid "Highscore"
+msgstr "Rekord"
+
+#: templates/worldle/competitive_currencies.html:150
+msgid "Note"
+msgstr "Hinweis"
+
+#: templates/worldle/competitive_currencies.html:150
+msgid "To make this game more challenging, hints to the country in the currency's name are replaced by an asterisk."
+msgstr "Um das Spiel herausfordernder zu gestalten, werden Hinweise auf das Land im Währungsnamen durch einen Asterisk ersetzt."
+
+#: templates/worldle/competitive_capitals.html:75
+msgid "Guess the capital of the displayed country"
+msgstr "Errate die Hauptstadt des angezeigten Landes"
+
+#: templates/worldle/competitive_languages.html:75
+msgid "Guess the language(s) of the displayed country"
+msgstr "Errate die Sprache(n) des angezeigten Landes"
+
+#: templates/worldle/competitive_areas.html:75
+msgid "Higher Lower with country areas"
+msgstr "Higher Lower mit Landesflächen"
+
+#: templates/worldle/competitive_areas.html:145
+msgid "Area"
+msgstr "Fläche"
+
+#: templates/worldle/competitive_areas.html:145
+msgid "Area?"
+msgstr "Fläche?"
+
+#: templates/worldle/competitive_areas.html:163
+msgid "Is the area of the country below higher or lower?"
+msgstr "Ist die Fläche des Landes unten höher oder niedriger?"
+
 #~ msgid "Lina de Windt's website"
 #~ msgstr "Lina de Windts Webseite"

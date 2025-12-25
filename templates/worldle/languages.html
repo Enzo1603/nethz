@@ -13,54 +13,68 @@
 
 {% block content %}
 
-{% region_select region %}
+<div class="row mb-4">
+    <div class="col-12">
+        {% region_select region %}
+    </div>
+</div>
 
-<br>
-<br>
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Header Card -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body text-center p-4">
+                <div class="mb-3">
+                    <i class="bi bi-translate text-primary" style="font-size: 2.5rem;"></i>
+                </div>
+                <h1 class="mb-2">Languages</h1>
+                <p class="text-body-secondary mb-0">{% trans "Guess the language(s) spoken in the displayed country" %}</p>
+            </div>
+        </div>
 
-<h1 class="mb-4">Languages</h1>
+        <!-- Game Card -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <h3 class="mb-3">{{ country_name | title }}</h3>
+                    <div class="mb-4">
+                        <img src="{% static country_image_name %}" class="img-fluid rounded" style="max-width: 50%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    </div>
+                </div>
 
-<div class="col-8 mx-auto">
-    <div class="text-center">
+                <br>
 
-        <h3>{{ country_name | title }}</h3>
+                <div class="mb-4">
+                    <input class="form-control form-control-lg" type="text" id="userAnswer" placeholder="{% trans 'Enter the language(s)' %}">
+                </div>
 
-        <br>
-
-        <img src="{% static country_image_name %}" class="img-fluid zoom" style="max-width: 45%;">
-
-        <br>
-        <br>
-        <br>
-
-        <input class="form-control" type="text" id="userAnswer" placeholder="{% trans 'Enter the language(s)' %}">
-        <br>
-        <button class="btn btn-primary" onclick="checkAnswer(userAnswerElement, correctAnswer)">{% trans "Check Answer" %}</button>
-
-        <br>
-        <br>
-        <br>
-
-        <!-- Solution Accordion -->
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        {% trans "Show me the solution" %}
+                <div class="d-grid mb-4">
+                    <button class="btn btn-primary btn-lg" onclick="checkAnswer(userAnswerElement, correctAnswer)">
+                        <i class="bi bi-check-circle me-2"></i>{% trans "Check Answer" %}
                     </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        {% if country_languages %}
-                        {{ country_languages }}
-                        {% else %}
-                        {{ "There is no language. Submit an empty text field." }}
-                        {% endif %}
+                </div>
+
+                <!-- Solution Accordion -->
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <i class="bi bi-lightbulb me-2"></i>{% trans "Show me the solution" %}
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {% if country_languages %}
+                                <p class="mb-0"><strong>{{ country_languages }}</strong></p>
+                                {% else %}
+                                <p class="mb-0 text-body-secondary">{% trans "There is no language. Submit an empty text field." %}</p>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
