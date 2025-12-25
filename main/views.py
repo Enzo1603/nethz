@@ -73,8 +73,8 @@ def technische_mechanik(request, semester: str | None = None):
         session.short_name.replace("TM_", "") for session in tm_sessions
     ]
 
-    # Get the week entries
-    week_entries = current_session.week_entries.all() if current_session else None
+    # Get the week entries (optimized query)
+    week_entries = current_session.week_entries.all().order_by('week_number') if current_session else None
 
     context = {
         "exercise_session": current_session,

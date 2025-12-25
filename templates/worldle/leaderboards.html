@@ -31,7 +31,7 @@
 
 </div>
 
-<script>
+<script defer>
     updateAllLeaderboards()
     setInterval(updateAllLeaderboards, 20000)  // Update every 20 seconds
 
@@ -46,11 +46,11 @@
         const loadingRow = document.querySelector(`#${tableId}-loading`)
         const emptyRow = document.querySelector(`#${tableId}-empty`)
         const tbody = document.querySelector(`#${tableId} tbody`)
-        
+
         // Show loading state
         if (loadingRow) loadingRow.style.display = ''
         if (emptyRow) emptyRow.style.display = 'none'
-        
+
         // Remove all existing data rows (keep loading and empty rows)
         const existingRows = tbody.querySelectorAll('tr')
         existingRows.forEach(row => {
@@ -67,7 +67,7 @@
             .then(data => {
                 // Hide loading state
                 if (loadingRow) loadingRow.style.display = 'none'
-                
+
                 if (!data || data.length === 0) {
                     // Show empty state
                     if (emptyRow) emptyRow.style.display = ''

@@ -1,9 +1,4 @@
-/* ============================================
-   BOOTSTRAP CUSTOMIZATION - SIMPLIFIED & MODERN
-   ============================================
-   
-   Bootstrap 5.3+ CSS Custom Properties für einfache Customization
- */
+/* Bootstrap 5.3+ CSS Custom Properties */
 
 [data-bs-theme="dark"] {
     /* Base Colors */
@@ -70,11 +65,7 @@
     background-color: var(--bs-surface-elevated) !important;
 }
 
-/* ============================================
-   TYPOGRAPHY - SIMPLIFIED
-   ============================================
-   Roboto Serif für alles - akademische, professionelle Serif-Schrift
- */
+/* Typography - Roboto Serif */
 
 :root {
     /* Font Family - Roboto Serif für alles (konsistent, akademisch, professionell) */
@@ -176,7 +167,6 @@ small, .small {
 
 /* Navigation */
 nav {
-    font-family: var(--font-main);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -231,38 +221,12 @@ nav {
     color: white;
 }
 
-/* Alert Colors - More saturated, original Bootstrap style */
-.alert-danger::selection {
-    background: #DC3545;
-    color: white;
-}
-
-.alert-warning::selection {
-    background: #FFC107;
-    color: white;
-}
-
-.alert-success::selection {
-    background: #198754;
-    color: white;
-}
-
-.alert-primary::selection {
-    background: var(--bs-primary);
-    color: white;
-}
-
-.alert-info::selection {
-    background: #0DCAF0;
-    color: white;
-}
-
-/* Alerts - Default Bootstrap style (no custom overrides) */
-
-.bg-primary ::selection {
-    background: var(--bs-primary);
-    color: white;
-}
+.alert-danger::selection { background: #DC3545; color: white; }
+.alert-warning::selection { background: #FFC107; color: white; }
+.alert-success::selection { background: #198754; color: white; }
+.alert-primary::selection { background: var(--bs-primary); color: white; }
+.alert-info::selection { background: #0DCAF0; color: white; }
+.bg-primary ::selection { background: var(--bs-primary); color: white; }
 
 /* Links */
 a {
@@ -356,45 +320,16 @@ a:focus-visible {
 }
 
 /* Color variants for link cards */
-.link-card-success:hover {
-    border-color: var(--bs-success) !important;
-}
-
-.link-card-success:hover .card-title {
-    color: var(--bs-success);
-}
-
-.link-card-info:hover {
-    border-color: var(--bs-info) !important;
-}
-
-.link-card-info:hover .card-title {
-    color: var(--bs-info);
-}
-
-.link-card-warning:hover {
-    border-color: var(--bs-warning) !important;
-}
-
-.link-card-warning:hover .card-title {
-    color: var(--bs-warning);
-}
-
-.link-card-danger:hover {
-    border-color: var(--bs-danger) !important;
-}
-
-.link-card-danger:hover .card-title {
-    color: var(--bs-danger);
-}
-
-.link-card-primary:hover {
-    border-color: var(--bs-primary) !important;
-}
-
-.link-card-primary:hover .card-title {
-    color: var(--bs-primary);
-}
+.link-card-success:hover { border-color: var(--bs-success) !important; }
+.link-card-success:hover .card-title { color: var(--bs-success); }
+.link-card-info:hover { border-color: var(--bs-info) !important; }
+.link-card-info:hover .card-title { color: var(--bs-info); }
+.link-card-warning:hover { border-color: var(--bs-warning) !important; }
+.link-card-warning:hover .card-title { color: var(--bs-warning); }
+.link-card-danger:hover { border-color: var(--bs-danger) !important; }
+.link-card-danger:hover .card-title { color: var(--bs-danger); }
+.link-card-primary:hover { border-color: var(--bs-primary) !important; }
+.link-card-primary:hover .card-title { color: var(--bs-primary); }
 
 .card-img {
     transition: filter 0.3s ease-in-out;
@@ -406,7 +341,6 @@ a:focus-visible {
 
 /* Buttons */
 .btn {
-    font-family: var(--font-main);
     font-weight: var(--fw-medium);
     transition: all 0.2s ease-in-out;
 }
@@ -421,11 +355,6 @@ a:focus-visible {
 }
 
 /* Forms */
-.form-control,
-.form-select {
-    font-family: var(--font-main);
-}
-
 .form-control:focus,
 .form-select:focus {
     border-color: var(--bs-primary);
@@ -434,7 +363,6 @@ a:focus-visible {
 }
 
 .form-label {
-    font-family: var(--font-main);
     font-weight: var(--fw-medium);
     font-size: var(--fs-sm);
 }
@@ -460,16 +388,7 @@ textarea:focus-visible {
     box-shadow: 0 0 0 0.2rem rgba(var(--bs-warning-rgb), 0.25);
 }
 
-/* ============================================
-   SMOOTH PAGE TRANSITIONS
-   ============================================
-   
-   Die fade-in Animation wird auf <main> angewendet
-   (siehe templates/components/_base.html)
-   
-   Beim Laden einer neuen Seite wird der Inhalt
-   sanft eingeblendet für einen flüssigen Übergang.
- */
+/* Smooth Page Transitions */
 
 @keyframes fadeIn {
     from {
@@ -509,6 +428,14 @@ textarea:focus-visible {
     clip: auto;
     white-space: normal;
     z-index: 10000;
+}
+
+.skip-link {
+    z-index: 9999;
+}
+
+.main-content {
+    margin-top: 80px;
 }
 
 /* Modern Table Design */

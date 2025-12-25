@@ -130,6 +130,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "nethz_django.urls"
 
+# Caching - Simple in-memory cache for template fragments
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
+    }
+}
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

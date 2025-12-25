@@ -11,10 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Performance: DNS prefetch for external resources -->
+    <!-- Performance: Resource hints -->
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
     <!-- SEO Meta Tags -->
     {% include "seo_meta.html" %}
@@ -41,11 +42,14 @@
 <body>
 
     <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" style="z-index: 9999;">{% trans "Skip to main content" %}</a>
+    <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2 skip-link">{% trans "Skip to main content" %}</a>
 
+    {% load cache %}
+    {% cache 3600 navbar request.LANGUAGE_CODE %}
     {% include "components/_navbar.html" %}
+    {% endcache %}
 
-    <main id="main-content" class="container fade-in" style="margin-top: 80px;">
+    <main id="main-content" class="container fade-in main-content">
         {% include "components/_messages.html" %}
 
         <br>
@@ -54,7 +58,9 @@
 
     </main>
 
+    {% cache 3600 footer request.LANGUAGE_CODE %}
     {% include "components/_footer.html" %}
+    {% endcache %}
 
 </body>
 
