@@ -32,11 +32,16 @@ ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/.venv/bin:$PATH"
 ENV PYTHONPATH="/app"
 
-# Copy application code (templates, locale, static, etc.)
+# Copy application code
 COPY templates/ /app/templates/
 COPY locale/ /app/locale/
 COPY static/ /app/static/
-COPY accounts/ main/ worldle/ lib/ nethz_django/ manage.py entrypoint.sh ./
+COPY accounts/ /app/accounts/
+COPY main/ /app/main/
+COPY worldle/ /app/worldle/
+COPY lib/ /app/lib/
+COPY nethz_django/ /app/nethz_django/
+COPY manage.py entrypoint.sh ./
 
 # Collect static files and compile messages
 # Dummy values only for build
