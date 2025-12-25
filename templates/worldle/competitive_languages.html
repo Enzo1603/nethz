@@ -4,102 +4,25 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% load static %}
-{% load macros %}
 
 {% block head %}
 <meta name="robots" content="noindex, nofollow">
-
 <meta name="csrf-token" content="{{ csrf_token }}">
-
-<link rel="stylesheet" href="{% static 'css/animation.css' %}">
-
-<style>
-    /* For Correct/Incorrect overlay */
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(4px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0.3s ease, opacity 0.3s ease;
-        z-index: 9999;
-    }
-
-    .overlay.visible {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .overlay-content {
-        background: var(--bs-surface);
-        border-radius: var(--bs-border-radius-lg);
-        padding: 2rem 3rem;
-        box-shadow: var(--bs-box-shadow-lg);
-        text-align: center;
-        transform: scale(0.9);
-        transition: transform 0.3s ease;
-    }
-
-    .overlay.visible .overlay-content {
-        transform: scale(1);
-    }
-
-    .overlay i {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-    }
-
-    .overlay p {
-        color: var(--bs-body-color);
-        font-size: 1.5rem;
-        margin: 0;
-    }
-
-    .overlay.correct .overlay-content {
-        border: 2px solid var(--bs-success);
-    }
-
-    .overlay.incorrect .overlay-content {
-        border: 2px solid var(--bs-danger);
-    }
-
-    .choice-button {
-        transition: all 0.2s ease-in-out;
-        min-height: 60px;
-    }
-
-    .choice-button:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--bs-box-shadow);
-    }
-
-    .choice-button:active {
-        transform: translateY(0);
-    }
-</style>
 {% endblock %}
 
 
 {% block content %}
 
-<!-- HTML-Code für die Symbole -->
-<div id="correct-overlay" class="overlay correct">
-    <div class="overlay-content">
+<!-- Feedback Overlays -->
+<div id="correct-overlay" class="game-overlay correct">
+    <div class="game-overlay-content">
         <i class="bi bi-check-circle-fill text-success"></i>
         <p class="correct-text fw-bold"></p>
     </div>
 </div>
 
-<div id="incorrect-overlay" class="overlay incorrect">
-    <div class="overlay-content">
+<div id="incorrect-overlay" class="game-overlay incorrect">
+    <div class="game-overlay-content">
         <i class="bi bi-x-circle-fill text-danger"></i>
         <p class="correct-text fw-bold"></p>
     </div>
@@ -124,7 +47,7 @@
                         <div class="row text-center text-md-end">
                             <div class="col-6 col-md-12 mb-2 mb-md-0">
                                 <div class="d-flex align-items-center justify-content-center justify-content-md-end">
-                                    <i class="bi bi-star-fill text-warning me-2" style="font-size: 1.25rem; line-height: 1; margin-top: -0.1rem;"></i>
+                                    <i class="bi bi-star-fill text-warning me-2" style="font-size: 1.25rem;"></i>
                                     <div class="text-start text-md-end">
                                         <div class="small text-body-secondary">{% trans "Score" %}</div>
                                         <div class="h4 mb-0"><span id="score">0</span></div>
@@ -133,7 +56,7 @@
                             </div>
                             <div class="col-6 col-md-12">
                                 <div class="d-flex align-items-center justify-content-center justify-content-md-end">
-                                    <i class="bi bi-trophy-fill text-primary me-2" style="font-size: 1.25rem; line-height: 1; margin-top: -0.1rem;"></i>
+                                    <i class="bi bi-trophy-fill text-primary me-2" style="font-size: 1.25rem;"></i>
                                     <div class="text-start text-md-end">
                                         <div class="small text-body-secondary">{% trans "Highscore" %}</div>
                                         <div class="h4 mb-0"><span id="high_score">0</span></div>
@@ -156,34 +79,32 @@
                     </div>
                 </div>
 
-                <br>
-
                 <div class="row g-3">
                     <div class="col-12 col-md-6">
                         <button id="button-a" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
                             <span class="badge bg-primary me-2">A</span>
-                            <span id="choice-a-text" class="flex-grow-1 text-center">Choice A</span>
+                            <span id="choice-a-text" class="flex-grow-1 text-center"></span>
                             <span class="badge bg-primary" style="opacity: 0;">A</span>
                         </button>
                     </div>
                     <div class="col-12 col-md-6">
                         <button id="button-b" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
                             <span class="badge bg-primary me-2">B</span>
-                            <span id="choice-b-text" class="flex-grow-1 text-center">Choice B</span>
+                            <span id="choice-b-text" class="flex-grow-1 text-center"></span>
                             <span class="badge bg-primary" style="opacity: 0;">B</span>
                         </button>
                     </div>
                     <div class="col-12 col-md-6">
                         <button id="button-c" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
                             <span class="badge bg-primary me-2">C</span>
-                            <span id="choice-c-text" class="flex-grow-1 text-center">Choice C</span>
+                            <span id="choice-c-text" class="flex-grow-1 text-center"></span>
                             <span class="badge bg-primary" style="opacity: 0;">C</span>
                         </button>
                     </div>
                     <div class="col-12 col-md-6">
                         <button id="button-d" type="button" class="btn btn-outline-primary choice-button fw-bold w-100 d-flex align-items-center justify-content-between p-3">
                             <span class="badge bg-primary me-2">D</span>
-                            <span id="choice-d-text" class="flex-grow-1 text-center">Choice D</span>
+                            <span id="choice-d-text" class="flex-grow-1 text-center"></span>
                             <span class="badge bg-primary" style="opacity: 0;">D</span>
                         </button>
                     </div>
@@ -191,35 +112,29 @@
             </div>
         </div>
 
-        <!-- Leaderboard Accordion -->
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-0">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item border-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                <i class="bi bi-trophy me-2"></i>{% trans "Leaderboard" %}
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="table-responsive">
-                                    <table class="table table-modern mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" style="width: 10%;">#</th>
-                                                <th scope="col">{% trans "Username" %}</th>
-                                                <th scope="col" style="width: 20%;" class="text-end">{% trans "Highscore" %}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Leaderboard Card -->
+        <div class="leaderboard-card">
+            <div class="leaderboard-header bg-primary text-white">
+                <h5><i class="bi bi-trophy me-2"></i>{% trans "Leaderboard" %}</h5>
+            </div>
+            <div class="table-responsive">
+                <table id="leaderboard-table" class="table leaderboard-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 15%;">#</th>
+                            <th scope="col">{% trans "Username" %}</th>
+                            <th scope="col" style="width: 25%;">{% trans "Score" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="leaderboard-loading">
+                            <td colspan="3" class="text-center py-4">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                                <span class="ms-2 text-muted">{% trans "Loading..." %}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -227,45 +142,31 @@
 
 
 <script>
-    let score = {{ score }}
-    let highscore = {{ highscore }}
+    const RANK_CLASSES = ['gold', 'silver', 'bronze'];
+    let score = {{ score }};
+    let highscore = {{ highscore }};
+    let country = {{ country | safe }};
+    let choices = {{ choices | safe }};
 
-    let country = {{ country | safe }}
-    let choices = {{ choices | safe }}
+    // DOM elements
+    const countryName = document.getElementById("country-name");
+    const image = document.getElementById("image");
+    const scoreSpan = document.getElementById("score");
+    const highscoreSpan = document.getElementById("high_score");
+    const choiceTexts = ['a', 'b', 'c', 'd'].map(l => document.getElementById(`choice-${l}-text`));
 
-    // DOM-Elemente initialisieren
-    const country_name = document.getElementById("country-name")
-    const image = document.getElementById("image")
-    const score_span = document.getElementById("score")
-    const highscore_span = document.getElementById("high_score")
+    // Register click handlers
+    ['a', 'b', 'c', 'd'].forEach((letter, i) => {
+        document.getElementById(`button-${letter}`).addEventListener("click", () => 
+            sendChoice(['A', 'B', 'C', 'D'][i])
+        );
+    });
 
-    let choice_a_text = document.getElementById("choice-a-text")
-    let choice_b_text = document.getElementById("choice-b-text")
-    let choice_c_text = document.getElementById("choice-c-text")
-    let choice_d_text = document.getElementById("choice-d-text")
-
-    const button_a = document.getElementById("button-a")
-    const button_b = document.getElementById("button-b")
-    const button_c = document.getElementById("button-c")
-    const button_d = document.getElementById("button-d")
-
-    // Register Eventhandlers
-    button_a.addEventListener("click", () => sendChoice("A"))
-    button_b.addEventListener("click", () => sendChoice("B"))
-    button_c.addEventListener("click", () => sendChoice("C"))
-    button_d.addEventListener("click", () => sendChoice("D"))
-
-    // First load initialization
-    updateDisplay()
+    updateDisplay();
 
     function sendChoice(userChoice) {
-        let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-
-        if (userChoice === "A") { userChoice = choices["A"] }
-        else if (userChoice === "B") { userChoice = choices["B"] }
-        else if (userChoice === "C") { userChoice = choices["C"] }
-        else if (userChoice === "D") { userChoice = choices["D"] }
-        else { console.error("Invalid userChoice: " + userChoice) }
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+        const choiceValue = choices[userChoice];
 
         fetch("/{{ LANGUAGE_CODE }}/worldle/languages/competitive/", {
             method: 'POST',
@@ -273,91 +174,76 @@
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-CSRFToken': csrfToken
             },
-            body: 'choice=' + userChoice
+            body: 'choice=' + choiceValue
         })
-            .then(response => response.json())
-            .then(data => {
-                country = data["country"]
-                choices = data["choices"]
-                score = data["score"]
-                highscore = data["highscore"]
-                updateDisplay()
-
-                const is_correct = data["is_correct"]
-                const correct_answers = data["correct_answers"]
-                showOverlay(is_correct, correct_answers)
-
-            })
-            .catch(error => console.error('Error:', error))
+        .then(response => response.json())
+        .then(data => {
+            country = data.country;
+            choices = data.choices;
+            score = data.score;
+            highscore = data.highscore;
+            updateDisplay();
+            showOverlay(data.is_correct, data.correct_answers);
+        })
+        .catch(error => console.error('Error:', error));
     }
 
-    function showOverlay(isCorrect, correct_answers) {
-        let id = ""
-        if (isCorrect) {
-            id = "correct-overlay"
-        } else {
-            id = "incorrect-overlay"
-        }
-
-        const overlay = document.getElementById(id)
-        const overlayTexts = document.getElementsByClassName("correct-text")
-
-        overlayTexts[0].textContent = correct_answers
-        overlayTexts[1].textContent = correct_answers
-
-        overlay.classList.add("visible")
-
-        // verzögertes Ausblenden des Overlays
-        setTimeout(() => {
-            overlay.classList.remove("visible")
-        }, 700)
+    function showOverlay(isCorrect, correctAnswers) {
+        const overlay = document.getElementById(isCorrect ? "correct-overlay" : "incorrect-overlay");
+        document.querySelectorAll(".correct-text").forEach(el => el.textContent = correctAnswers);
+        
+        overlay.classList.add("visible");
+        setTimeout(() => overlay.classList.remove("visible"), 700);
     }
 
     function updateDisplay() {
-        updateLeaderboard()
-
-        country_name.innerText = country["name"]
-        image.src = country["image_url"]
-        score_span.innerText = score
-        highscore_span.innerText = highscore
-
-        choice_a_text.innerText = choices["A"].toUpperCase()
-        choice_b_text.innerText = choices["B"].toUpperCase()
-        choice_c_text.innerText = choices["C"].toUpperCase()
-        choice_d_text.innerText = choices["D"].toUpperCase()
+        countryName.textContent = country.name;
+        image.src = country.image_url;
+        scoreSpan.textContent = score;
+        highscoreSpan.textContent = highscore;
+        
+        ['A', 'B', 'C', 'D'].forEach((letter, i) => {
+            choiceTexts[i].textContent = choices[letter].toUpperCase();
+        });
+        
+        updateLeaderboard();
     }
 
     function updateLeaderboard() {
+        const tbody = document.querySelector("#leaderboard-table tbody");
+
         fetch('/{{ LANGUAGE_CODE }}/worldle/leaderboards/languages_highscore/')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-
-                const tbody = document.querySelector(".table tbody")
-                tbody.innerHTML = ""
+                tbody.innerHTML = '';
+                
+                if (!data?.length) {
+                    tbody.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-muted"><i class="bi bi-inbox me-2"></i>{% trans "No scores yet" %}</td></tr>';
+                    return;
+                }
 
                 data.forEach((user, index) => {
-                    const tr = document.createElement("tr")
-                    const th = document.createElement("th")
-                    th.scope = "row"
-                    th.textContent = index + 1
-
-                    const tdUsername = document.createElement("td")
-                    tdUsername.textContent = user.username
-
-                    const tdHighscore = document.createElement("td")
-                    tdHighscore.textContent = user.highscore
-
-                    tr.appendChild(th)
-                    tr.appendChild(tdUsername)
-                    tr.appendChild(tdHighscore)
-
-                    tbody.appendChild(tr)
-                })
-
-            }).catch(error => console.error('Error:', error))
+                    const rankClass = RANK_CLASSES[index] || '';
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <th scope="row" class="leaderboard-rank ${rankClass}">${index + 1}</th>
+                        <td>${escapeHtml(user.username)}</td>
+                        <td><strong>${user.highscore}</strong></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                tbody.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>{% trans "Error loading data" %}</td></tr>';
+            });
     }
 
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 </script>
 
 {% endblock content %}

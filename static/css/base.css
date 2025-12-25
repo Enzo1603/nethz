@@ -555,6 +555,78 @@ textarea:focus-visible {
     font-size: 0.9rem;
 }
 
+/* Game Overlay (Correct/Incorrect feedback) */
+.game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+    z-index: 9999;
+}
+
+.game-overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.game-overlay-content {
+    background: var(--bs-surface);
+    border-radius: var(--bs-border-radius-lg);
+    padding: 2rem 3rem;
+    box-shadow: var(--bs-box-shadow-lg);
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.game-overlay.visible .game-overlay-content {
+    transform: scale(1);
+}
+
+.game-overlay i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.game-overlay p {
+    color: var(--bs-body-color);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.game-overlay.correct .game-overlay-content {
+    border: 2px solid var(--bs-success);
+}
+
+.game-overlay.incorrect .game-overlay-content {
+    border: 2px solid var(--bs-danger);
+}
+
+/* Choice Buttons (Quiz games) */
+.choice-button {
+    transition: all 0.2s ease-in-out;
+    min-height: 60px;
+}
+
+.choice-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bs-box-shadow);
+}
+
+.choice-button:active {
+    transform: translateY(0);
+}
+
 /* Leaderboard */
 .leaderboard-card {
     border-radius: var(--bs-border-radius-lg);
