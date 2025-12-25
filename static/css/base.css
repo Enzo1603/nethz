@@ -555,6 +555,64 @@ textarea:focus-visible {
     font-size: 0.9rem;
 }
 
+/* Leaderboard */
+.leaderboard-card {
+    border-radius: var(--bs-border-radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--bs-border-color);
+    background: var(--bs-surface);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.leaderboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bs-box-shadow-lg);
+}
+
+.leaderboard-header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leaderboard-header h5 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.leaderboard-table {
+    margin: 0;
+}
+
+.leaderboard-table thead th {
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    border: none;
+    font-weight: var(--fw-medium);
+    padding: 0.75rem 1rem;
+}
+
+.leaderboard-table tbody td,
+.leaderboard-table tbody th {
+    padding: 0.75rem 1rem;
+    border-color: var(--bs-border-color);
+}
+
+.leaderboard-table tbody tr:hover {
+    background: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+.leaderboard-rank {
+    font-weight: var(--fw-semibold);
+    color: var(--bs-primary);
+}
+
+.leaderboard-rank.gold { color: #FFD700; }
+.leaderboard-rank.silver { color: #C0C0C0; }
+.leaderboard-rank.bronze { color: #CD7F32; }
+
 /* Link Banner */
 .link-banner .card {
     min-height: 90px;

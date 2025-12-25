@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-25 17:09+0100\n"
+"POT-Creation-Date: 2025-12-25 18:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,10 +46,10 @@ msgstr "Der Benutzername enthält nicht erlaubte Zeichen oder Ausdrücke."
 
 #: accounts/forms.py:56 accounts/forms.py:82 accounts/forms.py:160
 #: templates/macros/leaderboard.html:15
-#: templates/worldle/competitive_areas.html:204
-#: templates/worldle/competitive_capitals.html:209
-#: templates/worldle/competitive_currencies.html:217
-#: templates/worldle/competitive_languages.html:209
+#: templates/worldle/competitive_areas.html:206
+#: templates/worldle/competitive_capitals.html:211
+#: templates/worldle/competitive_currencies.html:219
+#: templates/worldle/competitive_languages.html:211
 msgid "Username"
 msgstr "Benutzername"
 
@@ -269,7 +269,7 @@ msgid "engineering mechanics, ETH Zurich, study materials, engineering"
 msgstr "Technische Mechanik, ETH Zürich, Studienmaterialien, Ingenieurwesen"
 
 #: lib/seo_utils.py:51 main/views.py:14 templates/components/_navbar.html:22
-#: templates/exercise_sessions/technische_mechanik.html:5
+#: templates/exercise_sessions/technische_mechanik.html:9
 msgid "Engineering Mechanics"
 msgstr "Technische Mechanik"
 
@@ -381,7 +381,7 @@ msgstr "Link zu den Übungsunterlagen"
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:81
+#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:58
 msgid "Remarks"
 msgstr "Anmerkungen"
 
@@ -546,40 +546,52 @@ msgstr "Abmelden"
 msgid "Change language"
 msgstr "Ändere die Sprache"
 
-#: templates/exercise_sessions/technische_mechanik.html:28
+#: templates/exercise_sessions/technische_mechanik.html:32
 #: templates/main/home.html:26
 msgid "Useful Links"
 msgstr "Nützliche Links"
 
-#: templates/exercise_sessions/technische_mechanik.html:37
+#: templates/exercise_sessions/technische_mechanik.html:36
 msgid "Lina de Windt's PVK"
 msgstr "Lina de Windts PVK"
 
-#: templates/exercise_sessions/technische_mechanik.html:49
+#: templates/exercise_sessions/technische_mechanik.html:36
+msgid "Polybox download"
+msgstr ""
+
+#: templates/exercise_sessions/technische_mechanik.html:39
 msgid "Theory Recap by Felix Stalder"
 msgstr "Theorieblätter von Felix Stalder"
 
-#: templates/exercise_sessions/technische_mechanik.html:61
+#: templates/exercise_sessions/technische_mechanik.html:39
+msgid "Notes"
+msgstr "Notzen"
+
+#: templates/exercise_sessions/technische_mechanik.html:42
 msgid "YT - EE4ETH - Engineering Mechanics Playlist"
 msgstr "YT - EE4ETH - Technische Mechanik Playlist"
 
-#: templates/exercise_sessions/technische_mechanik.html:77
+#: templates/exercise_sessions/technische_mechanik.html:42
+msgid "YouTube"
+msgstr ""
+
+#: templates/exercise_sessions/technische_mechanik.html:54
 msgid "Week"
 msgstr "Woche"
 
-#: templates/exercise_sessions/technische_mechanik.html:78
+#: templates/exercise_sessions/technische_mechanik.html:55
 msgid "Exercise Materials"
 msgstr "Übungsunterlagen"
 
-#: templates/exercise_sessions/technische_mechanik.html:79
+#: templates/exercise_sessions/technische_mechanik.html:56
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/exercise_sessions/technische_mechanik.html:80
+#: templates/exercise_sessions/technische_mechanik.html:57
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/exercise_sessions/technische_mechanik.html:91
+#: templates/exercise_sessions/technische_mechanik.html:68
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
 
@@ -632,20 +644,32 @@ msgstr "Europa"
 msgid "Oceania"
 msgstr "Ozeanien"
 
-#: templates/main/home.html:35
+#: templates/main/home.html:30
 msgid "AMIV new Study Documents"
 msgstr "AMIV neue Studienunterlagen"
 
-#: templates/main/home.html:47
+#: templates/main/home.html:30
+msgid "Latest materials"
+msgstr "Neusten Materialien"
+
+#: templates/main/home.html:33
 msgid "AMIV old Study Documents"
 msgstr "AMIV alte Studienunterlagen"
 
-#: templates/main/home.html:59
+#: templates/main/home.html:33
+msgid "Archive"
+msgstr "Archiv"
+
+#: templates/main/home.html:36
 msgid ""
 "Polybox with additional old exams (especially useful for EM in 4th semester)"
 msgstr ""
 "Polybox mit zusätzlichen alten Prüfungen (besonders nützlich für EM im 4. "
 "Semester)"
+
+#: templates/main/home.html:36
+msgid "Download"
+msgstr ""
 
 #: templates/worldle/capitals.html:31
 msgid "Guess the capital city of the displayed country"
@@ -679,13 +703,13 @@ msgid "Score"
 msgstr "Punkte"
 
 #: templates/worldle/competitive_areas.html:129
-#: templates/worldle/competitive_areas.html:205
+#: templates/worldle/competitive_areas.html:207
 #: templates/worldle/competitive_capitals.html:138
-#: templates/worldle/competitive_capitals.html:210
+#: templates/worldle/competitive_capitals.html:212
 #: templates/worldle/competitive_currencies.html:138
-#: templates/worldle/competitive_currencies.html:218
+#: templates/worldle/competitive_currencies.html:220
 #: templates/worldle/competitive_languages.html:138
-#: templates/worldle/competitive_languages.html:210
+#: templates/worldle/competitive_languages.html:212
 msgid "Highscore"
 msgstr "Rekord"
 
@@ -694,26 +718,26 @@ msgstr "Rekord"
 msgid "Area"
 msgstr "Fläche"
 
-#: templates/worldle/competitive_areas.html:167
+#: templates/worldle/competitive_areas.html:169
 msgid "Is the area of the country on the right higher or lower?"
 msgstr "Ist die Fläche des Landes auf der rechten Seite grösser oder kleiner?"
 
-#: templates/worldle/competitive_areas.html:168
+#: templates/worldle/competitive_areas.html:170
 msgid "Is the area of the country below higher or lower?"
 msgstr "Ist die Fläche des Landes unten höher oder niedriger?"
 
-#: templates/worldle/competitive_areas.html:175
+#: templates/worldle/competitive_areas.html:177
 msgid "Lower"
 msgstr "Kleiner"
 
-#: templates/worldle/competitive_areas.html:180
+#: templates/worldle/competitive_areas.html:182
 msgid "Higher"
 msgstr "Grösser"
 
-#: templates/worldle/competitive_areas.html:194
-#: templates/worldle/competitive_capitals.html:199
-#: templates/worldle/competitive_currencies.html:207
-#: templates/worldle/competitive_languages.html:199
+#: templates/worldle/competitive_areas.html:196
+#: templates/worldle/competitive_capitals.html:201
+#: templates/worldle/competitive_currencies.html:209
+#: templates/worldle/competitive_languages.html:201
 msgid "Leaderboard"
 msgstr "Rangliste"
 
@@ -725,11 +749,11 @@ msgstr "Errate die Hauptstadt des angezeigten Landes"
 msgid "Guess the currency of the displayed country"
 msgstr "Errate die Währung des angezeigten Landes"
 
-#: templates/worldle/competitive_currencies.html:196
+#: templates/worldle/competitive_currencies.html:198
 msgid "Note"
 msgstr "Hinweis"
 
-#: templates/worldle/competitive_currencies.html:196
+#: templates/worldle/competitive_currencies.html:198
 msgid ""
 "To make this game more challenging, hints to the country in the currency's "
 "name are replaced by an asterisk."
@@ -757,9 +781,13 @@ msgstr "Üben (kein Konto erforderlich)"
 msgid "Competitive (account required)"
 msgstr "Wettbewerb (Konto erforderlich)"
 
-#: templates/worldle/home.html:37 templates/worldle/leaderboards.html:22
+#: templates/worldle/home.html:45 templates/worldle/leaderboards.html:22
 msgid "Leaderboards"
 msgstr "Ranglisten"
+
+#: templates/worldle/home.html:46
+msgid "See who’s on top"
+msgstr "Siehe, wer zuoberst ist"
 
 #: templates/worldle/languages.html:31
 msgid "Guess the language(s) spoken in the displayed country"

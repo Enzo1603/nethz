@@ -1,23 +1,24 @@
 {% load i18n %}
 
-<!-- {{ Title }} Leaderboard -->
-<div class="col-md-6 mb-5">
-    <div class="border border-3 border-primary rounded-3 overflow-hidden">
-        <div class="d-flex justify-content-between align-items-center bg-primary text-white p-3">
-            <h3 class="mb-0">{{ Title }}</h3>
-            <a class="btn btn-light" href="{{ link }}">{% trans "Go to Game" %}</a>
+<div class="col-md-6 mb-4">
+    <div class="leaderboard-card">
+        <div class="leaderboard-header bg-primary text-white">
+            <h5><i class="bi bi-trophy me-2"></i>{{ Title }}</h5>
+            <a class="btn btn-sm btn-light" href="{{ link }}">
+                <i class="bi bi-controller me-1"></i>{% trans "Play" %}
+            </a>
         </div>
         <div class="table-responsive">
-            <table id="{{Title}}" class="table mb-0">
+            <table id="{{ Title }}" class="table leaderboard-table mb-0">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col" style="width: 15%;">#</th>
                         <th scope="col">{% trans "Username" %}</th>
-                        <th scope="col">Highscore</th>
+                        <th scope="col" style="width: 25%;">{% trans "Score" %}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="{{Title}}-loading">
+                    <tr id="{{ Title }}-loading">
                         <td colspan="3" class="text-center py-4">
                             <div class="spinner-border spinner-border-sm text-primary" role="status">
                                 <span class="visually-hidden">{% trans "Loading..." %}</span>
@@ -25,7 +26,7 @@
                             <span class="ms-2 text-muted">{% trans "Loading..." %}</span>
                         </td>
                     </tr>
-                    <tr id="{{Title}}-empty" style="display: none;">
+                    <tr id="{{ Title }}-empty" style="display: none;">
                         <td colspan="3" class="text-center py-4 text-muted">
                             <i class="bi bi-inbox me-2"></i>{% trans "No scores yet" %}
                         </td>

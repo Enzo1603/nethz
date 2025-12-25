@@ -1,111 +1,98 @@
 {% extends "components/_base.html" %}
-
 {% load i18n %}
-{% load static %}
 {% load macros %}
-
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/animation.css' %}" />
-
-<style>
-    .rounded-table {
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px solid #dee2e6;
-    }
-</style>
-{% endblock %}
-
 
 {% block content %}
 
-<h1 class="mb-4">{% trans "Leaderboards" %} <i class="bi bi-trophy"></i></h1>
-
-
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <h1 class="mb-0">{% trans "Leaderboards" %}</h1>
+    <span class="badge bg-primary-subtle text-primary-emphasis">
+        <i class="bi bi-arrow-repeat me-1"></i>{% trans "Live updates" %}
+    </span>
+</div>
 
 <div class="row">
-
     {% for leaderboard_config in leaderboard_configs %}
     {% leaderboard leaderboard_config %}
     {% endfor %}
-
 </div>
 
 <script defer>
-    updateAllLeaderboards()
-    setInterval(updateAllLeaderboards, 20000)  // Update every 20 seconds
+    const LEADERBOARD_ENDPOINTS = {
+        'Areas': '/worldle/leaderboards/areas_highscore/',
+        'Capitals': '/worldle/leaderboards/capitals_highscore/',
+        'Currencies': '/worldle/leaderboards/currencies_highscore/',
+        'Languages': '/worldle/leaderboards/languages_highscore/'
+    };
+
+    const RANK_CLASSES = ['gold', 'silver', 'bronze'];
 
     function updateAllLeaderboards() {
-        updateLeaderboard('Areas', '/worldle/leaderboards/areas_highscore/')
-        updateLeaderboard('Capitals', '/worldle/leaderboards/capitals_highscore/')
-        updateLeaderboard('Currencies', '/worldle/leaderboards/currencies_highscore/')
-        updateLeaderboard('Languages', '/worldle/leaderboards/languages_highscore/')
+        Object.entries(LEADERBOARD_ENDPOINTS).forEach(([id, url]) => {
+            updateLeaderboard(id, url);
+        });
     }
 
     function updateLeaderboard(tableId, url) {
-        const loadingRow = document.querySelector(`#${tableId}-loading`)
-        const emptyRow = document.querySelector(`#${tableId}-empty`)
-        const tbody = document.querySelector(`#${tableId} tbody`)
+        const tbody = document.querySelector(`#${tableId} tbody`);
+        const loadingRow = document.querySelector(`#${tableId}-loading`);
+        const emptyRow = document.querySelector(`#${tableId}-empty`);
 
-        // Show loading state
-        if (loadingRow) loadingRow.style.display = ''
-        if (emptyRow) emptyRow.style.display = 'none'
+        if (!tbody) return;
 
-        // Remove all existing data rows (keep loading and empty rows)
-        const existingRows = tbody.querySelectorAll('tr')
-        existingRows.forEach(row => {
-            if (row.id !== `${tableId}-loading` && row.id !== `${tableId}-empty`) {
-                row.remove()
-            }
-        })
+        // Show loading
+        if (loadingRow) loadingRow.style.display = '';
+        if (emptyRow) emptyRow.style.display = 'none';
+
+        // Remove existing data rows
+        tbody.querySelectorAll('tr:not([id])').forEach(row => row.remove());
 
         fetch(url)
             .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok')
-                return response.json()
+                if (!response.ok) throw new Error('Network error');
+                return response.json();
             })
             .then(data => {
-                // Hide loading state
-                if (loadingRow) loadingRow.style.display = 'none'
+                if (loadingRow) loadingRow.style.display = 'none';
 
-                if (!data || data.length === 0) {
-                    // Show empty state
-                    if (emptyRow) emptyRow.style.display = ''
-                    return
+                if (!data?.length) {
+                    if (emptyRow) emptyRow.style.display = '';
+                    return;
                 }
 
-                // Hide empty state
-                if (emptyRow) emptyRow.style.display = 'none'
+                if (emptyRow) emptyRow.style.display = 'none';
 
                 data.forEach((user, index) => {
-                    const tr = document.createElement("tr")
-                    const th = document.createElement("th")
-                    th.scope = "row"
-                    th.textContent = index + 1
-
-                    const tdUsername = document.createElement("td")
-                    tdUsername.textContent = user.username
-
-                    const tdHighscore = document.createElement("td")
-                    tdHighscore.textContent = user.highscore
-
-                    tr.appendChild(th)
-                    tr.appendChild(tdUsername)
-                    tr.appendChild(tdHighscore)
-
-                    tbody.appendChild(tr)
-                })
-
-            }).catch(error => {
-                console.error('Error:', error)
-                // Hide loading, show error
-                if (loadingRow) loadingRow.style.display = 'none'
-                if (emptyRow) {
-                    emptyRow.innerHTML = '<td colspan="3" class="text-center py-4 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>{% trans "Error loading data" %}</td>'
-                    emptyRow.style.display = ''
-                }
+                    const tr = document.createElement('tr');
+                    const rankClass = RANK_CLASSES[index] || '';
+                    
+                    tr.innerHTML = `
+                        <th scope="row" class="leaderboard-rank ${rankClass}">${index + 1}</th>
+                        <td>${escapeHtml(user.username)}</td>
+                        <td><strong>${user.highscore}</strong></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
             })
+            .catch(error => {
+                console.error('Leaderboard error:', error);
+                if (loadingRow) loadingRow.style.display = 'none';
+                if (emptyRow) {
+                    emptyRow.innerHTML = '<td colspan="3" class="text-center py-4 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>{% trans "Error loading data" %}</td>';
+                    emptyRow.style.display = '';
+                }
+            });
     }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Initial load and auto-refresh
+    updateAllLeaderboards();
+    setInterval(updateAllLeaderboards, 20000);
 </script>
 
 {% endblock content %}
