@@ -17,12 +17,12 @@
 {% template_message "info" message_txt True %}
 {% endif %}
 
-<h1 class="mb-4">{% trans "Game Modes" %}</h1>
+<h1 class="mb-4" style="font-weight: var(--fw-medium);">{% trans "Game Modes" %}</h1>
 
 
 <div class="row">
-    <h4>{% trans "Practice (no account required)" %}</h4>
-    <hr>
+    <h3 class="mb-2">{% trans "Practice (no account required)" %}</h3>
+    <hr class="mt-0">
 
     {% card capitals_card %}
 
@@ -31,8 +31,8 @@
 
 
 <div class="row">
-    <h4>{% trans "Competitive (account required)" %}</h4>
-    <hr>
+    <h3 class="mb-2">{% trans "Competitive (account required)" %}</h3>
+    <hr class="mt-0">
     <div class="d-grid gap-2 mb-3">
         <a class="btn btn-outline-primary" href="{% url 'worldle:leaderboards' %}"><i class="bi bi-trophy pe-2"></i>{% trans "Leaderboards" %}</a>
     </div>

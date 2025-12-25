@@ -11,15 +11,7 @@
 
 {% block content %}
 
-<!-- <h1>Polybox</h1> -->
-
-<div class="row px-3">
-    <!-- PolyBox Button -->
-    <a class="btn btn-outline-primary" href="https://polybox.ethz.ch/index.php/s/C6EVuKd8eAV9TQS" target="_blank">
-        <i class="bi bi-cloud-arrow-up-fill pe-2"></i>{% trans "To the Polybox" %}</a>
-</div>
-
-<br>
+{% include "macros/polybox.html" %}
 
  <!--<h1 class="mt-3 mb-4">Übungsstunden</h1>-->
 
@@ -31,13 +23,46 @@
     {% card worldle_card %}
 </div>
 
-<h5 class="mt-3 mb-3">{% trans "Useful Links" %}</h5>
+<h5 class="mt-4 mb-3">{% trans "Useful Links" %}</h5>
 
-<ul>
-    <li><a class="link-primary fw-bold" href="https://exams.amiv.ethz.ch/" target="_blank">{% trans "AMIV new Study Documents" %}</a></li>
-    <li><a class="link-primary fw-bold" href="https://amiv.ethz.ch/en/studies/documents" target="_blank">{% trans "AMIV old Study Documents" %}</a></li>
-    <li><a class="link-primary fw-bold" href="https://polybox.ethz.ch/index.php/s/bJHsmeHpz4i6YZA" target="_blank">{% trans "Polybox with additional old exams (especially useful for EM in 4th semester)" %}</a></li>
-</ul>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+        <a href="https://exams.amiv.ethz.ch/" target="_blank" class="text-decoration-none">
+            <div class="card h-100 border-success link-card link-card-success">
+                <div class="card-body">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-file-earmark-text text-success me-2"></i>
+                        {% trans "AMIV new Study Documents" %}
+                    </h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a href="https://amiv.ethz.ch/en/studies/documents" target="_blank" class="text-decoration-none">
+            <div class="card h-100 border-info link-card link-card-info">
+                <div class="card-body">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-archive text-info me-2"></i>
+                        {% trans "AMIV old Study Documents" %}
+                    </h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a href="https://polybox.ethz.ch/index.php/s/bJHsmeHpz4i6YZA" target="_blank" class="text-decoration-none">
+            <div class="card h-100 border-warning link-card link-card-warning">
+                <div class="card-body">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-cloud-arrow-down text-warning me-2"></i>
+                        {% trans "Polybox with additional old exams (especially useful for EM in 4th semester)" %}
+                    </h5>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
 <br>
 

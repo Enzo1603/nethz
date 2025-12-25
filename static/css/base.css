@@ -1,67 +1,582 @@
+/* ============================================
+   BOOTSTRAP CUSTOMIZATION - SIMPLIFIED & MODERN
+   ============================================
+   
+   Bootstrap 5.3+ CSS Custom Properties für einfache Customization
+ */
+
 [data-bs-theme="dark"] {
+    /* Base Colors */
     --bs-body-bg: rgb(18, 30, 40) !important;
+    --bs-body-color: rgb(230, 230, 230);
+    --bs-body-color-rgb: 230, 230, 230;
+    
+    /* Primary Color - Modern, deeper blue (not baby-blue) */
+    --bs-primary: #2563EB;
+    --bs-primary-rgb: 37, 99, 235;
+    --bs-primary-bg-subtle: rgba(37, 99, 235, 0.15);
+    --bs-primary-border-subtle: rgba(37, 99, 235, 0.3);
+    --bs-primary-text-emphasis: #3B82F6;
+    
+    /* Other Colors - More saturated (Bootstrap original style) */
+    --bs-secondary: #6C757D;
+    --bs-secondary-rgb: 108, 117, 125;
+    --bs-success: #198754;
+    --bs-success-rgb: 25, 135, 84;
+    --bs-danger: #DC3545;
+    --bs-danger-rgb: 220, 53, 69;
+    --bs-warning: #FFC107;
+    --bs-warning-rgb: 255, 193, 7;
+    --bs-info: #0DCAF0;
+    --bs-info-rgb: 13, 202, 240;
+    
+    /* Surface Colors */
+    --bs-surface: rgb(25, 38, 50);
+    --bs-surface-elevated: rgb(32, 46, 60);
+    
+    /* Border Colors */
+    --bs-border-color: rgba(255, 255, 255, 0.1);
+    --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
+    
+    /* Link Colors */
+    --bs-link-color: var(--bs-primary);
+    --bs-link-color-rgb: var(--bs-primary-rgb);
+    --bs-link-hover-color: var(--bs-primary-text-emphasis);
+    
+    /* Border Radius - More rounded (original Bootstrap style) */
+    --bs-border-radius: 0.375rem;
+    --bs-border-radius-sm: 0.25rem;
+    --bs-border-radius-lg: 0.5rem;
+    --bs-border-radius-xl: 0.75rem;
+    
+    /* Shadows */
+    --bs-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+    --bs-box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    
+    /* Navbar */
+    --bs-navbar-bg: rgb(10, 20, 30);
 }
 
+/* Surface Backgrounds */
+[data-bs-theme="dark"] .bg-body-tertiary {
+    background-color: var(--bs-navbar-bg) !important;
+}
+
+.bg-surface {
+    background-color: var(--bs-surface) !important;
+}
+
+.bg-surface-elevated {
+    background-color: var(--bs-surface-elevated) !important;
+}
+
+/* ============================================
+   TYPOGRAPHY - SIMPLIFIED
+   ============================================
+   Roboto Serif für alles - akademische, professionelle Serif-Schrift
+ */
+
+:root {
+    /* Font Family - Roboto Serif für alles (konsistent, akademisch, professionell) */
+    --font-main: "Roboto Serif", "Roboto", Georgia, serif;
+    
+    /* Font Sizes - Slightly larger for better readability */
+    --fs-sm: 0.875rem;   /* 14px */
+    --fs-base: 1.0625rem; /* 17px - slightly larger */
+    --fs-lg: 1.1875rem;   /* 19px */
+    --fs-xl: 1.3125rem;   /* 21px */
+    --fs-2xl: 1.625rem;   /* 26px */
+    --fs-3xl: 2rem;       /* 32px */
+    --fs-4xl: 2.5rem;     /* 40px */
+    
+    /* Line Heights */
+    --lh-tight: 1.25;
+    --lh-normal: 1.5;
+    --lh-relaxed: 1.625;
+    
+    /* Font Weights */
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+}
+
+/* Base Typography */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    font-size: var(--fs-base);
+    line-height: var(--lh-relaxed);
+    font-weight: var(--fw-normal);
+    color: var(--bs-body-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Headings - Better weights and sizes */
+h1, .h1 {
+    font-size: var(--fs-4xl);
+    line-height: var(--lh-tight);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 1.5rem;
+}
+
+h2, .h2 {
+    font-size: var(--fs-3xl);
+    line-height: var(--lh-tight);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 1.25rem;
+}
+
+h3, .h3 {
+    font-size: var(--fs-2xl);
+    line-height: var(--lh-tight);
+    font-weight: var(--fw-medium);
+    margin-bottom: 1rem;
+}
+
+h4, .h4 {
+    font-size: var(--fs-xl);
+    line-height: var(--lh-normal);
+    font-weight: var(--fw-medium);
+    margin-bottom: 0.875rem;
+}
+
+h5, .h5 {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-normal);
+    font-weight: var(--fw-normal);
+    margin-bottom: 0.75rem;
+}
+
+h6, .h6 {
+    font-size: var(--fs-base);
+    line-height: var(--lh-normal);
+    font-weight: var(--fw-normal);
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: var(--lh-relaxed);
+}
+
+small, .small {
+    font-size: var(--fs-sm);
+}
+
+.lead {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-relaxed);
+}
+
+/* Navigation */
+nav {
+    font-family: var(--font-main);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    background-color: var(--bs-navbar-bg) !important;
+    border-bottom: 1px solid var(--bs-border-color);
+}
+
+.navbar-brand {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-medium);
+    color: var(--bs-body-color);
+    transition: color 0.2s ease-in-out;
+    letter-spacing: 0.01em;
+}
+
+.navbar-brand:hover {
+    color: var(--bs-primary);
+}
+
+.nav-link {
+    color: var(--bs-body-color);
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    color: var(--bs-primary);
+}
+
+.nav-link.active {
+    font-weight: var(--fw-medium);
+    color: var(--bs-primary) !important;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--bs-primary);
+    border-radius: 2px 2px 0 0;
+}
+
+/* Selection Colors */
 ::selection {
     background: #4a525b;
     color: white;
 }
 
+/* Alert Colors - More saturated, original Bootstrap style */
 .alert-danger::selection {
-    background: #d9534f;
+    background: #DC3545;
     color: white;
 }
 
 .alert-warning::selection {
-    background: #f0ad4e;
+    background: #FFC107;
     color: white;
 }
 
 .alert-success::selection {
-    background: #5cb85c;
+    background: #198754;
     color: white;
 }
 
 .alert-primary::selection {
-    background: #337ab7;
+    background: var(--bs-primary);
     color: white;
 }
 
 .alert-info::selection {
-    background: #5bc0de;
+    background: #0DCAF0;
     color: white;
 }
+
+/* Alerts - Default Bootstrap style (no custom overrides) */
 
 .bg-primary ::selection {
-    background: #0e62cf;
+    background: var(--bs-primary);
     color: white;
 }
 
-[data-bs-theme="dark"] .bg-body-tertiary {
-    background-color: rgb(10, 20, 30) !important;
-}
-
-body {
-    font-family: "Roboto Serif", "Roboto", Arial, Helvetica, serif;
-}
-
+/* Links */
 a {
-    color: white;
+    color: var(--bs-link-color);
     text-decoration: none;
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 
-nav {
-    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+a:hover {
+    color: var(--bs-link-hover-color);
+    opacity: 0.9;
 }
 
+a:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+    border-radius: var(--bs-border-radius-sm);
+}
+
+.link-primary {
+    color: var(--bs-primary);
+}
+
+.link-primary:hover {
+    color: var(--bs-primary-text-emphasis);
+}
+
+/* Cards */
+.card {
+    background-color: var(--bs-surface);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius-lg);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bs-box-shadow-lg);
+}
+
+/* Polybox Card - Special styling */
+.polybox-card {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, rgba(var(--bs-primary-rgb), 0.02) 100%);
+}
+
+.polybox-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bs-box-shadow-lg);
+    border-color: var(--bs-primary) !important;
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.1) 0%, rgba(var(--bs-primary-rgb), 0.05) 100%);
+}
+
+.polybox-card .card-title {
+    color: var(--bs-body-color);
+    transition: color 0.2s ease-in-out;
+}
+
+.polybox-card:hover .card-title {
+    color: var(--bs-primary);
+}
+
+.polybox-card .bi-cloud-arrow-up-fill,
+.polybox-card .bi-arrow-right {
+    transition: transform 0.2s ease-in-out;
+}
+
+.polybox-card:hover .bi-cloud-arrow-up-fill {
+    transform: translateY(-3px);
+}
+
+.polybox-card:hover .bi-arrow-right {
+    transform: translateX(5px);
+}
+
+/* Link Cards - Whole card is clickable */
+.link-card {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bs-box-shadow-lg);
+}
+
+.link-card .card-title {
+    color: var(--bs-body-color);
+    transition: color 0.2s ease-in-out;
+}
+
+/* Color variants for link cards */
+.link-card-success:hover {
+    border-color: var(--bs-success) !important;
+}
+
+.link-card-success:hover .card-title {
+    color: var(--bs-success);
+}
+
+.link-card-info:hover {
+    border-color: var(--bs-info) !important;
+}
+
+.link-card-info:hover .card-title {
+    color: var(--bs-info);
+}
+
+.link-card-warning:hover {
+    border-color: var(--bs-warning) !important;
+}
+
+.link-card-warning:hover .card-title {
+    color: var(--bs-warning);
+}
+
+.link-card-danger:hover {
+    border-color: var(--bs-danger) !important;
+}
+
+.link-card-danger:hover .card-title {
+    color: var(--bs-danger);
+}
+
+.link-card-primary:hover {
+    border-color: var(--bs-primary) !important;
+}
+
+.link-card-primary:hover .card-title {
+    color: var(--bs-primary);
+}
+
+.card-img {
+    transition: filter 0.3s ease-in-out;
+}
+
+.card:hover .card-img {
+    filter: brightness(80%);
+}
+
+/* Buttons */
+.btn {
+    font-family: var(--font-main);
+    font-weight: var(--fw-medium);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover:not(:disabled):not(.disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active:not(:disabled):not(.disabled) {
+    transform: translateY(0);
+}
+
+/* Forms */
+.form-control,
+.form-select {
+    font-family: var(--font-main);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-label {
+    font-family: var(--font-main);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-sm);
+}
+
+/* Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+    border-radius: var(--bs-border-radius-sm);
+}
+
+/* Utility Classes */
 .is-partial-correct {
-    border-color: #ffc107;
-    /* Setze die gewünschte Orange/Gelb-Farbe */
+    border-color: var(--bs-warning);
 }
 
 .is-partial-correct:focus {
-    border-color: #ffc107;
-    /* Setze die gewünschte Orange/Gelb-Farbe */
-    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
-    /* Optional: Füge einen Schatten hinzu */
+    border-color: var(--bs-warning);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-warning-rgb), 0.25);
+}
+
+/* ============================================
+   SMOOTH PAGE TRANSITIONS
+   ============================================
+   
+   Die fade-in Animation wird auf <main> angewendet
+   (siehe templates/components/_base.html)
+   
+   Beim Laden einer neuen Seite wird der Inhalt
+   sanft eingeblendet für einen flüssigen Übergang.
+ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Skip to content link */
+.visually-hidden-focusable {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.visually-hidden-focusable:focus {
+    position: fixed;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    z-index: 10000;
+}
+
+/* Modern Table Design */
+.table-modern {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-modern thead th {
+    border-bottom: 1px solid var(--bs-border-color);
+    border-top: none;
+    font-weight: var(--fw-semibold);
+    padding: 1rem 0.75rem;
+    background-color: transparent;
+}
+
+.table-modern tbody tr {
+    border-bottom: 1px solid var(--bs-border-color);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.table-modern tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table-modern tbody tr:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+.table-modern tbody td,
+.table-modern tbody th {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+}
+
+.table-modern tbody th {
+    font-weight: var(--fw-medium);
+    color: var(--bs-body-color);
+}
+
+/* Remove table-group-divider styling */
+.table-modern tbody tr:not(:first-child) {
+    border-top: 1px solid var(--bs-border-color);
+}
+
+/* Performance: Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    h1, .h1 {
+        font-size: var(--fs-3xl);
+    }
+    
+    h2, .h2 {
+        font-size: var(--fs-2xl);
+    }
+    
+    h3, .h3 {
+        font-size: var(--fs-xl);
+    }
 }

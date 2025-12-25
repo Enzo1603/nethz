@@ -5,22 +5,13 @@
     <h3>{% trans "Engineering Mechanics" %} {{ current_semester }}</h3>
 
     <div class="dropdown">
-        <button
-            class="btn btn-outline-secondary dropdown-toggle"
-            type="button"
-            id="semesterDropdown"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-        >
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="semesterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             {{ current_semester }}
         </button>
         <ul class="dropdown-menu" aria-labelledby="semesterDropdown">
             {% for semester in available_semesters %}
             <li>
-                <a
-                    class="dropdown-item {% if semester == current_semester %}active{% endif %}"
-                    href="{% url 'main:technische_mechanik_semester' semester %}"
-                >
+                <a class="dropdown-item {% if semester == current_semester %}active{% endif %}" href="{% url 'main:technische_mechanik_semester' semester %}">
                     {{ semester }}
                 </a>
             </li>
@@ -31,81 +22,72 @@
 
 <br />
 
-<!-- Polybox -->
-<div class="row px-3">
-    <!-- PolyBox Button -->
-    <a
-        class="btn btn-outline-primary"
-        href="https://polybox.ethz.ch/index.php/s/C6EVuKd8eAV9TQS"
-        target="_blank"
-    >
-        <i class="bi bi-cloud-arrow-up-fill pe-2"></i>{% trans "To the Polybox" %}</a
-    >
-</div>
+{% include "macros/polybox.html" %}
 
-<br />
+<div class="mt-4">
+    <h5 class="mb-3">{% trans "Useful Links" %}</h5>
 
-<div>
-    <h5>{% trans "Useful Links" %}</h5>
-
-    <ul>
-        <li>
-            <a
-                class="link-primary fw-bold"
-                href="https://polybox.ethz.ch/index.php/s/jBS5i5tCgrS8ScZ"
-                target="_blank"
-            >
-                {% trans "Lina de Windt's PVK" %}
+    <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+            <a href="https://polybox.ethz.ch/index.php/s/jBS5i5tCgrS8ScZ" target="_blank" class="text-decoration-none">
+                <div class="card h-100 border-success link-card link-card-success">
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-file-earmark-pdf text-success me-2"></i>
+                            {% trans "Lina de Windt's PVK" %}
+                        </h5>
+                    </div>
+                </div>
             </a>
-        </li>
-
-        <li>
-            <a
-                class="link-primary fw-bold"
-                href="https://polybox.ethz.ch/index.php/s/FQWekmyGL5QdJtA"
-                target="_blank"
-            >
-                {% trans "Theory Recap by Felix Stalder" %}
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a href="https://polybox.ethz.ch/index.php/s/FQWekmyGL5QdJtA" target="_blank" class="text-decoration-none">
+                <div class="card h-100 border-info link-card link-card-info">
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-book text-info me-2"></i>
+                            {% trans "Theory Recap by Felix Stalder" %}
+                        </h5>
+                    </div>
+                </div>
             </a>
-        </li>
-
-        <li>
-            <a
-                class="link-primary fw-bold"
-                href="https://www.youtube.com/playlist?list=PL0WLWTsoAENhKG7he0XBQmgDnFfcJnfoi"
-                target="_blank"
-            >
-                {% trans "YT - EE4ETH - Engineering Mechanics Playlist" %}
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <a href="https://www.youtube.com/playlist?list=PL0WLWTsoAENhKG7he0XBQmgDnFfcJnfoi" target="_blank" class="text-decoration-none">
+                <div class="card h-100 border-danger link-card link-card-danger">
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-youtube text-danger me-2"></i>
+                            {% trans "YT - EE4ETH - Engineering Mechanics Playlist" %}
+                        </h5>
+                    </div>
+                </div>
             </a>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 
 <br />
 
 <!-- Table -->
-<div class="table-responsive">
-    <table class="table table-borderless table-hover">
+<div class="table-responsive mt-4">
+    <table class="table table-modern">
         <thead>
             <tr>
-                <th scope="col">{% trans "Week" %}</th>
-                <th scope="col">{% trans "Exercise Materials" %}</th>
+                <th scope="col" style="width: 10%;">{% trans "Week" %}</th>
+                <th scope="col" style="width: 25%;">{% trans "Exercise Materials" %}</th>
                 <!-- <th scope="col">{% trans "Exercises" %}</th>
                 <th scope="col">{% trans "Solutions" %}</th> -->
-                <th scope="col">{% trans "Remarks" %}</th>
+                <th scope="col" style="width: 65%;">{% trans "Remarks" %}</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody>
             {% for entry in week_entries %}
             <tr>
                 <th scope="row">{{ entry.week_number }}</th>
 
                 <td>
-                    <a
-                        class="btn btn-outline-primary {% if not entry.has_exercise_materials %}disabled{% endif %}"
-                        href="{{ entry.exercise_materials_link }}"
-                        target="_blank"
-                    >
+                    <a class="btn btn-outline-primary {% if not entry.has_exercise_materials %}disabled{% endif %}" href="{{ entry.exercise_materials_link }}" target="_blank">
                         <i class="bi bi-download me-md-2"></i>{% trans "Exercise Material" %}&nbsp; {% if entry.materials_number != 0 %}
                         {{ entry.materials_number }} {% else %} n/a {% endif %}
                     </a>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-25 15:11+0100\n"
+"POT-Creation-Date: 2025-12-25 16:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -374,7 +374,7 @@ msgstr "Link zu den Übungsunterlagen"
 msgid "Link to the exercise materials for the week."
 msgstr "Link zu den Übungsunterlagen für die Woche."
 
-#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:95
+#: main/models.py:61 templates/exercise_sessions/technische_mechanik.html:81
 msgid "Remarks"
 msgstr "Anmerkungen"
 
@@ -519,45 +519,40 @@ msgstr "Admin-Portal"
 msgid "Logout"
 msgstr "Abmelden"
 
-#: templates/exercise_sessions/technische_mechanik.html:42
-#: templates/main/home.html:19
-msgid "To the Polybox"
-msgstr "Zur Polybox"
-
-#: templates/exercise_sessions/technische_mechanik.html:49
-#: templates/main/home.html:34
+#: templates/exercise_sessions/technische_mechanik.html:28
+#: templates/main/home.html:26
 msgid "Useful Links"
 msgstr "Nützliche Links"
 
-#: templates/exercise_sessions/technische_mechanik.html:58
+#: templates/exercise_sessions/technische_mechanik.html:37
 msgid "Lina de Windt's PVK"
 msgstr "Lina de Windts PVK"
 
-#: templates/exercise_sessions/technische_mechanik.html:68
+#: templates/exercise_sessions/technische_mechanik.html:49
 msgid "Theory Recap by Felix Stalder"
 msgstr "Theorieblätter von Felix Stalder"
 
-#: templates/exercise_sessions/technische_mechanik.html:78
+#: templates/exercise_sessions/technische_mechanik.html:61
 msgid "YT - EE4ETH - Engineering Mechanics Playlist"
 msgstr "YT - EE4ETH - Technische Mechanik Playlist"
 
-#: templates/exercise_sessions/technische_mechanik.html:91
+#: templates/exercise_sessions/technische_mechanik.html:77
 msgid "Week"
 msgstr "Woche"
 
-#: templates/exercise_sessions/technische_mechanik.html:92
+#: templates/exercise_sessions/technische_mechanik.html:78
 msgid "Exercise Materials"
 msgstr "Übungsunterlagen"
 
-#: templates/exercise_sessions/technische_mechanik.html:93
+#: templates/exercise_sessions/technische_mechanik.html:79
 msgid "Exercises"
 msgstr "Serien"
 
-#: templates/exercise_sessions/technische_mechanik.html:94
+#: templates/exercise_sessions/technische_mechanik.html:80
 msgid "Solutions"
 msgstr "Lösungen"
 
-#: templates/exercise_sessions/technische_mechanik.html:109
+#: templates/exercise_sessions/technische_mechanik.html:91
 msgid "Exercise Material"
 msgstr "Übungsunterlage"
 
@@ -572,6 +567,14 @@ msgstr "Lädt..."
 #: templates/macros/leaderboard.html:30
 msgid "No scores yet"
 msgstr "Noch keine Scores"
+
+#: templates/macros/polybox.html:15
+msgid "To the Polybox"
+msgstr "Zur Polybox"
+
+#: templates/macros/polybox.html:18
+msgid "Access all study materials and documents"
+msgstr "Zugriff auf alle Studienmaterialien und Dokumente"
 
 #: templates/macros/regions.html:6
 msgid "Worldwide"
@@ -601,15 +604,15 @@ msgstr "Europa"
 msgid "Oceania"
 msgstr "Ozeanien"
 
-#: templates/main/home.html:37
+#: templates/main/home.html:35
 msgid "AMIV new Study Documents"
 msgstr "AMIV neue Studienunterlagen"
 
-#: templates/main/home.html:38
+#: templates/main/home.html:47
 msgid "AMIV old Study Documents"
 msgstr "AMIV alte Studienunterlagen"
 
-#: templates/main/home.html:39
+#: templates/main/home.html:59
 msgid ""
 "Polybox with additional old exams (especially useful for EM in 4th semester)"
 msgstr ""
