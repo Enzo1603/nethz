@@ -41,7 +41,7 @@ COPY main/ /app/main/
 COPY worldle/ /app/worldle/
 COPY lib/ /app/lib/
 COPY nethz_django/ /app/nethz_django/
-COPY manage.py entrypoint.sh ./
+COPY pyproject.toml manage.py entrypoint.sh ./
 
 # Collect static files and compile messages
 # Dummy values only for build
