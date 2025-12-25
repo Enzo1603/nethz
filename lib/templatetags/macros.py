@@ -62,34 +62,47 @@ def leaderboard(leaderboard_config):
     return leaderboard_config
 
 
+GRADIENT_PRESETS = {
+    "primary": "linear-gradient(120deg, rgba(13,110,253,0.75) 0%, rgba(13,110,253,0.55) 60%)",
+    "success": "linear-gradient(120deg, rgba(25,135,84,0.75) 0%, rgba(25,135,84,0.55) 60%)",
+    "info": "linear-gradient(120deg, rgba(13,202,240,0.75) 0%, rgba(13,202,240,0.55) 60%)",
+    "warning": "linear-gradient(120deg, rgba(255,193,7,0.8) 0%, rgba(255,193,7,0.65) 60%)",
+    "danger": "linear-gradient(120deg, rgba(220,53,69,0.8) 0%, rgba(220,53,69,0.6) 60%)",
+}
+
+
 @register.inclusion_tag("macros/link_banner.html")
 def link_banner(
     link,
     title,
     icon,
-    gradient,
+    gradient="primary",
     subtitle="",
-    icon_color="primary",
+    icon_color="",
     target="_blank",
 ):
     """
     Usage:
-        {% link_banner
-            link="https://example.com"
-            title="Title"
-            subtitle="Subtitle"
-            icon="bi-file-earmark-text"
-            icon_color="primary"
-            gradient="linear-gradient(...)"
-            target="_blank"
-        %}
+        {% link_banner link="https://example.com" title="Title" icon="bi-icon" gradient="primary" %}
+
+    Gradient presets: primary, success, info, warning, danger
+    Or use a custom gradient string.
+
+    If icon_color is not specified, it defaults to the gradient preset name.
     """
+    # Resolve gradient preset or use as-is
+    resolved_gradient = GRADIENT_PRESETS.get(gradient, gradient)
+
+    # Default icon_color to gradient name if it's a preset
+    if not icon_color:
+        icon_color = gradient if gradient in GRADIENT_PRESETS else "primary"
+
     return {
         "link": link,
         "title": title,
         "subtitle": subtitle,
         "icon": icon,
         "icon_color": icon_color,
-        "gradient": gradient,
+        "gradient": resolved_gradient,
         "target": target,
     }
