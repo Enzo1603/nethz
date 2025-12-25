@@ -25,6 +25,8 @@ db/
 
 # Static files (built during image creation)
 assets/
+# Compiled locale files (will be compiled during build)
+locale/*/LC_MESSAGES/*.mo
 
 # Documentation and README files
 README.md

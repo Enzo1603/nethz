@@ -31,8 +31,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Copy application code
-COPY . .
+# Copy application code (templates, locale, static, etc.)
+COPY templates/ /app/templates/
+COPY locale/ /app/locale/
+COPY static/ /app/static/
+COPY accounts/ main/ worldle/ lib/ nethz_django/ manage.py entrypoint.sh ./
 
 # Build arguments for collectstatic (not saved to final image)
 ARG SECRET_KEY="dummy-secret-key"
@@ -52,6 +55,10 @@ RUN chmod +x ./entrypoint.sh
 
 # Expose port
 EXPOSE 8000
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/').read()" || exit 1
 
 # Set entrypoint
 ENTRYPOINT ["./entrypoint.sh"]

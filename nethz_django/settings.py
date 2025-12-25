@@ -225,6 +225,11 @@ if ENVIRONMENT == "production" or ENVIRONMENT == "testing":
         BASE_DIR / "assets"
     )  # python manage.py collectstatic saves files there
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    
+    # WhiteNoise optimization - Better caching and compression
+    WHITENOISE_MAX_AGE = 31536000  # 1 year for immutable files
+    WHITENOISE_USE_FINDERS = False  # Disable in production (files already collected)
+    WHITENOISE_AUTOREFRESH = False  # Disable auto-refresh in production
 
 
 # Default primary key field type

@@ -20,3 +20,9 @@ services:
     # Set user at runtime - use your host user ID to avoid permission issues
     user: ${UID:-1000}:${GID:-1000}
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/').read()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
