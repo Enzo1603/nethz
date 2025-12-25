@@ -44,14 +44,14 @@ COPY nethz_django/ /app/nethz_django/
 COPY manage.py entrypoint.sh ./
 
 # Collect static files and compile messages
-# Dummy values only for build
-RUN SECRET_KEY="build-only-dummy-key" \
+# Dummy values only for build (export so both commands see them)
+RUN export SECRET_KEY="build-only-dummy-key" \
     PRODUCTION_DOMAINS="localhost" \
     EMAIL_HOST="localhost" \
     EMAIL_PORT="25" \
     EMAIL_HOST_USER="dummy" \
     EMAIL_HOST_PASSWORD="dummy" \
-    DEFAULT_FROM_EMAIL="dummy@localhost" \
+    DEFAULT_FROM_EMAIL="dummy@localhost" && \
     python manage.py collectstatic --noinput && \
     python manage.py compilemessages
 
