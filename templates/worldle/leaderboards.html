@@ -43,13 +43,39 @@
     }
 
     function updateLeaderboard(tableId, url) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
+        const loadingRow = document.querySelector(`#${tableId}-loading`)
+        const emptyRow = document.querySelector(`#${tableId}-empty`)
+        const tbody = document.querySelector(`#${tableId} tbody`)
+        
+        // Show loading state
+        if (loadingRow) loadingRow.style.display = ''
+        if (emptyRow) emptyRow.style.display = 'none'
+        
+        // Remove all existing data rows (keep loading and empty rows)
+        const existingRows = tbody.querySelectorAll('tr')
+        existingRows.forEach(row => {
+            if (row.id !== `${tableId}-loading` && row.id !== `${tableId}-empty`) {
+                row.remove()
+            }
+        })
 
-                const tbody = document.querySelector(`#${tableId} tbody`)
-                tbody.innerHTML = ""
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok')
+                return response.json()
+            })
+            .then(data => {
+                // Hide loading state
+                if (loadingRow) loadingRow.style.display = 'none'
+                
+                if (!data || data.length === 0) {
+                    // Show empty state
+                    if (emptyRow) emptyRow.style.display = ''
+                    return
+                }
+
+                // Hide empty state
+                if (emptyRow) emptyRow.style.display = 'none'
 
                 data.forEach((user, index) => {
                     const tr = document.createElement("tr")
@@ -70,7 +96,15 @@
                     tbody.appendChild(tr)
                 })
 
-            }).catch(error => console.error('Error:', error))
+            }).catch(error => {
+                console.error('Error:', error)
+                // Hide loading, show error
+                if (loadingRow) loadingRow.style.display = 'none'
+                if (emptyRow) {
+                    emptyRow.innerHTML = '<td colspan="3" class="text-center py-4 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>{% trans "Error loading data" %}</td>'
+                    emptyRow.style.display = ''
+                }
+            })
     }
 </script>
 

@@ -4,13 +4,10 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fs-5 fixed-top bg-body-tertiary mb-5" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4" href="{% url 'main:home' %}">Enzo Baraldi</a>
+        <a class="navbar-brand fs-4 {% if request.resolver_match.namespace == 'main' and request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">Enzo Baraldi</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <!-- <span class="navbar-toggler-icon" data-bs-theme="dark"></span> -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-            </svg>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
+            <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,13 +18,13 @@
                 </li> -->
 
                 <li class="nav-item ms-3">
-                    <a class="nav-link" href="{% url 'main:technische_mechanik' %}">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'technische_mechanik' %}active{% endif %}" href="{% url 'main:technische_mechanik' %}">
                         {% trans "Engineering Mechanics" %}
                     </a>
                 </li>
 
                 <li class="nav-item ms-3">
-                    <a class="nav-link" href="{% url 'worldle:home' %}">
+                    <a class="nav-link {% if request.resolver_match.namespace == 'worldle' and request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'worldle:home' %}">
                         Worldle
                     </a>
                 </li>

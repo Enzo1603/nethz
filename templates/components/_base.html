@@ -35,16 +35,19 @@
 
 <body>
 
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" style="z-index: 9999;">{% trans "Skip to main content" %}</a>
+
     {% include "components/_navbar.html" %}
 
-    <div class="container" style="margin-top: 80px;">
+    <main id="main-content" class="container" style="margin-top: 80px;">
         {% include "components/_messages.html" %}
 
         <br>
 
         {% block content %}{% endblock %}
 
-    </div>
+    </main>
 
     {% include "components/_footer.html" %}
 
