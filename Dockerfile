@@ -38,24 +38,15 @@ COPY locale/ /app/locale/
 COPY static/ /app/static/
 COPY accounts/ main/ worldle/ lib/ nethz_django/ manage.py entrypoint.sh ./
 
-# Build arguments for collectstatic (not saved to final image)
-ARG SECRET_KEY="dummy-secret-key"
-ARG PRODUCTION_DOMAINS="dummy.domain.com"
-ARG EMAIL_HOST="dummy-email-host"
-ARG EMAIL_PORT="999"
-ARG EMAIL_HOST_USER="dummy-email-host-user"
-ARG EMAIL_HOST_PASSWORD="dummy-email-host-password"
-ARG DEFAULT_FROM_EMAIL="dummy.from@email.com"
-
 # Collect static files and compile messages
-# Set environment variables inline (only for this RUN, not persisted in image)
-RUN SECRET_KEY="${SECRET_KEY}" \
-    PRODUCTION_DOMAINS="${PRODUCTION_DOMAINS}" \
-    EMAIL_HOST="${EMAIL_HOST}" \
-    EMAIL_PORT="${EMAIL_PORT}" \
-    EMAIL_HOST_USER="${EMAIL_HOST_USER}" \
-    EMAIL_HOST_PASSWORD="${EMAIL_HOST_PASSWORD}" \
-    DEFAULT_FROM_EMAIL="${DEFAULT_FROM_EMAIL}" \
+# Dummy values only for build
+RUN SECRET_KEY="build-only-dummy-key" \
+    PRODUCTION_DOMAINS="localhost" \
+    EMAIL_HOST="localhost" \
+    EMAIL_PORT="25" \
+    EMAIL_HOST_USER="dummy" \
+    EMAIL_HOST_PASSWORD="dummy" \
+    DEFAULT_FROM_EMAIL="dummy@localhost" \
     python manage.py collectstatic --noinput && \
     python manage.py compilemessages
 
