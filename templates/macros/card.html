@@ -1,18 +1,16 @@
 <!-- {{ title | title }} Card -->
-<div class="col-md-6 col-sm-12 mt-2 mb-4">
+<div class="col-md-6 col-sm-12 mb-2">
     <div class="card border-0">
-        <a href="{{ link }}" class="text-decoration-none {% if disable %}pe-none{% endif %}" {% if disable %}aria-disabled="true" tabindex="-1"{% endif %}>
-            <div class="ratio ratio-16x9 rounded-3 zoom">
-                <img src="{{ image_path }}" class="card-img rounded-3" style="object-fit: cover; filter: brightness(70%);" alt="{{ title }}" loading="lazy" decoding="async">
-                <div class="card-img-overlay text-white text-center d-flex align-items-center justify-content-center">
-                    <div style="width: 90%;">
-                        <h2 class="card-title">{{ title }}</h2>
+        <a href="{{ link }}" class="text-decoration-none {% if disable %}pe-none{% endif %}" {% if disable %}aria-disabled="true" tabindex="-1" {% endif %}>
+            <div class="rounded-3 zoom position-relative" style="padding-top: 42%;">
+                <img src="{{ image_path }}" class="card-img rounded-3 position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover; filter: brightness(70%);" alt="{{ title }}" loading="lazy" decoding="async">
+                <div class="card-img-overlay text-white text-center d-flex align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100">
+                    <div>
+                        <h3 class="card-title mb-1">{{ title }}</h3>
                         {% if description %}
-                        <p class="card-text mb-3">{{ description }}</p>
-                        {% else %}
-                        <div class="mb-4"></div>
+                        <p class="card-text mb-2">{{ description }}</p>
                         {% endif %}
-                        <span class="btn btn-light btn-lg {% if disable %} disabled {% endif %}">
+                        <span class="btn btn-light {% if disable %} disabled {% endif %}">
                             {{ button_text }}
                         </span>
                     </div>

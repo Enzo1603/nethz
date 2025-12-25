@@ -33,9 +33,34 @@
 <div class="row">
     <h3 class="mb-2">{% trans "Competitive (account required)" %}</h3>
     <hr class="mt-0">
-    <div class="d-grid gap-2 mb-3">
-        <a class="btn btn-outline-primary" href="{% url 'worldle:leaderboards' %}"><i class="bi bi-trophy pe-2"></i>{% trans "Leaderboards" %}</a>
-    </div>
+    <a href="{% url 'worldle:leaderboards' %}" class="text-decoration-none d-block mb-3 leaderboard-banner">
+        <div class="card border-0 rounded-3 overflow-hidden position-relative text-white">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(120deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 60%), url('{% static 'images/worldle_3px.webp' %}'); background-size: cover; background-position: center;"></div>
+            <div class="card-body d-flex align-items-center justify-content-between position-relative py-3">
+                <div class="d-flex align-items-center">
+                    <div class="bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 38px; height: 38px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                        <i class="bi bi-trophy-fill" style="font-size: 1rem;"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-1 fw-semibold">{% trans "Leaderboards" %}</h5>
+                        <small class="text-white-50">{% trans "See who’s on top" %}</small>
+                    </div>
+                </div>
+                <i class="bi bi-chevron-right" style="font-size: 1.25rem; opacity: 0.85;"></i>
+            </div>
+        </div>
+    </a>
+    <style>
+        .leaderboard-banner .card {
+            height: 90px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            background-color: #0d6efd; /* fallback if image fails */
+        }
+        .leaderboard-banner:hover .card {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+    </style>
 
     {% card competitive_areas_card %}
 
