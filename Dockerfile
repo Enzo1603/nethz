@@ -53,7 +53,7 @@ RUN export SECRET_KEY="build-only-dummy-key" \
     EMAIL_HOST_PASSWORD="dummy" \
     DEFAULT_FROM_EMAIL="dummy@localhost" && \
     python manage.py collectstatic --noinput && \
-    python manage.py compilemessages
+    python manage.py compilemessages --ignore=.venv
 
 # Make entrypoint executable
 RUN chmod +x ./entrypoint.sh
