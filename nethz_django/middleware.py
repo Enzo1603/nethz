@@ -1,18 +1,19 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
 
 class SEORedirectMiddleware:
     """
-    SEO-friendly redirects with permanent 301 status codes.
+    SEO-friendly redirect middleware.
 
     Handles:
-    - Root URL: redirect "/" to the best-fit language (default de/en) with 301
-    - Trailing slash: redirect "/path" -> "/path/" with 301 for GET requests
+    - Root URL: redirect "/" to the best-fit language (de/en) with 302 (temporary),
+      because the target depends on cookies / Accept-Language and is not permanent.
+    - Trailing slash: redirect "/path" -> "/path/" with 301 for GET requests.
     """
 
     def __init__(self, get_response):
@@ -34,7 +35,12 @@ class SEORedirectMiddleware:
                 chosen_lang = lang_code
                 break
 
-        # Root URL: override LocaleMiddleware's 302 with a permanent 301
+        # Root URL: redirect to best-fit language with 302 (temporary)
+        # A 302 is correct here because the redirect target depends on the
+        # user's cookie / Accept-Language, so it is not truly permanent.
+        # Using 301 caused Google to report "Umleitungsfehler" (redirect error)
+        # because it caches 301s aggressively and cannot handle a permanent
+        # redirect whose target varies by cookie state.
         if path == "/":
             # 1) honor persisted choice (cookie or session)
             lang_cookie = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
@@ -51,7 +57,7 @@ class SEORedirectMiddleware:
             supported = [lang[0] for lang in settings.LANGUAGES]
             if user_language not in supported:
                 user_language = settings.LANGUAGE_CODE
-            response = HttpResponsePermanentRedirect(f"/{user_language}/")
+            response = HttpResponseRedirect(f"/{user_language}/")
             if user_language:
                 response.set_cookie(
                     settings.LANGUAGE_COOKIE_NAME, user_language, max_age=31536000

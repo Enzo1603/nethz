@@ -116,8 +116,12 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Workaround: Remove X-Robots-Tag: noindex set by Traefik/Pangolin proxy.
+    # Must be early (before SEORedirectMiddleware) so it also strips the header
+    # from redirect responses that return before reaching inner middleware.
+    "nethz_django.middleware.RemoveNoindexHeaderMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    # SEO: 301 redirects for root URL and trailing slashes (needs session first)
+    # SEO: 302 redirect for root URL, 301 for trailing slashes (needs session first)
     "nethz_django.middleware.SEORedirectMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -126,8 +130,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "nethz_django.middleware.EmailVerificationMiddleware",
-    # Workaround: Remove X-Robots-Tag: noindex set by Traefik/Pangolin proxy
-    "nethz_django.middleware.RemoveNoindexHeaderMiddleware",
 ]
 
 ROOT_URLCONF = "nethz_django.urls"
