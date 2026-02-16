@@ -74,7 +74,11 @@ def technische_mechanik(request, semester: str | None = None):
     ]
 
     # Get the week entries (optimized query)
-    week_entries = current_session.week_entries.all().order_by('week_number') if current_session else None
+    week_entries = (
+        current_session.week_entries.all().order_by("week_number")
+        if current_session
+        else None
+    )
 
     context = {
         "exercise_session": current_session,
@@ -87,16 +91,15 @@ def technische_mechanik(request, semester: str | None = None):
     seo_data = get_technische_mechanik_seo(current_semester)
     if current_semester:
         add_seo_to_context(
-            context, seo_data, 
-            request=request, 
+            context,
+            seo_data,
+            request=request,
             url_name="main:technische_mechanik_semester",
-            url_kwargs={"semester": current_semester}
+            url_kwargs={"semester": current_semester},
         )
     else:
         add_seo_to_context(
-            context, seo_data,
-            request=request,
-            url_name="main:technische_mechanik"
+            context, seo_data, request=request, url_name="main:technische_mechanik"
         )
 
     return render(request, "exercise_sessions/technische_mechanik.html", context)

@@ -91,7 +91,9 @@ def leaderboards(request):
 
     # Add SEO data
     seo_data = get_leaderboards_seo()
-    add_seo_to_context(context, seo_data, request=request, url_name="worldle:leaderboards")
+    add_seo_to_context(
+        context, seo_data, request=request, url_name="worldle:leaderboards"
+    )
 
     return render(
         request,
@@ -129,10 +131,11 @@ def capitals(request, region):
     # Add SEO data
     seo_data = get_worldle_capitals_seo(region)
     add_seo_to_context(
-        context, seo_data, 
-        request=request, 
+        context,
+        seo_data,
+        request=request,
         url_name="worldle:capitals",
-        url_kwargs={"region": region}
+        url_kwargs={"region": region},
     )
 
     return render(
@@ -176,9 +179,7 @@ def competitive_capitals(request):
         # Add SEO data
         seo_data = get_worldle_competitive_seo("capitals")
         add_seo_to_context(
-            context, seo_data,
-            request=request,
-            url_name="worldle:competitive_capitals"
+            context, seo_data, request=request, url_name="worldle:competitive_capitals"
         )
 
         return render(
@@ -268,10 +269,11 @@ def languages(request, region):
     # Add SEO data
     seo_data = get_worldle_languages_seo(region)
     add_seo_to_context(
-        context, seo_data,
+        context,
+        seo_data,
         request=request,
         url_name="worldle:languages",
-        url_kwargs={"region": region}
+        url_kwargs={"region": region},
     )
 
     return render(
@@ -315,9 +317,7 @@ def competitive_languages(request):
         # Add SEO data
         seo_data = get_worldle_competitive_seo("languages")
         add_seo_to_context(
-            context, seo_data,
-            request=request,
-            url_name="worldle:competitive_languages"
+            context, seo_data, request=request, url_name="worldle:competitive_languages"
         )
 
         return render(
@@ -405,9 +405,7 @@ def competitive_areas(request):
         # Add SEO data
         seo_data = get_worldle_competitive_seo("areas")
         add_seo_to_context(
-            context, seo_data,
-            request=request,
-            url_name="worldle:competitive_areas"
+            context, seo_data, request=request, url_name="worldle:competitive_areas"
         )
 
         return render(
@@ -506,9 +504,10 @@ def competitive_currencies(request):
         # Add SEO data
         seo_data = get_worldle_competitive_seo("currencies")
         add_seo_to_context(
-            context, seo_data,
+            context,
+            seo_data,
             request=request,
-            url_name="worldle:competitive_currencies"
+            url_name="worldle:competitive_currencies",
         )
 
         return render(

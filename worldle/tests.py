@@ -43,7 +43,9 @@ class WorldleViewsTest(TestCase):
         """Test default capitals view redirects to default region"""
         response = self.client.get(reverse("worldle:default_capitals"))
         self.assertRedirects(
-            response, reverse("worldle:capitals", args=[DEFAULT_REGION]), status_code=301
+            response,
+            reverse("worldle:capitals", args=[DEFAULT_REGION]),
+            status_code=301,
         )
 
     def test_capitals_view_valid_region(self):
@@ -65,7 +67,9 @@ class WorldleViewsTest(TestCase):
         """Test default languages view redirects to default region"""
         response = self.client.get(reverse("worldle:default_languages"))
         self.assertRedirects(
-            response, reverse("worldle:languages", args=[DEFAULT_REGION]), status_code=301
+            response,
+            reverse("worldle:languages", args=[DEFAULT_REGION]),
+            status_code=301,
         )
 
     def test_languages_view_valid_region(self):

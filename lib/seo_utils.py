@@ -3,7 +3,6 @@ Simple SEO utility functions for basic meta tag management.
 """
 
 from django.conf import settings
-from django.urls import reverse
 from django.utils.translation import gettext as _
 
 
@@ -116,31 +115,37 @@ def get_leaderboards_seo():
     )
 
 
-def add_seo_to_context(context, seo_data, request=None, url_name=None, url_args=None, url_kwargs=None):
+def add_seo_to_context(
+    context, seo_data, request=None, url_name=None, url_args=None, url_kwargs=None
+):
     """Helper function to add SEO data to view context"""
     if isinstance(seo_data, SEOData):
         context.update(seo_data.to_context())
-        
+
         # Generate canonical URL if not provided but request and url_name are available
         if request and url_name and not seo_data.canonical_url:
             # Import here to avoid circular imports
             from django.urls import reverse
+
             scheme = "https" if request.is_secure() else "http"
             host = request.get_host()
             path = reverse(url_name, args=url_args or [], kwargs=url_kwargs or {})
             context["canonical_url"] = f"{scheme}://{host}{path}"
-            
+
             # Generate hreflang URLs for bilingual support
             from django.utils import translation
+
             hreflang_urls = {}
             current_lang = translation.get_language()
             try:
                 for lang_code, _lang_name in getattr(settings, "LANGUAGES", ()):
                     with translation.override(lang_code):
-                        path = reverse(url_name, args=url_args or [], kwargs=url_kwargs or {})
+                        path = reverse(
+                            url_name, args=url_args or [], kwargs=url_kwargs or {}
+                        )
                         hreflang_urls[lang_code] = f"{scheme}://{host}{path}"
             finally:
                 translation.activate(current_lang)
             context["hreflang_urls"] = hreflang_urls
-    
+
     return context

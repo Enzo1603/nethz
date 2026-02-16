@@ -152,7 +152,7 @@ class CustomUserChangeForm(UserChangeForm):
                 HTML(
                     format_html(
                         '<div class="d-flex align-items-center mb-4"><i class="bi bi-person-badge text-primary me-2" style="font-size: 1.5rem;"></i><h5 class="mb-0">{}</h5></div>',
-                        _("Username and Email Address")
+                        _("Username and Email Address"),
                     )
                 ),
                 FloatingField(
@@ -167,7 +167,7 @@ class CustomUserChangeForm(UserChangeForm):
                 HTML(
                     format_html(
                         '<div class="d-flex align-items-center mb-4"><i class="bi bi-person text-primary me-2" style="font-size: 1.5rem;"></i><h5 class="mb-0">{}</h5></div>',
-                        _("First and Last name")
+                        _("First and Last name"),
                     )
                 ),
                 FloatingField("first_name", placeholder=_("First Name")),
@@ -178,7 +178,7 @@ class CustomUserChangeForm(UserChangeForm):
                 HTML(
                     format_html(
                         '<div class="d-flex align-items-center mb-4"><i class="bi bi-key text-primary me-2" style="font-size: 1.5rem;"></i><h5 class="mb-0">{}</h5></div>',
-                        _("Change Password")
+                        _("Change Password"),
                     )
                 ),
                 HTML(
@@ -186,9 +186,7 @@ class CustomUserChangeForm(UserChangeForm):
                     + str(_("Leave blank if you don't want to change your password."))
                     + "</p>"
                 ),
-                FloatingField(
-                    "password1", placeholder=_("New Password"), minlength=8
-                ),
+                FloatingField("password1", placeholder=_("New Password"), minlength=8),
                 FloatingField("password2", placeholder=_("Confirm New Password")),
                 css_class="mb-4",
             ),

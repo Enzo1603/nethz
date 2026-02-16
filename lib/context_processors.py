@@ -33,12 +33,12 @@ def get_hreflang_urls(request, url_name, *args, **kwargs):
     scheme = "https" if request.is_secure() else "http"
     host = request.get_host()
     hreflang_urls = {}
-    
+
     from django.utils import translation
-    
+
     # Save current language
     current_lang = translation.get_language()
-    
+
     try:
         for lang_code, _lang_name in getattr(settings, "LANGUAGES", ()):
             with translation.override(lang_code):
@@ -47,7 +47,7 @@ def get_hreflang_urls(request, url_name, *args, **kwargs):
     finally:
         # Restore original language
         translation.activate(current_lang)
-    
+
     return hreflang_urls
 
 
