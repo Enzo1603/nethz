@@ -1,6 +1,6 @@
 [project]
 name = "nethz"
-version = "4.1.2"
+version = "4.1.3"
 description = "\"Personal ETHZ website\""
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
