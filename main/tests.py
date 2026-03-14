@@ -80,8 +80,9 @@ class MainViewsTest(TestCase):
         response = self.client.get(reverse("main:home"))
         self.assertEqual(response.status_code, 200)
 
-        # Check for common navigation elements
-        self.assertContains(response, "Home", count=None)
+        # Check for the main navigation links shown in the navbar
+        self.assertContains(response, reverse("main:technische_mechanik"))
+        self.assertContains(response, reverse("worldle:home"))
 
     def test_technische_mechanik_context_data(self):
         """Test that technische mechanik view passes correct context"""
