@@ -89,6 +89,17 @@ class WorldleViewsTest(TestCase):
         )
         self.assertEqual(response.status_code, 404)
 
+    def test_worldle_subpages_mark_navbar_active(self):
+        """Test worldle subpages keep the worldle navbar link active"""
+        worldle_link = reverse("worldle:home")
+        response = self.client.get(reverse("worldle:capitals", args=["africa"]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            f'class="nav-link active" href="{worldle_link}"',
+            html=False,
+        )
+
     def test_areas_view_get(self):
         """Test areas view GET request"""
         response = self.client.get(reverse("worldle:competitive_areas"))

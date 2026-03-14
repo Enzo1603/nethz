@@ -2,8 +2,16 @@ from django.test import TestCase
 from django.urls import reverse
 from django.templatetags.static import static
 
+from .models import ExerciseSession
+
 
 class MainViewsTest(TestCase):
+    def setUp(self):
+        ExerciseSession.objects.get_or_create(
+            short_name="TM_HS24",
+            defaults={"name": "Engineering Mechanics HS24"},
+        )
+
     def test_home_view(self):
         """Test that home view renders correctly"""
         response = self.client.get(reverse("main:home"))
@@ -150,4 +158,17 @@ class MainViewsTest(TestCase):
         tm_semester_url = reverse("main:technische_mechanik_semester", args=["HS24"])
         self.assertTrue(
             "technische-mechanik" in tm_semester_url and "HS24" in tm_semester_url
+        )
+
+    def test_technische_mechanik_semester_marks_navbar_active(self):
+        """Test semester subpages keep the mechanics navbar link active"""
+        tm_link = reverse("main:technische_mechanik")
+        response = self.client.get(
+            reverse("main:technische_mechanik_semester", args=["HS24"])
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            f'class="nav-link active" href="{tm_link}"',
+            html=False,
         )

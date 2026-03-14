@@ -46,7 +46,7 @@
 
     {% load cache %}
     {% if not debug %}
-    {% cache 3600 navbar request.LANGUAGE_CODE %}
+    {% cache 3600 navbar request.LANGUAGE_CODE request.path %}
     {% include "components/_navbar.html" %}
     {% endcache %}
     {% else %}

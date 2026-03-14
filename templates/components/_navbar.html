@@ -13,18 +13,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <!-- <li class="nav-item ms-3">
-                    <a class="nav-link" aria-current="page" href="{% url 'main:home' %}">Home</a>
-                </li> -->
 
                 <li class="nav-item ms-3">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'technische_mechanik' %}active{% endif %}" href="{% url 'main:technische_mechanik' %}">
+                    <a class="nav-link {% if request.resolver_match.namespace == 'main' and 'technische_mechanik' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'main:technische_mechanik' %}">
                         {% trans "Engineering Mechanics" %}
                     </a>
                 </li>
 
                 <li class="nav-item ms-3">
-                    <a class="nav-link {% if request.resolver_match.namespace == 'worldle' and request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'worldle:home' %}">
+                    <a class="nav-link {% if request.resolver_match.namespace == 'worldle' %}active{% endif %}" href="{% url 'worldle:home' %}">
                         Worldle
                     </a>
                 </li>
