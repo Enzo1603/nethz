@@ -27,6 +27,7 @@ from .sitemaps import (
     WorldleRegionSitemap,
 )
 from .views import robots_txt
+from main.views import root_home
 
 # Sitemap configuration
 sitemaps = {
@@ -47,6 +48,10 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     path("robots.txt", robots_txt, name="robots_txt"),
+    # Domain root: serve the default-language home with 200 (no redirect) so
+    # Google can index the property root. This is the hreflang x-default /
+    # canonical German home; "/de/" is an alias that canonicalizes to "/".
+    path("", root_home, name="root_home"),
 ]
 
 urlpatterns += i18n_patterns(

@@ -173,3 +173,69 @@ class MainViewsTest(TestCase):
             f'class="nav-link active" href="{tm_link}"',
             html=False,
         )
+
+
+class RootAndCanonicalSeoTest(TestCase):
+    """Regression tests for the Google "Umleitungsfehler" fix.
+
+    The domain root must serve the default-language home with HTTP 200
+    (no language-dependent redirect) so Google can index it.
+    """
+
+    def setUp(self):
+        ExerciseSession.objects.get_or_create(
+            short_name="TM_HS24",
+            defaults={"name": "Engineering Mechanics HS24"},
+        )
+
+    def test_root_url_serves_home_with_200(self):
+        """Root URL must not redirect, it must render the home page."""
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "main/home.html")
+
+    def test_root_url_canonical_and_hreflang(self):
+        """Root is the canonical German home and the hreflang x-default."""
+        response = self.client.get("/")
+        self.assertContains(response, '<link rel="canonical" href="http://testserver/">')
+        self.assertContains(
+            response, '<link rel="alternate" hreflang="x-default" href="http://testserver/">'
+        )
+        self.assertContains(
+            response, '<link rel="alternate" hreflang="de" href="http://testserver/">'
+        )
+        self.assertContains(
+            response,
+            '<link rel="alternate" hreflang="en" href="http://testserver/en/">',
+        )
+
+    def test_german_home_alias_canonicalizes_to_root(self):
+        """/de/ stays reachable but canonicalizes to "/" (no duplicate content)."""
+        response = self.client.get("/de/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<link rel="canonical" href="http://testserver/">')
+
+    def test_english_home_is_self_canonical(self):
+        response = self.client.get("/en/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, '<link rel="canonical" href="http://testserver/en/">'
+        )
+
+    def test_lowercase_semester_redirects_to_canonical_casing(self):
+        """Legacy sitemap URLs (/hs24/) must 301 to the canonical casing."""
+        response = self.client.get("/de/technische-mechanik/hs24/")
+        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response["Location"], "/de/technische-mechanik/HS24/")
+
+    def test_sitemap_lists_canonical_semester_urls(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn("technische-mechanik/HS24/", content)
+        self.assertNotIn("technische-mechanik/hs24/", content)
+
+    def test_sitemap_german_home_is_root(self):
+        response = self.client.get("/sitemap.xml")
+        content = response.content.decode()
+        self.assertIn("<loc>https://testserver/</loc>", content)

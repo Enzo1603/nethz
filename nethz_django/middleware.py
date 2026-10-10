@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
-from django.utils import translation
+from django.http import HttpResponsePermanentRedirect
 from django.utils.translation import gettext_lazy as _
 
 
@@ -11,9 +10,14 @@ class SEORedirectMiddleware:
     SEO-friendly redirect middleware.
 
     Handles:
-    - Root URL: redirect "/" to the best-fit language (de/en) with 302 (temporary),
-      because the target depends on cookies / Accept-Language and is not permanent.
     - Trailing slash: redirect "/path" -> "/path/" with 301 for GET requests.
+    - Persist the chosen language for language-prefixed URLs (session + cookie).
+
+    Note: the domain root "/" deliberately does NOT redirect to a language
+    variant anymore. A language-dependent redirect (old 301, later 302) caused
+    Google to report "Umleitungsfehler" (redirect error) and the property root
+    was never indexed. "/" is routed to main.views.root_home and serves the
+    default-language home with HTTP 200 (canonical + hreflang x-default).
     """
 
     def __init__(self, get_response):
@@ -34,35 +38,6 @@ class SEORedirectMiddleware:
                     session_obj[settings.LANGUAGE_COOKIE_NAME] = lang_code
                 chosen_lang = lang_code
                 break
-
-        # Root URL: redirect to best-fit language with 302 (temporary)
-        # A 302 is correct here because the redirect target depends on the
-        # user's cookie / Accept-Language, so it is not truly permanent.
-        # Using 301 caused Google to report "Umleitungsfehler" (redirect error)
-        # because it caches 301s aggressively and cannot handle a permanent
-        # redirect whose target varies by cookie state.
-        if path == "/":
-            # 1) honor persisted choice (cookie or session)
-            lang_cookie = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
-            session_obj = getattr(request, "session", None)
-            lang_session = (
-                session_obj.get(settings.LANGUAGE_COOKIE_NAME) if session_obj else None
-            )
-            user_language = lang_cookie or lang_session
-            # 2) fallback to Accept-Language
-            if not user_language:
-                user_language = translation.get_language_from_request(
-                    request, check_path=False
-                )
-            supported = [lang[0] for lang in settings.LANGUAGES]
-            if user_language not in supported:
-                user_language = settings.LANGUAGE_CODE
-            response = HttpResponseRedirect(f"/{user_language}/")
-            if user_language:
-                response.set_cookie(
-                    settings.LANGUAGE_COOKIE_NAME, user_language, max_age=31536000
-                )
-            return response
 
         # Enforce trailing slash for safe methods (GET/HEAD)
         if (

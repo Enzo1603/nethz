@@ -7,6 +7,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone, translation
 
+from lib.seo_utils import localized_path
 from main.models import ExerciseSession
 from worldle.country_data import VALID_REGIONS
 
@@ -65,8 +66,9 @@ class StaticViewSitemap(I18nSitemap):
         ]
 
     def location(self, item: str) -> str:
-        # `translation.override()` in base ensures i18n_patterns adds /de/ or /en/
-        return reverse(item)
+        # Use the same canonical paths as the page <link rel="canonical"> tags:
+        # the German (default language) home lives at "/" (see lib.seo_utils).
+        return localized_path(item, lang_code=translation.get_language())
 
     def lastmod(self, obj) -> timezone.datetime:
         # If you have per-page update times, return them here instead.
@@ -84,8 +86,8 @@ class TechnischeMechanikSitemap(I18nSitemap):
             short_name__startswith="TM_"
         ).values_list("short_name", flat=True)
 
-        # "TM_HS24" -> "hs24"
-        semesters = sorted([s.replace("TM_", "").lower() for s in tm_sessions])
+        # "TM_HS24" -> "HS24" (keep the canonical casing used by the URLs)
+        semesters = sorted([s.replace("TM_", "") for s in tm_sessions])
         return semesters
 
     def location(self, item: str) -> str:

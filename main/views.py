@@ -1,7 +1,9 @@
-from django.http import Http404
+from django.conf import settings
+from django.http import Http404, HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.templatetags.static import static
 from django.urls import reverse
+from django.utils import translation
 from django.utils.translation import gettext as _
 
 from .models import ExerciseSession
@@ -48,6 +50,23 @@ def home(request):
     return render(request, "main/home.html", context)
 
 
+def root_home(request):
+    """Serve the home page at the domain root ("/") with HTTP 200.
+
+    A language-dependent redirect (301/302) on the root URL made Google report
+    "Umleitungsfehler" (redirect error) and the property root was never
+    indexed. Instead we always render the default-language home page here (no
+    Accept-Language sniffing, so crawlers see a stable page) and canonicalize
+    to "/" (see add_seo_to_context + seo_meta.html). "/de/" is an alias that
+    canonicalizes to the same URL.
+    """
+    with translation.override(settings.LANGUAGE_CODE):
+        response = home(request)
+    # LocaleMiddleware would otherwise report the visitor's detected language.
+    response["Content-Language"] = settings.LANGUAGE_CODE
+    return response
+
+
 def technische_mechanik(request, semester: str | None = None):
     # Get all available TM exercise sessions
     tm_sessions = ExerciseSession.objects.filter(
@@ -63,10 +82,17 @@ def technische_mechanik(request, semester: str | None = None):
         current_semester = current_session.short_name.replace("TM_", "")
     else:
         template_name = f"TM_{semester}"
-        current_session = tm_sessions.filter(short_name=template_name).first()
+        current_session = tm_sessions.filter(short_name__iexact=template_name).first()
         if not current_session:
             raise Http404("Invalid semester")
-        current_semester = semester
+        current_semester = current_session.short_name.replace("TM_", "")
+        # Canonical casing lives in the DB ("HS24"). Redirect legacy/lowercase
+        # URLs (e.g. /technische-mechanik/hs24/ from old sitemaps) with a 301
+        # so Google consolidates them onto the canonical URL instead of 404s.
+        if current_semester != semester:
+            return HttpResponsePermanentRedirect(
+                reverse("main:technische_mechanik_semester", args=[current_semester])
+            )
 
     # Get available semesters for dropdown
     available_semesters = [

@@ -1,10 +1,11 @@
-{% load i18n %}
+{% load i18n seo_tags %}
 {% get_current_language as LANGUAGE_CODE %}
+{% localized_url 'main:home' as home_url %}
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fs-5 fixed-top bg-body-tertiary mb-5" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4 {% if request.resolver_match.namespace == 'main' and request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'main:home' %}">Enzo Baraldi</a>
+        <a class="navbar-brand fs-4 {% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'root_home' %}active{% endif %}" href="{{ home_url }}">Enzo Baraldi</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}">
             <span class="navbar-toggler-icon"></span>
