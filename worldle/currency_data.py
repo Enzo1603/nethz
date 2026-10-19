@@ -1,7 +1,6 @@
 import csv
 from pathlib import Path
 
-
 FILE_PATH = Path(__file__).resolve().parent
 
 
@@ -17,10 +16,10 @@ class CurrencyData:
 
     def __new__(cls):
         if cls.__instance is None:
-            cls.__instance = super(CurrencyData, cls).__new__(cls)
+            cls.__instance = super().__new__(cls)
             with open(cls.__COUNTRIES_CSV_FILE_PATH, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
-                cls.__CSV_ENTRIES = tuple(list(reader))
+                cls.__CSV_ENTRIES = tuple(reader)
         return cls.__instance
 
     @classmethod

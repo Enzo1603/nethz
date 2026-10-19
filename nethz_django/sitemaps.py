@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from django.conf import settings
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
@@ -34,7 +32,7 @@ class I18nSitemap(Sitemap):
         We temporarily activate each language to make `reverse()` (within `location()`)
         produce language-prefixed URLs under `i18n_patterns`.
         """
-        urls: List[dict] = []
+        urls: list[dict] = []
 
         # Respect protocol passed in by the sitemap view, otherwise fall back.
         protocol = protocol or self.protocol
@@ -57,7 +55,7 @@ class StaticViewSitemap(I18nSitemap):
     priority = 0.8
     changefreq = "weekly"
 
-    def items(self) -> List[str]:
+    def items(self) -> list[str]:
         return [
             "main:home",
             "main:technische_mechanik",
@@ -81,7 +79,7 @@ class TechnischeMechanikSitemap(I18nSitemap):
     priority = 0.7
     changefreq = "weekly"
 
-    def items(self) -> List[str]:
+    def items(self) -> list[str]:
         tm_sessions = ExerciseSession.objects.filter(
             short_name__startswith="TM_"
         ).values_list("short_name", flat=True)
@@ -103,7 +101,7 @@ class WorldleRegionSitemap(I18nSitemap):
     priority = 0.6
     changefreq = "monthly"
 
-    def items(self) -> List[str]:
+    def items(self) -> list[str]:
         regions = [r for r in VALID_REGIONS if r not in ["worldwide", "antarctic"]]
         return sorted(regions)
 
@@ -120,7 +118,7 @@ class WorldleLanguageRegionSitemap(I18nSitemap):
     priority = 0.6
     changefreq = "monthly"
 
-    def items(self) -> List[str]:
+    def items(self) -> list[str]:
         regions = [r for r in VALID_REGIONS if r not in ["worldwide", "antarctic"]]
         return sorted(regions)
 

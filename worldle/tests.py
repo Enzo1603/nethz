@@ -1,6 +1,7 @@
+from unittest.mock import patch
+
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
-from unittest.mock import patch
 
 from accounts.models import CustomUser
 from worldle.views import DEFAULT_REGION

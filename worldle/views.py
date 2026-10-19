@@ -1,36 +1,37 @@
 import random
 
+from django.contrib.auth.decorators import login_required
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 
-from .leaders import get_leaders, LeaderDatabase
+from lib.seo_utils import (
+    add_seo_to_context,
+    get_leaderboards_seo,
+    get_worldle_capitals_seo,
+    get_worldle_competitive_seo,
+    get_worldle_home_seo,
+    get_worldle_languages_seo,
+)
+
 from .country_data import (
-    CountryData,
-    CountryHeader,
     DEFAULT_REGION,
     VALID_REGIONS,
+    CountryData,
+    CountryHeader,
 )
 from .currency_data import CurrencyData
-from lib.seo_utils import (
-    get_worldle_home_seo,
-    get_worldle_capitals_seo,
-    get_worldle_languages_seo,
-    get_worldle_competitive_seo,
-    get_leaderboards_seo,
-    add_seo_to_context,
-)
+from .leaders import LeaderDatabase, get_leaders
 
 
 def home(request):
     from .cards import (
         capitals_card,
-        languages_card,
         competitive_areas_card,
         competitive_capitals_card,
         competitive_currencies_card,
         competitive_languages_card,
+        languages_card,
     )
 
     context = {

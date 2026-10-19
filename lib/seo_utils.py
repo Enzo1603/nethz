@@ -72,7 +72,7 @@ def get_worldle_capitals_seo(region=None):
     """SEO data for Worldle capitals pages"""
     if region:
         region_display = region.replace("-", " ").title()
-        title = "Worldle {}".format(region_display)
+        title = f"Worldle {region_display}"
         description = _("Geography quiz game - guess the capitals")
         keywords = _("capitals, geography, worldle, quiz, game")
     else:
@@ -87,7 +87,7 @@ def get_worldle_languages_seo(region=None):
     """SEO data for Worldle languages pages"""
     if region:
         region_display = region.replace("-", " ").title()
-        title = "Worldle {}".format(region_display)
+        title = f"Worldle {region_display}"
         description = _("Geography quiz game - guess the languages")
         keywords = _("languages, geography, worldle, quiz, game")
     else:
@@ -101,7 +101,7 @@ def get_worldle_languages_seo(region=None):
 def get_worldle_competitive_seo(game_type):
     """SEO data for competitive Worldle games"""
     return SEOData(
-        title="Worldle {}".format(game_type),
+        title=f"Worldle {game_type}",
         description=_("Competitive geography quiz with leaderboards"),
         keywords=_("worldle, geography, competitive, quiz, leaderboard"),
     )

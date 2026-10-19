@@ -1,7 +1,7 @@
 import tomllib
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import UTC, datetime
 from functools import lru_cache
+from pathlib import Path
 
 from django.conf import settings
 from django.urls import reverse
@@ -15,7 +15,7 @@ def get_version():
         with open(pyproject_path, "rb") as f:
             data = tomllib.load(f)
         return data.get("project", {}).get("version", "unknown")
-    except Exception:
+    except (OSError, tomllib.TOMLDecodeError):
         return "unknown"
 
 
@@ -53,7 +53,7 @@ def get_hreflang_urls(request, url_name, *args, **kwargs):
 
 def inject_global_context(request):
     return {
-        "utcnow": datetime.now(timezone.utc),
+        "utcnow": datetime.now(UTC),
         "version": get_version(),
         "request": request,  # Make request available in templates for URL generation
         "debug": settings.DEBUG,  # Make DEBUG available in templates for conditional caching

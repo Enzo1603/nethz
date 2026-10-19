@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db.models import Q
 from django.http import Http404, HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.templatetags.static import static
@@ -6,9 +7,9 @@ from django.urls import reverse
 from django.utils import translation
 from django.utils.translation import gettext as _
 
+from lib.seo_utils import add_seo_to_context, get_home_seo, get_technische_mechanik_seo
+
 from .models import ExerciseSession
-from django.db.models import Q
-from lib.seo_utils import get_home_seo, get_technische_mechanik_seo, add_seo_to_context
 
 
 def home(request):

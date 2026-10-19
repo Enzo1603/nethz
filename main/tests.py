@@ -1,6 +1,6 @@
+from django.templatetags.static import static
 from django.test import TestCase
 from django.urls import reverse
-from django.templatetags.static import static
 
 from .models import ExerciseSession
 
@@ -197,9 +197,12 @@ class RootAndCanonicalSeoTest(TestCase):
     def test_root_url_canonical_and_hreflang(self):
         """Root is the canonical German home and the hreflang x-default."""
         response = self.client.get("/")
-        self.assertContains(response, '<link rel="canonical" href="http://testserver/">')
         self.assertContains(
-            response, '<link rel="alternate" hreflang="x-default" href="http://testserver/">'
+            response, '<link rel="canonical" href="http://testserver/">'
+        )
+        self.assertContains(
+            response,
+            '<link rel="alternate" hreflang="x-default" href="http://testserver/">',
         )
         self.assertContains(
             response, '<link rel="alternate" hreflang="de" href="http://testserver/">'
@@ -213,7 +216,9 @@ class RootAndCanonicalSeoTest(TestCase):
         """/de/ stays reachable but canonicalizes to "/" (no duplicate content)."""
         response = self.client.get("/de/")
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<link rel="canonical" href="http://testserver/">')
+        self.assertContains(
+            response, '<link rel="canonical" href="http://testserver/">'
+        )
 
     def test_english_home_is_self_canonical(self):
         response = self.client.get("/en/")
