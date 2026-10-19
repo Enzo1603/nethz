@@ -38,7 +38,7 @@ class Command(BaseCommand):
                     )
                 )
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - report any failure to the CLI
             self.stdout.write(self.style.ERROR(f"❌ Sitemap error: {e}"))
 
     def test_robots(self):
@@ -65,5 +65,5 @@ class Command(BaseCommand):
                     )
                 )
 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - report any failure to the CLI
             self.stdout.write(self.style.ERROR(f"❌ Robots.txt error: {e}"))

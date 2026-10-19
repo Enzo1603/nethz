@@ -16,3 +16,10 @@ dependencies = [
 
 [dependency-groups]
 dev = ["ruff>=0.17.1"]
+
+[tool.ruff]
+extend-exclude = ["*/migrations"]
+
+[tool.ruff.lint]
+# Django's mutable class attributes (Meta, admin options, ...) are conventionally unannotated
+ignore = ["RUF012"]

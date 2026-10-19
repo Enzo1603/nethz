@@ -1,7 +1,6 @@
 import csv
 from pathlib import Path
 
-
 FILE_PATH = Path(__file__).resolve().parent
 
 PROFANITY_EN_CSV_FILE_PATH = FILE_PATH / "profanity" / "profanity_en.csv"

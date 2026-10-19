@@ -1,6 +1,7 @@
+from django.contrib.auth import authenticate, get_user_model
+from django.db import IntegrityError
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth import get_user_model, authenticate
 
 
 class CustomUserTests(TestCase):
@@ -25,7 +26,7 @@ class CustomUserTests(TestCase):
 
     def test_user_email_uniqueness(self):
         """Test that email must be unique"""
-        with self.assertRaises(Exception):
+        with self.assertRaises(IntegrityError):
             get_user_model().objects.create_user(
                 username="anotheruser",
                 email=self.user_data["email"],  # Same email

@@ -5,8 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import (
     LoginView,
-    PasswordResetView,
     PasswordResetConfirmView,
+    PasswordResetView,
 )
 from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404, HttpResponseRedirect
@@ -21,15 +21,15 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, UpdateView
 
+from .emails import send_verification_email
 from .forms import (
-    CustomUserCreationForm,
     CustomAuthenticationForm,
-    CustomUserChangeForm,
     CustomPasswordResetForm,
     CustomSetPasswordForm,
+    CustomUserChangeForm,
+    CustomUserCreationForm,
 )
 from .models import CustomUser
-from .emails import send_verification_email
 
 UserModel = get_user_model()
 

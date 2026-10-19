@@ -1,19 +1,17 @@
+from crispy_bootstrap5.bootstrap5 import FloatingField
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import HTML, Div, Layout, Submit
 from django import forms
 from django.contrib.auth.forms import (
-    UserCreationForm,
-    UserChangeForm,
     AuthenticationForm,
     PasswordResetForm,
     SetPasswordForm,
+    UserChangeForm,
+    UserCreationForm,
 )
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Submit, HTML
-from crispy_bootstrap5.bootstrap5 import FloatingField
-
 
 from .models import CustomUser
 from .utils import PROFANITIES
@@ -47,7 +45,7 @@ class CustomUserCreationForm(UserCreationForm):
         return username
 
     def __init__(self, *args, **kwargs):
-        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
@@ -75,7 +73,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
-        super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
@@ -145,7 +143,7 @@ class CustomUserChangeForm(UserChangeForm):
         return cleaned_data
 
     def __init__(self, *args, **kwargs):
-        super(CustomUserChangeForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
@@ -203,7 +201,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 class CustomPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
-        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
@@ -232,7 +230,7 @@ class CustomSetPasswordForm(SetPasswordForm):
     )
 
     def __init__(self, *args, **kwargs):
-        super(CustomSetPasswordForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(

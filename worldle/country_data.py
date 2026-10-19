@@ -1,10 +1,9 @@
-from copy import deepcopy
 import csv
 import random
+from copy import deepcopy
 from pathlib import Path
 
 from django.templatetags.static import static
-
 
 FILE_PATH = Path(__file__).resolve().parent
 
@@ -39,10 +38,10 @@ class CountryData:
 
     def __new__(cls):
         if cls.__instance is None:
-            cls.__instance = super(CountryData, cls).__new__(cls)
+            cls.__instance = super().__new__(cls)
             with open(cls.__COUNTRIES_CSV_FILE_PATH, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
-                cls.__CSV_ENTRIES = tuple(list(reader))
+                cls.__CSV_ENTRIES = tuple(reader)
         return cls.__instance
 
     @classmethod
@@ -59,10 +58,8 @@ class CountryData:
     @classmethod
     def generate_correct_answers(cls, country_data):
         correct_answers = country_data.strip().lower()
-        correct_answers = list(
-            map(lambda item: item.strip(), correct_answers.split(","))
-        )
-        correct_answers = list(filter(lambda item: item != "", correct_answers))
+        correct_answers = [item.strip() for item in correct_answers.split(",")]
+        correct_answers = [item for item in correct_answers if item != ""]
         return correct_answers
 
     @classmethod
@@ -116,16 +113,16 @@ class CountryData:
 
     @classmethod
     def get_random_items(
-        cls, number_of_items: int, header_field: CountryHeader, exclude: str = None
+        cls,
+        number_of_items: int,
+        header_field: CountryHeader,
+        exclude: str | None = None,
     ) -> list:
         items = []
         for entry in cls.get_csv_entries():
             item = entry[header_field].strip().lower()
-            item = list(map(lambda item: item.strip(), item.split(",")))
-            item = list(filter(lambda item: item != "", item))
-
-            for i in item:
-                items.append(i)
+            item = [part.strip() for part in item.split(",")]
+            items.extend(part for part in item if part != "")
 
         result = random.sample(items, number_of_items)
 
